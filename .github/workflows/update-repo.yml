@@ -2,10 +2,10 @@ name: Update APT Repository
 
 on:
   repository_dispatch:
-    types: [package-updated]
-  workflow_dispatch:
+    types: [package-updated]  # This listens for the event from package repos
+  workflow_dispatch:          # Manual trigger
   schedule:
-    - cron: '0 6 * * *'  # Daily rebuild
+    - cron: '0 6 * * *'        # Daily rebuild
 
 jobs:
   update-apt-repo:
@@ -14,65 +14,200 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Debug repository dispatch
+      if: github.event_name == 'repository_dispatch'
+      run: |
+        echo "Event type: ${{ github.event.action }}"
+        echo "Client payload: ${{ toJson(github.event.client_payload) }}"
+        echo "Triggered by: ${{ github.event.client_payload.repository }}"
+
     - name: Discover package repositories
       id: discover
       run: |
-        # Find all repos in hatlabs org with "apt-package" topic
-        repos=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/orgs/hatlabs/repos?per_page=100" | \
-          jq -r '.[] | select(.topics[]? == "apt-package") | .full_name')
+        echo "Discovering repositories with 'apt-package' topic..."
 
-        echo "Found package repositories:"
+        # Use GitHub API to find repos with apt-package topic
+        repos=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/search/repositories?q=org:hatlabs+topic:apt-package" | \
+          jq -r '.items[].full_name')
+
+        echo "Found repositories:"
         echo "$repos"
+
+        # Store for next step
         echo "repos<<EOF" >> $GITHUB_OUTPUT
         echo "$repos" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
 
-    - name: Setup environment
+    - name: Setup build environment
       run: |
         sudo apt-get update
         sudo apt-get install -y dpkg-dev apt-utils curl jq
-        mkdir -p packages
+        mkdir -p packages apt-repo/pool/main apt-repo/dists/stable/main/binary-amd64
 
-    - name: Download packages from discovered repos
+    - name: Download latest packages
       run: |
-        echo "${{ steps.discover.outputs.repos }}" | while read repo; do
+        echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
           if [ -n "$repo" ]; then
-            echo "Processing $repo..."
+            echo "=== Processing $repo ==="
 
-            # Get latest release
+            # Get latest release info
+            echo "Fetching latest release from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/$repo/releases/latest")
 
-            if [ "$(echo "$release_info" | jq -r '.message // empty')" != "Not Found" ]; then
-              # Download .deb files
-              echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url' | while read url; do
-                if [ -n "$url" ]; then
-                  filename=$(basename "$url")
-                  echo "Downloading $filename from $repo..."
-                  curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$url" -o "packages/$filename"
-                fi
-              done
-            else
+            # Check if release exists
+            if [ "$(echo "$release_info" | jq -r '.message // empty')" = "Not Found" ]; then
               echo "No releases found for $repo"
+              continue
             fi
+
+            release_tag=$(echo "$release_info" | jq -r '.tag_name')
+            echo "Latest release: $release_tag"
+
+            # Download all .deb files from the release
+            echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | {name: .name, url: .browser_download_url}' | \
+            while IFS= read -r asset; do
+              if [ -n "$asset" ] && [ "$asset" != "null" ]; then
+                name=$(echo "$asset" | jq -r '.name')
+                url=$(echo "$asset" | jq -r '.url')
+
+                echo "Downloading $name..."
+                curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                     -H "Accept: application/octet-stream" \
+                     "$url" -o "packages/$name"
+
+                if [ $? -eq 0 ]; then
+                  echo "✓ Downloaded $name"
+                else
+                  echo "✗ Failed to download $name"
+                fi
+              fi
+            done
+
+            echo ""
           fi
         done
 
-    - name: Build APT repository
-      run: |
-        # Same as before - build the repo structure
-        mkdir -p apt-repo/pool/main
-        mkdir -p apt-repo/dists/stable/main/binary-amd64
+        echo "=== Downloaded packages ==="
+        ls -la packages/ || echo "No packages downloaded"
 
-        cp packages/*.deb apt-repo/pool/main/ 2>/dev/null || echo "No packages to copy"
+    - name: Build APT repository structure
+      run: |
+        # Copy packages to pool
+        if ls packages/*.deb 1> /dev/null 2>&1; then
+          cp packages/*.deb apt-repo/pool/main/
+          echo "Copied $(ls packages/*.deb | wc -l) packages to repository"
+        else
+          echo "No .deb packages found to copy"
+          # Create empty repository structure anyway
+        fi
 
         cd apt-repo
+
+        # Generate Packages file
+        echo "Generating Packages file..."
         dpkg-scanpackages pool/ /dev/null > dists/stable/main/binary-amd64/Packages
         gzip -k dists/stable/main/binary-amd64/Packages
 
+        # Generate Release file
+        echo "Generating Release file..."
         cd dists/stable
-        apt-ftparchive release . > Release
+        cat > Release << EOF
+        Origin: Hat Labs
+        Label: Hat Labs APT Repository
+        Suite: stable
+        Codename: stable
+        Version: 1.0
+        Architectures: amd64 all
+        Components: main
+        Description: Hat Labs package repository
+        Date: $(date -Ru)
+        EOF
+
+        # Add package checksums
+        apt-ftparchive release . >> Release
+
+        echo "Repository structure:"
+        find ../../apt-repo -type f | sort
+
+    - name: Create repository index page
+      run: |
+        cd apt-repo
+
+        # Get package information for index
+        package_info=""
+        if [ -f dists/stable/main/binary-amd64/Packages ]; then
+          package_info=$(awk '
+            /^Package:/ { pkg = $2 }
+            /^Description:/ { desc = substr($0, 13); print pkg ":" desc }
+          ' dists/stable/main/binary-amd64/Packages)
+        fi
+
+        cat > index.html << EOF
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Hat Labs APT Repository</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+                .setup { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }
+                .package { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+                code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+                .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
+                h1 { color: #2d3748; }
+                h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+            </style>
+        </head>
+        <body>
+            <h1>🎩 Hat Labs APT Repository</h1>
+            <p>Debian packages for Hat Labs projects</p>
+
+            <h2>📦 Setup Instructions</h2>
+            <div class="setup">
+                <p><strong>Add the repository:</strong></p>
+                <div class="command">echo "deb https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
+
+                <p><strong>Update package list:</strong></p>
+                <div class="command">sudo apt update --allow-insecure-repositories</div>
+
+            </div>
+
+            <h2>📋 Available Packages</h2>
+        EOF
+
+        # Add package information
+        if [ -n "$package_info" ]; then
+          echo "$package_info" | while IFS=':' read -r pkg desc; do
+            cat >> index.html << EOF
+            <div class="package">
+                <h3>$pkg</h3>
+                <p>$desc</p>
+                <div class="command">sudo apt install $pkg</div>
+            </div>
+        EOF
+          done
+        else
+          cat >> index.html << EOF
+            <div class="package">
+                <p><em>No packages available yet. Check back soon!</em></p>
+            </div>
+        EOF
+        fi
+
+        cat >> index.html << EOF
+
+            <h2>🚀 Install All Packages</h2>
+            <div class="setup">
+                <div class="command">sudo apt install halpid halpi-firmware</div>
+            </div>
+
+            <hr>
+            <p><small>Last updated: $(date)</small></p>
+            <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
+        </body>
+        </html>
+        EOF
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -80,3 +215,12 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./apt-repo
         cname: apt.hatlabs.fi
+
+    - name: Report status
+      run: |
+        echo "=== APT Repository Update Complete ==="
+        echo "Repository deployed to: https://apt.hatlabs.fi"
+        if [ -f apt-repo/dists/stable/main/binary-amd64/Packages ]; then
+          package_count=$(grep -c '^Package:' apt-repo/dists/stable/main/binary-amd64/Packages)
+          echo "Packages in repository: $package_count"
+        fi
