@@ -6,6 +6,9 @@ on:
   workflow_dispatch:          # Manual trigger
   schedule:
     - cron: '0 6 * * *'        # Daily rebuild
+  push:
+    branches:
+      - main                   # Trigger on push to main branch
 
 jobs:
   update-apt-repo:
