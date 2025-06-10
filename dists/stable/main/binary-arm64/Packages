@@ -1,0 +1,41 @@
+Package: halpid
+Version: 3.0.3
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 48946
+Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.11)
+Depends: python3-venv
+Recommends: halpi-firmware
+Filename: pool/main/halpid_3.0.3_arm64.deb
+Size: 9817564
+MD5sum: d35b61299b509455c01d5e290311ff5c
+SHA1: 5b74d3474c5d0ed2581927fefe68daad03c43f87
+SHA256: e6d6c81c35139cff37b122f332c14cf490c896f77aca3960172ae22111883dc7
+Section: admin
+Priority: important
+Description: HALPI2 service daemon
+ `halpid` is a power monitor and watchdog service for HALPI2. It communicates
+ with the HALPI2 controller, providing the "smart" aspects of the operation.
+ .
+ The main use case for the service software is to have the Raspberry Pi
+ Operating System shut down once the power is cut. This prevents potential
+ file system corruption without having to shut down the device manually.
+
+Package: halpid-dbgsym
+Source: halpid
+Version: 3.0.3
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3158
+Depends: halpid (= 3.0.3)
+Filename: pool/main/halpid-dbgsym_3.0.3_arm64.deb
+Size: 2910496
+MD5sum: 7f0699bba96613246f2a739e902878bc
+SHA1: 2b878fc92eade9578e6f0ab4066ecfd15814d1ea
+SHA256: 5545e5f36bda26a03bdba62561213bbcbcfbba7a166de1a5bf547068fa0b65cb
+Section: debug
+Priority: optional
+Description: debug symbols for halpid
+Build-Ids: 0324e9067dd27d358392001fbf8da608f689611f 346a9985dd36070448b46d785e0f421708192707 3483deab709e58eae4b99e184ca3b87a559dbe1c 3fccf58f569f442c7aac9fc8b2597d220ee7285b 533e392d46c9c5e106c445fe27006bdcc72de9d7 99b14dfcee7ed305b0ff0a318c83030736dc92b7 ad5c07c70f09cd2e660271bfc8c4d52869625e52 c304442c41bc344636fec8d4cbefc0ed27de54c1 cca2e6dafd389687d15e9449f2be9c9862688a6d f0bdcf042427b85b3efb9589b9ba7e89cc4b352c
+

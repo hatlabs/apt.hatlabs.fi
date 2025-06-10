@@ -3,24 +3,32 @@ Label: Hat Labs APT Repository
 Suite: stable
 Codename: stable
 Version: 1.0
-Architectures: amd64 all
+Architectures: arm64 all
 Components: main
 Description: Hat Labs package repository
-Date: Tue, 10 Jun 2025 14:24:46 +0000
-Date: Tue, 10 Jun 2025 14:24:46 +0000
+Date: Tue, 10 Jun 2025 15:33:32 +0000
+Date: Tue, 10 Jun 2025 15:33:32 +0000
 MD5Sum:
- 4c6c08aafa32b152081bf9f30e9a2d70              251 Release
- 682310f1c69cbf88c400dd4a83e919c8             1809 main/binary-amd64/Packages
- 649e7411f09cb7ea7529b093858de33e             1061 main/binary-amd64/Packages.gz
+ 1ae90b2f7ec062a0c2dba52ba1a41faf              251 Release
+ d41d8cd98f00b204e9800998ecf8427e                0 main/binary-all/Packages
+ 167eea891437149bf841150eeda4ccf2               29 main/binary-all/Packages.gz
+ dbc3a45e7152e9345fa924f12173a4ac             1809 main/binary-arm64/Packages
+ 152521efec43a28baa13fb1171a3d487             1057 main/binary-arm64/Packages.gz
 SHA1:
- 84b013c5704a9b5060ee5442dc9107ae893eb921              251 Release
- 1288e697ef6131796d426b9adf0d52139e2572f1             1809 main/binary-amd64/Packages
- 559d9432d75935b9cd03b9bca5ab247c67e7459a             1061 main/binary-amd64/Packages.gz
+ 8aabbb072a6fccbc2da38793b557d1907fa8e133              251 Release
+ da39a3ee5e6b4b0d3255bfef95601890afd80709                0 main/binary-all/Packages
+ 86424bff199c1501827a5fb5104cb89be6cd6250               29 main/binary-all/Packages.gz
+ fd2e2780b996a7c7aaf38ad5e0d6e3db6e9be8ad             1809 main/binary-arm64/Packages
+ d57a5a1be48580cbafbbfad3f4d92693ce03a3f8             1057 main/binary-arm64/Packages.gz
 SHA256:
- 9cc7a9f53991d3814e10f029a7fbb1235454a98986ce516c58c81e17bed82195              251 Release
- 30a64ae80af6122d8eb3c059eba8882fbcd57e2884a4ea3fe9b8b9b65388a078             1809 main/binary-amd64/Packages
- 92599cf03060d04c97ac7b1523d15484fd5cb998ac489e137c97269481a7c2a3             1061 main/binary-amd64/Packages.gz
+ 11771840b0d3f5b1369c00c2c544d4bfa6ab083fb69d900f82c451eac938e00c              251 Release
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                0 main/binary-all/Packages
+ 4cdecbf1ebcd961e24f4678ee40328f4889627aef620e7c3b97cc92499f84c16               29 main/binary-all/Packages.gz
+ 78a6fdf6827be1fb69a4fc65cbe639d55995d328b26bebaf2b0bf4abf348b220             1809 main/binary-arm64/Packages
+ 1e711a1b29dc5c5575bbc2d8940cfdbe846eaa48e934bef045b8721be3018d36             1057 main/binary-arm64/Packages.gz
 SHA512:
- 80e7f4ea7363d086353563eda5da824325bb0860188d43b7980db40abaef1b29aeb77c643e4e1dd9343af4d4952a015d959fe7c18fab8c49ea6e453405846940              251 Release
- f8cf511c1c7d7d0559a9bdef3038cd38bd19f66e622dba0b8b46d0282a43b5c490a5367e3e87ce44ac3bc08c4c5dc9fb50fddaef27938c92d8b94b97a47888d1             1809 main/binary-amd64/Packages
- b74e38da95818f233c9b23ebceaac5e9e40611f69b82af8d39c6b5c436a16991add765f21ca6cf18adc926aaa7001e1711e99e758f0cd4d2d13373f6484c3add             1061 main/binary-amd64/Packages.gz
+ 7e45b9e1d5952adbba352d757f7b2e42172a1c064d91eb65fe0c82f36dbedd1500993368d29e6650959e3447b235404b90e8e6d0d0239a51067d6d0384d69541              251 Release
+ cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e                0 main/binary-all/Packages
+ 9e923d9fd5f022b5d5e32d104b783199161411f09b1f26c0061244244acd387a4299abfbf7e80c78b65950027a8aa0463318eb9092f43de8740bde0dbada191d               29 main/binary-all/Packages.gz
+ 250e5b878634c752ed13a6ad03213976c128be78087428a74446bd2bebf26af73f1e7da696d7081e4f2cfd4511d38dec095362b31b7d4a972c5e487f4247ca13             1809 main/binary-arm64/Packages
+ 3cc8c239f861ed9bdfba6f14b2541bca4c5d087e74407c06fec60a8ca1490978f23b89599992d0b30e0d64ef13202bf045f2868d9b0e08219da79dc35a7c07e3             1057 main/binary-arm64/Packages.gz
