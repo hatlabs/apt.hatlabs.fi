@@ -45,8 +45,16 @@ jobs:
     - name: Setup build environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y dpkg-dev apt-utils curl jq
-        mkdir -p packages apt-repo/pool/main apt-repo/dists/stable/main/binary-amd64
+        sudo apt-get install -y dpkg-dev apt-utils curl jq gnupg
+        mkdir -p packages apt-repo/pool/main apt-repo/dists/stable/main/binary-arm64 apt-repo/dists/stable/main/binary-all
+
+    - name: Import GPG signing key
+      run: |
+        echo "${{ secrets.APT_SIGNING_KEY }}" | gpg --import --batch
+        # Get the key ID for signing
+        GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -1 | sed 's/.*\/\([A-Z0-9]*\) .*/\1/')
+        echo "GPG_KEY_ID=$GPG_KEY_ID" >> $GITHUB_ENV
+        echo "Using GPG key: $GPG_KEY_ID"
 
     - name: Download latest packages
       run: |
@@ -140,8 +148,22 @@ jobs:
         # Add package checksums
         apt-ftparchive release . >> Release
 
+        # Sign the Release file
+        echo "Signing Release file with GPG..."
+        gpg --batch --yes --detach-sign --armor -u $GPG_KEY_ID -o Release.gpg Release
+        gpg --batch --yes --clear-sign -u $GPG_KEY_ID -o InRelease Release
+
         echo "Repository structure:"
-        find ../../apt-repo -name "Packages*" | sort
+        find ../apt-repo -type f | sort
+
+    - name: Export public GPG key
+      run: |
+        cd apt-repo
+        # Export the public key for users to download
+        gpg --export --armor $GPG_KEY_ID > hat-labs-apt-key.asc
+
+        # Also create a keyring file
+        gpg --export $GPG_KEY_ID > hat-labs-apt-key.gpg
 
     - name: Create repository index page
       run: |
@@ -176,20 +198,19 @@ jobs:
                 .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
                 h1 { color: #2d3748; }
                 h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+                .security { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 15px; margin: 20px 0; }
             </style>
         </head>
         <body>
             <h1>🎩 Hat Labs APT Repository</h1>
-            <p>Debian packages for Hat Labs projects</p>
+            <p>Signed Debian packages for Hat Labs projects</p>
 
-            <h2>📦 Setup Instructions</h2>
-            <div class="setup">
-                <p><strong>Add the repository:</strong></p>
-                <div class="command">echo "deb https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
-
-                <p><strong>Update package list:</strong></p>
-                <div class="command">sudo apt update --allow-insecure-repositories</div>
-
+            <div class="security">
+                <h3>🔐 Installation (Recommended)</h3>
+                <p>Add our signing key to verify package authenticity:</p>
+                <div class="command">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg</div>
+                <div class="command">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
+                <div class="command">sudo apt update</div>
             </div>
 
             <h2>📋 Available Packages</h2>
@@ -240,7 +261,8 @@ jobs:
             }
           ' >> index.html
           rm -f package_info.tmp package_info_sorted.tmp
-        else          cat >> index.html << EOF
+        else
+          cat >> index.html << EOF
             <div class="package">
                 <p><em>No packages available yet. Check back soon!</em></p>
             </div>
@@ -249,9 +271,16 @@ jobs:
 
         cat >> index.html << EOF
 
+            <h2>🔑 Manual Key Installation</h2>
+            <div class="setup">
+                <p>Download the signing key: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a></p>
+                <p>Key fingerprint: <code id="fingerprint">Loading...</code></p>
+            </div>
+
             <hr>
             <p><small>Last updated: $(date)</small></p>
             <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
+            <p><small>🔒 This repository is cryptographically signed for security</small></p>
         </body>
         </html>
         EOF
@@ -267,7 +296,7 @@ jobs:
       run: |
         echo "=== APT Repository Update Complete ==="
         echo "Repository deployed to: https://apt.hatlabs.fi"
-        if [ -f apt-repo/dists/stable/main/binary-amd64/Packages ]; then
-          package_count=$(grep -c '^Package:' apt-repo/dists/stable/main/binary-amd64/Packages)
+        if [ -f apt-repo/dists/stable/main/binary-arm64/Packages ]; then
+          package_count=$(grep -c '^Package:' apt-repo/dists/stable/main/binary-arm64/Packages)
           echo "Packages in repository: $package_count"
         fi
