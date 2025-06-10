@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hat Labs APT Repository</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .setup { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }
+        .package { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
+        h1 { color: #2d3748; }
+        h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🎩 Hat Labs APT Repository</h1>
+    <p>Debian packages for Hat Labs projects</p>
+
+    <h2>📦 Setup Instructions</h2>
+    <div class="setup">
+        <p><strong>Add the repository:</strong></p>
+        <div class="command">echo "deb https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
+
+        <p><strong>Update package list:</strong></p>
+        <div class="command">sudo apt update --allow-insecure-repositories</div>
+
+    </div>
+
+    <h2>📋 Available Packages</h2>
+    <div class="package">
+        <h3>halpid</h3>
+        <p> HALPI2 service daemon</p>
+        <div class="command">sudo apt install halpid</div>
+    </div>
+    <div class="package">
+        <h3>halpid-dbgsym</h3>
+        <p> debug symbols for halpid</p>
+        <div class="command">sudo apt install halpid-dbgsym</div>
+    </div>
+
+    <h2>🚀 Install All Packages</h2>
+    <div class="setup">
+        <div class="command">sudo apt install halpid halpi-firmware</div>
+    </div>
+
+    <hr>
+    <p><small>Last updated: Tue Jun 10 13:21:43 UTC 2025</small></p>
+    <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
+</body>
+</html>
