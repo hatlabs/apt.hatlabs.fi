@@ -100,17 +100,26 @@ jobs:
           echo "Copied $(ls packages/*.deb | wc -l) packages to repository"
         else
           echo "No .deb packages found to copy"
-          # Create empty repository structure anyway
         fi
 
         cd apt-repo
 
-        # Generate Packages file
-        echo "Generating Packages file..."
-        dpkg-scanpackages pool/ /dev/null > dists/stable/main/binary-amd64/Packages
-        gzip -k dists/stable/main/binary-amd64/Packages
+        # Create directories for arm64 architecture only
+        mkdir -p dists/stable/main/binary-arm64
+        mkdir -p dists/stable/main/binary-all
 
-        # Generate Release file
+        # Generate Packages files
+        echo "Generating Packages files for arm64..."
+
+        # For arm64 packages
+        dpkg-scanpackages -a arm64 pool/ /dev/null > dists/stable/main/binary-arm64/Packages 2>/dev/null || touch dists/stable/main/binary-arm64/Packages
+        gzip -k dists/stable/main/binary-arm64/Packages
+
+        # For architecture-independent packages (scripts, docs, etc.)
+        dpkg-scanpackages -a all pool/ /dev/null > dists/stable/main/binary-all/Packages 2>/dev/null || touch dists/stable/main/binary-all/Packages
+        gzip -k dists/stable/main/binary-all/Packages
+
+        # Generate Release file with arm64 architecture
         echo "Generating Release file..."
         cd dists/stable
         cat > Release << EOF
@@ -119,7 +128,7 @@ jobs:
         Suite: stable
         Codename: stable
         Version: 1.0
-        Architectures: amd64 all
+        Architectures: arm64 all
         Components: main
         Description: Hat Labs package repository
         Date: $(date -Ru)
@@ -129,7 +138,7 @@ jobs:
         apt-ftparchive release . >> Release
 
         echo "Repository structure:"
-        find ../../apt-repo -type f | sort
+        find ../../apt-repo -name "Packages*" | sort
 
     - name: Create repository index page
       run: |
@@ -177,16 +186,47 @@ jobs:
         EOF
 
         # Add package information
-        if [ -n "$package_info" ]; then
-          echo "$package_info" | while IFS=':' read -r pkg desc; do
-            cat >> index.html << EOF
-            <div class="package">
-                <h3>$pkg</h3>
-                <p>$desc</p>
-                <div class="command">sudo apt install $pkg</div>
-            </div>
-        EOF
-          done
+        package_info=""
+        for arch in amd64 arm64 all; do
+          pkgfile="dists/stable/main/binary-$arch/Packages"
+          if [ -f "$pkgfile" ]; then
+            awk -v arch="$arch" '
+              /^Package:/ { pkg = $2 }
+              /^Description:/ { desc = substr($0, 13) }
+              /^Filename:/ { file = $2 }
+              /^$/ && pkg && desc && file {
+                print pkg ":" desc ":" arch ":" file
+                pkg = desc = file = ""
+              }
+            ' "$pkgfile" >> package_info.tmp
+          fi
+        done
+
+        if [ -f package_info.tmp ] && [ -s package_info.tmp ]; then
+          sort package_info.tmp | uniq > package_info_sorted.tmp
+          cat package_info_sorted.tmp | awk -F: '
+            {
+              pkg=$1; desc=$2; arch=$3; file=$4
+              key=pkg
+              pkgs[key]=desc
+              archs[key]=archs[key] ? archs[key] ", " arch : arch
+              files[key]=files[key] ? files[key] "|" file "|" arch : file "|" arch
+            }
+            END {
+              for (k in pkgs) {
+                printf "<div class=\"package\">\n<h3>%s</h3>\n<p>%s</p>\n", k, pkgs[k]
+                printf "<p><strong>Architectures:</strong> %s</p>\n", archs[k]
+                n=split(files[k], arr, /\|/)
+                for (i=1; i<=n; i+=2) {
+                  if (arr[i] != "") {
+                    printf "<div><a href=\"%s\">Download (%s)</a></div>\n", arr[i], arr[i+1]
+                  }
+                }
+                printf "<div class=\"command\">sudo apt install %s</div>\n</div>\n", k
+              }
+            }
+          ' >> index.html
+          rm -f package_info.tmp package_info_sorted.tmp
         else
           cat >> index.html << EOF
             <div class="package">
