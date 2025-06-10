@@ -10,20 +10,19 @@
         .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
         h1 { color: #2d3748; }
         h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+        .security { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 15px; margin: 20px 0; }
     </style>
 </head>
 <body>
     <h1>🎩 Hat Labs APT Repository</h1>
-    <p>Debian packages for Hat Labs projects</p>
+    <p>Signed Debian packages for Hat Labs projects</p>
 
-    <h2>📦 Setup Instructions</h2>
-    <div class="setup">
-        <p><strong>Add the repository:</strong></p>
-        <div class="command">echo "deb https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
-
-        <p><strong>Update package list:</strong></p>
-        <div class="command">sudo apt update --allow-insecure-repositories</div>
-
+    <div class="security">
+        <h3>🔐 Installation (Recommended)</h3>
+        <p>Add our signing key to verify package authenticity:</p>
+        <div class="command">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg</div>
+        <div class="command">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
+        <div class="command">sudo apt update</div>
     </div>
 
     <h2>📋 Available Packages</h2>
@@ -40,8 +39,15 @@
 <div class="command">sudo apt install halpid</div>
 </div>
 
+    <h2>🔑 Manual Key Installation</h2>
+    <div class="setup">
+        <p>Download the signing key: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a></p>
+        <p>Key fingerprint: <code id="fingerprint">Loading...</code></p>
+    </div>
+
     <hr>
-    <p><small>Last updated: Tue Jun 10 15:50:54 UTC 2025</small></p>
+    <p><small>Last updated: Tue Jun 10 18:20:49 UTC 2025</small></p>
     <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
+    <p><small>🔒 This repository is cryptographically signed for security</small></p>
 </body>
 </html>
