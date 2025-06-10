@@ -197,11 +197,6 @@ jobs:
 
         cat >> index.html << EOF
 
-            <h2>🚀 Install All Packages</h2>
-            <div class="setup">
-                <div class="command">sudo apt install halpid halpi-firmware</div>
-            </div>
-
             <hr>
             <p><small>Last updated: $(date)</small></p>
             <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
@@ -210,7 +205,7 @@ jobs:
         EOF
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./apt-repo
