@@ -209,26 +209,28 @@ jobs:
               pkg=$1; desc=$2; arch=$3; file=$4
               key=pkg
               pkgs[key]=desc
-              archs[key]=archs[key] ? archs[key] ", " arch : arch
-              files[key]=files[key] ? files[key] "|" file "|" arch : file "|" arch
+              # Store download links per arch
+              links[key,arch]="<a href=\"" file "\">" arch "</a>"
+              archlist[key]=archlist[key] ? archlist[key] "," arch : arch
             }
             END {
               for (k in pkgs) {
                 printf "<div class=\"package\">\n<h3>%s</h3>\n<p>%s</p>\n", k, pkgs[k]
-                printf "<p><strong>Architectures:</strong> %s</p>\n", archs[k]
-                n=split(files[k], arr, /\|/)
-                for (i=1; i<=n; i+=2) {
-                  if (arr[i] != "") {
-                    printf "<div><a href=\"%s\">Download (%s)</a></div>\n", arr[i], arr[i+1]
-                  }
+                # Print architecture tags as download links
+                split(archlist[k], archs, ",")
+                printf "<p><strong>Architectures:</strong> "
+                for (i=1; i<=length(archs); i++) {
+                  a=archs[i]
+                  printf "%s", links[k,a]
+                  if (i < length(archs)) printf ", "
                 }
+                printf "</p>\n"
                 printf "<div class=\"command\">sudo apt install %s</div>\n</div>\n", k
               }
             }
           ' >> index.html
           rm -f package_info.tmp package_info_sorted.tmp
-        else
-          cat >> index.html << EOF
+        else          cat >> index.html << EOF
             <div class="package">
                 <p><em>No packages available yet. Check back soon!</em></p>
             </div>
