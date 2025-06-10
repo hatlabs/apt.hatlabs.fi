@@ -1,16 +1,16 @@
 Package: halpid
-Version: 3.0.1-1
-Architecture: amd64
+Version: 3.0.2
+Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 48838
+Installed-Size: 48946
 Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.11)
 Depends: python3-venv
 Recommends: halpi-firmware
-Filename: pool/main/halpid_3.0.1-1_amd64.deb
-Size: 9863808
-MD5sum: 7498313aac4dcd1b4a0ee3af409820c1
-SHA1: e306cd99df54b9067b27b7de495366a32612f1f3
-SHA256: aecce67660d2edf58296330e86b6e04f4a867e0e2158c494affba46313a0442b
+Filename: pool/main/halpid_3.0.2_arm64.deb
+Size: 9818536
+MD5sum: 1366975282dd8937e171c99a0ecd53f8
+SHA1: ee1e83e2b392f5f83256dfd0d88bbb5c4fc35f48
+SHA256: 7c7f76755175bdbd8da6ea5b25a2780ad52f5be9a03eae64fb423ee58fbefecc
 Section: admin
 Priority: important
 Description: HALPI2 service daemon
@@ -23,19 +23,19 @@ Description: HALPI2 service daemon
 
 Package: halpid-dbgsym
 Source: halpid
-Version: 3.0.1-1
+Version: 3.0.2
 Auto-Built-Package: debug-symbols
-Architecture: amd64
+Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 3120
-Depends: halpid (= 3.0.1-1)
-Filename: pool/main/halpid-dbgsym_3.0.1-1_amd64.deb
-Size: 2891148
-MD5sum: d1f855d7c999fcaec8db07bfae2ecf72
-SHA1: 55fb08d13433a2358263b9294a919acc49df7a88
-SHA256: 450bc536a4c82a7df45570e959b691f5b509dbdcfb2e7c0e96e21648169d4d4f
+Installed-Size: 3158
+Depends: halpid (= 3.0.2)
+Filename: pool/main/halpid-dbgsym_3.0.2_arm64.deb
+Size: 2910572
+MD5sum: 0df1c549173f8449735c7f2191467d7b
+SHA1: 935f1389eb284a839b579965057552131bd20749
+SHA256: 2f1d52c2370ca0f569246343379e50871bea462b02b99d258f9404a759013880
 Section: debug
 Priority: optional
 Description: debug symbols for halpid
-Build-Ids: 3a73ad6167fe6212c1190d7efd5004b5921d809c 4520bb725f549d7ebcc137d408e03aa49b5635f5 60f38eb08b891ef5f750e9e28a03404507ed3929 6ca7e7ba1686554b528196c0e46e35af843ce6c3 6cfb82f8982a2ad937cb161028c1ba635881d556 bb098d54c25c2d29a5c31cbab0a3af4dbf77471e d76b362e38bb7a43bd8eab23204c9296ccf1d482 dd4c6f92f90e3485b133a9d850977618ad0bbfa5 f80f489e4d8e6936043d6d6750f05906292c4b4d fff5e9c064afc572f10db2c1d4d66dea4dec7840
+Build-Ids: 0324e9067dd27d358392001fbf8da608f689611f 346a9985dd36070448b46d785e0f421708192707 3483deab709e58eae4b99e184ca3b87a559dbe1c 3fccf58f569f442c7aac9fc8b2597d220ee7285b 533e392d46c9c5e106c445fe27006bdcc72de9d7 99b14dfcee7ed305b0ff0a318c83030736dc92b7 ad5c07c70f09cd2e660271bfc8c4d52869625e52 c304442c41bc344636fec8d4cbefc0ed27de54c1 cca2e6dafd389687d15e9449f2be9c9862688a6d f0bdcf042427b85b3efb9589b9ba7e89cc4b352c
 
