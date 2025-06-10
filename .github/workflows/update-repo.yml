@@ -1,0 +1,82 @@
+name: Update APT Repository
+
+on:
+  repository_dispatch:
+    types: [package-updated]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Daily rebuild
+
+jobs:
+  update-apt-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Discover package repositories
+      id: discover
+      run: |
+        # Find all repos in hatlabs org with "apt-package" topic
+        repos=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/orgs/hatlabs/repos?per_page=100" | \
+          jq -r '.[] | select(.topics[]? == "apt-package") | .full_name')
+
+        echo "Found package repositories:"
+        echo "$repos"
+        echo "repos<<EOF" >> $GITHUB_OUTPUT
+        echo "$repos" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Setup environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y dpkg-dev apt-utils curl jq
+        mkdir -p packages
+
+    - name: Download packages from discovered repos
+      run: |
+        echo "${{ steps.discover.outputs.repos }}" | while read repo; do
+          if [ -n "$repo" ]; then
+            echo "Processing $repo..."
+
+            # Get latest release
+            release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/$repo/releases/latest")
+
+            if [ "$(echo "$release_info" | jq -r '.message // empty')" != "Not Found" ]; then
+              # Download .deb files
+              echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url' | while read url; do
+                if [ -n "$url" ]; then
+                  filename=$(basename "$url")
+                  echo "Downloading $filename from $repo..."
+                  curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$url" -o "packages/$filename"
+                fi
+              done
+            else
+              echo "No releases found for $repo"
+            fi
+          fi
+        done
+
+    - name: Build APT repository
+      run: |
+        # Same as before - build the repo structure
+        mkdir -p apt-repo/pool/main
+        mkdir -p apt-repo/dists/stable/main/binary-amd64
+
+        cp packages/*.deb apt-repo/pool/main/ 2>/dev/null || echo "No packages to copy"
+
+        cd apt-repo
+        dpkg-scanpackages pool/ /dev/null > dists/stable/main/binary-amd64/Packages
+        gzip -k dists/stable/main/binary-amd64/Packages
+
+        cd dists/stable
+        apt-ftparchive release . > Release
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./apt-repo
+        cname: apt.hatlabs.fi
