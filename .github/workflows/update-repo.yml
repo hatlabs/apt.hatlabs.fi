@@ -66,12 +66,12 @@ jobs:
             echo "Latest release: $release_tag"
 
             # Download all .deb files from the release
-            echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | {name: .name, url: .browser_download_url}' | \
-            while IFS= read -r asset; do
-              if [ -n "$asset" ] && [ "$asset" != "null" ]; then
-                name=$(echo "$asset" | jq -r '.name')
-                url=$(echo "$asset" | jq -r '.url')
+            echo "Downloading .deb files from $repo..."
 
+            # Process each .deb asset
+            echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | "\(.name)|\(.browser_download_url)"' | \
+            while IFS='|' read -r name url; do
+              if [ -n "$name" ] && [ -n "$url" ]; then
                 echo "Downloading $name..."
                 curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                      -H "Accept: application/octet-stream" \
