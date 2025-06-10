@@ -128,7 +128,7 @@ jobs:
         Suite: stable
         Codename: stable
         Version: 1.0
-        Architectures: arm64 all
+        Architectures: arm64 armhf all
         Components: main
         Description: Hat Labs package repository
         Date: $(date -Ru)
@@ -146,13 +146,20 @@ jobs:
 
         # Get package information for index
         package_info=""
-        if [ -f dists/stable/main/binary-amd64/Packages ]; then
-          package_info=$(awk '
-            /^Package:/ { pkg = $2 }
-            /^Description:/ { desc = substr($0, 13); print pkg ":" desc }
-          ' dists/stable/main/binary-amd64/Packages)
-        fi
-
+        for arch in arm64 armhf all; do
+          pkgfile="dists/stable/main/binary-$arch/Packages"
+          if [ -f "$pkgfile" ]; then
+            awk -v arch="$arch" '
+              /^Package:/ { pkg = $2 }
+              /^Description:/ { desc = substr($0, 13) }
+              /^Filename:/ { file = $2 }
+              /^$/ && pkg && desc && file {
+                print pkg ":" desc ":" arch ":" file
+                pkg = desc = file = ""
+              }
+            ' "$pkgfile" >> package_info.tmp
+          fi
+        done
         cat > index.html << EOF
         <!DOCTYPE html>
         <html>
@@ -187,7 +194,7 @@ jobs:
 
         # Add package information
         package_info=""
-        for arch in amd64 arm64 all; do
+        for arch in arm64 armhf all; do
           pkgfile="dists/stable/main/binary-$arch/Packages"
           if [ -f "$pkgfile" ]; then
             awk -v arch="$arch" '
