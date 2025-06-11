@@ -84,14 +84,38 @@ jobs:
             while IFS='|' read -r name url; do
               if [ -n "$name" ] && [ -n "$url" ]; then
                 echo "Downloading $name..."
+                temp_file="packages/temp_$name"
                 curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                      -H "Accept: application/octet-stream" \
-                     "$url" -o "packages/$name"
+                     "$url" -o "$temp_file"
 
                 if [ $? -eq 0 ]; then
                   echo "✓ Downloaded $name"
+
+                  # Extract the actual package version from the .deb metadata
+                  actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null)
+                  package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null)
+                  architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null)
+
+                  if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
+                    # Create the correct filename based on package metadata
+                    correct_filename="${package_name}_${actual_version}_${architecture}.deb"
+                    final_path="packages/$correct_filename"
+
+                    # Move to correct filename
+                    mv "$temp_file" "$final_path"
+
+                    echo "  Package: $package_name"
+                    echo "  Version: $actual_version (corrected from filename)"
+                    echo "  Architecture: $architecture"
+                    echo "  Renamed to: $correct_filename"
+                  else
+                    echo "  ⚠️  Could not extract package metadata, keeping original filename"
+                    mv "$temp_file" "packages/$name"
+                  fi
                 else
                   echo "✗ Failed to download $name"
+                  rm -f "$temp_file"
                 fi
               fi
             done
@@ -100,9 +124,8 @@ jobs:
           fi
         done
 
-        echo "=== Downloaded packages ==="
+        echo "=== Downloaded and renamed packages ==="
         ls -la packages/ || echo "No packages downloaded"
-
     - name: Build APT repository structure
       run: |
         # Copy packages to pool
@@ -203,10 +226,10 @@ jobs:
         </head>
         <body>
             <h1>🎩 Hat Labs APT Repository</h1>
-            <p>Signed Debian packages for Hat Labs projects</p>
+            <p>Debian packages for Hat Labs projects</p>
 
             <div class="security">
-                <h3>🔐 Installation (Recommended)</h3>
+                <h3>🔐 Installation</h3>
                 <p>Add our signing key to verify package authenticity:</p>
                 <div class="command">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg</div>
                 <div class="command">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
