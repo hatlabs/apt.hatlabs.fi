@@ -1,0 +1,18 @@
+Package: halpi2-firmware
+Version: 3.0.0~a2
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 2830
+Depends: halpid
+Filename: pool/main/halpi2-firmware_3.0.0~a2_all.deb
+Size: 586896
+MD5sum: d345c61d3b40f95d045cf8fc3d9f46ea
+SHA1: 22b9a83c17a764375c2286080960b454aba3cd55
+SHA256: 2cd9b29af646ba8f8392af77334088938c0b9cdd751f69b0e6e1953e0db4eece
+Section: embedded
+Priority: optional
+Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
+Description: Firmware for the HALPI2 Computer
+ This package contains the firmware for the HALPI2 Computer onboard controller.
+ The firmware is automatically flashed to the device upon installation.
+
