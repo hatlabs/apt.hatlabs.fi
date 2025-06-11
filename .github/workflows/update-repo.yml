@@ -188,6 +188,11 @@ jobs:
         # Also create a keyring file
         gpg --export $GPG_KEY_ID > hat-labs-apt-key.gpg
 
+        # Get the fingerprint for the index page
+        FINGERPRINT=$(gpg --fingerprint $GPG_KEY_ID | grep -A1 "pub " | tail -n1 | tr -d ' ')
+        echo "GPG_FINGERPRINT=$FINGERPRINT" >> $GITHUB_ENV
+        echo "Key fingerprint: $FINGERPRINT"
+
     - name: Create repository index page
       run: |
         cd apt-repo
@@ -297,7 +302,7 @@ jobs:
             <h2>🔑 Manual Key Installation</h2>
             <div class="setup">
                 <p>Download the signing key: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a></p>
-                <p>Key fingerprint: <code id="fingerprint">Loading...</code></p>
+                <p>Key fingerprint: <code>$GPG_FINGERPRINT</code></p>
             </div>
 
             <hr>
