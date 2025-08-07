@@ -1,14 +1,14 @@
 Package: halpi2-firmware
-Version: 3.0.0
+Version: 3.1.0
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 2832
-Depends: halpid
-Filename: pool/main/halpi2-firmware_3.0.0_all.deb
-Size: 597956
-MD5sum: e09e17ec42c9509aea2c613b226c2c97
-SHA1: be695da01b66316ecef840d071d387f6c61caf3a
-SHA256: b7a0040ad632a5e1f675ac34b97da5737e6bc87011d60a3303cc69d1e64a4881
+Installed-Size: 3151
+Depends: halpid (>= 4.0.0)
+Filename: pool/main/halpi2-firmware_3.1.0_all.deb
+Size: 638112
+MD5sum: 07ea0d7570290cfbcf24663abde715c0
+SHA1: 2f1623fe957627501286a90d736c5611d23dcd06
+SHA256: 2f11676467f9f48a9b37192921466a6d164b7f778630fc648dcbf8cb9031b7a2
 Section: embedded
 Priority: optional
 Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
