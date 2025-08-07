@@ -17,18 +17,18 @@ Description: Firmware for the HALPI2 Computer
  The firmware is automatically flashed to the device upon installation.
 
 Package: halpid
-Version: 4.0.0
+Version: 4.0.2
 Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 49279
 Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.11)
 Depends: python3-venv
 Recommends: halpi-firmware
-Filename: pool/main/halpid_4.0.0_arm64.deb
-Size: 9864552
-MD5sum: 40a9da51f033b5169c1bd1d3c4b398f0
-SHA1: aa82eef923174ea300aa1dc0b2cdc7e88bdc624f
-SHA256: 296662764d29be2c3a280d69986786a5e0486f5ce3db532484c2067111bfa3a4
+Filename: pool/main/halpid_4.0.2_arm64.deb
+Size: 9865740
+MD5sum: 4316a2629fe4e57940519be450fd5150
+SHA1: 52d08ae1daba5b6bd1e9dc42543a2f5975c756ac
+SHA256: a6f92e0d09943a5cf0098eccdd9f45cb095e270514a2f6b5c365eb2f5897afff
 Section: admin
 Priority: important
 Description: HALPI2 service daemon
@@ -41,17 +41,17 @@ Description: HALPI2 service daemon
 
 Package: halpid-dbgsym
 Source: halpid
-Version: 4.0.0
+Version: 4.0.2
 Auto-Built-Package: debug-symbols
 Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 3169
-Depends: halpid (= 4.0.0)
-Filename: pool/main/halpid-dbgsym_4.0.0_arm64.deb
-Size: 2921256
-MD5sum: d82cd7ec23d9f62accb014e907c08eea
-SHA1: c9ead642c84107b339dfb973f0f5b3ddc2ab1c90
-SHA256: 42de4fc7bc5afd4761daa125cd8254033d7ae685a9cf8bdce7245ce4026fd0bb
+Depends: halpid (= 4.0.2)
+Filename: pool/main/halpid-dbgsym_4.0.2_arm64.deb
+Size: 2921080
+MD5sum: 52a5722f6590876554024a5be8495148
+SHA1: 15a63a2832364e2688251567110b1ff07f37e440
+SHA256: c28848d893e67fba01df2359b5923b4b86b796fcebab97ad9a0f8e34afff8722
 Section: debug
 Priority: optional
 Description: debug symbols for halpid
