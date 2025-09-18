@@ -16,3 +16,44 @@ Description: Firmware for the HALPI2 Computer
  This package contains the firmware for the HALPI2 Computer onboard controller.
  The firmware is automatically flashed to the device upon installation.
 
+Package: halpid
+Version: 4.0.4~a1
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 49249
+Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.11)
+Depends: python3-venv
+Recommends: halpi-firmware
+Filename: pool/main/halpid_4.0.4~a1_arm64.deb
+Size: 9871320
+MD5sum: 2b6a4d83c92cc74a7f9df60e97d294b7
+SHA1: de3f12adc0ad67597a818db5d768f18077ec346d
+SHA256: 364950370403cdcba634311066e853c010e1831e40077d231fa1dff58504d292
+Section: admin
+Priority: important
+Description: HALPI2 service daemon
+ `halpid` is a power monitor and watchdog service for HALPI2. It communicates
+ with the HALPI2 controller, providing the "smart" aspects of the operation.
+ .
+ The main use case for the service software is to have the Raspberry Pi
+ Operating System shut down once the power is cut. This prevents potential
+ file system corruption without having to shut down the device manually.
+
+Package: halpid-dbgsym
+Source: halpid
+Version: 4.0.4~a1
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3169
+Depends: halpid (= 4.0.4~a1)
+Filename: pool/main/halpid-dbgsym_4.0.4~a1_arm64.deb
+Size: 2920668
+MD5sum: 2375707b31cd445ab1c83b5eba38d5ab
+SHA1: 406b858d039ccafed6f149ad86d451910ff97bce
+SHA256: 6d027c558ea10db09d96f60191bd489778167b713c8e59bb8f832a9e40898225
+Section: debug
+Priority: optional
+Description: debug symbols for halpid
+Build-Ids: 0324e9067dd27d358392001fbf8da608f689611f 1daf4143a119154f4b83968118ab85192589743c 346a9985dd36070448b46d785e0f421708192707 3483deab709e58eae4b99e184ca3b87a559dbe1c 3fccf58f569f442c7aac9fc8b2597d220ee7285b 533e392d46c9c5e106c445fe27006bdcc72de9d7 99b14dfcee7ed305b0ff0a318c83030736dc92b7 cca2e6dafd389687d15e9449f2be9c9862688a6d e0ae469aa984a4a16a1ed9e775c02707d40b38c1 f0bdcf042427b85b3efb9589b9ba7e89cc4b352c
+
