@@ -16,3 +16,43 @@ Description: Firmware for the HALPI2 Computer
  This package contains the firmware for the HALPI2 Computer onboard controller.
  The firmware is automatically flashed to the device upon installation.
 
+Package: halpid
+Version: 4.0.7
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 59661
+Pre-Depends: dpkg (>= 1.16.1)
+Recommends: halpi-firmware
+Filename: pool/main/halpid_4.0.7_arm64.deb
+Size: 14406448
+MD5sum: b4cbb77e93812b3951e9c07388d80a37
+SHA1: a5327851fb5aece1e6383642e077c4e27d58e4c3
+SHA256: 45413f4a61ef52f2a5df77224aad646868ff28e6f96326ddb6dc432500d13ffd
+Section: admin
+Priority: important
+Description: HALPI2 service daemon
+ `halpid` is a power monitor and watchdog service for HALPI2. It communicates
+ with the HALPI2 controller, providing the "smart" aspects of the operation.
+ .
+ The main use case for the service software is to have the Raspberry Pi
+ Operating System shut down once the power is cut. This prevents potential
+ file system corruption without having to shut down the device manually.
+
+Package: halpid-dbgsym
+Source: halpid
+Version: 4.0.7
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3186
+Depends: halpid (= 4.0.7)
+Filename: pool/main/halpid-dbgsym_4.0.7_arm64.deb
+Size: 2959648
+MD5sum: 486c9ac5276f017e19f20c77da30c2fe
+SHA1: a232c99a56a91973d9dd0b115063f586a0eff422
+SHA256: 458420548a8c18ec84e5e0310f2d0a419cc6981d469e33e831acaf298332b734
+Section: debug
+Priority: optional
+Description: debug symbols for halpid
+Build-Ids: 0279c3207048ad50c955fbf6c22c0dbfe121f59a 1728fb0bab3aba38f0ef3471243925179e4c18e3 45291742d283499fe0d216b6bd8e3a0f7fd67300 54b221c8668e70325161cf15e93bf69b313dfdf2 69c14f241382bd5c8e46cfb31509aa26cc44a855 7cdf9a5d10e2d0814b1fa5db02828f5e8445c8db 9fbfbce03bf4e40a427bd3a70dae84a069dcb28a c61fed41fc2396952746b4596c943a619660ff16 ce089597aa230f9d66c35d9d192d2a7ed620db33 ee535d14a0ddb5f4b206945991ec58dcd8890184
+
