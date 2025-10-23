@@ -251,11 +251,12 @@ jobs:
           if [ -f "$pkgfile" ]; then
             awk -v arch="$arch" '
               /^Package:/ { pkg = $2 }
+              /^Version:/ { ver = $2 }
               /^Description:/ { desc = substr($0, 13) }
               /^Filename:/ { file = $2 }
-              /^$/ && pkg && desc && file {
-                print pkg ":" desc ":" arch ":" file
-                pkg = desc = file = ""
+              /^$/ && pkg && ver && desc && file {
+                print pkg ":" ver ":" desc ":" arch ":" file
+                pkg = ver = desc = file = ""
               }
             ' "$pkgfile" >> package_info.tmp
           fi
@@ -265,9 +266,10 @@ jobs:
           sort package_info.tmp | uniq > package_info_sorted.tmp
           cat package_info_sorted.tmp | awk -F: '
             {
-              pkg=$1; desc=$2; arch=$3; file=$4
+              pkg=$1; ver=$2; desc=$3; arch=$4; file=$5
               key=pkg
               pkgs[key]=desc
+              versions[key]=ver
               # Store download links per arch
               links[key,arch]="<a href=\"" file "\">" arch "</a>"
               archlist[key]=archlist[key] ? archlist[key] "," arch : arch
@@ -275,7 +277,7 @@ jobs:
             END {
               PROCINFO["sorted_in"] = "@ind_str_asc"
               for (k in pkgs) {
-                printf "<div class=\"package\">\n<h3>%s</h3>\n<p>%s</p>\n", k, pkgs[k]
+                printf "<div class=\"package\">\n<h3>%s <small>v%s</small></h3>\n<p>%s</p>\n", k, versions[k], pkgs[k]
                 # Print architecture tags as download links
                 split(archlist[k], archs, ",")
                 printf "<p><strong>Architectures:</strong> "
