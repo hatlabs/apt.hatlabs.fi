@@ -1,14 +1,14 @@
 Package: casaos-docker-service
-Version: 0.4.15
+Version: 0.4.15-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 19
-Depends: docker.io, docker-compose-v2
-Filename: pool/main/casaos-docker-service_0.4.15_all.deb
-Size: 2984
-MD5sum: 93011dc59cfc0d529333883b187ab963
-SHA1: 99dcdcab4a0c361d85c492b6b9283af17e0aed89
-SHA256: 6fd724b73bd07022b660fe909af322c8086fca23c5d1e69ab780728276b5c21e
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/main/casaos-docker-service_0.4.15-1_all.deb
+Size: 3068
+MD5sum: 7b03536a01b8f1dc946060577ce7d0b1
+SHA1: fce3118538a2850ee6f1836f8f4cd408a8468b82
+SHA256: afeb3f921fb01393731f8ce349b0318b462d2a29ff6070d2c910df05d0690773
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/casaos-docker-service
