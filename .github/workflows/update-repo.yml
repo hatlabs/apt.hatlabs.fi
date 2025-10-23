@@ -273,6 +273,7 @@ jobs:
               archlist[key]=archlist[key] ? archlist[key] "," arch : arch
             }
             END {
+              PROCINFO["sorted_in"] = "@ind_str_asc"
               for (k in pkgs) {
                 printf "<div class=\"package\">\n<h3>%s</h3>\n<p>%s</p>\n", k, pkgs[k]
                 # Print architecture tags as download links
