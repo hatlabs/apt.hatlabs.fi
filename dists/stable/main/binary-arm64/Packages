@@ -1,18 +1,18 @@
 Package: casaos-docker-service
-Version: 0.4.15-1
+Version: 0.4.15-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 19
+Installed-Size: 22
 Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/main/casaos-docker-service_0.4.15-1_all.deb
-Size: 3068
-MD5sum: 7b03536a01b8f1dc946060577ce7d0b1
-SHA1: fce3118538a2850ee6f1836f8f4cd408a8468b82
-SHA256: afeb3f921fb01393731f8ce349b0318b462d2a29ff6070d2c910df05d0690773
+Filename: pool/main/casaos-docker-service_0.4.15-2_all.deb
+Size: 3524
+MD5sum: c5419cd90f8af22763d0ec19f6e13717
+SHA1: 359fb35b821d0917e942afaa1979e93c3f0a1fe3
+SHA256: e55b2211abc57cb6566eb85573f609ac8e5ef7026242184d8b3714d4bceae18a
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/casaos-docker-service
-Description: CasaOS containerized service for HaLOS
+Description: CasaOS containerized service for Halos
  CasaOS provides a user-friendly web interface for managing Docker
  containers. This package installs CasaOS as a containerized service
  using Docker Compose.
