@@ -43,16 +43,16 @@ Description: Firmware for the HALPI2 Computer
  The firmware is automatically flashed to the device upon installation.
 
 Package: runtipi-docker-service
-Version: 4.5.2-1
+Version: 4.5.2-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 2126
 Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/main/runtipi-docker-service_4.5.2-1_all.deb
-Size: 2156400
-MD5sum: 240739b2b368db2f1c62390ec5a5c49b
-SHA1: f1c85709e9ab176f7549d1aa2f1643b8c4432bd2
-SHA256: f74995fa872b8154d25bbb4079defadd4ef3740ace004f3dc2ed2e62be0a4cc8
+Filename: pool/main/runtipi-docker-service_4.5.2-2_all.deb
+Size: 2156420
+MD5sum: 3f3372487346e6965e385836efb5aefb
+SHA1: d2cf72b3c14c144d8fb837a536d591aa5045e0c9
+SHA256: b80d54586745a7f0cc7fd8b608ac002614528f0d1e3dcf6dbc3d5fde66287f17
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/runtipi-docker-service
