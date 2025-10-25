@@ -42,3 +42,29 @@ Description: Firmware for the HALPI2 Computer
  This package contains the firmware for the HALPI2 Computer onboard controller.
  The firmware is automatically flashed to the device upon installation.
 
+Package: runtipi-docker-service
+Version: 4.5.2-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 2126
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/main/runtipi-docker-service_4.5.2-1_all.deb
+Size: 2156400
+MD5sum: 240739b2b368db2f1c62390ec5a5c49b
+SHA1: f1c85709e9ab176f7549d1aa2f1643b8c4432bd2
+SHA256: f74995fa872b8154d25bbb4079defadd4ef3740ace004f3dc2ed2e62be0a4cc8
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/runtipi-docker-service
+Description: Runtipi homeserver orchestrator with systemd integration
+ Runtipi provides a user-friendly web interface for managing Docker
+ containers and self-hosted applications. This package installs the
+ runtipi-cli tool and configures it as a systemd service.
+ .
+ Runtipi provides:
+  - Container management through web UI
+  - App store with 300+ pre-configured applications
+  - Simple Docker orchestration for self-hosting
+ .
+ The web interface is accessible on port 80 after installation.
+
