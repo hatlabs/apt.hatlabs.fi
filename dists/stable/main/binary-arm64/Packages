@@ -83,16 +83,16 @@ Description: debug symbols for halpid
 Build-Ids: 0279c3207048ad50c955fbf6c22c0dbfe121f59a 1728fb0bab3aba38f0ef3471243925179e4c18e3 45291742d283499fe0d216b6bd8e3a0f7fd67300 54b221c8668e70325161cf15e93bf69b313dfdf2 69c14f241382bd5c8e46cfb31509aa26cc44a855 7cdf9a5d10e2d0814b1fa5db02828f5e8445c8db 9fbfbce03bf4e40a427bd3a70dae84a069dcb28a c61fed41fc2396952746b4596c943a619660ff16 ce089597aa230f9d66c35d9d192d2a7ed620db33 ee535d14a0ddb5f4b206945991ec58dcd8890184
 
 Package: runtipi-docker-service
-Version: 4.5.3-4
+Version: 4.5.5-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 2126
+Installed-Size: 2127
 Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/main/runtipi-docker-service_4.5.3-4_all.deb
-Size: 2156480
-MD5sum: 421a80c2640c1fd762c8a6c8d8c2a7b1
-SHA1: 579885d28dfe7a57690d35c8f361f9fe4022881b
-SHA256: 95d0d8e9f236b129195f84bb406bfd99dd3c994af6b718f47f7a4a59ac133f23
+Filename: pool/main/runtipi-docker-service_4.5.5-1_all.deb
+Size: 2157648
+MD5sum: 17f11674a39f0c7e1b8bbc346171345c
+SHA1: ba822d0e00f82557235497f1bcb0c36385a98e3a
+SHA256: 7e7e88ee0e7c3a126067e0c4f059f08bba25101f55e7ad93d4b146ae106650cc
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/runtipi-docker-service
