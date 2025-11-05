@@ -49,6 +49,32 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
+Package: cockpit-package-manager
+Version: 0.1.1-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 9338
+Depends: cockpit (>= 276), packagekit
+Filename: pool/main/cockpit-package-manager_0.1.1-1_all.deb
+Size: 1849788
+MD5sum: 638dc440b1906abcf2306b3ea00a0041
+SHA1: 8fd0778bbe91c2bf7765a84e0a101f9e77c65f64
+SHA256: a2e386c89edea5aa51af956edacbd0bdf4f110597cbd4168979559a392c3ea29
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-package-manager
+Description: Cockpit-based package manager using PackageKit
+ A web-based package manager interface for Cockpit that provides:
+  - Browse packages by PackageKit group (cross-distribution compatible)
+  - Search and filter packages by name or description
+  - View detailed package information, dependencies, and file lists
+  - Install and remove packages with progress tracking
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a modern, user-friendly interface for managing
+ system packages through Cockpit's web interface using the PackageKit
+ D-Bus API for cross-distribution compatibility.
+
 Package: halpi2-firmware
 Version: 3.1.3
 Architecture: all
