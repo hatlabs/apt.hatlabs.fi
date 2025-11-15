@@ -24,6 +24,59 @@ jobs:
         echo "Client payload: ${{ toJson(github.event.client_payload) }}"
         echo "Triggered by: ${{ github.event.client_payload.repository }}"
 
+    - name: Parse payload and determine target distribution
+      id: payload
+      run: |
+        # Define supported distributions (single source of truth)
+        ALL_DISTRIBUTIONS="stable unstable bookworm-stable bookworm-unstable trixie-stable trixie-unstable"
+        echo "all_distributions=$ALL_DISTRIBUTIONS" >> $GITHUB_OUTPUT
+
+        # Extract payload fields (defaults for backward compatibility and scheduled runs)
+        DISTRO="${{ github.event.client_payload.distro }}"
+        CHANNEL="${{ github.event.client_payload.channel }}"
+        COMPONENT="${{ github.event.client_payload.component }}"
+        TARGET_REPO="${{ github.event.client_payload.repository }}"
+
+        # Set defaults if not provided
+        DISTRO="${DISTRO:-any}"
+        CHANNEL="${CHANNEL:-stable}"
+        COMPONENT="${COMPONENT:-main}"
+
+        # Normalize to lowercase for case-insensitive comparison
+        DISTRO=$(echo "$DISTRO" | tr '[:upper:]' '[:lower:]')
+        CHANNEL=$(echo "$CHANNEL" | tr '[:upper:]' '[:lower:]')
+        COMPONENT=$(echo "$COMPONENT" | tr '[:upper:]' '[:lower:]')
+
+        # Map to distribution name
+        if [ "$DISTRO" = "any" ]; then
+          DISTRIBUTION="$CHANNEL"
+        else
+          DISTRIBUTION="${DISTRO}-${CHANNEL}"
+        fi
+
+        echo "=== Payload Configuration ==="
+        echo "Distro: $DISTRO"
+        echo "Channel: $CHANNEL"
+        echo "Component: $COMPONENT"
+        echo "Distribution: $DISTRIBUTION"
+        echo "Target Repository: ${TARGET_REPO:-<all repositories>}"
+
+        # Export for later steps
+        echo "distro=$DISTRO" >> $GITHUB_OUTPUT
+        echo "channel=$CHANNEL" >> $GITHUB_OUTPUT
+        echo "component=$COMPONENT" >> $GITHUB_OUTPUT
+        echo "distribution=$DISTRIBUTION" >> $GITHUB_OUTPUT
+        echo "target_repo=$TARGET_REPO" >> $GITHUB_OUTPUT
+
+        # Determine if this is a targeted update or full rebuild
+        if [ -n "$TARGET_REPO" ]; then
+          echo "mode=targeted" >> $GITHUB_OUTPUT
+          echo "Mode: Targeted update for $TARGET_REPO"
+        else
+          echo "mode=full" >> $GITHUB_OUTPUT
+          echo "Mode: Full repository rebuild"
+        fi
+
     - name: Discover package repositories
       id: discover
       run: |
@@ -46,7 +99,19 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y dpkg-dev apt-utils curl jq gnupg
-        mkdir -p packages apt-repo/pool/main apt-repo/dists/stable/main/binary-arm64 apt-repo/dists/stable/main/binary-all
+
+        # Create packages directory and pool
+        mkdir -p packages apt-repo/pool/main
+
+        # Create all distribution directories
+        for dist in ${{ steps.payload.outputs.all_distributions }}; do
+          echo "Creating distribution: $dist"
+          mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
+          mkdir -p "apt-repo/dists/$dist/main/binary-all"
+        done
+
+        echo "=== Created distribution directories ==="
+        ls -la apt-repo/dists/
 
     - name: Import GPG signing key
       run: |
@@ -56,128 +121,219 @@ jobs:
         echo "GPG_KEY_ID=$GPG_KEY_ID" >> $GITHUB_ENV
         echo "Using GPG key: $GPG_KEY_ID"
 
-    - name: Download latest packages
+    - name: Download packages
       run: |
-        echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
-          if [ -n "$repo" ]; then
-            echo "=== Processing $repo ==="
+        MODE="${{ steps.payload.outputs.mode }}"
+        TARGET_REPO="${{ steps.payload.outputs.target_repo }}"
+        CHANNEL="${{ steps.payload.outputs.channel }}"
 
-            # Get latest release info
+        # Function to download packages from a repository
+        download_from_repo() {
+          local repo=$1
+          local release_tag=$2
+
+          echo "=== Processing $repo (release: $release_tag) ==="
+
+          # Get release info
+          if [ "$release_tag" = "latest" ]; then
             echo "Fetching latest release from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/$repo/releases/latest")
-
-            # Check if release exists
-            if [ "$(echo "$release_info" | jq -r '.message // empty')" = "Not Found" ]; then
-              echo "No releases found for $repo"
-              continue
-            fi
-
-            release_tag=$(echo "$release_info" | jq -r '.tag_name')
-            echo "Latest release: $release_tag"
-
-            # Download all .deb files from the release
-            echo "Downloading .deb files from $repo..."
-
-            # Process each .deb asset
-            echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | "\(.name)|\(.browser_download_url)"' | \
-            while IFS='|' read -r name url; do
-              if [ -n "$name" ] && [ -n "$url" ]; then
-                echo "Downloading $name..."
-                temp_file="packages/temp_$name"
-                curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                     -H "Accept: application/octet-stream" \
-                     "$url" -o "$temp_file"
-
-                if [ $? -eq 0 ]; then
-                  echo "✓ Downloaded $name"
-
-                  # Extract the actual package version from the .deb metadata
-                  actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null)
-                  package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null)
-                  architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null)
-
-                  if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
-                    # Create the correct filename based on package metadata
-                    correct_filename="${package_name}_${actual_version}_${architecture}.deb"
-                    final_path="packages/$correct_filename"
-
-                    # Move to correct filename
-                    mv "$temp_file" "$final_path"
-
-                    echo "  Package: $package_name"
-                    echo "  Version: $actual_version (corrected from filename)"
-                    echo "  Architecture: $architecture"
-                    echo "  Renamed to: $correct_filename"
-                  else
-                    echo "  ⚠️  Could not extract package metadata, keeping original filename"
-                    mv "$temp_file" "packages/$name"
-                  fi
-                else
-                  echo "✗ Failed to download $name"
-                  rm -f "$temp_file"
-                fi
-              fi
-            done
-
-            echo ""
+          else
+            echo "Fetching release $release_tag from $repo..."
+            release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/$repo/releases/tags/$release_tag")
           fi
-        done
 
-        echo "=== Downloaded and renamed packages ==="
+          # Check if release exists
+          if [ "$(echo "$release_info" | jq -r '.message // empty')" = "Not Found" ]; then
+            echo "No release found for $repo (tag: $release_tag)"
+            return
+          fi
+
+          local actual_tag=$(echo "$release_info" | jq -r '.tag_name')
+          echo "Release tag: $actual_tag"
+
+          # Download all .deb files from the release
+          echo "Downloading .deb files..."
+          echo "$release_info" | jq -r '.assets[] | select(.name | endswith(".deb")) | "\(.name)|\(.browser_download_url)"' | \
+          while IFS='|' read -r name url; do
+            if [ -n "$name" ] && [ -n "$url" ]; then
+              echo "Downloading $name..."
+              temp_file="packages/temp_$name"
+              curl -L --fail -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                   -H "Accept: application/octet-stream" \
+                   "$url" -o "$temp_file"
+
+              if [ $? -eq 0 ]; then
+                echo "✓ Downloaded $name"
+
+                # Extract package metadata
+                actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null)
+                package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null)
+                architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null)
+
+                if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
+                  # Create canonical filename
+                  correct_filename="${package_name}_${actual_version}_${architecture}.deb"
+                  final_path="packages/$correct_filename"
+
+                  mv "$temp_file" "$final_path"
+
+                  echo "  Package: $package_name"
+                  echo "  Version: $actual_version"
+                  echo "  Architecture: $architecture"
+                  echo "  Filename: $correct_filename"
+                else
+                  echo "  ⚠️  Could not extract package metadata, keeping original filename"
+                  mv "$temp_file" "packages/$name"
+                fi
+              else
+                echo "✗ Failed to download $name"
+                rm -f "$temp_file"
+              fi
+            fi
+          done
+          echo ""
+        }
+
+        # Determine which repositories and releases to process
+        if [ "$MODE" = "targeted" ]; then
+          echo "=== Targeted Update Mode ==="
+          # Determine release tag based on channel
+          if [ "$CHANNEL" = "unstable" ]; then
+            RELEASE_TAG="unstable"
+          else
+            RELEASE_TAG="latest"
+          fi
+
+          download_from_repo "$TARGET_REPO" "$RELEASE_TAG"
+        else
+          echo "=== Full Rebuild Mode ==="
+          # Download from all repositories (stable channel only for full rebuild)
+          echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
+            if [ -n "$repo" ]; then
+              download_from_repo "$repo" "latest"
+            fi
+          done
+        fi
+
+        echo "=== Downloaded packages ==="
         ls -la packages/ || echo "No packages downloaded"
     - name: Build APT repository structure
       run: |
-        # Copy packages to pool
+        MODE="${{ steps.payload.outputs.mode }}"
+        TARGET_DIST="${{ steps.payload.outputs.distribution }}"
+        COMPONENT="${{ steps.payload.outputs.component }}"
+
+        # Copy new packages to pool
         if ls packages/*.deb 1> /dev/null 2>&1; then
           cp packages/*.deb apt-repo/pool/main/
-          echo "Copied $(ls packages/*.deb | wc -l) packages to repository"
+          echo "Copied $(ls packages/*.deb | wc -l) packages to repository pool"
         else
-          echo "No .deb packages found to copy"
+          echo "No new .deb packages to copy"
         fi
 
         cd apt-repo
 
-        # Create directories for arm64 architecture only
-        mkdir -p dists/stable/main/binary-arm64
-        mkdir -p dists/stable/main/binary-all
+        # Function to build distribution metadata
+        build_distribution() {
+          local dist=$1
+          local component=$2
 
-        # Generate Packages files
-        echo "Generating Packages files for arm64..."
+          echo "=== Building distribution: $dist/$component ==="
 
-        # For arm64 packages
-        dpkg-scanpackages -a arm64 pool/ /dev/null > dists/stable/main/binary-arm64/Packages 2>/dev/null || touch dists/stable/main/binary-arm64/Packages
-        gzip -k dists/stable/main/binary-arm64/Packages
+          local dist_path="dists/$dist"
+          local comp_path="$dist_path/$component"
 
-        # For architecture-independent packages (scripts, docs, etc.)
-        dpkg-scanpackages -a all pool/ /dev/null > dists/stable/main/binary-all/Packages 2>/dev/null || touch dists/stable/main/binary-all/Packages
-        gzip -k dists/stable/main/binary-all/Packages
+          # Ensure directories exist
+          mkdir -p "$comp_path/binary-arm64"
+          mkdir -p "$comp_path/binary-all"
 
-        # Generate Release file with arm64 architecture
-        echo "Generating Release file..."
-        cd dists/stable
-        cat > Release << EOF
+          # Generate Packages files for each architecture
+          echo "Generating Packages files..."
+
+          # ARM64 packages
+          dpkg-scanpackages -a arm64 pool/ /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
+          gzip -kf "$comp_path/binary-arm64/Packages"
+
+          # Architecture-independent packages
+          dpkg-scanpackages -a all pool/ /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
+          gzip -kf "$comp_path/binary-all/Packages"
+
+          # Generate Release file
+          echo "Generating Release file for $dist..."
+          cd "$dist_path"
+
+          # Determine suite and description based on distribution pattern
+          if [[ "$dist" == "stable" ]]; then
+            SUITE="stable"
+            CODENAME="stable"
+            DESC="Hat Labs product packages (stable)"
+          elif [[ "$dist" == "unstable" ]]; then
+            SUITE="unstable"
+            CODENAME="unstable"
+            DESC="Hat Labs product packages (unstable - rolling)"
+          elif [[ "$dist" =~ ^([a-z0-9]+)-(stable|unstable)$ ]]; then
+            # Extract codename and stability from pattern like "bookworm-stable"
+            CODENAME="${BASH_REMATCH[1]}"
+            STABILITY="${BASH_REMATCH[2]}"
+            SUITE="$dist"
+            # Capitalize first letter of codename for description
+            CODENAME_DISPLAY="$(echo ${CODENAME:0:1} | tr '[:lower:]' '[:upper:]')${CODENAME:1}"
+            if [[ "$STABILITY" == "stable" ]]; then
+              DESC="Halos packages for Debian $CODENAME_DISPLAY (stable)"
+            else
+              DESC="Halos packages for Debian $CODENAME_DISPLAY (unstable - rolling)"
+            fi
+          else
+            SUITE="$dist"
+            CODENAME="$dist"
+            DESC="Hat Labs APT Repository - $dist"
+          fi
+
+          cat > Release << EOF
         Origin: Hat Labs
         Label: Hat Labs APT Repository
-        Suite: stable
-        Codename: stable
+        Suite: $SUITE
+        Codename: $CODENAME
         Version: 1.0
-        Architectures: arm64 armhf all
-        Components: main
-        Description: Hat Labs package repository
+        Architectures: arm64 all
+        Components: $component
+        Description: $DESC
         Date: $(date -Ru)
         EOF
 
-        # Add package checksums
-        apt-ftparchive release . >> Release
+          # Add package checksums
+          apt-ftparchive release . >> Release
 
-        # Sign the Release file
-        echo "Signing Release file with GPG..."
-        gpg --batch --yes --detach-sign --armor -u $GPG_KEY_ID -o Release.gpg Release
-        gpg --batch --yes --clear-sign -u $GPG_KEY_ID -o InRelease Release
+          # Sign the Release file
+          echo "Signing Release file..."
+          gpg --batch --yes --detach-sign --armor -u $GPG_KEY_ID -o Release.gpg Release
+          gpg --batch --yes --clear-sign -u $GPG_KEY_ID -o InRelease Release
 
-        echo "Repository structure:"
-        find ../apt-repo -type f | sort
+          cd ../..
+          echo "✓ Built $dist/$component"
+        }
+
+        # Determine which distributions to build
+        if [ "$MODE" = "targeted" ]; then
+          echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
+          build_distribution "$TARGET_DIST" "$COMPONENT"
+        else
+          echo "=== Full Rebuild Mode: Updating stable distributions only ==="
+          echo "(Unstable distributions require targeted updates from package repos)"
+          # Only build stable distributions in full rebuild mode
+          # Unstable distributions get packages from targeted updates when repos push to main
+          STABLE_DISTRIBUTIONS="stable bookworm-stable trixie-stable"
+          for dist in $STABLE_DISTRIBUTIONS; do
+            build_distribution "$dist" "main"
+          done
+        fi
+
+        echo ""
+        echo "=== Repository structure ==="
+        find dists -name "Packages" -o -name "Release" | sort
 
     - name: Export public GPG key
       run: |
@@ -327,7 +483,15 @@ jobs:
       run: |
         echo "=== APT Repository Update Complete ==="
         echo "Repository deployed to: https://apt.hatlabs.fi"
-        if [ -f apt-repo/dists/stable/main/binary-arm64/Packages ]; then
-          package_count=$(grep -c '^Package:' apt-repo/dists/stable/main/binary-arm64/Packages)
-          echo "Packages in repository: $package_count"
-        fi
+        echo ""
+        echo "Distribution Summary:"
+
+        for dist in ${{ steps.payload.outputs.all_distributions }}; do
+          pkgfile="apt-repo/dists/$dist/main/binary-arm64/Packages"
+          if [ -f "$pkgfile" ]; then
+            count=$(grep -c '^Package:' "$pkgfile" 2>/dev/null || echo "0")
+            echo "  $dist: $count packages"
+          else
+            echo "  $dist: (not built this run)"
+          fi
+        done
