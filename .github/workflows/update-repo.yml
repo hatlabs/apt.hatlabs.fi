@@ -229,7 +229,6 @@ jobs:
 
         # Copy new packages to distribution-specific pool
         if ls packages/*.deb 1> /dev/null 2>&1; then
-          mkdir -p "apt-repo/pool/$TARGET_DIST/main"
           cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
           echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
         else
@@ -323,14 +322,23 @@ jobs:
           echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
-          echo "=== Full Rebuild Mode: Updating stable distributions only ==="
-          echo "(Unstable distributions require targeted updates from package repos)"
-          # Only build stable distributions in full rebuild mode
-          # Unstable distributions get packages from targeted updates when repos push to main
-          STABLE_DISTRIBUTIONS="stable bookworm-stable trixie-stable"
-          for dist in $STABLE_DISTRIBUTIONS; do
+          echo "=== Full Rebuild Mode ==="
+          echo "Packages downloaded from all repositories are in pool/stable/main/"
+          echo "Building all distributions (stable will have packages, others initially empty)"
+
+          # In full rebuild mode:
+          # - Downloaded packages are in pool/stable/main/ (Hat Labs products)
+          # - Build all distributions to ensure metadata exists
+          # - Only stable will have packages initially
+          # - Distribution-specific packages (bookworm/trixie) populate via targeted updates
+
+          for dist in ${{ steps.payload.outputs.all_distributions }}; do
             build_distribution "$dist" "main"
           done
+
+          echo ""
+          echo "Note: Distribution-specific packages (bookworm/trixie) are added via targeted"
+          echo "updates when package repositories build for those distributions."
         fi
 
         echo ""
