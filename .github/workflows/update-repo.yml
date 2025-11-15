@@ -159,7 +159,11 @@ jobs:
 
           # Check for null/empty release_info (e.g., when no pre-releases exist)
           if [ -z "$release_info" ] || [ "$release_info" = "null" ]; then
-            echo "No pre-release found for $repo"
+            if [ "$release_tag" = "prerelease" ]; then
+              echo "No pre-release found for $repo"
+            else
+              echo "No release information found for $repo"
+            fi
             return
           fi
 
