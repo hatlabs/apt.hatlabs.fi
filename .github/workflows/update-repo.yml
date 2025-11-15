@@ -42,8 +42,10 @@ jobs:
         CHANNEL="${CHANNEL:-stable}"
         COMPONENT="${COMPONENT:-main}"
 
-        # Normalize distro to lowercase for case-insensitive comparison
+        # Normalize to lowercase for case-insensitive comparison
         DISTRO=$(echo "$DISTRO" | tr '[:upper:]' '[:lower:]')
+        CHANNEL=$(echo "$CHANNEL" | tr '[:upper:]' '[:lower:]')
+        COMPONENT=$(echo "$COMPONENT" | tr '[:upper:]' '[:lower:]')
 
         # Map to distribution name
         if [ "$DISTRO" = "any" ]; then
