@@ -100,12 +100,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y dpkg-dev apt-utils curl jq gnupg
 
-        # Create packages directory and pool
-        mkdir -p packages apt-repo/pool/main
+        # Create packages directory
+        mkdir -p packages
 
-        # Create all distribution directories
+        # Create distribution-specific pool and distribution directories
         for dist in ${{ steps.payload.outputs.all_distributions }}; do
           echo "Creating distribution: $dist"
+          mkdir -p "apt-repo/pool/$dist/main"
           mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
           mkdir -p "apt-repo/dists/$dist/main/binary-all"
         done
@@ -226,10 +227,10 @@ jobs:
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
 
-        # Copy new packages to pool
+        # Copy new packages to distribution-specific pool
         if ls packages/*.deb 1> /dev/null 2>&1; then
-          cp packages/*.deb apt-repo/pool/main/
-          echo "Copied $(ls packages/*.deb | wc -l) packages to repository pool"
+          cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
+          echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
         else
           echo "No new .deb packages to copy"
         fi
@@ -253,12 +254,12 @@ jobs:
           # Generate Packages files for each architecture
           echo "Generating Packages files..."
 
-          # ARM64 packages
-          dpkg-scanpackages -a arm64 pool/ /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
+          # ARM64 packages - scan only this distribution's pool
+          dpkg-scanpackages -a arm64 "pool/$dist/" /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
           gzip -kf "$comp_path/binary-arm64/Packages"
 
-          # Architecture-independent packages
-          dpkg-scanpackages -a all pool/ /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
+          # Architecture-independent packages - scan only this distribution's pool
+          dpkg-scanpackages -a all "pool/$dist/" /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
           gzip -kf "$comp_path/binary-all/Packages"
 
           # Generate Release file
@@ -321,14 +322,23 @@ jobs:
           echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
-          echo "=== Full Rebuild Mode: Updating stable distributions only ==="
-          echo "(Unstable distributions require targeted updates from package repos)"
-          # Only build stable distributions in full rebuild mode
-          # Unstable distributions get packages from targeted updates when repos push to main
-          STABLE_DISTRIBUTIONS="stable bookworm-stable trixie-stable"
-          for dist in $STABLE_DISTRIBUTIONS; do
+          echo "=== Full Rebuild Mode ==="
+          echo "Packages downloaded from all repositories are in pool/stable/main/"
+          echo "Building all distributions (stable will have packages, others initially empty)"
+
+          # In full rebuild mode:
+          # - Downloaded packages are in pool/stable/main/ (Hat Labs products)
+          # - Build all distributions to ensure metadata exists
+          # - Only stable will have packages initially
+          # - Distribution-specific packages (bookworm/trixie) populate via targeted updates
+
+          for dist in ${{ steps.payload.outputs.all_distributions }}; do
             build_distribution "$dist" "main"
           done
+
+          echo ""
+          echo "Note: Distribution-specific packages (bookworm/trixie) are added via targeted"
+          echo "updates when package repositories build for those distributions."
         fi
 
         echo ""
