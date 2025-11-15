@@ -1,0 +1,161 @@
+Package: casaos-docker-service
+Version: 0.4.15-2
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 22
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/main/casaos-docker-service_0.4.15-2_all.deb
+Size: 3524
+MD5sum: c5419cd90f8af22763d0ec19f6e13717
+SHA1: 359fb35b821d0917e942afaa1979e93c3f0a1fe3
+SHA256: e55b2211abc57cb6566eb85573f609ac8e5ef7026242184d8b3714d4bceae18a
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/casaos-docker-service
+Description: CasaOS containerized service for Halos
+ CasaOS provides a user-friendly web interface for managing Docker
+ containers. This package installs CasaOS as a containerized service
+ using Docker Compose.
+ .
+ CasaOS runs in a Docker container and provides:
+  - Container management through web UI
+  - App store functionality
+  - Simple Docker management for non-technical users
+ .
+ The web interface is accessible on port 80 after installation.
+
+Package: cockpit-dockermanager
+Version: 1.0.7-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 66
+Depends: cockpit (>= 200)
+Recommends: docker.io | docker-ce
+Filename: pool/main/cockpit-dockermanager_1.0.7-1_all.deb
+Size: 15608
+MD5sum: d2b4c22012a7cb1fb1d8174f1a3bb2c7
+SHA1: 3fbba28bd8d8c4778d0725f0bba0431e374b1767
+SHA256: fc5f2c47685bc88d3567b246f6437658d08ef1c77a457c3a44c2e3630b21c590
+Section: admin
+Priority: optional
+Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
+Description: Cockpit plugin for Docker container management
+ Docker Manager is a lightweight and intuitive utility designed to help you
+ manage your Docker containers via a simplified web interface through Cockpit.
+ .
+ Features:
+  * List, start, stop, search and restart containers
+  * View container status, uptime, details and exposed ports
+  * In-window terminal with individual container terminal functionality
+  * Image management
+
+Package: cockpit-package-manager
+Version: 0.1.1-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 9338
+Depends: cockpit (>= 276), packagekit
+Filename: pool/main/cockpit-package-manager_0.1.1-1_all.deb
+Size: 1849788
+MD5sum: 638dc440b1906abcf2306b3ea00a0041
+SHA1: 8fd0778bbe91c2bf7765a84e0a101f9e77c65f64
+SHA256: a2e386c89edea5aa51af956edacbd0bdf4f110597cbd4168979559a392c3ea29
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-package-manager
+Description: Cockpit-based package manager using PackageKit
+ A web-based package manager interface for Cockpit that provides:
+  - Browse packages by PackageKit group (cross-distribution compatible)
+  - Search and filter packages by name or description
+  - View detailed package information, dependencies, and file lists
+  - Install and remove packages with progress tracking
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a modern, user-friendly interface for managing
+ system packages through Cockpit's web interface using the PackageKit
+ D-Bus API for cross-distribution compatibility.
+
+Package: halpi2-firmware
+Version: 3.2.0
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3077
+Depends: halpid (>= 4.0.0)
+Filename: pool/main/halpi2-firmware_3.2.0_all.deb
+Size: 650138
+MD5sum: 083085fc87fe2063168def1a60d9e4fd
+SHA1: 40944abad181238a3370c0364eb9b689dbcd7600
+SHA256: 64a8c8970eac8ea4057b911320003de601b6186e38ae119186cbd33329a7d40c
+Section: embedded
+Priority: optional
+Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
+Description: Firmware for the HALPI2 Computer
+ This package contains the firmware for the HALPI2 Computer onboard controller.
+ The firmware is automatically flashed to the device upon installation.
+
+Package: halpid
+Version: 4.0.7
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 59661
+Pre-Depends: dpkg (>= 1.16.1)
+Recommends: halpi-firmware
+Filename: pool/main/halpid_4.0.7_arm64.deb
+Size: 14406448
+MD5sum: b4cbb77e93812b3951e9c07388d80a37
+SHA1: a5327851fb5aece1e6383642e077c4e27d58e4c3
+SHA256: 45413f4a61ef52f2a5df77224aad646868ff28e6f96326ddb6dc432500d13ffd
+Section: admin
+Priority: important
+Description: HALPI2 service daemon
+ `halpid` is a power monitor and watchdog service for HALPI2. It communicates
+ with the HALPI2 controller, providing the "smart" aspects of the operation.
+ .
+ The main use case for the service software is to have the Raspberry Pi
+ Operating System shut down once the power is cut. This prevents potential
+ file system corruption without having to shut down the device manually.
+
+Package: halpid-dbgsym
+Source: halpid
+Version: 4.0.7
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3186
+Depends: halpid (= 4.0.7)
+Filename: pool/main/halpid-dbgsym_4.0.7_arm64.deb
+Size: 2959648
+MD5sum: 486c9ac5276f017e19f20c77da30c2fe
+SHA1: a232c99a56a91973d9dd0b115063f586a0eff422
+SHA256: 458420548a8c18ec84e5e0310f2d0a419cc6981d469e33e831acaf298332b734
+Section: debug
+Priority: optional
+Description: debug symbols for halpid
+Build-Ids: 0279c3207048ad50c955fbf6c22c0dbfe121f59a 1728fb0bab3aba38f0ef3471243925179e4c18e3 45291742d283499fe0d216b6bd8e3a0f7fd67300 54b221c8668e70325161cf15e93bf69b313dfdf2 69c14f241382bd5c8e46cfb31509aa26cc44a855 7cdf9a5d10e2d0814b1fa5db02828f5e8445c8db 9fbfbce03bf4e40a427bd3a70dae84a069dcb28a c61fed41fc2396952746b4596c943a619660ff16 ce089597aa230f9d66c35d9d192d2a7ed620db33 ee535d14a0ddb5f4b206945991ec58dcd8890184
+
+Package: runtipi-docker-service
+Version: 4.6.2-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 2122
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/main/runtipi-docker-service_4.6.2-1_all.deb
+Size: 2156532
+MD5sum: ec2384cc8ed9e961aa98f045e1f37669
+SHA1: 048b2944e8c366724a1726ab66357c2e3402bdbf
+SHA256: 7e8c08ef6a584287d5f0bbcc17a3b0060f70762516d720b2839b7ffa46aae845
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/runtipi-docker-service
+Description: Runtipi homeserver orchestrator with systemd integration
+ Runtipi provides a user-friendly web interface for managing Docker
+ containers and self-hosted applications. This package installs the
+ runtipi-cli tool and configures it as a systemd service.
+ .
+ Runtipi provides:
+  - Container management through web UI
+  - App store with 300+ pre-configured applications
+  - Simple Docker orchestration for self-hosting
+ .
+ The web interface is accessible on port 80 after installation.
+
