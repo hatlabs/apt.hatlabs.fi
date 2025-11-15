@@ -108,14 +108,53 @@ jobs:
         echo "Generating Release file for $DIST..."
         cd "dists/$DIST"
 
+        # Set Suite, Codename, and Description based on distribution
+        case "$DIST" in
+          stable)
+            SUITE="stable"
+            CODENAME="stable"
+            DESCRIPTION="Hat Labs Stable APT Repository"
+            ;;
+          unstable)
+            SUITE="unstable"
+            CODENAME="unstable"
+            DESCRIPTION="Hat Labs Unstable APT Repository"
+            ;;
+          bookworm-stable)
+            SUITE="stable"
+            CODENAME="bookworm"
+            DESCRIPTION="Hat Labs Bookworm Stable APT Repository"
+            ;;
+          bookworm-unstable)
+            SUITE="unstable"
+            CODENAME="bookworm"
+            DESCRIPTION="Hat Labs Bookworm Unstable APT Repository"
+            ;;
+          trixie-stable)
+            SUITE="stable"
+            CODENAME="trixie"
+            DESCRIPTION="Hat Labs Trixie Stable APT Repository"
+            ;;
+          trixie-unstable)
+            SUITE="unstable"
+            CODENAME="trixie"
+            DESCRIPTION="Hat Labs Trixie Unstable APT Repository"
+            ;;
+          *)
+            SUITE="$DIST"
+            CODENAME="$DIST"
+            DESCRIPTION="Hat Labs APT Repository"
+            ;;
+        esac
+
         cat > Release <<EOF
 Origin: Hat Labs
 Label: Hat Labs
-Suite: $DIST
-Codename: $DIST
+Suite: $SUITE
+Codename: $CODENAME
 Architectures: arm64 all
 Components: main
-Description: Hat Labs APT Repository
+Description: $DESCRIPTION
 Date: $(date -Ru)
 EOF
 
