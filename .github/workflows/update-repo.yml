@@ -140,6 +140,11 @@ jobs:
             echo "Fetching latest release from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/$repo/releases/latest")
+          elif [ "$release_tag" = "prerelease" ]; then
+            echo "Fetching latest pre-release from $repo..."
+            release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/$repo/releases" | \
+              jq '[.[] | select(.prerelease == true)] | .[0]')
           else
             echo "Fetching release $release_tag from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -149,6 +154,16 @@ jobs:
           # Check if release exists
           if [ "$(echo "$release_info" | jq -r '.message // empty')" = "Not Found" ]; then
             echo "No release found for $repo (tag: $release_tag)"
+            return
+          fi
+
+          # Check for null/empty release_info (e.g., when no pre-releases exist)
+          if [ -z "$release_info" ] || [ "$release_info" = "null" ]; then
+            if [ "$release_tag" = "prerelease" ]; then
+              echo "No pre-release found for $repo"
+            else
+              echo "No release information found for $repo"
+            fi
             return
           fi
 
@@ -203,8 +218,10 @@ jobs:
           echo "=== Targeted Update Mode ==="
           # Determine release tag based on channel
           if [ "$CHANNEL" = "unstable" ]; then
-            RELEASE_TAG="unstable"
+            # For unstable channel, download from latest pre-release
+            RELEASE_TAG="prerelease"
           else
+            # For stable channel, download from latest stable release
             RELEASE_TAG="latest"
           fi
 
