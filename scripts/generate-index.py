@@ -16,6 +16,10 @@ import html
 
 
 # Constants
+REPO_URL = 'https://apt.hatlabs.fi'
+KEYRING_PATH = '/usr/share/keyrings/hatlabs.gpg'
+SUPPORTED_ARCHITECTURES = ['arm64', 'all']
+
 UNSTABLE_WARNING = '''
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -133,7 +137,7 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
 
         # Collect packages from all architectures
         all_packages = []
-        for arch in ['arm64', 'all']:
+        for arch in SUPPORTED_ARCHITECTURES:
             packages_file = dist_path / 'main' / f'binary-{arch}' / 'Packages'
             if packages_file.exists():
                 all_packages.extend(parse_packages_file(packages_file))
@@ -154,9 +158,8 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
                           file=sys.stderr)
                 if pkg.architecture not in existing.all_architectures:
                     existing.all_architectures.append(pkg.architecture)
-                # Prefer arm64 as the primary architecture display
-                if pkg.architecture == 'arm64' and existing.architecture == 'all':
-                    existing.architecture = 'arm64'
+                # Update primary architecture display to preferred one
+                existing.architecture = get_preferred_architecture(existing.architecture, pkg.architecture)
 
         distributions.append(Distribution(
             name=dist_name,
@@ -166,6 +169,19 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
         ))
 
     return distributions
+
+
+def get_preferred_architecture(arch1: str, arch2: str) -> str:
+    """Return the preferred architecture for display purposes.
+
+    Prefers more specific architectures (arm64) over generic ones (all).
+    """
+    if arch1 == 'arm64' and arch2 == 'all':
+        return 'arm64'
+    elif arch2 == 'arm64' and arch1 == 'all':
+        return 'arm64'
+    # If both are the same or neither is arm64/all, keep the first
+    return arch1
 
 
 def is_product_distribution(dist_name: str) -> bool:
@@ -192,7 +208,7 @@ def render_distribution_card(dist: Distribution) -> str:
 
     # Add installation command
     parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
 
     # Render package list
     if dist.packages:
@@ -369,12 +385,12 @@ def generate_html(distributions: List[Distribution], gpg_fingerprint: str) -> st
 ''')
 
     # Installation instructions
-    html_parts.append('''
+    html_parts.append(f'''
         <div class="info-box">
             <h3>🔐 Repository Setup</h3>
             <p>Add the Hat Labs repository to your system:</p>
-            <div class="command-block">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg
-echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi <distribution> main" | sudo tee /etc/apt/sources.list.d/hatlabs.list
+            <div class="command-block">curl -fsSL {REPO_URL}/hat-labs-apt-key.asc | sudo gpg --dearmor -o {KEYRING_PATH}
+echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} <distribution> main" | sudo tee /etc/apt/sources.list.d/hatlabs.list
 sudo apt update</div>
             <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
         </div>
@@ -419,7 +435,7 @@ sudo apt update</div>
     html_parts.append(f'''
         <footer>
             <p>Last updated: {current_time}</p>
-            <p>Repository URL: <code>https://apt.hatlabs.fi</code></p>
+            <p>Repository URL: <code>{REPO_URL}</code></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
     </div>
