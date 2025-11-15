@@ -4,7 +4,7 @@ Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 22
 Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/main/casaos-docker-service_0.4.15-2_all.deb
+Filename: pool/stable/main/casaos-docker-service_0.4.15-2_all.deb
 Size: 3524
 MD5sum: c5419cd90f8af22763d0ec19f6e13717
 SHA1: 359fb35b821d0917e942afaa1979e93c3f0a1fe3
@@ -31,7 +31,7 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 66
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/main/cockpit-dockermanager_1.0.7-1_all.deb
+Filename: pool/stable/main/cockpit-dockermanager_1.0.7-1_all.deb
 Size: 15608
 MD5sum: d2b4c22012a7cb1fb1d8174f1a3bb2c7
 SHA1: 3fbba28bd8d8c4778d0725f0bba0431e374b1767
@@ -55,7 +55,7 @@ Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 9338
 Depends: cockpit (>= 276), packagekit
-Filename: pool/main/cockpit-package-manager_0.1.1-1_all.deb
+Filename: pool/stable/main/cockpit-package-manager_0.1.1-1_all.deb
 Size: 1849788
 MD5sum: 638dc440b1906abcf2306b3ea00a0041
 SHA1: 8fd0778bbe91c2bf7765a84e0a101f9e77c65f64
@@ -81,7 +81,7 @@ Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 3077
 Depends: halpid (>= 4.0.0)
-Filename: pool/main/halpi2-firmware_3.2.0_all.deb
+Filename: pool/stable/main/halpi2-firmware_3.2.0_all.deb
 Size: 650138
 MD5sum: 083085fc87fe2063168def1a60d9e4fd
 SHA1: 40944abad181238a3370c0364eb9b689dbcd7600
@@ -100,7 +100,7 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 59661
 Pre-Depends: dpkg (>= 1.16.1)
 Recommends: halpi-firmware
-Filename: pool/main/halpid_4.0.7_arm64.deb
+Filename: pool/stable/main/halpid_4.0.7_arm64.deb
 Size: 14406448
 MD5sum: b4cbb77e93812b3951e9c07388d80a37
 SHA1: a5327851fb5aece1e6383642e077c4e27d58e4c3
@@ -123,7 +123,7 @@ Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 3186
 Depends: halpid (= 4.0.7)
-Filename: pool/main/halpid-dbgsym_4.0.7_arm64.deb
+Filename: pool/stable/main/halpid-dbgsym_4.0.7_arm64.deb
 Size: 2959648
 MD5sum: 486c9ac5276f017e19f20c77da30c2fe
 SHA1: a232c99a56a91973d9dd0b115063f586a0eff422
@@ -139,7 +139,7 @@ Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 2122
 Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/main/runtipi-docker-service_4.6.2-1_all.deb
+Filename: pool/stable/main/runtipi-docker-service_4.6.2-1_all.deb
 Size: 2156532
 MD5sum: ec2384cc8ed9e961aa98f045e1f37669
 SHA1: 048b2944e8c366724a1726ab66357c2e3402bdbf
