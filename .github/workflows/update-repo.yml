@@ -359,128 +359,14 @@ jobs:
         echo "GPG_FINGERPRINT=$FINGERPRINT" >> $GITHUB_ENV
         echo "Key fingerprint: $FINGERPRINT"
 
-    - name: Create repository index page
+    - name: Generate repository index page
       run: |
-        cd apt-repo
-
-        # Get package information for index
-        package_info=""
-        for arch in arm64 armhf all; do
-          pkgfile="dists/stable/main/binary-$arch/Packages"
-          if [ -f "$pkgfile" ]; then
-            awk -v arch="$arch" '
-              /^Package:/ { pkg = $2 }
-              /^Description:/ { desc = substr($0, 13) }
-              /^Filename:/ { file = $2 }
-              /^$/ && pkg && desc && file {
-                print pkg ":" desc ":" arch ":" file
-                pkg = desc = file = ""
-              }
-            ' "$pkgfile" >> package_info.tmp
-          fi
-        done
-        cat > index.html << EOF
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Hat Labs APT Repository</title>
-            <style>
-                body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-                .setup { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }
-                .package { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
-                code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-                .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
-                h1 { color: #2d3748; }
-                h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
-                .security { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 15px; margin: 20px 0; }
-            </style>
-        </head>
-        <body>
-            <h1>🎩 Hat Labs APT Repository</h1>
-            <p>Debian packages for Hat Labs projects</p>
-
-            <div class="security">
-                <h3>🔐 Installation</h3>
-                <p>Add our signing key to verify package authenticity:</p>
-                <div class="command">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg</div>
-                <div class="command">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
-                <div class="command">sudo apt update</div>
-            </div>
-
-            <h2>📋 Available Packages</h2>
-        EOF
-
-        # Add package information
-        package_info=""
-        for arch in arm64 armhf all; do
-          pkgfile="dists/stable/main/binary-$arch/Packages"
-          if [ -f "$pkgfile" ]; then
-            awk -v arch="$arch" '
-              /^Package:/ { pkg = $2 }
-              /^Version:/ { ver = $2 }
-              /^Description:/ { desc = substr($0, 13) }
-              /^Filename:/ { file = $2 }
-              /^$/ && pkg && ver && desc && file {
-                print pkg ":" ver ":" desc ":" arch ":" file
-                pkg = ver = desc = file = ""
-              }
-            ' "$pkgfile" >> package_info.tmp
-          fi
-        done
-
-        if [ -f package_info.tmp ] && [ -s package_info.tmp ]; then
-          sort package_info.tmp | uniq > package_info_sorted.tmp
-          cat package_info_sorted.tmp | awk -F: '
-            {
-              pkg=$1; ver=$2; desc=$3; arch=$4; file=$5
-              key=pkg
-              pkgs[key]=desc
-              versions[key]=ver
-              # Store download links per arch
-              links[key,arch]="<a href=\"" file "\">" arch "</a>"
-              archlist[key]=archlist[key] ? archlist[key] "," arch : arch
-            }
-            END {
-              PROCINFO["sorted_in"] = "@ind_str_asc"
-              for (k in pkgs) {
-                printf "<div class=\"package\">\n<h3>%s <small>v%s</small></h3>\n<p>%s</p>\n", k, versions[k], pkgs[k]
-                # Print architecture tags as download links
-                split(archlist[k], archs, ",")
-                printf "<p><strong>Architectures:</strong> "
-                for (i=1; i<=length(archs); i++) {
-                  a=archs[i]
-                  printf "%s", links[k,a]
-                  if (i < length(archs)) printf ", "
-                }
-                printf "</p>\n"
-                printf "<div class=\"command\">sudo apt install %s</div>\n</div>\n", k
-              }
-            }
-          ' >> index.html
-          rm -f package_info.tmp package_info_sorted.tmp
-        else
-          cat >> index.html << EOF
-            <div class="package">
-                <p><em>No packages available yet. Check back soon!</em></p>
-            </div>
-        EOF
-        fi
-
-        cat >> index.html << EOF
-
-            <h2>🔑 Manual Key Installation</h2>
-            <div class="setup">
-                <p>Download the signing key: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a></p>
-                <p>Key fingerprint: <code>$GPG_FINGERPRINT</code></p>
-            </div>
-
-            <hr>
-            <p><small>Last updated: $(date)</small></p>
-            <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
-            <p><small>🔒 This repository is cryptographically signed for security</small></p>
-        </body>
-        </html>
-        EOF
+        set -e
+        # Use Python script to generate multi-distribution index page
+        python3 scripts/generate-index.py \
+          apt-repo \
+          --gpg-fingerprint "$GPG_FINGERPRINT" \
+          --output apt-repo/index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4

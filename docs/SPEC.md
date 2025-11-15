@@ -140,7 +140,7 @@ Users control which packages they use by:
 - **Source selection**: Choosing which distributions to add to their sources.list
 - **Package installation**: Explicitly installing only the packages they need
 
-This shared-pool approach simplifies repository management and allows flexibility. Future enhancements may add per-distribution package filtering to control which packages appear in which Packages files (see ARCHITECTURE.md Future Expansion).
+**Note:** While packages are stored in a shared pool directory to avoid file duplication, each distribution maintains its own separate package metadata. Packages built for one distribution (e.g., bookworm-stable) are intended only for that distribution and should not be installed on systems running different distributions. The current implementation includes all packages in all distribution metadata files as a temporary limitation - future enhancements will add per-distribution package filtering to ensure proper separation (see ARCHITECTURE.md Future Expansion).
 
 ### Web Interface
 
