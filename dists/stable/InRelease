@@ -6,48 +6,48 @@ Label: Hat Labs APT Repository
 Suite: stable
 Codename: stable
 Version: 1.0
-Architectures: arm64 armhf all
+Architectures: arm64 all
 Components: main
-Description: Hat Labs package repository
-Date: Sat, 15 Nov 2025 06:00:55 +0000
-Date: Sat, 15 Nov 2025 06:00:55 +0000
+Description: Hat Labs product packages (stable)
+Date: Sat, 15 Nov 2025 12:33:11 +0000
+Date: Sat, 15 Nov 2025 12:33:11 +0000
 MD5Sum:
- 1518b6a810a3e116f253e091291ec746              257 Release
+ 0133558edea357768742bde7fdd0dd72              258 Release
  0cedde4e15925cd549c04acad9ec7b9e             4702 main/binary-all/Packages
- 8cf6325e2196458f05e241da202cd2c6             1854 main/binary-all/Packages.gz
+ 67833e1069ac2db7c1f2308c4e04e052             1854 main/binary-all/Packages.gz
  27087f460b26642ef119306498bba943             6471 main/binary-arm64/Packages
- 026edcbb6f0996b96bef8f3ec0309d6f             2652 main/binary-arm64/Packages.gz
+ 221892d5ebdf2c45b79af1407765fe0d             2652 main/binary-arm64/Packages.gz
 SHA1:
- bb73a44b69fe9e7917cfc737b18a9b00aa7ccdaf              257 Release
+ 44c2a262dba2b2c56a7755d89fe96798eca8a2d7              258 Release
  f7c65739ebcac696ec82b156b691cbfe6e427345             4702 main/binary-all/Packages
- 748a629aaf01f6a6b2af3b01709c15998be89558             1854 main/binary-all/Packages.gz
+ 0481463fdbe353f268d39ef073e36783b5f4f202             1854 main/binary-all/Packages.gz
  6959f0a92b44c3196afbc4d89d0600f05c1647a0             6471 main/binary-arm64/Packages
- fd6eb78910f9605c2ba2ceb3f7baa896ce70837d             2652 main/binary-arm64/Packages.gz
+ 636d5b5e3d1fe0289fb7767f18ba3858fd4c656d             2652 main/binary-arm64/Packages.gz
 SHA256:
- f60952e8e1ab95f933bb4893e6061ca6f4f81e247ff40efda992a4484e1772ed              257 Release
+ a17afca45f40fed9644f7f3b43347586013a39c7d427199d70eb362afd62635b              258 Release
  94a8d7c8915f3fb0617793ad5be1f9e69615dd0d79554e12fdb6166a3c136160             4702 main/binary-all/Packages
- 4b94228b9aa168739d474fb57413ceb1edc757229cdadeb2f95a367044236978             1854 main/binary-all/Packages.gz
+ a0b995c7a35a7c4b8032ebe270644fd6f65b61799f4e6c82ba5d46bc1058ef7a             1854 main/binary-all/Packages.gz
  69b77755ee5ce2a476f188330c87715f5e41cb9908fb88b2a5386af9428c118d             6471 main/binary-arm64/Packages
- af040f26fb0c8d2b5c2591eee07ad3524675301ace0028122242764df46533ea             2652 main/binary-arm64/Packages.gz
+ 6f0f5a97806c7d26a63c8817107323a377bdcb5a72b3c920eccdbfc6bea7eee7             2652 main/binary-arm64/Packages.gz
 SHA512:
- c365958d97ee257eeea3c65f8a5f6e23a7dbb200e8ce3cc308340938baa3a3f110c94af98e68fd0658f36b3ecab846b86713d35724c8a31d9fd01fff621a222c              257 Release
+ 5a69ea208b5d5ca29f4fa6edb1c098a50e3a3f7f58457d1fdda28a88a44e7b4c6f6c6f1bfe410788c02b3cb40888797a6e44e9bc00644502e1e51a5a958476dd              258 Release
  9fd39e2259dfdf6b76817630e30ab3d2e4f726818224cfe51a2b3b375a320dc0aad998fa564cc175f2b15c4c70c50a46c70868170c1e400237c4bc72fc36d6a9             4702 main/binary-all/Packages
- 090baf79c524dfb8807cafcb20f9517a1c677d6536bbea5790d9fc0f5be75490ac240254834eed9ea82eef02dc656c7476320a706ae5937ce799e46897adbed8             1854 main/binary-all/Packages.gz
+ 6e76df60f3d260a3541fe66733b6cd840bbe3265651fec3817357b8a87af3ce49a213fb0c37af02a637d7598154fc405559de1386dee35bee81bd1d91b4ee0b1             1854 main/binary-all/Packages.gz
  975a8f7e0b595fed7bd702558329c36d5805f635b62c9c3c9e1e055e0f3d9af51e67924d290a4346f572abe42adbbc224d8d96ef2a26243aed3fc13cf909e851             6471 main/binary-arm64/Packages
- 34a69e2a3b7fea56f7b5f55bfd5b15e69670fba19fb0813cfbf939e54866249c2d89dfe309531b7da25ec93e0e371d368b8720f0b530a36e3b2698232a5a3812             2652 main/binary-arm64/Packages.gz
+ af9e1bd1267edd7bdbb6a74179ed2ae29ebd9d8a64104a1c90eb7a2232d4f4edc51c29aae0e5dd7a4db0ce5a9fbb3cd360b4f001e3eda19213d51898c9cec843             2652 main/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEPYU+LXNjQG2vVCpTV3F3BCr3VvIFAmkYFxcACgkQV3F3BCr3
-VvIZFw//QLMQ9GAXSOF8IAZH7nyt31mul6GRB9gTGMID0oKjmgdmXXeJOVq/1Ub1
-ybZK0r5a+4W7egrWqck1er/XZHJC1CiQu/J3G90FdaR7IDXA73AR1gu2HzynfC0e
-/n4RsbQyfFGlWS1aObj29KTNMnjiYJKxBvGhz8POB3snGkcU0+OwuAAl3d55kF9L
-eteq4+ult63g4Bycd001u+TS/n4e42tndSRVNgbWOt4vQhl96l0qFw7QwpIJ0rOj
-YvGDPnoQR08Bt903RE+H78RmGyCqIuVf805iuJmnQXVOwAmGKyHcnoag/8+xrxC9
-uemXb+2Gmwk1WAqxld4MUofNbyQfvZqKAXAMorDOmZ1RMr90A8atng1cYX0Xd6xV
-vLw987gRERZ+Y/WI33Wgqa3sjaXUymiJfh0dbcgfd15IwlX+fgv1mmHYFKTXF8EX
-dg+y+pMlUnUIxP3xz/gvkIjaHG9hZIHOUJoGgX121+NFrLNmJAV3cmlTimvNQ5SC
-yUOi/brjuHutyXMEFKTbouWK+mVcNa63Jks65SPf9WkmeOE7TVjaoKDabTHd5VXp
-KVATUnX52uwBr40QlqUrizglExgvZhCFk6yz2qzkp5Tbp9GMUQHpgVFV8qMuwyY/
-+VWS0QT8530SFaqeyPY7Nd3CkbRzhcqUyy2OnVqXXmdQ8BBRCaY=
-=b8Ml
+iQIzBAEBCgAdFiEEPYU+LXNjQG2vVCpTV3F3BCr3VvIFAmkYcwcACgkQV3F3BCr3
+VvJZSBAAmlgtxpmoU9HZWoasDUNP1ZyhmkGzCHTA40NTt338B9Qng8eKG9e6aJv8
+uKhkgNXFD7WUt/DEWYUtlrLKCvAvFJYYAV/0QMFIWQifPEU1vH3l5Qy5Z1Tx00u0
+qxsh9a18CuOalx9DLZdmb6RtaC0qpMoPs6KryE348MTOmMQF2uityK7eb7WPhXdd
+ufr5ML3IM+xmkVIyTd+xFq6KUJqnep7KalAdxTdH/R53AXo5RjtYr92zbTbYLhvg
+6b2jypaAaiwYKtZBziVRZqcPaqT6OUqjtdeNGhIe/EJY0PllEIJBDuwT6hIt/hfG
+S4mbERW0R04oXf6LQmjZLl7AuXGUF3D/bMn8gHDNW9uJfIte5YP5yOr6rjE2Yl83
+QgzpqoCzVEsOyQ+3VQ3FbYW6ko+sbr15GMejzDmKE5hpgc3JRvlL61tIZlrwD8bP
+8XgtPpX3pFrUed3eQloq2mXjs5Fa/Jvw0zPaK87DKzEjieTFL7nzNNQPQ8P2tKZf
+dNTjQ8ReaDUJ1UhvavsLcQrDa2JoPCAOda/UtI3jk906UJF1+InilUV+XdEoEpTE
+PpVEU7td/UZUn+IeB8urTTZNK7CB0MKfoPUJjaqQoLrz6i2KBrXN5xYDd0mleIul
+oPGbLymd1P0L3vwDX/pbvMDORMh+3SwRcF4qhIBbGdnSJGsv8MM=
+=ogSN
 -----END PGP SIGNATURE-----
