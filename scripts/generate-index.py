@@ -108,7 +108,14 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
 
 
 def get_distribution_info(dist_name: str) -> Tuple[str, str]:
-    """Get display name and description for a distribution."""
+    """Get display name and description for a distribution.
+
+    Returns a tuple of (display_name, description) for known distributions.
+    For unknown distributions, returns a title-cased name and generic description.
+
+    Note: When adding new distributions to the repository, update this function
+    to provide proper display names and descriptions.
+    """
     distributions = {
         'stable': ('Stable', 'Hat Labs product packages (stable releases)'),
         'unstable': ('Unstable', 'Hat Labs product packages (rolling, latest from main)'),
@@ -158,6 +165,7 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
                           file=sys.stderr)
                 if pkg.architecture not in existing.all_architectures:
                     existing.all_architectures.append(pkg.architecture)
+                    existing.all_architectures.sort()  # Ensure consistent ordering
                 # Update primary architecture display to preferred one
                 existing.architecture = get_preferred_architecture(existing.architecture, pkg.architecture)
 
@@ -174,11 +182,15 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
 def get_preferred_architecture(arch1: str, arch2: str) -> str:
     """Return the preferred architecture for display purposes.
 
-    Prefers more specific architectures (arm64) over generic ones (all).
+    Prefers more specific architectures (arm64, armhf) over generic ones (all).
     """
-    if 'arm64' in (arch1, arch2) and 'all' in (arch1, arch2):
-        return 'arm64'
-    return arch1
+    # Define preference order (higher index = higher priority)
+    preference = {'all': 0, 'armhf': 1, 'arm64': 2}
+
+    pref1 = preference.get(arch1, 1)  # Default to middle priority
+    pref2 = preference.get(arch2, 1)
+
+    return arch1 if pref1 >= pref2 else arch2
 
 
 def is_product_distribution(dist_name: str) -> bool:
@@ -205,7 +217,7 @@ def render_distribution_card(dist: Distribution) -> str:
 
     # Add installation command
     parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {dist.name} main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
 
     # Render package list
     if dist.packages:
@@ -214,9 +226,9 @@ def render_distribution_card(dist: Distribution) -> str:
         for pkg in dist.packages:
             parts.append(f'\n                    <div class="package-item">')
             # Display all architectures if multiple, otherwise just the primary
-            arch_badges = ''.join(f'<span class="arch-badge">{html.escape(arch)}</span>'
-                                  for arch in pkg.all_architectures)
-            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span>{arch_badges}</h4>')
+            arch_badges = ' '.join(f'<span class="arch-badge">{html.escape(arch)}</span>'
+                                   for arch in pkg.all_architectures)
+            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span> {arch_badges}</h4>')
             parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
             parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
             parts.append('\n                    </div>')
