@@ -208,7 +208,7 @@ def render_distribution_card(dist: Distribution) -> str:
 
     # Add installation command
     parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} {dist.name} main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
 
     # Render package list
     if dist.packages:
@@ -390,7 +390,7 @@ def generate_html(distributions: List[Distribution], gpg_fingerprint: str) -> st
             <h3>🔐 Repository Setup</h3>
             <p>Add the Hat Labs repository to your system:</p>
             <div class="command-block">curl -fsSL {REPO_URL}/hat-labs-apt-key.asc | sudo gpg --dearmor -o {KEYRING_PATH}
-echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} <distribution> main" | sudo tee /etc/apt/sources.list.d/hatlabs.list
+echo "deb [signed-by={KEYRING_PATH}] {REPO_URL} <distribution> main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
 sudo apt update</div>
             <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
         </div>
