@@ -27,6 +27,10 @@ jobs:
     - name: Parse payload and determine target distribution
       id: payload
       run: |
+        # Define supported distributions (single source of truth)
+        ALL_DISTRIBUTIONS="stable unstable bookworm-stable bookworm-unstable trixie-stable trixie-unstable"
+        echo "all_distributions=$ALL_DISTRIBUTIONS" >> $GITHUB_OUTPUT
+
         # Extract payload fields (defaults for backward compatibility and scheduled runs)
         DISTRO="${{ github.event.client_payload.distro }}"
         CHANNEL="${{ github.event.client_payload.channel }}"
@@ -37,6 +41,9 @@ jobs:
         DISTRO="${DISTRO:-any}"
         CHANNEL="${CHANNEL:-stable}"
         COMPONENT="${COMPONENT:-main}"
+
+        # Normalize distro to lowercase for case-insensitive comparison
+        DISTRO=$(echo "$DISTRO" | tr '[:upper:]' '[:lower:]')
 
         # Map to distribution name
         if [ "$DISTRO" = "any" ]; then
@@ -95,8 +102,7 @@ jobs:
         mkdir -p packages apt-repo/pool/main
 
         # Create all distribution directories
-        DISTRIBUTIONS="stable unstable bookworm-stable bookworm-unstable trixie-stable trixie-unstable"
-        for dist in $DISTRIBUTIONS; do
+        for dist in ${{ steps.payload.outputs.all_distributions }}; do
           echo "Creating distribution: $dist"
           mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
           mkdir -p "apt-repo/dists/$dist/main/binary-all"
@@ -153,7 +159,7 @@ jobs:
             if [ -n "$name" ] && [ -n "$url" ]; then
               echo "Downloading $name..."
               temp_file="packages/temp_$name"
-              curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              curl -L --fail -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                    -H "Accept: application/octet-stream" \
                    "$url" -o "$temp_file"
 
@@ -257,44 +263,32 @@ jobs:
           echo "Generating Release file for $dist..."
           cd "$dist_path"
 
-          # Determine suite and description based on distribution
-          case "$dist" in
-            stable)
-              SUITE="stable"
-              CODENAME="stable"
-              DESC="Hat Labs product packages (stable)"
-              ;;
-            unstable)
-              SUITE="unstable"
-              CODENAME="unstable"
-              DESC="Hat Labs product packages (unstable - rolling)"
-              ;;
-            bookworm-stable)
-              SUITE="bookworm-stable"
-              CODENAME="bookworm"
-              DESC="Halos packages for Debian Bookworm (stable)"
-              ;;
-            bookworm-unstable)
-              SUITE="bookworm-unstable"
-              CODENAME="bookworm"
-              DESC="Halos packages for Debian Bookworm (unstable - rolling)"
-              ;;
-            trixie-stable)
-              SUITE="trixie-stable"
-              CODENAME="trixie"
-              DESC="Halos packages for Debian Trixie (stable)"
-              ;;
-            trixie-unstable)
-              SUITE="trixie-unstable"
-              CODENAME="trixie"
-              DESC="Halos packages for Debian Trixie (unstable - rolling)"
-              ;;
-            *)
-              SUITE="$dist"
-              CODENAME="$dist"
-              DESC="Hat Labs APT Repository - $dist"
-              ;;
-          esac
+          # Determine suite and description based on distribution pattern
+          if [[ "$dist" == "stable" ]]; then
+            SUITE="stable"
+            CODENAME="stable"
+            DESC="Hat Labs product packages (stable)"
+          elif [[ "$dist" == "unstable" ]]; then
+            SUITE="unstable"
+            CODENAME="unstable"
+            DESC="Hat Labs product packages (unstable - rolling)"
+          elif [[ "$dist" =~ ^([a-z0-9]+)-(stable|unstable)$ ]]; then
+            # Extract codename and stability from pattern like "bookworm-stable"
+            CODENAME="${BASH_REMATCH[1]}"
+            STABILITY="${BASH_REMATCH[2]}"
+            SUITE="$dist"
+            # Capitalize first letter of codename for description
+            CODENAME_DISPLAY="$(echo ${CODENAME:0:1} | tr '[:lower:]' '[:upper:]')${CODENAME:1}"
+            if [[ "$STABILITY" == "stable" ]]; then
+              DESC="Halos packages for Debian $CODENAME_DISPLAY (stable)"
+            else
+              DESC="Halos packages for Debian $CODENAME_DISPLAY (unstable - rolling)"
+            fi
+          else
+            SUITE="$dist"
+            CODENAME="$dist"
+            DESC="Hat Labs APT Repository - $dist"
+          fi
 
           cat > Release << EOF
         Origin: Hat Labs
@@ -325,9 +319,12 @@ jobs:
           echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
-          echo "=== Full Rebuild Mode: Updating all distributions ==="
-          DISTRIBUTIONS="stable unstable bookworm-stable bookworm-unstable trixie-stable trixie-unstable"
-          for dist in $DISTRIBUTIONS; do
+          echo "=== Full Rebuild Mode: Updating stable distributions only ==="
+          echo "(Unstable distributions require targeted updates from package repos)"
+          # Only build stable distributions in full rebuild mode
+          # Unstable distributions get packages from targeted updates when repos push to main
+          STABLE_DISTRIBUTIONS="stable bookworm-stable trixie-stable"
+          for dist in $STABLE_DISTRIBUTIONS; do
             build_distribution "$dist" "main"
           done
         fi
@@ -487,11 +484,12 @@ jobs:
         echo ""
         echo "Distribution Summary:"
 
-        DISTRIBUTIONS="stable unstable bookworm-stable bookworm-unstable trixie-stable trixie-unstable"
-        for dist in $DISTRIBUTIONS; do
+        for dist in ${{ steps.payload.outputs.all_distributions }}; do
           pkgfile="apt-repo/dists/$dist/main/binary-arm64/Packages"
           if [ -f "$pkgfile" ]; then
             count=$(grep -c '^Package:' "$pkgfile" 2>/dev/null || echo "0")
             echo "  $dist: $count packages"
+          else
+            echo "  $dist: (not built this run)"
           fi
         done

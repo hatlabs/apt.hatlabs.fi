@@ -371,8 +371,8 @@ When vulnerabilities are discovered:
 
 ### Planned Enhancements
 
-- **Unstable channel support** - Adding unstable distributions for all products
 - **Multi-distribution web interface** - Browsing interface for all distributions with package discovery
+- **Per-distribution package filtering** - Control which packages appear in which distributions
 - **Multiple component support** - Separating packages into main/contrib/non-free
 - **Automated testing** - Verify repository structure after updates
 

@@ -134,7 +134,13 @@ deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-st
 
 ### Package Separation
 
-Hat Labs product and Halos packages remain separate - they are never duplicated across distributions. Users requiring both must add both source lines. This maintains clear separation of concerns and avoids package bloat in distributions that don't need all packages.
+Hat Labs product and Halos packages are stored in a shared package pool to avoid duplication of .deb files. Currently, all packages are visible in all distribution Packages files, meaning users can install any package from any distribution they've configured.
+
+Users control which packages they use by:
+- **Source selection**: Choosing which distributions to add to their sources.list
+- **Package installation**: Explicitly installing only the packages they need
+
+This shared-pool approach simplifies repository management and allows flexibility. Future enhancements may add per-distribution package filtering to control which packages appear in which Packages files (see ARCHITECTURE.md Future Expansion).
 
 ### Web Interface
 
@@ -172,7 +178,7 @@ Hat Labs product packages need only two workflows:
 Package workflows must build .deb files with proper metadata:
 - Package name
 - Version (following semantic versioning)
-- Architecture (arm64, armhf, all)
+- Architecture (arm64, all)
 - Dependencies specific to target distribution
 
 ### Dispatch Trigger
