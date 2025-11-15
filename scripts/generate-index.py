@@ -9,9 +9,9 @@ an HTML page with distribution navigation and package listings.
 import argparse
 import sys
 from pathlib import Path
-from typing import Dict, List, Set
-from dataclasses import dataclass
-from datetime import datetime
+from typing import List
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 import html
 
 
@@ -23,6 +23,12 @@ class Package:
     description: str
     architecture: str
     filename: str
+    all_architectures: List[str] = field(default_factory=list)
+
+    def __post_init__(self):
+        """Initialize all_architectures if not provided."""
+        if not self.all_architectures:
+            self.all_architectures = [self.architecture]
 
 
 @dataclass
@@ -43,6 +49,7 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
     """Parse a Debian Packages file and extract package information."""
     packages = []
     current_package = {}
+    last_key = None
 
     try:
         with open(packages_file, 'r', encoding='utf-8') as f:
@@ -62,9 +69,15 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
                                 filename=current_package['Filename']
                             ))
                         current_package = {}
+                        last_key = None
+                elif line.startswith((' ', '\t')) and last_key:
+                    # Continuation line - append to previous field
+                    current_package[last_key] += ' ' + line.strip()
                 elif ':' in line:
                     key, _, value = line.partition(':')
-                    current_package[key.strip()] = value.strip()
+                    key = key.strip()
+                    current_package[key] = value.strip()
+                    last_key = key
 
             # Handle last package if file doesn't end with blank line
             if current_package and all(k in current_package for k in ['Package', 'Version', 'Description', 'Filename']):
@@ -117,14 +130,21 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
             if packages_file.exists():
                 all_packages.extend(parse_packages_file(packages_file))
 
-        # Deduplicate packages (same package may appear in multiple archs)
+        # Deduplicate packages while tracking all architectures
+        # Note: Same package should not normally appear in multiple arch directories,
+        # but if it does, we merge the architecture information.
         unique_packages = {}
         for pkg in all_packages:
             if pkg.name not in unique_packages:
                 unique_packages[pkg.name] = pkg
-            # Keep the one with more specific architecture (arm64 over all)
-            elif pkg.architecture == 'arm64' and unique_packages[pkg.name].architecture == 'all':
-                unique_packages[pkg.name] = pkg
+            else:
+                # Package already exists - merge architectures
+                existing = unique_packages[pkg.name]
+                if pkg.architecture not in existing.all_architectures:
+                    existing.all_architectures.append(pkg.architecture)
+                # Prefer arm64 as the primary architecture display
+                if pkg.architecture == 'arm64' and existing.architecture == 'all':
+                    existing.architecture = 'arm64'
 
         distributions.append(Distribution(
             name=dist_name,
@@ -394,7 +414,7 @@ sudo apt update</div>
 ''')
 
     # Footer
-    current_time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
+    current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
     html_parts.append(f'''
         <footer>
             <p>Last updated: {current_time}</p>
