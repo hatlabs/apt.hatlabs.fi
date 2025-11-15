@@ -24,6 +24,7 @@ on:
         default: 'all'
         type: choice
         options:
+          # Only 'all' and 'arm64' are supported. Do not add 'amd64' unless repository metadata generation and scanning are updated to support it.
           - all
           - arm64
 
