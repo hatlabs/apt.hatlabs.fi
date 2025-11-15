@@ -46,7 +46,9 @@ Each distribution directory contains:
 The core automation is implemented in `.github/workflows/update-repo.yml` which handles:
 
 1. **Package Discovery** - Finds all Hat Labs repositories tagged with `apt-package` topic
-2. **Package Download** - Downloads .deb artifacts from latest releases
+2. **Package Download** - Downloads .deb artifacts from GitHub releases
+   - Stable channel: Downloads from latest stable release
+   - Unstable channel: Downloads from latest pre-release
 3. **Repository Generation** - Creates APT repository metadata for each distribution
 4. **Signing** - Cryptographically signs all Release files
 5. **Deployment** - Publishes to GitHub Pages at apt.hatlabs.fi
@@ -100,16 +102,16 @@ Package repo workflow triggers
     ↓
 Build .deb in distribution-specific container
     ↓
-Create or update "unstable" release
+Create or update pre-release with version tag (e.g., v0.2.0)
     ↓
-Attach .deb to unstable release
+Attach .deb to pre-release
     ↓
 Send repository_dispatch to apt.hatlabs.fi
     payload: {distro: "bookworm", channel: "unstable", component: "main"}
     ↓
 apt.hatlabs.fi workflow triggers
     ↓
-Download .deb from unstable release
+Download .deb from latest pre-release
     ↓
 Add to pool/main/ (replacing previous version)
     ↓
@@ -121,6 +123,8 @@ Deploy to GitHub Pages
     ↓
 Users run `apt update` and receive updated package
 ```
+
+**Note**: The unstable channel downloads from the latest pre-release (by date), not from a special "unstable" tag. Package repositories create pre-releases with version tags (e.g., v0.2.0) marked with GitHub's pre-release checkbox.
 
 ## Workflow Dispatch Payload Handling
 
