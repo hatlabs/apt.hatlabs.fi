@@ -1,83 +1,275 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hat Labs APT Repository</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-        .setup { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }
-        .package { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
-        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-        .command { background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 5px; margin: 10px 0; }
-        h1 { color: #2d3748; }
-        h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
-        .security { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 15px; margin: 20px 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        header { margin-bottom: 40px; border-bottom: 3px solid #4299e1; padding-bottom: 20px; }
+        h1 { color: #2d3748; font-size: 2.5em; margin-bottom: 10px; }
+        h1 .emoji { font-style: normal; }
+        .subtitle { color: #718096; font-size: 1.1em; }
+
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #4299e1;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        .info-box h3 { color: #2c5282; margin-bottom: 10px; }
+
+        .warning-box {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .dist-section { margin: 40px 0; }
+        .dist-section h2 {
+            color: #2d3748;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dist-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .dist-card h3 {
+            color: #2c5282;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .dist-meta {
+            color: #718096;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        .dist-desc {
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+
+        .command-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: "Monaco", "Courier New", monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .package-list { margin-top: 25px; }
+        .package-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .package-item h4 {
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        .package-item .version {
+            color: #718096;
+            font-size: 0.9em;
+            font-family: monospace;
+        }
+        .package-item .arch-badge {
+            display: inline-block;
+            background: #4299e1;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        .package-item .description {
+            color: #4a5568;
+            margin-top: 8px;
+            font-size: 0.95em;
+        }
+
+        .install-cmd {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 2em; }
+            .command-block { font-size: 0.8em; }
+        }
     </style>
 </head>
 <body>
-    <h1>🎩 Hat Labs APT Repository</h1>
-    <p>Debian packages for Hat Labs projects</p>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">🎩</span> Hat Labs APT Repository</h1>
+            <p class="subtitle">Debian packages for Hat Labs products and Halos operating system</p>
+        </header>
 
-    <div class="security">
-        <h3>🔐 Installation</h3>
-        <p>Add our signing key to verify package authenticity:</p>
-        <div class="command">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg</div>
-        <div class="command">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>
-        <div class="command">sudo apt update</div>
+        <div class="info-box">
+            <h3>🔐 Repository Setup</h3>
+            <p>Add the Hat Labs repository to your system:</p>
+            <div class="command-block">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg
+echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi <distribution> main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
+sudo apt update</div>
+            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
+        </div>
+
+        <div class="dist-section">
+            <h2>📦 Hat Labs Product Packages</h2>
+            <p style="margin-bottom: 20px; color: #4a5568;">Firmware and drivers for Hat Labs hardware products (HALPI2, etc.)</p>
+            <div class="dist-card">
+                <h3>Stable</h3>
+                <p class="dist-meta">7 packages</p>
+                <p class="dist-desc">Hat Labs product packages (stable releases)</p>
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <div class="package-list">
+                    <strong>Available Packages:</strong>
+                    <div class="package-item">
+                        <h4>casaos-docker-service <span class="version">v0.4.15-2</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">CasaOS containerized service for Halos CasaOS provides a user-friendly web interface for managing Docker containers. This package installs CasaOS as a containerized service using Docker Compose. . CasaOS runs in a Docker container and provides: - Container management through web UI - App store functionality - Simple Docker management for non-technical users . The web interface is accessible on port 80 after installation.</p>
+                        <div class="install-cmd">sudo apt install casaos-docker-service</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>cockpit-dockermanager <span class="version">v1.0.7-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Cockpit plugin for Docker container management Docker Manager is a lightweight and intuitive utility designed to help you manage your Docker containers via a simplified web interface through Cockpit. . Features: * List, start, stop, search and restart containers * View container status, uptime, details and exposed ports * In-window terminal with individual container terminal functionality * Image management</p>
+                        <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>cockpit-package-manager <span class="version">v0.1.1-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Cockpit-based package manager using PackageKit A web-based package manager interface for Cockpit that provides: - Browse packages by PackageKit group (cross-distribution compatible) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing system packages through Cockpit&#x27;s web interface using the PackageKit D-Bus API for cross-distribution compatibility.</p>
+                        <div class="install-cmd">sudo apt install cockpit-package-manager</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpi2-firmware <span class="version">v3.2.0</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Firmware for the HALPI2 Computer This package contains the firmware for the HALPI2 Computer onboard controller. The firmware is automatically flashed to the device upon installation.</p>
+                        <div class="install-cmd">sudo apt install halpi2-firmware</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpid <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                        <p class="description">HALPI2 service daemon `halpid` is a power monitor and watchdog service for HALPI2. It communicates with the HALPI2 controller, providing the &quot;smart&quot; aspects of the operation. . The main use case for the service software is to have the Raspberry Pi Operating System shut down once the power is cut. This prevents potential file system corruption without having to shut down the device manually.</p>
+                        <div class="install-cmd">sudo apt install halpid</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpid-dbgsym <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                        <p class="description">debug symbols for halpid</p>
+                        <div class="install-cmd">sudo apt install halpid-dbgsym</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>runtipi-docker-service <span class="version">v4.6.2-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Runtipi homeserver orchestrator with systemd integration Runtipi provides a user-friendly web interface for managing Docker containers and self-hosted applications. This package installs the runtipi-cli tool and configures it as a systemd service. . Runtipi provides: - Container management through web UI - App store with 300+ pre-configured applications - Simple Docker orchestration for self-hosting . The web interface is accessible on port 80 after installation.</p>
+                        <div class="install-cmd">sudo apt install runtipi-docker-service</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dist-card">
+                <h3>Unstable</h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+            </div>
+        </div>
+        <div class="dist-section">
+            <h2>🌊 Halos Operating System Packages</h2>
+            <p style="margin-bottom: 20px; color: #4a5568;">Halos-specific packages for different Debian/Raspberry Pi OS releases</p>
+            <div class="dist-card">
+                <h3>Bookworm Stable</h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Halos packages for Debian Bookworm (stable releases)</p>
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+            </div>
+            <div class="dist-card">
+                <h3>Bookworm Unstable</h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Halos packages for Debian Bookworm (rolling)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+            </div>
+            <div class="dist-card">
+                <h3>Trixie Stable</h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Halos packages for Debian Trixie (stable releases)</p>
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+            </div>
+            <div class="dist-card">
+                <h3>Trixie Unstable</h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+            </div>
+        </div>
+        <div class="info-box">
+            <h3>🔑 Repository Signing Key</h3>
+            <p>All packages are cryptographically signed for security.</p>
+            <p style="margin-top: 10px;">
+                Download: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a><br>
+                Fingerprint: <code>3D853E2D7363406DAF542A53577177042AF756F2</code>
+            </p>
+        </div>
+
+        <footer>
+            <p>Last updated: 2025-11-15 15:52:48 UTC</p>
+            <p>Repository URL: <code>https://apt.hatlabs.fi</code></p>
+            <p>🔒 This repository is cryptographically signed for security</p>
+        </footer>
     </div>
-
-    <h2>📋 Available Packages</h2>
-<div class="package">
-<h3>casaos-docker-service <small>v0.4.15-2</small></h3>
-<p> CasaOS containerized service for Halos</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/casaos-docker-service_0.4.15-2_all.deb</a>, <a href="">pool/stable/main/casaos-docker-service_0.4.15-2_all.deb</a>, <a href="pool/stable/main/casaos-docker-service_0.4.15-2_all.deb">all</a>, <a href="pool/stable/main/casaos-docker-service_0.4.15-2_all.deb">arm64</a></p>
-<div class="command">sudo apt install casaos-docker-service</div>
-</div>
-<div class="package">
-<h3>cockpit-dockermanager <small>v1.0.7-1</small></h3>
-<p> Cockpit plugin for Docker container management</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/cockpit-dockermanager_1.0.7-1_all.deb</a>, <a href="">pool/stable/main/cockpit-dockermanager_1.0.7-1_all.deb</a>, <a href="pool/stable/main/cockpit-dockermanager_1.0.7-1_all.deb">all</a>, <a href="pool/stable/main/cockpit-dockermanager_1.0.7-1_all.deb">arm64</a></p>
-<div class="command">sudo apt install cockpit-dockermanager</div>
-</div>
-<div class="package">
-<h3>cockpit-package-manager <small>v0.1.1-1</small></h3>
-<p> Cockpit-based package manager using PackageKit</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/cockpit-package-manager_0.1.1-1_all.deb</a>, <a href="">pool/stable/main/cockpit-package-manager_0.1.1-1_all.deb</a>, <a href="pool/stable/main/cockpit-package-manager_0.1.1-1_all.deb">all</a>, <a href="pool/stable/main/cockpit-package-manager_0.1.1-1_all.deb">arm64</a></p>
-<div class="command">sudo apt install cockpit-package-manager</div>
-</div>
-<div class="package">
-<h3>halpi2-firmware <small>v3.2.0</small></h3>
-<p> Firmware for the HALPI2 Computer</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/halpi2-firmware_3.2.0_all.deb</a>, <a href="">pool/stable/main/halpi2-firmware_3.2.0_all.deb</a>, <a href="pool/stable/main/halpi2-firmware_3.2.0_all.deb">all</a>, <a href="pool/stable/main/halpi2-firmware_3.2.0_all.deb">arm64</a></p>
-<div class="command">sudo apt install halpi2-firmware</div>
-</div>
-<div class="package">
-<h3>halpid <small>v4.0.7</small></h3>
-<p> HALPI2 service daemon</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/halpid_4.0.7_arm64.deb</a>, <a href="pool/stable/main/halpid_4.0.7_arm64.deb">arm64</a></p>
-<div class="command">sudo apt install halpid</div>
-</div>
-<div class="package">
-<h3>halpid-dbgsym <small>v4.0.7</small></h3>
-<p> debug symbols for halpid</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/halpid-dbgsym_4.0.7_arm64.deb</a>, <a href="pool/stable/main/halpid-dbgsym_4.0.7_arm64.deb">arm64</a></p>
-<div class="command">sudo apt install halpid-dbgsym</div>
-</div>
-<div class="package">
-<h3>runtipi-docker-service <small>v4.6.2-1</small></h3>
-<p> Runtipi homeserver orchestrator with systemd integration</p>
-<p><strong>Architectures:</strong> <a href="">pool/stable/main/runtipi-docker-service_4.6.2-1_all.deb</a>, <a href="">pool/stable/main/runtipi-docker-service_4.6.2-1_all.deb</a>, <a href="pool/stable/main/runtipi-docker-service_4.6.2-1_all.deb">all</a>, <a href="pool/stable/main/runtipi-docker-service_4.6.2-1_all.deb">arm64</a></p>
-<div class="command">sudo apt install runtipi-docker-service</div>
-</div>
-
-    <h2>🔑 Manual Key Installation</h2>
-    <div class="setup">
-        <p>Download the signing key: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a></p>
-        <p>Key fingerprint: <code>3D853E2D7363406DAF542A53577177042AF756F2</code></p>
-    </div>
-
-    <hr>
-    <p><small>Last updated: Sat Nov 15 15:09:18 UTC 2025</small></p>
-    <p><small>Repository URL: <code>https://apt.hatlabs.fi</code></small></p>
-    <p><small>🔒 This repository is cryptographically signed for security</small></p>
 </body>
 </html>
