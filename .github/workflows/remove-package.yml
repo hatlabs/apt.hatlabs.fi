@@ -1,0 +1,206 @@
+name: Remove Package from APT Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: 'Package name to remove (e.g., cockpit-apt)'
+        required: true
+        type: string
+      distribution:
+        description: 'Distribution to remove from'
+        required: true
+        type: choice
+        options:
+          - stable
+          - unstable
+          - bookworm-stable
+          - bookworm-unstable
+          - trixie-stable
+          - trixie-unstable
+      architecture:
+        description: 'Architecture (use "all" for arch-independent packages)'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          # Only 'all' and 'arm64' are supported. Do not add 'amd64' unless repository metadata generation and scanning are updated to support it.
+          - all
+          - arm64
+
+jobs:
+  remove-package:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y dpkg-dev apt-utils gnupg
+
+    - name: Import GPG signing key
+      run: |
+        echo "${{ secrets.APT_SIGNING_KEY }}" | gpg --import --batch
+        GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -1 | sed 's/.*\/\([A-Z0-9]*\) .*/\1/')
+        echo "GPG_KEY_ID=$GPG_KEY_ID" >> $GITHUB_ENV
+        echo "Using GPG key: $GPG_KEY_ID"
+
+    - name: Remove package
+      run: |
+        PACKAGE="${{ github.event.inputs.package_name }}"
+        DIST="${{ github.event.inputs.distribution }}"
+        ARCH="${{ github.event.inputs.architecture }}"
+
+        # Validate package name (only allow alphanumeric, dot, dash, underscore, plus)
+        if ! [[ "$PACKAGE" =~ ^[a-zA-Z0-9._+-]+$ ]]; then
+          echo "❌ Invalid package name. Only alphanumeric characters, dots, dashes, underscores, and plus signs are allowed."
+          exit 1
+        fi
+
+        echo "=== Removing $PACKAGE from $DIST ($ARCH) ==="
+
+        # Find and remove .deb files matching the package name
+        POOL_DIR="apt-repo/pool/$DIST/main"
+        REMOVED_COUNT=0
+
+        if [ -d "$POOL_DIR" ]; then
+          echo "Searching for packages in $POOL_DIR..."
+          while read -r debfile; do
+            echo "  Removing: $debfile"
+            rm -f "$debfile"
+            REMOVED_COUNT=$((REMOVED_COUNT + 1))
+          done < <(find "$POOL_DIR" -name "${PACKAGE}_*_${ARCH}.deb" -type f)
+
+          if [ $REMOVED_COUNT -eq 0 ]; then
+            echo "⚠️  No packages found matching ${PACKAGE}_*_${ARCH}.deb"
+          else
+            echo "✓ Removed $REMOVED_COUNT package(s)"
+          fi
+        else
+          echo "❌ Distribution directory not found: $POOL_DIR"
+          exit 1
+        fi
+
+    - name: Rebuild repository metadata
+      run: |
+        DIST="${{ github.event.inputs.distribution }}"
+
+        echo "=== Rebuilding repository metadata for $DIST ==="
+
+        cd apt-repo
+
+        # Generate Packages file
+        for arch in arm64 all; do
+          ARCH_DIR="dists/$DIST/main/binary-$arch"
+          if [ -d "$ARCH_DIR" ]; then
+            echo "Generating Packages file for $arch..."
+            dpkg-scanpackages --arch $arch "pool/$DIST/" /dev/null > "$ARCH_DIR/Packages" 2>/dev/null || touch "$ARCH_DIR/Packages"
+            gzip -kf "$ARCH_DIR/Packages"
+          fi
+        done
+
+        # Generate Release file
+        echo "Generating Release file for $DIST..."
+        cd "dists/$DIST"
+
+        # Set Suite, Codename, and Description based on distribution
+        case "$DIST" in
+          stable)
+            SUITE="stable"
+            CODENAME="stable"
+            DESCRIPTION="Hat Labs Stable APT Repository"
+            ;;
+          unstable)
+            SUITE="unstable"
+            CODENAME="unstable"
+            DESCRIPTION="Hat Labs Unstable APT Repository"
+            ;;
+          bookworm-stable)
+            SUITE="stable"
+            CODENAME="bookworm"
+            DESCRIPTION="Hat Labs Bookworm Stable APT Repository"
+            ;;
+          bookworm-unstable)
+            SUITE="unstable"
+            CODENAME="bookworm"
+            DESCRIPTION="Hat Labs Bookworm Unstable APT Repository"
+            ;;
+          trixie-stable)
+            SUITE="stable"
+            CODENAME="trixie"
+            DESCRIPTION="Hat Labs Trixie Stable APT Repository"
+            ;;
+          trixie-unstable)
+            SUITE="unstable"
+            CODENAME="trixie"
+            DESCRIPTION="Hat Labs Trixie Unstable APT Repository"
+            ;;
+          *)
+            SUITE="$DIST"
+            CODENAME="$DIST"
+            DESCRIPTION="Hat Labs APT Repository"
+            ;;
+        esac
+
+        cat > Release <<EOF
+Origin: Hat Labs
+Label: Hat Labs
+Suite: $SUITE
+Codename: $CODENAME
+Architectures: arm64 all
+Components: main
+Description: $DESCRIPTION
+Date: $(date -Ru)
+EOF
+
+        # Add checksums using apt-ftparchive
+        apt-ftparchive release . >> Release
+
+        # Sign Release file
+        echo "Signing Release file..."
+        gpg --batch --default-key "$GPG_KEY_ID" --armor --detach-sign --yes -o Release.gpg Release
+        gpg --batch --default-key "$GPG_KEY_ID" --yes --clear-sign -o InRelease Release
+
+        cd ../..
+
+        echo "✓ Repository metadata rebuilt"
+
+    - name: Commit and push changes
+      run: |
+        PACKAGE="${{ github.event.inputs.package_name }}"
+        DIST="${{ github.event.inputs.distribution }}"
+
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+        git add apt-repo/
+
+        if git diff --staged --quiet; then
+          echo "ℹ️  No changes to commit (package may not have existed)"
+        else
+          git commit -m "chore: remove $PACKAGE from $DIST distribution
+
+Manually triggered package removal via workflow.
+
+Distribution: $DIST
+Package: $PACKAGE
+Architecture: ${{ github.event.inputs.architecture }}
+Triggered by: @${{ github.actor }}"
+
+          git push
+          echo "✓ Changes pushed successfully"
+        fi
+
+    - name: Report completion
+      run: |
+        echo "=== Package Removal Complete ==="
+        echo "Package: ${{ github.event.inputs.package_name }}"
+        echo "Distribution: ${{ github.event.inputs.distribution }}"
+        echo "Architecture: ${{ github.event.inputs.architecture }}"
+        echo ""
+        echo "Repository URL: https://apt.hatlabs.fi"
