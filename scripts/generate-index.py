@@ -185,7 +185,7 @@ def get_preferred_architecture(arch1: str, arch2: str) -> str:
     Prefers more specific architectures (arm64, armhf) over generic ones (all).
     """
     # Define preference order (higher index = higher priority)
-    preference = {'all': 0, 'armhf': 1, 'arm64': 2}
+    preference = {'all': 0, 'arm64': 1}
 
     pref1 = preference.get(arch1, 1)  # Default to middle priority
     pref2 = preference.get(arch2, 1)
