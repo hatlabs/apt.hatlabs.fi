@@ -9,10 +9,18 @@ an HTML page with distribution navigation and package listings.
 import argparse
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import html
+
+
+# Constants
+UNSTABLE_WARNING = '''
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+'''
 
 
 @dataclass
@@ -52,7 +60,7 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
     last_key = None
 
     try:
-        with open(packages_file, 'r', encoding='utf-8') as f:
+        with open(packages_file, 'r', encoding='utf-8', errors='replace') as f:
             for line in f:
                 line = line.rstrip()
 
@@ -95,7 +103,7 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
     return packages
 
 
-def get_distribution_info(dist_name: str) -> tuple[str, str]:
+def get_distribution_info(dist_name: str) -> Tuple[str, str]:
     """Get display name and description for a distribution."""
     distributions = {
         'stable': ('Stable', 'Hat Labs product packages (stable releases)'),
@@ -138,8 +146,12 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
             if pkg.name not in unique_packages:
                 unique_packages[pkg.name] = pkg
             else:
-                # Package already exists - merge architectures
+                # Package already exists - check version and merge architectures
                 existing = unique_packages[pkg.name]
+                if pkg.version != existing.version:
+                    print(f"Warning: Package {pkg.name} has different versions across architectures: "
+                          f"{existing.architecture}={existing.version}, {pkg.architecture}={pkg.version}",
+                          file=sys.stderr)
                 if pkg.architecture not in existing.all_architectures:
                     existing.all_architectures.append(pkg.architecture)
                 # Prefer arm64 as the primary architecture display
@@ -156,12 +168,57 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
     return distributions
 
 
+def is_product_distribution(dist_name: str) -> bool:
+    """Return True if the distribution is a Hat Labs product distribution.
+
+    Product distributions don't contain a hyphen (e.g., 'stable', 'unstable').
+    Halos distributions are named with pattern '{distro}-{channel}' (e.g., 'bookworm-stable').
+    """
+    return '-' not in dist_name
+
+
+def render_distribution_card(dist: Distribution) -> str:
+    """Render HTML for a single distribution card."""
+    parts = []
+
+    parts.append(f'\n            <div class="dist-card">')
+    parts.append(f'\n                <h3>{html.escape(dist.display_name)}</h3>')
+    parts.append(f'\n                <p class="dist-meta">{dist.package_count} packages</p>')
+    parts.append(f'\n                <p class="dist-desc">{html.escape(dist.description)}</p>')
+
+    # Add unstable warning if applicable
+    if 'unstable' in dist.name:
+        parts.append(UNSTABLE_WARNING)
+
+    # Add installation command
+    parts.append(f'\n                <strong>Add this distribution:</strong>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
+
+    # Render package list
+    if dist.packages:
+        parts.append('\n                <div class="package-list">')
+        parts.append('\n                    <strong>Available Packages:</strong>')
+        for pkg in dist.packages:
+            parts.append(f'\n                    <div class="package-item">')
+            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span><span class="arch-badge">{html.escape(pkg.architecture)}</span></h4>')
+            parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
+            parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
+            parts.append('\n                    </div>')
+        parts.append('\n                </div>')
+    else:
+        parts.append('\n                <p style="color: #718096; font-style: italic;">No packages available yet.</p>')
+
+    parts.append('\n            </div>')
+
+    return ''.join(parts)
+
+
 def generate_html(distributions: List[Distribution], gpg_fingerprint: str) -> str:
     """Generate the complete HTML index page."""
 
     # Group distributions by type
-    product_dists = [d for d in distributions if d.name in ['stable', 'unstable']]
-    halos_dists = [d for d in distributions if d.name not in ['stable', 'unstable']]
+    product_dists = [d for d in distributions if is_product_distribution(d.name)]
+    halos_dists = [d for d in distributions if not is_product_distribution(d.name)]
 
     html_parts = []
 
@@ -330,35 +387,7 @@ sudo apt update</div>
         html_parts.append('\n            <p style="margin-bottom: 20px; color: #4a5568;">Firmware and drivers for Hat Labs hardware products (HALPI2, etc.)</p>')
 
         for dist in product_dists:
-            html_parts.append(f'\n            <div class="dist-card">')
-            html_parts.append(f'\n                <h3>{html.escape(dist.display_name)}</h3>')
-            html_parts.append(f'\n                <p class="dist-meta">{dist.package_count} packages</p>')
-            html_parts.append(f'\n                <p class="dist-desc">{html.escape(dist.description)}</p>')
-
-            if dist.name == 'unstable':
-                html_parts.append('''
-                <div class="warning-box">
-                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
-                </div>
-''')
-
-            html_parts.append(f'\n                <strong>Add this distribution:</strong>')
-            html_parts.append(f'\n                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
-
-            if dist.packages:
-                html_parts.append('\n                <div class="package-list">')
-                html_parts.append('\n                    <strong>Available Packages:</strong>')
-                for pkg in dist.packages:
-                    html_parts.append(f'\n                    <div class="package-item">')
-                    html_parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span><span class="arch-badge">{html.escape(pkg.architecture)}</span></h4>')
-                    html_parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
-                    html_parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
-                    html_parts.append('\n                    </div>')
-                html_parts.append('\n                </div>')
-            else:
-                html_parts.append('\n                <p style="color: #718096; font-style: italic;">No packages available yet.</p>')
-
-            html_parts.append('\n            </div>')
+            html_parts.append(render_distribution_card(dist))
 
         html_parts.append('\n        </div>')
 
@@ -369,35 +398,7 @@ sudo apt update</div>
         html_parts.append('\n            <p style="margin-bottom: 20px; color: #4a5568;">Halos-specific packages for different Debian/Raspberry Pi OS releases</p>')
 
         for dist in halos_dists:
-            html_parts.append(f'\n            <div class="dist-card">')
-            html_parts.append(f'\n                <h3>{html.escape(dist.display_name)}</h3>')
-            html_parts.append(f'\n                <p class="dist-meta">{dist.package_count} packages</p>')
-            html_parts.append(f'\n                <p class="dist-desc">{html.escape(dist.description)}</p>')
-
-            if 'unstable' in dist.name:
-                html_parts.append('''
-                <div class="warning-box">
-                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
-                </div>
-''')
-
-            html_parts.append(f'\n                <strong>Add this distribution:</strong>')
-            html_parts.append(f'\n                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi {dist.name} main" | sudo tee /etc/apt/sources.list.d/hatlabs.list</div>')
-
-            if dist.packages:
-                html_parts.append('\n                <div class="package-list">')
-                html_parts.append('\n                    <strong>Available Packages:</strong>')
-                for pkg in dist.packages:
-                    html_parts.append(f'\n                    <div class="package-item">')
-                    html_parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span><span class="arch-badge">{html.escape(pkg.architecture)}</span></h4>')
-                    html_parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
-                    html_parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
-                    html_parts.append('\n                    </div>')
-                html_parts.append('\n                </div>')
-            else:
-                html_parts.append('\n                <p style="color: #718096; font-style: italic;">No packages available yet. Packages will appear here when repos push to this distribution.</p>')
-
-            html_parts.append('\n            </div>')
+            html_parts.append(render_distribution_card(dist))
 
         html_parts.append('\n        </div>')
 
@@ -458,8 +459,12 @@ def main():
 
     # Write output
     output_file = args.output or (args.repo_dir / 'index.html')
-    output_file.write_text(html_content, encoding='utf-8')
-    print(f"✓ Generated {output_file}")
+    try:
+        output_file.write_text(html_content, encoding='utf-8')
+        print(f"✓ Generated {output_file}")
+    except OSError as e:
+        print(f"Error: Failed to write to {output_file}: {e}", file=sys.stderr)
+        return 2
 
     return 0
 

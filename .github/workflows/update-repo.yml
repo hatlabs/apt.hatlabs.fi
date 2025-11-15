@@ -351,6 +351,7 @@ jobs:
 
     - name: Generate repository index page
       run: |
+        set -e
         # Use Python script to generate multi-distribution index page
         python3 scripts/generate-index.py \
           apt-repo \
