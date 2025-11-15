@@ -144,7 +144,7 @@ jobs:
             echo "Fetching latest pre-release from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/$repo/releases" | \
-              jq -r '[.[] | select(.prerelease == true)] | .[0]')
+              jq '[.[] | select(.prerelease == true)] | .[0]')
           else
             echo "Fetching release $release_tag from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -154,6 +154,12 @@ jobs:
           # Check if release exists
           if [ "$(echo "$release_info" | jq -r '.message // empty')" = "Not Found" ]; then
             echo "No release found for $repo (tag: $release_tag)"
+            return
+          fi
+
+          # Check for null/empty release_info (e.g., when no pre-releases exist)
+          if [ -z "$release_info" ] || [ "$release_info" = "null" ]; then
+            echo "No pre-release found for $repo"
             return
           fi
 
