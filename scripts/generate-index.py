@@ -142,9 +142,9 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
             if packages_file.exists():
                 all_packages.extend(parse_packages_file(packages_file))
 
-        # Deduplicate packages while tracking all architectures
-        # Note: Same package should not normally appear in multiple arch directories,
-        # but if it does, we merge the architecture information.
+        # Deduplicate packages while tracking all architectures.
+        # Packages can legitimately appear in multiple architecture directories
+        # (e.g., both binary-arm64 and binary-all).
         unique_packages = {}
         for pkg in all_packages:
             if pkg.name not in unique_packages:
@@ -176,11 +176,8 @@ def get_preferred_architecture(arch1: str, arch2: str) -> str:
 
     Prefers more specific architectures (arm64) over generic ones (all).
     """
-    if arch1 == 'arm64' and arch2 == 'all':
+    if 'arm64' in (arch1, arch2) and 'all' in (arch1, arch2):
         return 'arm64'
-    elif arch2 == 'arm64' and arch1 == 'all':
-        return 'arm64'
-    # If both are the same or neither is arm64/all, keep the first
     return arch1
 
 
@@ -216,7 +213,10 @@ def render_distribution_card(dist: Distribution) -> str:
         parts.append('\n                    <strong>Available Packages:</strong>')
         for pkg in dist.packages:
             parts.append(f'\n                    <div class="package-item">')
-            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span><span class="arch-badge">{html.escape(pkg.architecture)}</span></h4>')
+            # Display all architectures if multiple, otherwise just the primary
+            arch_badges = ''.join(f'<span class="arch-badge">{html.escape(arch)}</span>'
+                                  for arch in pkg.all_architectures)
+            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span>{arch_badges}</h4>')
             parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
             parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
             parts.append('\n                    </div>')
@@ -450,7 +450,7 @@ def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description='Generate APT repository index page')
     parser.add_argument('repo_dir', type=Path, help='Path to apt-repo directory')
-    parser.add_argument('--gpg-fingerprint', default='', help='GPG key fingerprint')
+    parser.add_argument('--gpg-fingerprint', required=True, help='GPG key fingerprint')
     parser.add_argument('--output', type=Path, help='Output HTML file (default: repo_dir/index.html)')
 
     args = parser.parse_args()
