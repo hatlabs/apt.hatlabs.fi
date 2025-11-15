@@ -26,7 +26,6 @@ on:
         options:
           - all
           - arm64
-          - amd64
 
 jobs:
   remove-package:
@@ -56,6 +55,12 @@ jobs:
         DIST="${{ github.event.inputs.distribution }}"
         ARCH="${{ github.event.inputs.architecture }}"
 
+        # Validate package name (only allow alphanumeric, dot, dash, underscore, plus)
+        if ! [[ "$PACKAGE" =~ ^[a-zA-Z0-9._+-]+$ ]]; then
+          echo "❌ Invalid package name. Only alphanumeric characters, dots, dashes, underscores, and plus signs are allowed."
+          exit 1
+        fi
+
         echo "=== Removing $PACKAGE from $DIST ($ARCH) ==="
 
         # Find and remove .deb files matching the package name
@@ -64,11 +69,11 @@ jobs:
 
         if [ -d "$POOL_DIR" ]; then
           echo "Searching for packages in $POOL_DIR..."
-          find "$POOL_DIR" -name "${PACKAGE}_*_${ARCH}.deb" -type f | while read -r debfile; do
+          while read -r debfile; do
             echo "  Removing: $debfile"
             rm -f "$debfile"
             REMOVED_COUNT=$((REMOVED_COUNT + 1))
-          done
+          done < <(find "$POOL_DIR" -name "${PACKAGE}_*_${ARCH}.deb" -type f)
 
           if [ $REMOVED_COUNT -eq 0 ]; then
             echo "⚠️  No packages found matching ${PACKAGE}_*_${ARCH}.deb"
@@ -93,8 +98,8 @@ jobs:
           ARCH_DIR="dists/$DIST/main/binary-$arch"
           if [ -d "$ARCH_DIR" ]; then
             echo "Generating Packages file for $arch..."
-            dpkg-scanpackages --arch $arch "pool/$DIST/main" /dev/null > "$ARCH_DIR/Packages"
-            gzip -9c "$ARCH_DIR/Packages" > "$ARCH_DIR/Packages.gz"
+            dpkg-scanpackages --arch $arch "pool/$DIST/" /dev/null > "$ARCH_DIR/Packages" 2>/dev/null || touch "$ARCH_DIR/Packages"
+            gzip -kf "$ARCH_DIR/Packages"
           fi
         done
 
@@ -113,21 +118,13 @@ Description: Hat Labs APT Repository
 Date: $(date -Ru)
 EOF
 
-        # Add checksums
-        echo "MD5Sum:" >> Release
-        find main -type f | while read file; do
-          md5sum "$file" | awk '{print " " $1 " " size " " file}' size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file") file="$file" >> Release
-        done
-
-        echo "SHA256:" >> Release
-        find main -type f | while read file; do
-          sha256sum "$file" | awk '{print " " $1 " " size " " file}' size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file") file="$file" >> Release
-        done
+        # Add checksums using apt-ftparchive
+        apt-ftparchive release . >> Release
 
         # Sign Release file
         echo "Signing Release file..."
-        gpg --default-key "$GPG_KEY_ID" --armor --detach-sign --yes -o Release.gpg Release
-        gpg --default-key "$GPG_KEY_ID" --armor --detach-sign --yes --clearsign -o InRelease Release
+        gpg --batch --default-key "$GPG_KEY_ID" --armor --detach-sign --yes -o Release.gpg Release
+        gpg --batch --default-key "$GPG_KEY_ID" --yes --clear-sign -o InRelease Release
 
         cd ../..
 
