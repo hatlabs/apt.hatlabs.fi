@@ -1,6 +1,8 @@
 # Hat Labs APT repository
 
-This is the APT repository for Hat Labs. It contains packages and tools for use with our systems.
+This is the APT repository for Hat Labs. It contains packages and tools for use with our devices and with HaLOS (Hat Labs Operating System).
+
+To use this repository, follow the instructions at [apt.hatlabs.fi](https://apt.hatlabs.fi).
 
 ## Agentic Coding Setup (Claude Code, GitHub Copilot, etc.)
 
