@@ -156,11 +156,48 @@ sudo apt update</div>
             <p style="margin-bottom: 20px; color: #4a5568;">Firmware and drivers for Hat Labs hardware products (HALPI2, etc.)</p>
             <div class="dist-card">
                 <h3>Stable</h3>
-                <p class="dist-meta">0 packages</p>
+                <p class="dist-meta">7 packages</p>
                 <p class="dist-desc">Hat Labs product packages (stable releases)</p>
                 <strong>Add this distribution:</strong>
                 <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+                <div class="package-list">
+                    <strong>Available Packages:</strong>
+                    <div class="package-item">
+                        <h4>casaos-docker-service <span class="version">v0.4.15-2</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">CasaOS containerized service for Halos CasaOS provides a user-friendly web interface for managing Docker containers. This package installs CasaOS as a containerized service using Docker Compose. . CasaOS runs in a Docker container and provides: - Container management through web UI - App store functionality - Simple Docker management for non-technical users . The web interface is accessible on port 80 after installation.</p>
+                        <div class="install-cmd">sudo apt install casaos-docker-service</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>cockpit-dockermanager <span class="version">v1.0.7-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Cockpit plugin for Docker container management Docker Manager is a lightweight and intuitive utility designed to help you manage your Docker containers via a simplified web interface through Cockpit. . Features: * List, start, stop, search and restart containers * View container status, uptime, details and exposed ports * In-window terminal with individual container terminal functionality * Image management</p>
+                        <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>cockpit-package-manager <span class="version">v0.1.1-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Cockpit-based package manager using PackageKit A web-based package manager interface for Cockpit that provides: - Browse packages by PackageKit group (cross-distribution compatible) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing system packages through Cockpit&#x27;s web interface using the PackageKit D-Bus API for cross-distribution compatibility.</p>
+                        <div class="install-cmd">sudo apt install cockpit-package-manager</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpi2-firmware <span class="version">v3.2.0</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Firmware for the HALPI2 Computer This package contains the firmware for the HALPI2 Computer onboard controller. The firmware is automatically flashed to the device upon installation.</p>
+                        <div class="install-cmd">sudo apt install halpi2-firmware</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpid <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                        <p class="description">HALPI2 service daemon `halpid` is a power monitor and watchdog service for HALPI2. It communicates with the HALPI2 controller, providing the &quot;smart&quot; aspects of the operation. . The main use case for the service software is to have the Raspberry Pi Operating System shut down once the power is cut. This prevents potential file system corruption without having to shut down the device manually.</p>
+                        <div class="install-cmd">sudo apt install halpid</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>halpid-dbgsym <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                        <p class="description">debug symbols for halpid</p>
+                        <div class="install-cmd">sudo apt install halpid-dbgsym</div>
+                    </div>
+                    <div class="package-item">
+                        <h4>runtipi-docker-service <span class="version">v4.6.2-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Runtipi homeserver orchestrator with systemd integration Runtipi provides a user-friendly web interface for managing Docker containers and self-hosted applications. This package installs the runtipi-cli tool and configures it as a systemd service. . Runtipi provides: - Container management through web UI - App store with 300+ pre-configured applications - Simple Docker orchestration for self-hosting . The web interface is accessible on port 80 after installation.</p>
+                        <div class="install-cmd">sudo apt install runtipi-docker-service</div>
+                    </div>
+                </div>
             </div>
             <div class="dist-card">
                 <h3>Unstable</h3>
@@ -208,7 +245,7 @@ sudo apt update</div>
             </div>
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">1 packages</p>
+                <p class="dist-meta">0 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -216,14 +253,7 @@ sudo apt update</div>
 
                 <strong>Add this distribution:</strong>
                 <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <div class="package-list">
-                    <strong>Available Packages:</strong>
-                    <div class="package-item">
-                        <h4>cockpit-apt <span class="version">v0.2.0-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Modern APT package manager interface for Cockpit A web-based package manager interface for Cockpit that provides: - Browse packages by Debian section (games, web, development, etc.) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - View available package updates - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing APT packages through Cockpit&#x27;s web interface, designed for Debian and Ubuntu systems.</p>
-                        <div class="install-cmd">sudo apt install cockpit-apt</div>
-                    </div>
-                </div>
+                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
             </div>
         </div>
         <div class="info-box">
@@ -236,7 +266,7 @@ sudo apt update</div>
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-16 21:18:37 UTC</p>
+            <p>Last updated: 2025-11-16 21:48:25 UTC</p>
             <p>Repository URL: <code>https://apt.hatlabs.fi</code></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
