@@ -24,9 +24,10 @@ on:
         default: 'all'
         type: choice
         options:
-          # Only 'all' and 'arm64' are supported. Do not add 'amd64' unless repository metadata generation and scanning are updated to support it.
+          # Only 'all', 'arm64', and 'armhf' are supported. Do not add 'amd64' unless repository metadata generation and scanning are updated to support it.
           - all
           - arm64
+          - armhf
 
 jobs:
   remove-package:
@@ -95,7 +96,7 @@ jobs:
         cd apt-repo
 
         # Generate Packages file
-        for arch in arm64 all; do
+        for arch in arm64 armhf all; do
           ARCH_DIR="dists/$DIST/main/binary-$arch"
           if [ -d "$ARCH_DIR" ]; then
             echo "Generating Packages file for $arch..."
@@ -152,7 +153,7 @@ jobs:
         Label: Hat Labs
         Suite: $SUITE
         Codename: $CODENAME
-        Architectures: arm64 all
+        Architectures: arm64 armhf all
         Components: main
         Description: $DESCRIPTION
         Date: $(date -Ru)
