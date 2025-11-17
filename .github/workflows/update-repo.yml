@@ -125,8 +125,9 @@ jobs:
         TARGET_REPO="${{ steps.payload.outputs.target_repo }}"
         CHANNEL="${{ steps.payload.outputs.channel }}"
 
-        # Source suffix parsing functions
+        # Source helper functions
         source scripts/suffix-parsing-functions.sh
+        source scripts/routing-functions.sh
 
         # Function to download packages from a repository
         download_from_repo() {
@@ -302,18 +303,19 @@ EOF
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
 
-        # Copy new packages to distribution-specific pool (targeted mode only)
-        # In full rebuild mode, packages are already in their distribution pools
-        if [ "$MODE" = "targeted" ]; then
-          if ls packages/*.deb 1> /dev/null 2>&1; then
-            mkdir -p "apt-repo/pool/$TARGET_DIST/main"
-            cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
-            echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
-          else
-            echo "No new .deb packages to copy"
-          fi
+        # Route packages based on metadata
+        if ls packages/*.deb 1> /dev/null 2>&1; then
+          echo "=== Routing packages ==="
+          for pkg in packages/*.deb; do
+            echo "Routing: $(basename "$pkg")"
+            route_package "$pkg" "$CHANNEL" || {
+              echo "Warning: Failed to route $(basename "$pkg")"
+            }
+          done
+          pkg_count=$(ls packages/*.deb | wc -l)
+          echo "✓ Successfully routed $pkg_count packages"
         else
-          echo "Full rebuild mode: packages already in distribution-specific pools"
+          echo "ℹ No packages to route"
         fi
 
         cd apt-repo
