@@ -1,0 +1,121 @@
+Package: casaos-docker-service
+Version: 0.4.15-2
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 22
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/trixie-stable/main/casaos-docker-service_0.4.15-2_all.deb
+Size: 3524
+MD5sum: c5419cd90f8af22763d0ec19f6e13717
+SHA1: 359fb35b821d0917e942afaa1979e93c3f0a1fe3
+SHA256: e55b2211abc57cb6566eb85573f609ac8e5ef7026242184d8b3714d4bceae18a
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/casaos-docker-service
+Description: CasaOS containerized service for Halos
+ CasaOS provides a user-friendly web interface for managing Docker
+ containers. This package installs CasaOS as a containerized service
+ using Docker Compose.
+ .
+ CasaOS runs in a Docker container and provides:
+  - Container management through web UI
+  - App store functionality
+  - Simple Docker management for non-technical users
+ .
+ The web interface is accessible on port 80 after installation.
+
+Package: cockpit-dockermanager
+Version: 1.0.7-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 66
+Depends: cockpit (>= 200)
+Recommends: docker.io | docker-ce
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7-1_all.deb
+Size: 15608
+MD5sum: d2b4c22012a7cb1fb1d8174f1a3bb2c7
+SHA1: 3fbba28bd8d8c4778d0725f0bba0431e374b1767
+SHA256: fc5f2c47685bc88d3567b246f6437658d08ef1c77a457c3a44c2e3630b21c590
+Section: admin
+Priority: optional
+Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
+Description: Cockpit plugin for Docker container management
+ Docker Manager is a lightweight and intuitive utility designed to help you
+ manage your Docker containers via a simplified web interface through Cockpit.
+ .
+ Features:
+  * List, start, stop, search and restart containers
+  * View container status, uptime, details and exposed ports
+  * In-window terminal with individual container terminal functionality
+  * Image management
+
+Package: cockpit-package-manager
+Version: 0.1.1-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 9338
+Depends: cockpit (>= 276), packagekit
+Filename: pool/trixie-stable/main/cockpit-package-manager_0.1.1-1_all.deb
+Size: 1849788
+MD5sum: 638dc440b1906abcf2306b3ea00a0041
+SHA1: 8fd0778bbe91c2bf7765a84e0a101f9e77c65f64
+SHA256: a2e386c89edea5aa51af956edacbd0bdf4f110597cbd4168979559a392c3ea29
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-package-manager
+Description: Cockpit-based package manager using PackageKit
+ A web-based package manager interface for Cockpit that provides:
+  - Browse packages by PackageKit group (cross-distribution compatible)
+  - Search and filter packages by name or description
+  - View detailed package information, dependencies, and file lists
+  - Install and remove packages with progress tracking
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a modern, user-friendly interface for managing
+ system packages through Cockpit's web interface using the PackageKit
+ D-Bus API for cross-distribution compatibility.
+
+Package: halpi2-firmware
+Version: 3.2.0
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 3077
+Depends: halpid (>= 4.0.0)
+Filename: pool/trixie-stable/main/halpi2-firmware_3.2.0_all.deb
+Size: 650138
+MD5sum: 083085fc87fe2063168def1a60d9e4fd
+SHA1: 40944abad181238a3370c0364eb9b689dbcd7600
+SHA256: 64a8c8970eac8ea4057b911320003de601b6186e38ae119186cbd33329a7d40c
+Section: embedded
+Priority: optional
+Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
+Description: Firmware for the HALPI2 Computer
+ This package contains the firmware for the HALPI2 Computer onboard controller.
+ The firmware is automatically flashed to the device upon installation.
+
+Package: runtipi-docker-service
+Version: 4.6.2-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 2122
+Depends: docker-ce-cli, docker-compose-plugin
+Filename: pool/trixie-stable/main/runtipi-docker-service_4.6.2-1_all.deb
+Size: 2156532
+MD5sum: ec2384cc8ed9e961aa98f045e1f37669
+SHA1: 048b2944e8c366724a1726ab66357c2e3402bdbf
+SHA256: 7e8c08ef6a584287d5f0bbcc17a3b0060f70762516d720b2839b7ffa46aae845
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/runtipi-docker-service
+Description: Runtipi homeserver orchestrator with systemd integration
+ Runtipi provides a user-friendly web interface for managing Docker
+ containers and self-hosted applications. This package installs the
+ runtipi-cli tool and configures it as a systemd service.
+ .
+ Runtipi provides:
+  - Container management through web UI
+  - App store with 300+ pre-configured applications
+  - Simple Docker orchestration for self-hosting
+ .
+ The web interface is accessible on port 80 after installation.
+
