@@ -8,31 +8,56 @@ The Hat Labs APT repository is a GitHub Actions-based automated package reposito
 
 ### Repository Structure
 
-The APT repository follows standard Debian repository layout with multiple distribution directories:
+The APT repository follows standard Debian repository layout with multiple distribution directories and component-based organization:
 
 ```
 apt-repo/
 ├── pool/
-│   └── main/               # All .deb files stored here
+│   ├── stable/
+│   │   └── main/           # Legacy Hat Labs packages (backward compatibility)
+│   ├── unstable/
+│   │   └── main/           # Legacy Hat Labs packages (backward compatibility)
+│   ├── bookworm-stable/
+│   │   ├── main/           # General packages for Bookworm stable
+│   │   └── hatlabs/        # Hat Labs products for Bookworm stable
+│   ├── bookworm-unstable/
+│   │   ├── main/
+│   │   └── hatlabs/
+│   ├── trixie-stable/
+│   │   ├── main/           # General packages for Trixie stable
+│   │   └── hatlabs/        # Hat Labs products for Trixie stable
+│   └── trixie-unstable/
+│       ├── main/
+│       └── hatlabs/
 ├── dists/
-│   ├── stable/             # Hat Labs product packages stable channel
+│   ├── stable/             # Hat Labs product packages stable channel (legacy)
 │   │   └── main/
 │   │       ├── binary-arm64/
 │   │       └── binary-all/
-│   ├── unstable/           # Hat Labs product packages unstable channel
+│   ├── unstable/           # Hat Labs product packages unstable channel (legacy)
 │   │   └── main/
-│   ├── bookworm-stable/    # Halos stable for Bookworm
-│   │   └── main/
-│   ├── bookworm-unstable/  # Halos unstable for Bookworm
-│   │   └── main/
-│   ├── trixie-stable/      # Halos stable for Trixie
-│   │   └── main/
-│   └── trixie-unstable/    # Halos unstable for Trixie
-│       └── main/
+│   ├── bookworm-stable/    # Packages for Bookworm stable
+│   │   ├── main/
+│   │   └── hatlabs/
+│   ├── bookworm-unstable/  # Packages for Bookworm unstable
+│   │   ├── main/
+│   │   └── hatlabs/
+│   ├── trixie-stable/      # Packages for Trixie stable
+│   │   ├── main/
+│   │   └── hatlabs/
+│   └── trixie-unstable/    # Packages for Trixie unstable
+│       ├── main/
+│       └── hatlabs/
 ├── hat-labs-apt-key.asc    # Public GPG key (ASCII armored)
 ├── hat-labs-apt-key.gpg    # Public GPG key (binary)
 └── index.html              # Repository web interface
 ```
+
+**Components:**
+- **main** - General packages (marine applications, third-party software)
+- **hatlabs** - Hat Labs product packages (HALPI2 daemon, firmware, etc.)
+
+**Legacy repositories** (`stable/main` and `unstable/main`) are maintained for backward compatibility and contain only Hat Labs product packages that work across all distributions.
 
 Each distribution directory contains:
 - `Packages` - Package metadata file
@@ -61,6 +86,43 @@ Package repositories (e.g., HALPI2 firmware, cockpit-apt, halos-marine-container
 2. **Publishing Artifacts** - Attaching .deb files to GitHub releases
 3. **Triggering Updates** - Sending repository_dispatch events to apt.hatlabs.fi
 4. **Build Isolation** - Using appropriate build environments for target distributions
+
+### Extended Naming Convention
+
+Package files use an extended naming convention to encode distribution and component routing information.
+
+**See also:** [Issue #28](https://github.com/hatlabs/apt.hatlabs.fi/issues/28) for the complete design rationale and decision record.
+
+**Format:** `{package}_{version}_{arch}+{distro}+{component}.deb`
+
+**Examples:**
+- `halpi2-daemon_1.0.0-1_all+any+hatlabs.deb` - Hat Labs daemon for all distros
+- `signalk-server-container_2.17.2-1_all+trixie+main.deb` - Signal K for Trixie only
+- `cockpit-apt_0.2.0-1_all+trixie+main.deb` - Cockpit APT for Trixie only
+
+**Routing Dimensions:**
+
+1. **Distro** (which Debian distribution):
+   - `any` - All current and future distributions (bookworm, trixie, forky, ...)
+   - `trixie`, `bookworm`, `forky` - Specific distribution only
+
+2. **Channel** (stability level) - Determined by GitHub release type, NOT in filename:
+   - `stable` - Regular GitHub releases
+   - `unstable` - Pre-releases
+
+3. **Component** (package category):
+   - `main` - General packages (marine apps, third-party software)
+   - `hatlabs` - Hat Labs product packages
+
+**Why channel is omitted from filename:** The same binary package can be in both a pre-release (unstable) and a stable release. Channel is a property of the release, not the binary, so it's determined by the GitHub release type during ingestion.
+
+**Suffix Stripping:** The `+{distro}+{component}` suffix is used for routing logic only. When packages are stored in the APT repository, they are renamed to canonical Debian format: `{package}_{version}_{arch}.deb`. This ensures compatibility with all APT tools and clean user experience.
+
+**Special Legacy Routing:** Packages with `distro=any` and `component=hatlabs` are copied to both:
+- Legacy repositories: `pool/stable/main/` and `pool/unstable/main/`
+- All distribution-specific hatlabs components: `pool/{distro}-{channel}/hatlabs/`
+
+This ensures backward compatibility for Hat Labs product packages that existed before the multi-distro reorganization.
 
 ## Data Flow
 
@@ -167,6 +229,45 @@ The workflow must support packages being added to multiple distributions simulta
 
 The payload may include either a single distribution or a list of distribution specifications.
 
+### Extended Naming Routing (Full Rebuilds)
+
+During full rebuilds (scheduled or manual), packages are routed using the extended naming convention rather than dispatch payloads.
+
+**Routing Algorithm:**
+
+```
+1. Parse filename suffix to extract distro and component
+   Example: "package_1.0-1_all+trixie+main.deb" → distro="trixie", component="main"
+
+2. Determine channel from GitHub release type
+   - Pre-release → channel="unstable"
+   - Release → channel="stable"
+
+3. Expand distro if distro="any"
+   - distro="any" → ["bookworm", "trixie", "forky"]
+   - Otherwise → [distro]
+
+4. For each target_distro in expanded list:
+   - Route to: pool/{target_distro}-{channel}/{component}/
+   - Add to: dists/{target_distro}-{channel}/{component}/
+
+5. Special case for legacy routing:
+   - If distro="any" AND component="hatlabs":
+     - ALSO route to: pool/{channel}/main/
+     - ALSO add to: dists/{channel}/main/
+```
+
+**Examples:**
+
+| Filename | Release Type | Routes To |
+|----------|--------------|-----------|
+| `halpi2-daemon+any+hatlabs.deb` | Release | `stable/main` + `bookworm-stable/hatlabs` + `trixie-stable/hatlabs` |
+| `halpi2-daemon+any+hatlabs.deb` | Pre-release | `unstable/main` + `bookworm-unstable/hatlabs` + `trixie-unstable/hatlabs` |
+| `signalk+trixie+main.deb` | Release | `trixie-stable/main` ONLY |
+| `runtipi+any+main.deb` | Release | `bookworm-stable/main` + `trixie-stable/main` (NOT legacy stable/main) |
+
+**Fallback for packages without suffix:** For backward compatibility, packages without the `+{distro}+{component}` suffix are routed to bare `stable/` or `unstable/` distributions based on release type.
+
 ## Repository Update Process
 
 ### Discovery Phase
@@ -179,22 +280,31 @@ The workflow uses GitHub's search API to find all repositories with the `apt-pac
 ### Download Phase
 
 For each discovered repository:
-1. Query GitHub API for latest release information
+1. Query GitHub API for latest release information (release or pre-release based on target channel)
 2. Filter for .deb assets
 3. Download each .deb file
-4. Extract and verify package metadata (Package, Version, Architecture)
-5. Rename files to canonical Debian naming: `{package}_{version}_{arch}.deb`
+4. **Parse filename suffix** to extract routing information:
+   - Extract `distro` and `component` from `+{distro}+{component}.deb` suffix
+   - Fallback to `distro=any, component=main` if suffix not present
+5. Extract and verify package metadata from .deb control file (Package, Version, Architecture)
+6. **Determine routing** based on parsed suffix and release type:
+   - Expand `distro=any` to all supported distributions
+   - Apply legacy routing rules for `distro=any` + `component=hatlabs`
+7. **Rename files to canonical Debian naming:** `{package}_{version}_{arch}.deb` (strip suffix)
+8. Copy to appropriate pool directories based on routing rules
 
 ### Build Phase
 
-For each distribution:
+For each distribution and component combination:
 1. Create directory structure: `dists/{distribution}/{component}/binary-{arch}/`
-2. Copy all relevant packages to `pool/{component}/`
-3. Run `dpkg-scanpackages` to generate Packages files for each architecture
+2. Packages already copied to `pool/{distribution}/{component}/` during Download Phase
+3. Run `dpkg-scanpackages` on each pool to generate Packages files for each architecture
 4. Compress Packages files with gzip
 5. Generate Release file with distribution metadata
 6. Run `apt-ftparchive release` to add package checksums
 7. Sign Release file with GPG (both detached and inline signatures)
+
+**Component-specific processing:** Each component (main, hatlabs) is processed separately, creating independent Packages files and allowing users to select which components to include in their APT sources.
 
 ### Web Interface Generation Phase
 
@@ -373,12 +483,17 @@ When vulnerabilities are discovered:
 
 ## Future Expansion
 
+### Implemented Features
+
+- **Multiple component support** - Packages separated into main (general packages) and hatlabs (Hat Labs products)
+- **Multi-distro routing** - Extended naming convention enables automatic routing to multiple distributions
+
 ### Planned Enhancements
 
 - **Multi-distribution web interface** - Browsing interface for all distributions with package discovery
-- **Per-distribution package filtering** - Control which packages appear in which distributions
-- **Multiple component support** - Separating packages into main/contrib/non-free
+- **Per-distribution package filtering** - Enhanced control over which packages appear in which distributions
 - **Automated testing** - Verify repository structure after updates
+- **Additional components** - Support for contrib/non-free components if needed
 
 ### Potential Additions
 
