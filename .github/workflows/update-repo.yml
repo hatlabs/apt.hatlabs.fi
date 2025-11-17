@@ -212,14 +212,14 @@ jobs:
                   mv "$temp_file" "$final_path"
 
                   # Store metadata for routing (used by later issues #30, #32)
-                  cat > "${final_path}.meta" <<EOF
-package=$package_name
-version=$actual_version
-architecture=$architecture
-distro=$pkg_distro
-component=$pkg_component
-original_filename=$name
-EOF
+                  {
+                    echo "package=$package_name"
+                    echo "version=$actual_version"
+                    echo "architecture=$architecture"
+                    echo "distro=$pkg_distro"
+                    echo "component=$pkg_component"
+                    echo "original_filename=$name"
+                  } > "${final_path}.meta"
 
                   echo "  Package: $package_name"
                   echo "  Version: $actual_version"
