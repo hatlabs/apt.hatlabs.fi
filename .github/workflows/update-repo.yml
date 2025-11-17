@@ -273,8 +273,13 @@ jobs:
             mkdir -p packages
 
             # Download packages for all repositories
+            # Note: source scripts again here because the pipe creates a subshell
+            # where the previously sourced variables are not available
             echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
               if [ -n "$repo" ]; then
+                # Re-source in subshell for access to SUPPORTED_DISTROS and functions
+                source scripts/suffix-parsing-functions.sh || { echo "❌ Failed to load suffix parsing functions"; exit 1; }
+                source scripts/routing-functions.sh || { echo "❌ Failed to load routing functions"; exit 1; }
                 download_from_repo "$repo" "$RELEASE_TAG"
               fi
             done
