@@ -183,14 +183,17 @@ jobs:
         if git diff --staged --quiet; then
           echo "ℹ️  No changes to commit (package may not have existed)"
         else
-          git commit -m "chore: remove $PACKAGE from $DIST distribution
+          git commit -m "$(cat <<-EOF
+          chore: remove $PACKAGE from $DIST distribution
 
-Manually triggered package removal via workflow.
+          Manually triggered package removal via workflow.
 
-Distribution: $DIST
-Package: $PACKAGE
-Architecture: ${{ github.event.inputs.architecture }}
-Triggered by: @${{ github.actor }}"
+          Distribution: $DIST
+          Package: $PACKAGE
+          Architecture: ${{ github.event.inputs.architecture }}
+          Triggered by: @${{ github.actor }}
+          EOF
+          )"
 
           git push
           echo "✓ Changes pushed successfully"
