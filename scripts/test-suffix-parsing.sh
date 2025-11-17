@@ -2,7 +2,8 @@
 # Test script for suffix parsing functionality
 # Tests the parse_package_suffix and validate_suffix functions
 
-set -e
+# Note: Don't use set -e because parse_package_suffix returns 1 for fallback cases
+# which is not an error
 
 # Colors for output
 RED='\033[0;31m'
