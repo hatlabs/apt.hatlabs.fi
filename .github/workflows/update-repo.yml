@@ -125,9 +125,9 @@ jobs:
         TARGET_REPO="${{ steps.payload.outputs.target_repo }}"
         CHANNEL="${{ steps.payload.outputs.channel }}"
 
-        # Source helper functions
-        source scripts/suffix-parsing-functions.sh
-        source scripts/routing-functions.sh
+        # Source helper functions (fail fast if missing)
+        source scripts/suffix-parsing-functions.sh || { echo "❌ Failed to load suffix parsing functions"; exit 1; }
+        source scripts/routing-functions.sh || { echo "❌ Failed to load routing functions"; exit 1; }
 
         # Function to download packages from a repository
         download_from_repo() {
@@ -304,16 +304,26 @@ EOF
         COMPONENT="${{ steps.payload.outputs.component }}"
 
         # Route packages based on metadata
+        # Both targeted and full rebuild modes now use metadata-driven routing
         if ls packages/*.deb 1> /dev/null 2>&1; then
-          echo "=== Routing packages ==="
+          echo "=== Routing packages via metadata ==="
+          routing_failed=0
           for pkg in packages/*.deb; do
             echo "Routing: $(basename "$pkg")"
-            route_package "$pkg" "$CHANNEL" || {
-              echo "Warning: Failed to route $(basename "$pkg")"
-            }
+            if ! route_package "$pkg" "$CHANNEL"; then
+              echo "❌ Failed to route $(basename "$pkg")"
+              routing_failed=$((routing_failed + 1))
+            fi
           done
           pkg_count=$(ls packages/*.deb | wc -l)
-          echo "✓ Successfully routed $pkg_count packages"
+          routed_count=$((pkg_count - routing_failed))
+
+          if [ $routing_failed -eq 0 ]; then
+            echo "✓ Successfully routed $pkg_count packages"
+          else
+            echo "❌ Failed to route $routing_failed/$pkg_count packages"
+            exit 1
+          fi
         else
           echo "ℹ No packages to route"
         fi

@@ -3,6 +3,8 @@
 # These functions are sourced by both the workflow and test scripts
 
 # List of supported distributions (easily extensible for future distros)
+# Note: This list includes only actual distributions, not "any" (which is an alias)
+# See suffix-parsing-functions.sh for VALID_DISTROS which includes "any" for validation
 SUPPORTED_DISTROS=("bookworm" "trixie" "forky")
 
 # route_package - Route a package to appropriate pools based on metadata
@@ -42,13 +44,20 @@ route_package() {
   local channel="$2"
   local apt_repo_dir="${3:-.}/apt-repo"
 
+  # Validate channel
+  if [[ ! "$channel" =~ ^(stable|unstable)$ ]]; then
+    echo "Error: Invalid channel '$channel' (must be 'stable' or 'unstable')" >&2
+    return 1
+  fi
+
   # Get package filename (without path)
   local filename=$(basename "$package_file")
 
-  # Read metadata file
+  # Read metadata file (required - no fallback for backward compatibility)
   local meta_file="${package_file}.meta"
   if [ ! -f "$meta_file" ]; then
     echo "Error: Metadata file not found: $meta_file" >&2
+    echo "  Package requires suffix parsing first (Issue #29)" >&2
     return 1
   fi
 

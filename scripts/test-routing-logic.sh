@@ -238,9 +238,9 @@ count=$(count_files "**/halpi2-firmware_2.0-1_all.deb")
 assert_equals "4" "$count" "Package copied to 4 locations (1 legacy + 3 distro-specific)"
 
 # ============================================================================
-# Test 6: Missing metadata file (should handle gracefully)
+# Test 6: Missing metadata file should fail
 # ============================================================================
-test_case "Handle missing metadata file gracefully"
+test_case "Missing metadata file causes failure"
 
 rm -rf "$TEST_DIR/apt-repo"
 mkdir -p "$TEST_DIR/apt-repo"
@@ -248,15 +248,15 @@ mkdir -p "$TEST_DIR/apt-repo"
 # Create package but NO metadata
 touch "$TEST_DIR/packages/orphan_1.0-1_all.deb"
 
-# Call routing function - should fail gracefully or use fallback
+# Call routing function - should fail
 route_package "packages/orphan_1.0-1_all.deb" "stable" "$TEST_DIR" 2>/dev/null
 result=$?
 
 if [ $result -ne 0 ]; then
-  echo -e "${GREEN}✓ PASS${NC}: Function handles missing metadata gracefully"
+  echo -e "${GREEN}✓ PASS${NC}: Function correctly fails when metadata missing"
   TESTS_PASSED=$((TESTS_PASSED + 1))
 else
-  echo -e "${RED}✗ FAIL${NC}: Function should handle missing metadata"
+  echo -e "${RED}✗ FAIL${NC}: Function should fail when metadata is missing"
   TESTS_FAILED=$((TESTS_FAILED + 1))
 fi
 
@@ -322,7 +322,33 @@ pkg3_count=$(count_files "**/pkg3_3.0-1_all.deb")
 assert_equals "3" "$pkg3_count" "pkg3 (any/main) copied to 3 locations"
 
 # ============================================================================
-# Test 10: Directory creation
+# Test 10: Invalid channel validation
+# ============================================================================
+test_case "Reject invalid channel names"
+
+rm -rf "$TEST_DIR/apt-repo"
+mkdir -p "$TEST_DIR/apt-repo"
+
+create_test_package "test_1.0-1_all" "trixie" "main"
+
+# Call routing with invalid channel
+route_package "packages/test_1.0-1_all.deb" "stabel" "$TEST_DIR" 2>/dev/null
+result=$?
+
+if [ $result -ne 0 ]; then
+  echo -e "${GREEN}✓ PASS${NC}: Function rejects invalid channel 'stabel'"
+  TESTS_PASSED=$((TESTS_PASSED + 1))
+else
+  echo -e "${RED}✗ FAIL${NC}: Function should reject invalid channel"
+  TESTS_FAILED=$((TESTS_FAILED + 1))
+fi
+
+# Verify no files were created
+count=$(count_files "**/test_1.0-1_all.deb")
+assert_equals "0" "$count" "No files created for invalid channel"
+
+# ============================================================================
+# Test 11: Directory creation
 # ============================================================================
 test_case "Verify directory structure created correctly"
 
