@@ -183,7 +183,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "ℹ️  No changes to commit (package may not have existed)"
         else
-          git commit -m "$(cat <<-'EOF'
+          git commit -m "$(cat <<-EOF
           chore: remove $PACKAGE from $DIST distribution
 
           Manually triggered package removal via workflow.
