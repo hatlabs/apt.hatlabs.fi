@@ -92,6 +92,44 @@ jobs:
         echo "$repos" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
 
+    - name: Fetch existing repository (targeted mode)
+      if: steps.payload.outputs.mode == 'targeted'
+      run: |
+        echo "=== Fetching existing repository from gh-pages ==="
+
+        # Fetch gh-pages branch
+        git fetch origin gh-pages --depth=1
+
+        # Create apt-repo directory
+        mkdir -p apt-repo
+
+        # Extract existing repository content from gh-pages to apt-repo/
+        # The gh-pages branch contains the published apt repository at root level
+        git checkout origin/gh-pages -- pool dists hat-labs-apt-key.asc hat-labs-apt-key.gpg index.html 2>/dev/null || echo "No existing repository content"
+
+        # Move fetched content into apt-repo directory
+        if [ -d "pool" ]; then
+          mv pool apt-repo/ 2>/dev/null || true
+        fi
+        if [ -d "dists" ]; then
+          mv dists apt-repo/ 2>/dev/null || true
+        fi
+        if [ -f "hat-labs-apt-key.asc" ]; then
+          mv hat-labs-apt-key.asc apt-repo/ 2>/dev/null || true
+        fi
+        if [ -f "hat-labs-apt-key.gpg" ]; then
+          mv hat-labs-apt-key.gpg apt-repo/ 2>/dev/null || true
+        fi
+        if [ -f "index.html" ]; then
+          mv index.html apt-repo/ 2>/dev/null || true
+        fi
+
+        echo "✓ Existing repository content preserved"
+        echo "Pool contents:"
+        ls -la apt-repo/pool/ 2>/dev/null || echo "  (empty)"
+        echo "Distributions:"
+        ls -la apt-repo/dists/ 2>/dev/null || echo "  (empty)"
+
     - name: Setup build environment
       run: |
         sudo apt-get update
@@ -100,16 +138,34 @@ jobs:
         # Create packages directory
         mkdir -p packages
 
-        # Create distribution-specific pool and distribution directories
-        for dist in ${{ steps.payload.outputs.all_distributions }}; do
-          echo "Creating distribution: $dist"
-          mkdir -p "apt-repo/pool/$dist/main"
-          mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
-          mkdir -p "apt-repo/dists/$dist/main/binary-all"
-        done
+        MODE="${{ steps.payload.outputs.mode }}"
 
-        echo "=== Created distribution directories ==="
-        ls -la apt-repo/dists/
+        if [ "$MODE" = "full" ]; then
+          echo "=== Full rebuild mode: Creating fresh directory structure ==="
+          # Create distribution-specific pool and distribution directories
+          for dist in ${{ steps.payload.outputs.all_distributions }}; do
+            echo "Creating distribution: $dist"
+            mkdir -p "apt-repo/pool/$dist/main"
+            mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
+            mkdir -p "apt-repo/dists/$dist/main/binary-all"
+          done
+        else
+          echo "=== Targeted mode: Preserving existing structure, creating missing directories ==="
+          # In targeted mode, create apt-repo if it doesn't exist
+          # but preserve existing content
+          TARGET_DIST="${{ steps.payload.outputs.distribution }}"
+          COMPONENT="${{ steps.payload.outputs.component }}"
+
+          # Ensure target distribution directories exist (won't overwrite existing)
+          mkdir -p "apt-repo/pool/$TARGET_DIST/$COMPONENT"
+          mkdir -p "apt-repo/dists/$TARGET_DIST/$COMPONENT/binary-arm64"
+          mkdir -p "apt-repo/dists/$TARGET_DIST/$COMPONENT/binary-all"
+
+          echo "✓ Ensured $TARGET_DIST/$COMPONENT directories exist"
+        fi
+
+        echo "=== Distribution directories ==="
+        ls -la apt-repo/dists/ 2>/dev/null || echo "apt-repo/dists/ not yet created"
 
     - name: Import GPG signing key
       run: |
