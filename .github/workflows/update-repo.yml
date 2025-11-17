@@ -185,10 +185,10 @@ jobs:
               if [ $? -eq 0 ]; then
                 echo "✓ Downloaded $name"
 
-                # Extract package metadata
-                actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null)
-                package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null)
-                architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null)
+                # Extract package metadata (using || true to prevent script exit on missing fields)
+                actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null || true)
+                package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null || true)
+                architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null || true)
 
                 if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
                   # Parse suffix from original filename
