@@ -86,7 +86,7 @@ assert_equals "main" "$component" "Component should be 'main'"
 test_case "No suffix - fallback to defaults"
 parse_package_suffix "old-package_1.0-1_all.deb" distro component
 assert_equals "any" "$distro" "Distro should fallback to 'any'"
-assert_equals "main" "$component" "Component should fallback to 'main'"
+assert_equals "hatlabs" "$component" "Component should fallback to 'hatlabs' (temporary, legacy packages)"
 
 # Test 5: Invalid distro - should warn and fallback
 test_case "Invalid distro - fallback"
@@ -106,7 +106,7 @@ assert_equals "invalid" "$component" "Should extract component even if invalid"
 test_case "Malformed suffix (single +) - fallback"
 parse_package_suffix "package_1.0-1_all+trixie.deb" distro component
 assert_equals "any" "$distro" "Should fallback to 'any'"
-assert_equals "main" "$component" "Should fallback to 'main'"
+assert_equals "hatlabs" "$component" "Should fallback to 'hatlabs'"
 
 # Test 8: Complex package name with dashes and numbers
 test_case "Complex package name"
@@ -165,7 +165,7 @@ fi
 test_case "Real package: halpid-dbgsym without suffix"
 parse_package_suffix "halpid-dbgsym_4.0.7_amd64.deb" distro component
 assert_equals "any" "$distro" "Should fallback to 'any' for package without suffix"
-assert_equals "main" "$component" "Should fallback to 'main' for package without suffix"
+assert_equals "hatlabs" "$component" "Should fallback to 'hatlabs' for legacy packages without suffix"
 
 # Test 15: Real package with suffix - ensures regex still works
 test_case "Real package with suffix: cockpit-apt"
