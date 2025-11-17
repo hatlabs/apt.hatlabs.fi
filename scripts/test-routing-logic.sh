@@ -35,6 +35,9 @@ assert_equals() {
   local actual="$2"
   local message="$3"
 
+  # Trim whitespace from actual value
+  actual=$(echo "$actual" | xargs)
+
   if [ "$expected" = "$actual" ]; then
     echo -e "${GREEN}✓ PASS${NC}: $message"
     TESTS_PASSED=$((TESTS_PASSED + 1))
@@ -82,7 +85,8 @@ assert_file_not_exists() {
 
 count_files() {
   local pattern="$1"
-  find "$TEST_DIR" -type f -path "$pattern" 2>/dev/null | wc -l
+  # Only count files in apt-repo, not in packages directory (source)
+  find "$TEST_DIR/apt-repo" -type f -path "$pattern" 2>/dev/null | wc -l
 }
 
 print_summary() {
