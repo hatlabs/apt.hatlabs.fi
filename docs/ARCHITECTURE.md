@@ -33,6 +33,7 @@ apt-repo/
 │   ├── stable/             # Hat Labs product packages stable channel (legacy)
 │   │   └── main/
 │   │       ├── binary-arm64/
+│   │       ├── binary-armhf/
 │   │       └── binary-all/
 │   ├── unstable/           # Hat Labs product packages unstable channel (legacy)
 │   │   └── main/
