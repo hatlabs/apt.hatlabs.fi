@@ -133,29 +133,3 @@ Priority: optional
 Description: debug symbols for halpid
 Build-Ids: 0279c3207048ad50c955fbf6c22c0dbfe121f59a 1728fb0bab3aba38f0ef3471243925179e4c18e3 45291742d283499fe0d216b6bd8e3a0f7fd67300 54b221c8668e70325161cf15e93bf69b313dfdf2 69c14f241382bd5c8e46cfb31509aa26cc44a855 7cdf9a5d10e2d0814b1fa5db02828f5e8445c8db 9fbfbce03bf4e40a427bd3a70dae84a069dcb28a c61fed41fc2396952746b4596c943a619660ff16 ce089597aa230f9d66c35d9d192d2a7ed620db33 ee535d14a0ddb5f4b206945991ec58dcd8890184
 
-Package: runtipi-docker-service
-Version: 4.6.2-1
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 2122
-Depends: docker-ce-cli, docker-compose-plugin
-Filename: pool/bookworm-stable/main/runtipi-docker-service_4.6.2-1_all.deb
-Size: 2156532
-MD5sum: ec2384cc8ed9e961aa98f045e1f37669
-SHA1: 048b2944e8c366724a1726ab66357c2e3402bdbf
-SHA256: 7e8c08ef6a584287d5f0bbcc17a3b0060f70762516d720b2839b7ffa46aae845
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/runtipi-docker-service
-Description: Runtipi homeserver orchestrator with systemd integration
- Runtipi provides a user-friendly web interface for managing Docker
- containers and self-hosted applications. This package installs the
- runtipi-cli tool and configures it as a systemd service.
- .
- Runtipi provides:
-  - Container management through web UI
-  - App store with 300+ pre-configured applications
-  - Simple Docker orchestration for self-hosting
- .
- The web interface is accessible on port 80 after installation.
-

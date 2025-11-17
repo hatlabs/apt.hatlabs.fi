@@ -1,0 +1,27 @@
+Package: cockpit-apt
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 13773
+Depends: cockpit (>= 276), python3-apt
+Filename: pool/bookworm-unstable/main/cockpit-apt_0.2.0-1_all.deb
+Size: 1402064
+MD5sum: 670297874d518d7d261b92ce79dc1125
+SHA1: f610caa696c6f20eab3d93f4f490b5fa08964c13
+SHA256: a3e3954cb42d75b0caede2d95531f661c9644075d4ff8e19a9786f4645dfcc44
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-apt
+Description: Modern APT package manager interface for Cockpit
+ A web-based package manager interface for Cockpit that provides:
+  - Browse packages by Debian section (games, web, development, etc.)
+  - Search and filter packages by name or description
+  - View detailed package information, dependencies, and file lists
+  - Install and remove packages with progress tracking
+  - View available package updates
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a modern, user-friendly interface for managing
+ APT packages through Cockpit's web interface, designed for Debian
+ and Ubuntu systems.
+
