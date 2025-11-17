@@ -6,9 +6,6 @@ on:
   workflow_dispatch:          # Manual trigger
   schedule:
     - cron: '0 6 * * *'        # Daily rebuild
-  push:
-    branches:
-      - main                   # Trigger on push to main branch
 
 jobs:
   update-apt-repo:
@@ -228,28 +225,66 @@ jobs:
           download_from_repo "$TARGET_REPO" "$RELEASE_TAG"
         else
           echo "=== Full Rebuild Mode ==="
-          # Download from all repositories (stable channel only for full rebuild)
-          echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
-            if [ -n "$repo" ]; then
-              download_from_repo "$repo" "latest"
+          echo "Processing each distribution separately..."
+
+          # Iterate through each distribution and determine appropriate release type
+          for dist in ${{ steps.payload.outputs.all_distributions }}; do
+            # Determine channel from distribution name
+            if [[ "$dist" == *"-unstable"* ]] || [[ "$dist" == "unstable" ]]; then
+              DIST_CHANNEL="unstable"
+              RELEASE_TAG="prerelease"
+            else
+              DIST_CHANNEL="stable"
+              RELEASE_TAG="latest"
+            fi
+
+            echo ""
+            echo "--- Distribution: $dist (channel: $DIST_CHANNEL, release: $RELEASE_TAG) ---"
+
+            # Clean packages directory for this distribution
+            rm -rf packages/*
+            mkdir -p packages
+
+            # Download packages for all repositories
+            echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
+              if [ -n "$repo" ]; then
+                download_from_repo "$repo" "$RELEASE_TAG"
+              fi
+            done
+
+            # Copy downloaded packages to this distribution's pool
+            if ls packages/*.deb 1> /dev/null 2>&1; then
+              mkdir -p "apt-repo/pool/$dist/main"
+              cp packages/*.deb "apt-repo/pool/$dist/main/"
+              echo "✓ Copied $(ls packages/*.deb | wc -l) packages to $dist pool"
+            else
+              echo "ℹ No packages downloaded for $dist"
             fi
           done
+
+          # Clean up packages directory after full rebuild
+          rm -rf packages/*
         fi
 
-        echo "=== Downloaded packages ==="
-        ls -la packages/ || echo "No packages downloaded"
+        echo "=== Full rebuild completed ==="
     - name: Build APT repository structure
       run: |
         MODE="${{ steps.payload.outputs.mode }}"
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
 
-        # Copy new packages to distribution-specific pool
-        if ls packages/*.deb 1> /dev/null 2>&1; then
-          cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
-          echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
+        # Copy new packages to distribution-specific pool (targeted mode only)
+        # In full rebuild mode, packages are already in their distribution pools
+        if [ "$MODE" = "targeted" ]; then
+          if ls packages/*.deb 1> /dev/null 2>&1; then
+            mkdir -p "apt-repo/pool/$TARGET_DIST/main"
+            cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
+            echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
+          else
+            echo "No new .deb packages to copy"
+          fi
         else
-          echo "No new .deb packages to copy"
+          echo "Full rebuild mode: packages already in distribution-specific pools"
         fi
 
         cd apt-repo
@@ -340,22 +375,18 @@ jobs:
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
           echo "=== Full Rebuild Mode ==="
-          echo "Packages downloaded from all repositories are in pool/stable/main/"
-          echo "Building all distributions (stable will have packages, others initially empty)"
+          echo "Building all distributions with their respective packages"
 
           # In full rebuild mode:
-          # - Downloaded packages are in pool/stable/main/ (Hat Labs products)
-          # - Build all distributions to ensure metadata exists
-          # - Only stable will have packages initially
-          # - Distribution-specific packages (bookworm/trixie) populate via targeted updates
+          # - Each distribution's packages were downloaded in the Download step
+          # - Packages are already in distribution-specific pools (pool/$dist/main/)
+          # - Stable distributions got latest releases
+          # - Unstable distributions got pre-releases
+          # - Now build metadata for all distributions
 
           for dist in ${{ steps.payload.outputs.all_distributions }}; do
             build_distribution "$dist" "main"
           done
-
-          echo ""
-          echo "Note: Distribution-specific packages (bookworm/trixie) are added via targeted"
-          echo "updates when package repositories build for those distributions."
         fi
 
         echo ""
