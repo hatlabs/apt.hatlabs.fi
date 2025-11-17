@@ -282,19 +282,54 @@ EOF
             # Route downloaded packages based on their metadata
             # This handles distro expansion and component routing
             if ls packages/*.deb 1> /dev/null 2>&1; then
-              echo "Routing $channel packages to appropriate distributions..."
+              pkg_count=$(ls packages/*.deb | wc -l)
+              echo "Routing $pkg_count packages ($channel channel) to appropriate distributions..."
               routing_failed=0
+
               for pkg in packages/*.deb; do
+                pkg_name=$(basename "$pkg")
+                meta_file="${pkg}.meta"
+
+                # Clear metadata variables from previous iteration to prevent variable pollution
+                unset distro component package version architecture original_filename
+
+                # Read distro and component from metadata for logging
+                if [ -f "$meta_file" ]; then
+                  source "$meta_file" 2>/dev/null || {
+                    echo "❌ Failed to read metadata for $pkg_name"
+                    routing_failed=$((routing_failed + 1))
+                    continue
+                  }
+
+                  # Log routing decision
+                  if [ "$distro" = "any" ]; then
+                    echo "  → $pkg_name (distro=any, component=$component)"
+                    # Expand to all supported distributions
+                    targets_list=""
+                    for d in "${SUPPORTED_DISTROS[@]}"; do
+                      targets_list="$targets_list ${d}-${channel}/$component"
+                    done
+                    echo "      Routes to:$targets_list"
+                    if [ "$component" = "hatlabs" ]; then
+                      echo "      + Legacy: ${channel}/main"
+                    fi
+                  else
+                    echo "  → $pkg_name (distro=$distro, component=$component)"
+                    echo "      Routes to: ${distro}-${channel}/$component"
+                  fi
+                fi
+
+                # Perform actual routing
                 if ! route_package "$pkg" "$channel"; then
-                  echo "❌ Failed to route $(basename "$pkg")"
+                  echo "❌ Failed to route $pkg_name"
                   routing_failed=$((routing_failed + 1))
                 fi
               done
-              pkg_count=$(ls packages/*.deb | wc -l)
+
               routed_count=$((pkg_count - routing_failed))
 
               if [ $routing_failed -eq 0 ]; then
-                echo "✓ Successfully routed $pkg_count packages"
+                echo "✓ Successfully routed all $pkg_count $channel packages"
               else
                 echo "❌ Failed to route $routing_failed/$pkg_count packages"
                 exit 1
