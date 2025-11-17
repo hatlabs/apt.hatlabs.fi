@@ -125,8 +125,9 @@ jobs:
         TARGET_REPO="${{ steps.payload.outputs.target_repo }}"
         CHANNEL="${{ steps.payload.outputs.channel }}"
 
-        # Source suffix parsing functions
-        source scripts/suffix-parsing-functions.sh
+        # Source helper functions (fail fast if missing)
+        source scripts/suffix-parsing-functions.sh || { echo "❌ Failed to load suffix parsing functions"; exit 1; }
+        source scripts/routing-functions.sh || { echo "❌ Failed to load routing functions"; exit 1; }
 
         # Function to download packages from a repository
         download_from_repo() {
@@ -302,18 +303,29 @@ EOF
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
 
-        # Copy new packages to distribution-specific pool (targeted mode only)
-        # In full rebuild mode, packages are already in their distribution pools
-        if [ "$MODE" = "targeted" ]; then
-          if ls packages/*.deb 1> /dev/null 2>&1; then
-            mkdir -p "apt-repo/pool/$TARGET_DIST/main"
-            cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
-            echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
+        # Route packages based on metadata
+        # Both targeted and full rebuild modes now use metadata-driven routing
+        if ls packages/*.deb 1> /dev/null 2>&1; then
+          echo "=== Routing packages via metadata ==="
+          routing_failed=0
+          for pkg in packages/*.deb; do
+            echo "Routing: $(basename "$pkg")"
+            if ! route_package "$pkg" "$CHANNEL"; then
+              echo "❌ Failed to route $(basename "$pkg")"
+              routing_failed=$((routing_failed + 1))
+            fi
+          done
+          pkg_count=$(ls packages/*.deb | wc -l)
+          routed_count=$((pkg_count - routing_failed))
+
+          if [ $routing_failed -eq 0 ]; then
+            echo "✓ Successfully routed $pkg_count packages"
           else
-            echo "No new .deb packages to copy"
+            echo "❌ Failed to route $routing_failed/$pkg_count packages"
+            exit 1
           fi
         else
-          echo "Full rebuild mode: packages already in distribution-specific pools"
+          echo "ℹ No packages to route"
         fi
 
         cd apt-repo
