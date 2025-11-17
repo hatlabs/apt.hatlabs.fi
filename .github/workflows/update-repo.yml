@@ -6,9 +6,6 @@ on:
   workflow_dispatch:          # Manual trigger
   schedule:
     - cron: '0 6 * * *'        # Daily rebuild
-  push:
-    branches:
-      - main                   # Trigger on push to main branch
 
 jobs:
   update-apt-repo:
@@ -228,11 +225,33 @@ jobs:
           download_from_repo "$TARGET_REPO" "$RELEASE_TAG"
         else
           echo "=== Full Rebuild Mode ==="
-          # Download from all repositories (stable channel only for full rebuild)
-          echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
-            if [ -n "$repo" ]; then
-              download_from_repo "$repo" "latest"
+          echo "Processing each distribution separately..."
+
+          # Iterate through each distribution and determine appropriate release type
+          for dist in ${{ steps.payload.outputs.all_distributions }}; do
+            # Determine channel from distribution name
+            if [[ "$dist" == *"-unstable"* ]] || [[ "$dist" == "unstable" ]]; then
+              DIST_CHANNEL="unstable"
+              RELEASE_TAG="prerelease"
+            else
+              DIST_CHANNEL="stable"
+              RELEASE_TAG="latest"
             fi
+
+            echo ""
+            echo "--- Distribution: $dist (channel: $DIST_CHANNEL, release: $RELEASE_TAG) ---"
+
+            # Set target distribution for this iteration
+            export TARGET_DIST="$dist"
+
+            # Download packages for all repositories into this distribution's pool
+            echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
+              if [ -n "$repo" ]; then
+                download_from_repo "$repo" "$RELEASE_TAG"
+              fi
+            done
+
+            unset TARGET_DIST
           done
         fi
 
@@ -340,22 +359,18 @@ jobs:
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
           echo "=== Full Rebuild Mode ==="
-          echo "Packages downloaded from all repositories are in pool/stable/main/"
-          echo "Building all distributions (stable will have packages, others initially empty)"
+          echo "Packages downloaded to distribution-specific pools"
+          echo "Building all distributions with their respective packages"
 
           # In full rebuild mode:
-          # - Downloaded packages are in pool/stable/main/ (Hat Labs products)
-          # - Build all distributions to ensure metadata exists
-          # - Only stable will have packages initially
-          # - Distribution-specific packages (bookworm/trixie) populate via targeted updates
+          # - Each distribution's packages were downloaded to pool/$dist/main/
+          # - Stable distributions get latest releases
+          # - Unstable distributions get pre-releases
+          # - Build all distributions with their packages
 
           for dist in ${{ steps.payload.outputs.all_distributions }}; do
             build_distribution "$dist" "main"
           done
-
-          echo ""
-          echo "Note: Distribution-specific packages (bookworm/trixie) are added via targeted"
-          echo "updates when package repositories build for those distributions."
         fi
 
         echo ""
