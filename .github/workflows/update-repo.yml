@@ -241,34 +241,50 @@ jobs:
             echo ""
             echo "--- Distribution: $dist (channel: $DIST_CHANNEL, release: $RELEASE_TAG) ---"
 
-            # Set target distribution for this iteration
-            export TARGET_DIST="$dist"
+            # Clean packages directory for this distribution
+            rm -rf packages/*
+            mkdir -p packages
 
-            # Download packages for all repositories into this distribution's pool
+            # Download packages for all repositories
             echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
               if [ -n "$repo" ]; then
                 download_from_repo "$repo" "$RELEASE_TAG"
               fi
             done
 
-            unset TARGET_DIST
+            # Copy downloaded packages to this distribution's pool
+            if ls packages/*.deb 1> /dev/null 2>&1; then
+              mkdir -p "apt-repo/pool/$dist/main"
+              cp packages/*.deb "apt-repo/pool/$dist/main/"
+              echo "✓ Copied $(ls packages/*.deb | wc -l) packages to $dist pool"
+            else
+              echo "ℹ No packages downloaded for $dist"
+            fi
           done
+
+          # Clean up packages directory after full rebuild
+          rm -rf packages/*
         fi
 
-        echo "=== Downloaded packages ==="
-        ls -la packages/ || echo "No packages downloaded"
+        echo "=== Full rebuild completed ==="
     - name: Build APT repository structure
       run: |
         MODE="${{ steps.payload.outputs.mode }}"
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
 
-        # Copy new packages to distribution-specific pool
-        if ls packages/*.deb 1> /dev/null 2>&1; then
-          cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
-          echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
+        # Copy new packages to distribution-specific pool (targeted mode only)
+        # In full rebuild mode, packages are already in their distribution pools
+        if [ "$MODE" = "targeted" ]; then
+          if ls packages/*.deb 1> /dev/null 2>&1; then
+            mkdir -p "apt-repo/pool/$TARGET_DIST/main"
+            cp packages/*.deb "apt-repo/pool/$TARGET_DIST/main/"
+            echo "Copied $(ls packages/*.deb | wc -l) packages to $TARGET_DIST pool"
+          else
+            echo "No new .deb packages to copy"
+          fi
         else
-          echo "No new .deb packages to copy"
+          echo "Full rebuild mode: packages already in distribution-specific pools"
         fi
 
         cd apt-repo
@@ -359,14 +375,14 @@ jobs:
           build_distribution "$TARGET_DIST" "$COMPONENT"
         else
           echo "=== Full Rebuild Mode ==="
-          echo "Packages downloaded to distribution-specific pools"
           echo "Building all distributions with their respective packages"
 
           # In full rebuild mode:
-          # - Each distribution's packages were downloaded to pool/$dist/main/
-          # - Stable distributions get latest releases
-          # - Unstable distributions get pre-releases
-          # - Build all distributions with their packages
+          # - Each distribution's packages were downloaded in the Download step
+          # - Packages are already in distribution-specific pools (pool/$dist/main/)
+          # - Stable distributions got latest releases
+          # - Unstable distributions got pre-releases
+          # - Now build metadata for all distributions
 
           for dist in ${{ steps.payload.outputs.all_distributions }}; do
             build_distribution "$dist" "main"
