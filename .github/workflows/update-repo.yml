@@ -125,6 +125,9 @@ jobs:
         TARGET_REPO="${{ steps.payload.outputs.target_repo }}"
         CHANNEL="${{ steps.payload.outputs.channel }}"
 
+        # Source suffix parsing functions
+        source scripts/suffix-parsing-functions.sh
+
         # Function to download packages from a repository
         download_from_repo() {
           local repo=$1
@@ -187,15 +190,41 @@ jobs:
                 architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null)
 
                 if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
+                  # Parse suffix from original filename
+                  parse_package_suffix "$name" pkg_distro pkg_component
+                  if [ $? -eq 0 ]; then
+                    echo "  ✓ Parsed suffix: distro=$pkg_distro, component=$pkg_component"
+                    # Validate parsed values
+                    if ! validate_suffix "$pkg_distro" "$pkg_component"; then
+                      echo "  ⚠️  Using fallback: distro=any, component=main"
+                      pkg_distro="any"
+                      pkg_component="main"
+                    fi
+                  else
+                    echo "  No suffix found, using defaults: distro=$pkg_distro, component=$pkg_component"
+                  fi
+
                   # Create canonical filename
                   correct_filename="${package_name}_${actual_version}_${architecture}.deb"
                   final_path="packages/$correct_filename"
 
                   mv "$temp_file" "$final_path"
 
+                  # Store metadata for routing (used by later issues #30, #32)
+                  cat > "${final_path}.meta" <<EOF
+package=$package_name
+version=$actual_version
+architecture=$architecture
+distro=$pkg_distro
+component=$pkg_component
+original_filename=$name
+EOF
+
                   echo "  Package: $package_name"
                   echo "  Version: $actual_version"
                   echo "  Architecture: $architecture"
+                  echo "  Distro: $pkg_distro"
+                  echo "  Component: $pkg_component"
                   echo "  Filename: $correct_filename"
                 else
                   echo "  ⚠️  Could not extract package metadata, keeping original filename"
