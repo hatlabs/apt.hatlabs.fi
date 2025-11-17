@@ -103,7 +103,7 @@ METAEOF
 }
 
 # ============================================================================
-# Test 1: Full rebuild with mixed package types
+# Test 1: Full rebuild with mixed package types - routing prevents cross-pollution
 # ============================================================================
 test_case "Full rebuild mode: trixie-specific pkg should NOT appear in bookworm"
 
@@ -111,48 +111,43 @@ mkdir -p "$TEST_DIR/packages"
 mkdir -p "$TEST_DIR/apt-repo"
 cd "$TEST_DIR"
 
-# Create test packages
+# Create test packages with different distros
 create_test_package "signalk" "2.17.2-1" "all" "trixie" "main"
 create_test_package "cockpit-apt" "0.2.0-1" "all" "bookworm" "main"
 
-echo "Scenario: Full rebuild processes trixie-stable channel"
-echo "- signalk is trixie-specific"
-echo "- cockpit-apt is bookworm-specific"
+echo "Testing: Distribution-specific routing prevents cross-pollution"
 echo ""
-echo "Problem: Full rebuild naively copies all downloaded packages to the distribution being processed"
-echo "Result: Both packages end up in trixie-stable (WRONG)"
+echo "Packages:"
+echo "  - signalk: distro=trixie, component=main"
+echo "  - cockpit-apt: distro=bookworm, component=main"
 echo ""
 
-# Simulate what the current full rebuild does (WRONG):
-mkdir -p "$TEST_DIR/apt-repo/pool/trixie-stable/main"
-cp "$TEST_DIR/packages"/*.deb "$TEST_DIR/apt-repo/pool/trixie-stable/main/"
-
-# What we expect: signalk should be there, cockpit-apt should NOT
-assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/main/signalk_2.17.2-1_all.deb" \
-  "signalk_trixie is correctly in trixie-stable"
-
-assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/main/cockpit-apt_0.2.0-1_all.deb" \
-  "cockpit-apt_bookworm is IN trixie-stable (WRONG - this is the bug)"
-
-# What should happen with correct routing:
-echo ""
-echo "With correct routing:"
-
-rm -rf "$TEST_DIR/apt-repo"
-mkdir -p "$TEST_DIR/apt-repo"
-
-# Use the route_package function properly
+# Use the route_package function to route based on metadata
 route_package "$TEST_DIR/packages/signalk_2.17.2-1_all.deb" "stable" "$TEST_DIR"
 route_package "$TEST_DIR/packages/cockpit-apt_0.2.0-1_all.deb" "stable" "$TEST_DIR"
 
+# Verify correct routing: each package appears ONLY in its target distribution
 assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/main/signalk_2.17.2-1_all.deb" \
-  "signalk is in trixie-stable (CORRECT)"
+  "signalk correctly routed to trixie-stable/main"
 
 assert_file_exists "$TEST_DIR/apt-repo/pool/bookworm-stable/main/cockpit-apt_0.2.0-1_all.deb" \
-  "cockpit-apt is in bookworm-stable (CORRECT)"
+  "cockpit-apt correctly routed to bookworm-stable/main"
 
 assert_file_not_exists "$TEST_DIR/apt-repo/pool/trixie-stable/main/cockpit-apt_0.2.0-1_all.deb" \
-  "cockpit-apt is NOT in trixie-stable (CORRECT)"
+  "cockpit-apt is NOT incorrectly in trixie-stable (correct isolation)"
+
+assert_file_not_exists "$TEST_DIR/apt-repo/pool/bookworm-stable/main/signalk_2.17.2-1_all.deb" \
+  "signalk is NOT incorrectly in bookworm-stable (correct isolation)"
+
+# Count total files to verify no unintended copies
+pkg_count=$(find "$TEST_DIR/apt-repo" -name "*.deb" | wc -l)
+if [ "$pkg_count" -eq 2 ]; then
+  echo -e "${GREEN}✓ PASS${NC}: Exactly 2 packages in pools (no cross-distribution copies)"
+  TESTS_PASSED=$((TESTS_PASSED + 1))
+else
+  echo -e "${RED}✗ FAIL${NC}: Expected 2 packages in pools, found $pkg_count"
+  TESTS_FAILED=$((TESTS_FAILED + 1))
+fi
 
 # ============================================================================
 # Test 2: distro=any should expand across all distributions

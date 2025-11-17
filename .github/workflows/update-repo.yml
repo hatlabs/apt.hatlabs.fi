@@ -362,9 +362,15 @@ EOF
           local comp_path="$dist_path/$component"
           local pool_path="pool/$dist/$component"
 
-          # Only build if pool directory exists and has packages
+          # Check if pool directory exists
           if [ ! -d "$pool_path" ]; then
-            echo "ℹ No packages in pool/$dist/$component - skipping"
+            echo "ℹ Pool directory pool/$dist/$component does not exist - skipping"
+            return 0
+          fi
+
+          # Check if pool has any .deb packages
+          if ! ls "$pool_path"/*.deb 1>/dev/null 2>&1; then
+            echo "ℹ No .deb packages in pool/$dist/$component - skipping"
             return 0
           fi
 
@@ -394,17 +400,21 @@ EOF
 
           local dist_path="dists/$dist"
 
-          # Find all components in this distribution
+          # Find components that have been built (have Packages files)
+          # Only include known components (main, hatlabs) to prevent including temporary directories
           local components=""
-          for comp_dir in "$dist_path"/*; do
-            if [ -d "$comp_dir" ]; then
-              local comp=$(basename "$comp_dir")
-              if [ "$comp" != "." ] && [ "$comp" != ".." ]; then
-                components="$components $comp"
-              fi
+          for comp in main hatlabs; do
+            if [ -f "$dist_path/$comp/binary-arm64/Packages" ] || [ -f "$dist_path/$comp/binary-all/Packages" ]; then
+              components="$components $comp"
             fi
           done
           components=$(echo "$components" | xargs)
+
+          # Validate we have at least one component
+          if [ -z "$components" ]; then
+            echo "⚠️  Warning: No components found for $dist (skipping Release file)"
+            return 0
+          fi
 
           # Determine suite and description based on distribution pattern
           if [[ "$dist" == "stable" ]]; then
