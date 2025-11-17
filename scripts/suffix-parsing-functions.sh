@@ -43,9 +43,11 @@ parse_package_suffix() {
     eval "$component_var=\"${BASH_REMATCH[2]}\""
     return 0
   else
-    # No suffix found - use defaults (backward compatibility)
+    # No suffix found - use defaults
+    # Temporary: default to hatlabs component to avoid breaking production stable/main
+    # Once all packages have proper distro+component suffixes, this will change to main
     eval "$distro_var=\"any\""
-    eval "$component_var=\"main\""
+    eval "$component_var=\"hatlabs\""
     return 1
   fi
 }
