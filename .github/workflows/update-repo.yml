@@ -186,19 +186,13 @@ jobs:
                 echo "✓ Downloaded $name"
 
                 # Extract package metadata (using || true to prevent script exit on missing fields)
-                echo "  DEBUG: Extracting metadata..."
                 actual_version=$(dpkg-deb --field "$temp_file" Version 2>/dev/null || true)
-                echo "  DEBUG: Got version: ${actual_version:-<empty>}"
                 package_name=$(dpkg-deb --field "$temp_file" Package 2>/dev/null || true)
-                echo "  DEBUG: Got package name: ${package_name:-<empty>}"
                 architecture=$(dpkg-deb --field "$temp_file" Architecture 2>/dev/null || true)
-                echo "  DEBUG: Got architecture: ${architecture:-<empty>}"
 
                 if [ -n "$actual_version" ] && [ -n "$package_name" ] && [ -n "$architecture" ]; then
                   # Parse suffix from original filename
-                  echo "  DEBUG: Parsing suffix for $name..."
                   parse_package_suffix "$name" pkg_distro pkg_component
-                  echo "  DEBUG: Suffix parsing returned $?"
                   if [ $? -eq 0 ]; then
                     echo "  ✓ Parsed suffix: distro=$pkg_distro, component=$pkg_component"
                     # Validate parsed values
@@ -284,14 +278,9 @@ jobs:
             echo "${{ steps.discover.outputs.repos }}" | while IFS= read -r repo; do
               if [ -n "$repo" ]; then
                 # Re-source in subshell for access to SUPPORTED_DISTROS and functions
-                echo "  DEBUG: Sourcing helper functions..."
                 source scripts/suffix-parsing-functions.sh || { echo "❌ Failed to load suffix parsing functions"; exit 1; }
-                echo "  DEBUG: Sourced suffix-parsing-functions.sh"
                 source scripts/routing-functions.sh || { echo "❌ Failed to load routing functions"; exit 1; }
-                echo "  DEBUG: Sourced routing-functions.sh"
-                echo "  DEBUG: About to call download_from_repo for $repo..."
                 download_from_repo "$repo" "$RELEASE_TAG"
-                echo "  DEBUG: Completed download_from_repo for $repo"
               fi
             done
 
