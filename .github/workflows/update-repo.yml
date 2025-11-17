@@ -255,23 +255,20 @@ EOF
           download_from_repo "$TARGET_REPO" "$RELEASE_TAG"
         else
           echo "=== Full Rebuild Mode ==="
-          echo "Processing each distribution separately..."
+          echo "Downloading all packages and routing based on metadata..."
 
-          # Iterate through each distribution and determine appropriate release type
-          for dist in ${{ steps.payload.outputs.all_distributions }}; do
-            # Determine channel from distribution name
-            if [[ "$dist" == *"-unstable"* ]] || [[ "$dist" == "unstable" ]]; then
-              DIST_CHANNEL="unstable"
+          # Download stable and unstable packages separately
+          for channel in stable unstable; do
+            if [ "$channel" = "unstable" ]; then
               RELEASE_TAG="prerelease"
             else
-              DIST_CHANNEL="stable"
               RELEASE_TAG="latest"
             fi
 
             echo ""
-            echo "--- Distribution: $dist (channel: $DIST_CHANNEL, release: $RELEASE_TAG) ---"
+            echo "--- Downloading $channel packages (release: $RELEASE_TAG) ---"
 
-            # Clean packages directory for this distribution
+            # Clean packages directory
             rm -rf packages/*
             mkdir -p packages
 
@@ -282,13 +279,28 @@ EOF
               fi
             done
 
-            # Copy downloaded packages to this distribution's pool
+            # Route downloaded packages based on their metadata
+            # This handles distro expansion and component routing
             if ls packages/*.deb 1> /dev/null 2>&1; then
-              mkdir -p "apt-repo/pool/$dist/main"
-              cp packages/*.deb "apt-repo/pool/$dist/main/"
-              echo "✓ Copied $(ls packages/*.deb | wc -l) packages to $dist pool"
+              echo "Routing $channel packages to appropriate distributions..."
+              routing_failed=0
+              for pkg in packages/*.deb; do
+                if ! route_package "$pkg" "$channel"; then
+                  echo "❌ Failed to route $(basename "$pkg")"
+                  routing_failed=$((routing_failed + 1))
+                fi
+              done
+              pkg_count=$(ls packages/*.deb | wc -l)
+              routed_count=$((pkg_count - routing_failed))
+
+              if [ $routing_failed -eq 0 ]; then
+                echo "✓ Successfully routed $pkg_count packages"
+              else
+                echo "❌ Failed to route $routing_failed/$pkg_count packages"
+                exit 1
+              fi
             else
-              echo "ℹ No packages downloaded for $dist"
+              echo "ℹ No packages downloaded for $channel"
             fi
           done
 
@@ -302,36 +314,45 @@ EOF
         MODE="${{ steps.payload.outputs.mode }}"
         TARGET_DIST="${{ steps.payload.outputs.distribution }}"
         COMPONENT="${{ steps.payload.outputs.component }}"
+        CHANNEL="${{ steps.payload.outputs.channel }}"
 
-        # Route packages based on metadata
-        # Both targeted and full rebuild modes now use metadata-driven routing
-        if ls packages/*.deb 1> /dev/null 2>&1; then
-          echo "=== Routing packages via metadata ==="
-          routing_failed=0
-          for pkg in packages/*.deb; do
-            echo "Routing: $(basename "$pkg")"
-            if ! route_package "$pkg" "$CHANNEL"; then
-              echo "❌ Failed to route $(basename "$pkg")"
-              routing_failed=$((routing_failed + 1))
+        # Source helper functions
+        source scripts/suffix-parsing-functions.sh
+        source scripts/routing-functions.sh
+
+        # Route packages based on metadata (targeted mode only)
+        # In full rebuild mode, packages are already routed in the Download step
+        if [ "$MODE" = "targeted" ]; then
+          if ls packages/*.deb 1> /dev/null 2>&1; then
+            echo "=== Routing packages via metadata (Targeted mode) ==="
+            routing_failed=0
+            for pkg in packages/*.deb; do
+              echo "Routing: $(basename "$pkg")"
+              if ! route_package "$pkg" "$CHANNEL"; then
+                echo "❌ Failed to route $(basename "$pkg")"
+                routing_failed=$((routing_failed + 1))
+              fi
+            done
+            pkg_count=$(ls packages/*.deb | wc -l)
+            routed_count=$((pkg_count - routing_failed))
+
+            if [ $routing_failed -eq 0 ]; then
+              echo "✓ Successfully routed $pkg_count packages"
+            else
+              echo "❌ Failed to route $routing_failed/$pkg_count packages"
+              exit 1
             fi
-          done
-          pkg_count=$(ls packages/*.deb | wc -l)
-          routed_count=$((pkg_count - routing_failed))
-
-          if [ $routing_failed -eq 0 ]; then
-            echo "✓ Successfully routed $pkg_count packages"
           else
-            echo "❌ Failed to route $routing_failed/$pkg_count packages"
-            exit 1
+            echo "ℹ No packages to route"
           fi
         else
-          echo "ℹ No packages to route"
+          echo "=== Full Rebuild Mode: Packages already routed in Download step ==="
         fi
 
         cd apt-repo
 
-        # Function to build distribution metadata
-        build_distribution() {
+        # Function to build distribution metadata for a specific component
+        build_component() {
           local dist=$1
           local component=$2
 
@@ -339,6 +360,19 @@ EOF
 
           local dist_path="dists/$dist"
           local comp_path="$dist_path/$component"
+          local pool_path="pool/$dist/$component"
+
+          # Check if pool directory exists
+          if [ ! -d "$pool_path" ]; then
+            echo "ℹ Pool directory pool/$dist/$component does not exist - skipping"
+            return 0
+          fi
+
+          # Check if pool has any .deb packages
+          if ! ls "$pool_path"/*.deb 1>/dev/null 2>&1; then
+            echo "ℹ No .deb packages in pool/$dist/$component - skipping"
+            return 0
+          fi
 
           # Ensure directories exist
           mkdir -p "$comp_path/binary-arm64"
@@ -347,17 +381,40 @@ EOF
           # Generate Packages files for each architecture
           echo "Generating Packages files..."
 
-          # ARM64 packages - scan only this distribution's pool
-          dpkg-scanpackages -a arm64 "pool/$dist/" /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
+          # ARM64 packages - scan only this component's pool
+          dpkg-scanpackages -a arm64 "$pool_path" /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
           gzip -kf "$comp_path/binary-arm64/Packages"
 
-          # Architecture-independent packages - scan only this distribution's pool
-          dpkg-scanpackages -a all "pool/$dist/" /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
+          # Architecture-independent packages - scan only this component's pool
+          dpkg-scanpackages -a all "$pool_path" /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
           gzip -kf "$comp_path/binary-all/Packages"
 
-          # Generate Release file
-          echo "Generating Release file for $dist..."
-          cd "$dist_path"
+          echo "✓ Built $dist/$component"
+        }
+
+        # Function to build Release file for a distribution
+        build_release() {
+          local dist=$1
+
+          echo "=== Generating Release file for $dist ==="
+
+          local dist_path="dists/$dist"
+
+          # Find components that have been built (have Packages files)
+          # Only include known components (main, hatlabs) to prevent including temporary directories
+          local components=""
+          for comp in main hatlabs; do
+            if [ -f "$dist_path/$comp/binary-arm64/Packages" ] || [ -f "$dist_path/$comp/binary-all/Packages" ]; then
+              components="$components $comp"
+            fi
+          done
+          components=$(echo "$components" | xargs)
+
+          # Validate we have at least one component
+          if [ -z "$components" ]; then
+            echo "⚠️  Warning: No components found for $dist (skipping Release file)"
+            return 0
+          fi
 
           # Determine suite and description based on distribution pattern
           if [[ "$dist" == "stable" ]]; then
@@ -386,6 +443,8 @@ EOF
             DESC="Hat Labs APT Repository - $dist"
           fi
 
+          cd "$dist_path"
+
           cat > Release << EOF
         Origin: Hat Labs
         Label: Hat Labs APT Repository
@@ -393,7 +452,7 @@ EOF
         Codename: $CODENAME
         Version: 1.0
         Architectures: arm64 all
-        Components: $component
+        Components: $components
         Description: $DESC
         Date: $(date -Ru)
         EOF
@@ -407,26 +466,30 @@ EOF
           gpg --batch --yes --clear-sign -u $GPG_KEY_ID -o InRelease Release
 
           cd ../..
-          echo "✓ Built $dist/$component"
+          echo "✓ Generated Release file for $dist"
         }
 
         # Determine which distributions to build
         if [ "$MODE" = "targeted" ]; then
           echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
-          build_distribution "$TARGET_DIST" "$COMPONENT"
+          build_component "$TARGET_DIST" "$COMPONENT"
+          build_release "$TARGET_DIST"
         else
           echo "=== Full Rebuild Mode ==="
-          echo "Building all distributions with their respective packages"
+          echo "Building metadata for all distributions"
 
           # In full rebuild mode:
-          # - Each distribution's packages were downloaded in the Download step
-          # - Packages are already in distribution-specific pools (pool/$dist/main/)
-          # - Stable distributions got latest releases
-          # - Unstable distributions got pre-releases
-          # - Now build metadata for all distributions
+          # - Packages were routed by metadata in the Download step
+          # - Each distribution has both main and hatlabs components
+          # - Now build metadata for all components in all distributions
 
           for dist in ${{ steps.payload.outputs.all_distributions }}; do
-            build_distribution "$dist" "main"
+            # Build main component if it has packages
+            build_component "$dist" "main"
+            # Build hatlabs component if it has packages
+            build_component "$dist" "hatlabs"
+            # Build Release file for this distribution (includes all components)
+            build_release "$dist"
           done
         fi
 
@@ -472,11 +535,16 @@ EOF
         echo "Distribution Summary:"
 
         for dist in ${{ steps.payload.outputs.all_distributions }}; do
-          pkgfile="apt-repo/dists/$dist/main/binary-arm64/Packages"
-          if [ -f "$pkgfile" ]; then
-            count=$(grep -c '^Package:' "$pkgfile" 2>/dev/null || echo "0")
-            echo "  $dist: $count packages"
-          else
+          dist_has_packages=false
+          for component in main hatlabs; do
+            pkgfile="apt-repo/dists/$dist/$component/binary-arm64/Packages"
+            if [ -f "$pkgfile" ]; then
+              count=$(grep -c '^Package:' "$pkgfile" 2>/dev/null || echo "0")
+              echo "  $dist/$component: $count packages"
+              dist_has_packages=true
+            fi
+          done
+          if [ "$dist_has_packages" = false ]; then
             echo "  $dist: (not built this run)"
           fi
         done
