@@ -290,6 +290,9 @@ EOF
                 pkg_name=$(basename "$pkg")
                 meta_file="${pkg}.meta"
 
+                # Clear metadata variables from previous iteration to prevent variable pollution
+                unset distro component package version architecture original_filename
+
                 # Read distro and component from metadata for logging
                 if [ -f "$meta_file" ]; then
                   source "$meta_file" 2>/dev/null || {
@@ -301,7 +304,12 @@ EOF
                   # Log routing decision
                   if [ "$distro" = "any" ]; then
                     echo "  → $pkg_name (distro=any, component=$component)"
-                    echo "      Routes to: bookworm-${channel}/$component, trixie-${channel}/$component, forky-${channel}/$component"
+                    # Expand to all supported distributions
+                    targets_list=""
+                    for d in "${SUPPORTED_DISTROS[@]}"; do
+                      targets_list="$targets_list ${d}-${channel}/$component"
+                    done
+                    echo "      Routes to:$targets_list"
                     if [ "$component" = "hatlabs" ]; then
                       echo "      + Legacy: ${channel}/main"
                     fi
@@ -321,7 +329,7 @@ EOF
               routed_count=$((pkg_count - routing_failed))
 
               if [ $routing_failed -eq 0 ]; then
-                echo "✓ Successfully routed all $pkg_count packages"
+                echo "✓ Successfully routed all $pkg_count $channel packages"
               else
                 echo "❌ Failed to route $routing_failed/$pkg_count packages"
                 exit 1
