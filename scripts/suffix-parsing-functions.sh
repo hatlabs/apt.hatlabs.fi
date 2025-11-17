@@ -33,12 +33,12 @@ parse_package_suffix() {
 
   # Try to parse suffix: +distro+component.deb
   # Regex explanation:
-  # \+ - literal plus sign
+  # [+] - literal plus sign (character class for compatibility)
   # ([a-z]+) - capture group 1: one or more lowercase letters (distro)
-  # \+ - literal plus sign
+  # [+] - literal plus sign (character class for compatibility)
   # ([a-z]+) - capture group 2: one or more lowercase letters (component)
   # \.deb$ - ends with .deb
-  if [[ "$filename" =~ \+([a-z]+)\+([a-z]+)\.deb$ ]]; then
+  if [[ "$filename" =~ [+]([a-z]+)[+]([a-z]+)\.deb$ ]]; then
     eval "$distro_var=\"${BASH_REMATCH[1]}\""
     eval "$component_var=\"${BASH_REMATCH[2]}\""
     return 0

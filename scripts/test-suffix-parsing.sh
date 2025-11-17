@@ -160,5 +160,18 @@ else
   TESTS_FAILED=$((TESTS_FAILED + 1))
 fi
 
+# Test 14: Real package without suffix - debug symbol package
+# This was the package that was failing in the workflow
+test_case "Real package: halpid-dbgsym without suffix"
+parse_package_suffix "halpid-dbgsym_4.0.7_amd64.deb" distro component
+assert_equals "any" "$distro" "Should fallback to 'any' for package without suffix"
+assert_equals "main" "$component" "Should fallback to 'main' for package without suffix"
+
+# Test 15: Real package with suffix - ensures regex still works
+test_case "Real package with suffix: cockpit-apt"
+parse_package_suffix "cockpit-apt_0.1.0_all+any+main.deb" distro component
+assert_equals "any" "$distro" "Should extract 'any' distro"
+assert_equals "main" "$component" "Should extract 'main' component"
+
 # Print summary
 print_summary
