@@ -4,31 +4,31 @@ Suite: bookworm-stable
 Codename: bookworm
 Version: 1.0
 Architectures: arm64 all
-Components: main
+Components: hatlabs
 Description: Halos packages for Debian Bookworm (stable)
-Date: Mon, 17 Nov 2025 14:37:24 +0000
-Date: Mon, 17 Nov 2025 14:37:24 +0000
+Date: Mon, 17 Nov 2025 14:54:37 +0000
+Date: Mon, 17 Nov 2025 14:54:37 +0000
 MD5Sum:
- bbea08ef837a634b8d3ecb14fdc0137a              278 Release
- d222a93b47cc9e7b9418e5a5ab4f91fc             3770 main/binary-all/Packages
- a6f9e55d947c8821190f73c78e3055bb             1604 main/binary-all/Packages.gz
- e2bc91ecaf44dcd90bbddbdf2fa18a72             5571 main/binary-arm64/Packages
- d728d42cb2f3eff1bb5c7a886ae3cd60             2402 main/binary-arm64/Packages.gz
+ c52cd39895a9ae9067c586a994e71217              281 Release
+ 598ba4e551df1b4afc7eac15ecaf7f2c             3782 hatlabs/binary-all/Packages
+ 37a9d647e34d34c0dc74aee589710e13             1603 hatlabs/binary-all/Packages.gz
+ e72cb6804426ec5126e48e64902276a2             5589 hatlabs/binary-arm64/Packages
+ 35e5a8c8ba5396763a17d1932b500c05             2401 hatlabs/binary-arm64/Packages.gz
 SHA1:
- 5fef0b0eb1045beed60204552d4bff4397148e03              278 Release
- 84bd5e3939a52373dbdd7ab83967025fc5fb92a2             3770 main/binary-all/Packages
- 5f6412c6b97369d80635d1126cd07e5677ae0d66             1604 main/binary-all/Packages.gz
- 912f3845afaf0eaee10a2504f9004997de0e9c74             5571 main/binary-arm64/Packages
- 134c2c1b241e0be656295cc8c7c7935d33176618             2402 main/binary-arm64/Packages.gz
+ a1391d552d33f64a25a217359a7f40bf8f91298a              281 Release
+ 5ca72be1e4d13fadc79954f7b688cb0f733f72d3             3782 hatlabs/binary-all/Packages
+ 40d11329223a6dd784cb209d11c975574cb03c1e             1603 hatlabs/binary-all/Packages.gz
+ cc64f56cb0f7f2401647cbb6b34f37f6b6c127ec             5589 hatlabs/binary-arm64/Packages
+ 2bc3bece4c7474029d8faacf218f9e804dd7ec46             2401 hatlabs/binary-arm64/Packages.gz
 SHA256:
- 743165ddd62d0f003f630df1b3442aa5ea999993bc78e8cc424a0f3305ebdd7c              278 Release
- 4bd544d92c5b44aab2c43e0fe92ca701cfb242e237f88905e56c90416a59aaa3             3770 main/binary-all/Packages
- 56a832df846072ec03473bd0f7fbfd1a344a145106fb40c845d9592ac1562247             1604 main/binary-all/Packages.gz
- e4eb889446d77a4a98ab05281bee349970dea0d774b07ab1a9b9403156f0fcd1             5571 main/binary-arm64/Packages
- 603a63df44ea90631907620926327819934666df5743e5d5cd6284c656b4c6e8             2402 main/binary-arm64/Packages.gz
+ f46d19b99ae33d5c7a1acaf7a9e44a5193e1192c8dbcf5c2af3a7c131ebb1566              281 Release
+ 9503efbe6d7bf2398dcf9bf50cfbca718c2e279c4e082c48a10d6f9d7bfaa6e5             3782 hatlabs/binary-all/Packages
+ 72b5bada563fcb28df615e43676cf8c1207d855011f58565730edfdeecf86c5c             1603 hatlabs/binary-all/Packages.gz
+ 5d969778e0d34843d6545659e7f5faec303b8ee5e7079cd38d7f89907da0bcca             5589 hatlabs/binary-arm64/Packages
+ b92f13406d78c6ae58a7cf5b766ef159eacc7cd6da22cbb464c21674cd018b29             2401 hatlabs/binary-arm64/Packages.gz
 SHA512:
- f7251e38988894052f8b1dccab347ab995dd53a869ca5c75edc390fdea6bf9e98eb36738de56ef5aa5f85ae71e355eab4f6f0159ebaa3da1bb30778ac96d6e70              278 Release
- 2464a17a92148cb7096742e6a2523d0f71a238a92ece41a2baeebeff6e906957b41e96d0b7ef18165ec2f1bb1e466f60ed5fe2f779f0dcb4062da1ee9f2c0086             3770 main/binary-all/Packages
- 3ba487d35f6d9bf1b90ebf0a47d3b50c9639c764b4db9f023cc060338b37ded922fed614653dcd8628b121044fa28abb36a10b31b5fc22b90d8bc191e7bcb2be             1604 main/binary-all/Packages.gz
- 9967128212eff083263c4c5ba465c6d641e971030731389998e816086e639d2646110d3743fde684c32d8a8165a043c873d6073469b52280b28fd56cd5716ad6             5571 main/binary-arm64/Packages
- 87f9f79ce50f0b7d26e20bfc62850e2c63d5ef3c438d5b5567a3885c3a1ef8d584252c1ee6ace0c4350b53ffae4ac5efbf8196c1d7e936b2e0c715ca059e79e8             2402 main/binary-arm64/Packages.gz
+ fe6289d15499041c5efac571fd87ddbb66df93f9606d837d925f22a08acf64d300d59b81d17cc1e06c5751b5be3ef61882f6147b43902da1500bd4bae5ccc865              281 Release
+ 2d90b423569e02d8456431eb4bd0b2807c95847ae87a3e959a4300067197116df21276767b02b536d0e642f65878dd3830e03e7e4e8617a045973accb0826b67             3782 hatlabs/binary-all/Packages
+ 696db0f0f14372b6df6b5f607f664d821c72f97f7dfc9cc1c258669805aff42d16bdd78ee2b65c7869057cc4483c4e612e50866ba28229c39ab676c868d3318b             1603 hatlabs/binary-all/Packages.gz
+ d9c1029b1d3a3552bfdee0674ff09eea60aeff082ad1799266201ee2f44d1b9a173176b1ed23996c8d8531b9d59acc8a7c251981b6ab545bf803652b4bf69979             5589 hatlabs/binary-arm64/Packages
+ a28feb05f7b44523eca00297fdacd261095860d9c393a7f174d3e89bbf31834ea1dd7ada9417497a2990a56c5c14a88a4541f8ca6a86d8d6dd4dfbe5e5f16f93             2401 hatlabs/binary-arm64/Packages.gz
