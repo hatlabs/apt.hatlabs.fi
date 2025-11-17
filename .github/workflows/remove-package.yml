@@ -147,16 +147,16 @@ jobs:
             ;;
         esac
 
-        cat > Release <<EOF
-Origin: Hat Labs
-Label: Hat Labs
-Suite: $SUITE
-Codename: $CODENAME
-Architectures: arm64 all
-Components: main
-Description: $DESCRIPTION
-Date: $(date -Ru)
-EOF
+        cat > Release <<-EOF
+        Origin: Hat Labs
+        Label: Hat Labs
+        Suite: $SUITE
+        Codename: $CODENAME
+        Architectures: arm64 all
+        Components: main
+        Description: $DESCRIPTION
+        Date: $(date -Ru)
+        EOF
 
         # Add checksums using apt-ftparchive
         apt-ftparchive release . >> Release
