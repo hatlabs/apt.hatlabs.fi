@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hat Labs APT Repository</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb"><a href="index.html">← Back to all distributions</a></div>
+        <header>
+            <h1><span class="emoji">🎩</span> Hat Labs APT Repository</h1>
+            <p class="subtitle">Debian packages for Hat Labs products and Halos operating system</p>
+        </header>
+
+        <div class="dist-section">
+            <div class="dist-card">
+                <h3>Trixie Unstable</h3>
+                <p class="dist-meta">1 packages</p>
+                <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <div class="package-list">
+                    <strong>Available Packages:</strong>
+                    <div class="package-item">
+                        <h4>cockpit-apt <span class="version">v0.2.0-1</span> <span class="arch-badge">all</span></h4>
+                        <p class="description">Modern APT package manager interface for Cockpit A web-based package manager interface for Cockpit that provides: - Browse packages by Debian section (games, web, development, etc.) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - View available package updates - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing APT packages through Cockpit&#x27;s web interface, designed for Debian and Ubuntu systems.</p>
+                        <div class="install-cmd">sudo apt install cockpit-apt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <h3>🔑 Repository Signing Key</h3>
+            <p>All packages are cryptographically signed for security.</p>
+            <p style="margin-top: 10px;">
+                Download: <a href="hat-labs-apt-key.asc">hat-labs-apt-key.asc</a><br>
+                Fingerprint: <code>3D853E2D7363406DAF542A53577177042AF756F2</code>
+            </p>
+        </div>
+
+        <footer>
+            <p>Last updated: 2025-11-18 10:34:06 UTC</p>
+            <p><a href="index.html">← Back to all distributions</a></p>
+            <p>🔒 This repository is cryptographically signed for security</p>
+        </footer>
+    </div>
+</body>
+</html>
