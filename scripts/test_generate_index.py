@@ -321,5 +321,90 @@ class TestMultiPageGeneration:
         assert 'Dist 2' not in html1
 
 
+class TestFullWorkflowIntegration:
+    """Integration tests for complete workflow with main() function."""
+
+    def test_main_generates_all_files(self, tmp_path):
+        """Test that main() generates all expected HTML and CSS files."""
+        import sys
+        from pathlib import Path
+
+        # Create mock apt-repo directory structure
+        repo_dir = tmp_path / "apt-repo"
+        dists_dir = repo_dir / "dists"
+        dists_dir.mkdir(parents=True)
+
+        # Create minimal distribution structure
+        for dist in ['stable', 'unstable', 'bookworm-stable', 'bookworm-unstable', 'trixie-stable', 'trixie-unstable']:
+            dist_path = dists_dir / dist / 'main' / 'binary-all'
+            dist_path.mkdir(parents=True)
+            # Create empty Packages file
+            (dist_path / 'Packages').touch()
+
+        # Mock sys.argv for argparse
+        original_argv = sys.argv
+        try:
+            sys.argv = [
+                'generate_index.py',
+                str(repo_dir),
+                '--gpg-fingerprint', 'TEST_FINGERPRINT_123'
+            ]
+
+            # Import and call main() function
+            import generate_index
+            result = generate_index.main()
+
+            # Check return code
+            assert result == 0, "main() should return 0 on success"
+
+            # Verify all expected files were generated
+            assert (repo_dir / 'index.html').exists(), "index.html should exist"
+            assert (repo_dir / 'styles.css').exists(), "styles.css should exist"
+
+            # Check distribution pages
+            for dist in ['stable', 'unstable', 'bookworm-stable', 'bookworm-unstable', 'trixie-stable', 'trixie-unstable']:
+                html_file = repo_dir / f'{dist}.html'
+                assert html_file.exists(), f"{dist}.html should exist"
+
+                # Verify each page has the CSS link
+                html_content = html_file.read_text()
+                assert 'styles.css' in html_content, f"{dist}.html should link to styles.css"
+                assert 'href="styles.css"' in html_content, f"{dist}.html should have proper stylesheet link"
+
+        finally:
+            sys.argv = original_argv
+
+    def test_css_file_has_required_styles(self, tmp_path):
+        """Test that generated CSS file contains required styles."""
+        import sys
+        import generate_index
+
+        repo_dir = tmp_path / "apt-repo"
+        dists_dir = repo_dir / "dists"
+        dists_dir.mkdir(parents=True)
+
+        original_argv = sys.argv
+        try:
+            sys.argv = [
+                'generate_index.py',
+                str(repo_dir),
+                '--gpg-fingerprint', 'TEST'
+            ]
+
+            generate_index.main()
+
+            css_file = repo_dir / 'styles.css'
+            css_content = css_file.read_text()
+
+            # Check for critical style classes
+            assert '.dist-card' in css_content, "CSS should have .dist-card style"
+            assert '.breadcrumb' in css_content, "CSS should have .breadcrumb style"
+            assert '.package-item' in css_content, "CSS should have .package-item style"
+            assert '@media' in css_content, "CSS should have responsive design rules"
+
+        finally:
+            sys.argv = original_argv
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

@@ -26,6 +26,155 @@ UNSTABLE_WARNING = '''
                 </div>
 '''
 
+CSS_CONTENT = '''* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: #f7fafc;
+    padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+header { margin-bottom: 40px; border-bottom: 3px solid #4299e1; padding-bottom: 20px; }
+h1 { color: #2d3748; font-size: 2.5em; margin-bottom: 10px; }
+h1 .emoji { font-style: normal; }
+.subtitle { color: #718096; font-size: 1.1em; }
+
+.info-box {
+    background: #ebf8ff;
+    border-left: 4px solid #4299e1;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 4px;
+}
+.info-box h3 { color: #2c5282; margin-bottom: 10px; }
+
+.warning-box {
+    background: #fef5e7;
+    border-left: 4px solid #f39c12;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.dist-section { margin: 40px 0; }
+.dist-section h2 {
+    color: #2d3748;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.dist-card {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+.dist-card h3 {
+    color: #2c5282;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.dist-card h3 a {
+    color: #2c5282;
+    text-decoration: none;
+}
+.dist-card h3 a:hover {
+    text-decoration: underline;
+}
+.dist-meta {
+    color: #718096;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+}
+.dist-desc {
+    margin-bottom: 20px;
+    color: #4a5568;
+}
+
+.command-block {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-family: "Monaco", "Courier New", monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.package-list { margin-top: 25px; }
+.package-item {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+.package-item h4 {
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+.package-item .version {
+    color: #718096;
+    font-size: 0.9em;
+    font-family: monospace;
+}
+.package-item .arch-badge {
+    display: inline-block;
+    background: #4299e1;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+.package-item .description {
+    color: #4a5568;
+    margin-top: 8px;
+    font-size: 0.95em;
+}
+
+.install-cmd {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+.breadcrumb a {
+    color: #4299e1;
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    color: #718096;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .container { padding: 20px; }
+    h1 { font-size: 2em; }
+    .command-block { font-size: 0.8em; }
+}
+'''
+
 
 @dataclass
 class Package:
@@ -272,6 +421,38 @@ def render_distribution_card(dist: Distribution) -> str:
     return ''.join(parts)
 
 
+def get_html_header(breadcrumb: str = '') -> str:
+    """Get HTML header with CSS link (shared stylesheet) and optional breadcrumb.
+
+    Args:
+        breadcrumb: Optional breadcrumb HTML to include before header
+
+    Returns:
+        HTML header with linked stylesheet
+    """
+    header = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hat Labs APT Repository</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">'''
+
+    if breadcrumb:
+        header += f'\n        {breadcrumb}'
+
+    header += '''
+        <header>
+            <h1><span class="emoji">🎩</span> Hat Labs APT Repository</h1>
+            <p class="subtitle">Debian packages for Hat Labs products and Halos operating system</p>
+        </header>
+'''
+    return header
+
+
 def render_main_index(distributions: List[Distribution], gpg_fingerprint: str) -> str:
     """Generate the main index page with distribution summary cards.
 
@@ -284,170 +465,8 @@ def render_main_index(distributions: List[Distribution], gpg_fingerprint: str) -
 
     html_parts = []
 
-    # HTML header
-    html_parts.append('''<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hat Labs APT Repository</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #2d3748;
-            background: #f7fafc;
-            padding: 20px;
-        }
-        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        header { margin-bottom: 40px; border-bottom: 3px solid #4299e1; padding-bottom: 20px; }
-        h1 { color: #2d3748; font-size: 2.5em; margin-bottom: 10px; }
-        h1 .emoji { font-style: normal; }
-        .subtitle { color: #718096; font-size: 1.1em; }
-
-        .info-box {
-            background: #ebf8ff;
-            border-left: 4px solid #4299e1;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-        .info-box h3 { color: #2c5282; margin-bottom: 10px; }
-
-        .warning-box {
-            background: #fef5e7;
-            border-left: 4px solid #f39c12;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-
-        .dist-section { margin: 40px 0; }
-        .dist-section h2 {
-            color: #2d3748;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dist-card {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .dist-card h3 {
-            color: #2c5282;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .dist-card h3 a {
-            color: #2c5282;
-            text-decoration: none;
-        }
-        .dist-card h3 a:hover {
-            text-decoration: underline;
-        }
-        .dist-meta {
-            color: #718096;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-        }
-        .dist-desc {
-            margin-bottom: 20px;
-            color: #4a5568;
-        }
-
-        .command-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            font-family: "Monaco", "Courier New", monospace;
-            font-size: 0.9em;
-            overflow-x: auto;
-            white-space: pre;
-        }
-
-        .package-list { margin-top: 25px; }
-        .package-item {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-        .package-item h4 {
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-        .package-item .version {
-            color: #718096;
-            font-size: 0.9em;
-            font-family: monospace;
-        }
-        .package-item .arch-badge {
-            display: inline-block;
-            background: #4299e1;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-left: 8px;
-        }
-        .package-item .description {
-            color: #4a5568;
-            margin-top: 8px;
-            font-size: 0.95em;
-        }
-
-        .install-cmd {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-family: monospace;
-            font-size: 0.9em;
-        }
-
-        .breadcrumb {
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
-        .breadcrumb a {
-            color: #4299e1;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #718096;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 20px; }
-            h1 { font-size: 2em; }
-            .command-block { font-size: 0.8em; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1><span class="emoji">🎩</span> Hat Labs APT Repository</h1>
-            <p class="subtitle">Debian packages for Hat Labs products and Halos operating system</p>
-        </header>
-''')
+    # HTML header with stylesheet link
+    html_parts.append(get_html_header())
 
     # Installation instructions
     html_parts.append(f'''
@@ -519,167 +538,11 @@ def render_distribution_page(dist: Distribution, gpg_fingerprint: str) -> str:
     """
     html_parts = []
 
-    # HTML header
-    html_parts.append('''<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hat Labs APT Repository</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #2d3748;
-            background: #f7fafc;
-            padding: 20px;
-        }
-        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        header { margin-bottom: 40px; border-bottom: 3px solid #4299e1; padding-bottom: 20px; }
-        h1 { color: #2d3748; font-size: 2.5em; margin-bottom: 10px; }
-        h1 .emoji { font-style: normal; }
-        .subtitle { color: #718096; font-size: 1.1em; }
+    # Breadcrumb navigation
+    breadcrumb = '<div class="breadcrumb"><a href="index.html">← Back to all distributions</a></div>'
 
-        .info-box {
-            background: #ebf8ff;
-            border-left: 4px solid #4299e1;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-        .info-box h3 { color: #2c5282; margin-bottom: 10px; }
-
-        .warning-box {
-            background: #fef5e7;
-            border-left: 4px solid #f39c12;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-
-        .dist-section { margin: 40px 0; }
-        .dist-section h2 {
-            color: #2d3748;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dist-card {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .dist-card h3 {
-            color: #2c5282;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .dist-meta {
-            color: #718096;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-        }
-        .dist-desc {
-            margin-bottom: 20px;
-            color: #4a5568;
-        }
-
-        .command-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            font-family: "Monaco", "Courier New", monospace;
-            font-size: 0.9em;
-            overflow-x: auto;
-            white-space: pre;
-        }
-
-        .package-list { margin-top: 25px; }
-        .package-item {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-        .package-item h4 {
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-        .package-item .version {
-            color: #718096;
-            font-size: 0.9em;
-            font-family: monospace;
-        }
-        .package-item .arch-badge {
-            display: inline-block;
-            background: #4299e1;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-left: 8px;
-        }
-        .package-item .description {
-            color: #4a5568;
-            margin-top: 8px;
-            font-size: 0.95em;
-        }
-
-        .install-cmd {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-family: monospace;
-            font-size: 0.9em;
-        }
-
-        .breadcrumb {
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
-        .breadcrumb a {
-            color: #4299e1;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #718096;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 20px; }
-            h1 { font-size: 2em; }
-            .command-block { font-size: 0.8em; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">← Back to all distributions</a>
-        </div>
-
-        <header>
-            <h1><span class="emoji">🎩</span> Hat Labs APT Repository</h1>
-            <p class="subtitle">Debian packages for Hat Labs products and Halos operating system</p>
-        </header>
-''')
+    # HTML header with stylesheet link and breadcrumb
+    html_parts.append(get_html_header(breadcrumb))
 
     # Distribution card with all details
     html_parts.append('\n        <div class="dist-section">')
@@ -935,6 +798,21 @@ sudo apt update</div>
     return ''.join(html_parts)
 
 
+def write_shared_css(output_dir: Path) -> None:
+    """Write shared CSS file to output directory for all pages.
+
+    This enables browser caching and reduces page sizes by not duplicating
+    CSS in every HTML file.
+    """
+    css_file = output_dir / 'styles.css'
+    try:
+        css_file.write_text(CSS_CONTENT, encoding='utf-8')
+        print(f"✓ Generated {css_file}")
+    except OSError as e:
+        print(f"Error: Failed to write CSS file: {e}", file=sys.stderr)
+        raise
+
+
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description='Generate APT repository index pages')
@@ -973,6 +851,9 @@ def main():
             print(f"✓ Generated {output_file}")
         else:
             # Multi-page: generate main index + distribution pages
+
+            # Write shared CSS file (used by all pages)
+            write_shared_css(output_dir)
 
             # Generate main index
             main_html = render_main_index(distributions, args.gpg_fingerprint)

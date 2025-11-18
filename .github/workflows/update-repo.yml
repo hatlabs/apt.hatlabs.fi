@@ -607,12 +607,21 @@ jobs:
         echo "GPG_FINGERPRINT=$FINGERPRINT" >> $GITHUB_ENV
         echo "Key fingerprint: $FINGERPRINT"
 
+    - name: Install test dependencies
+      run: |
+        pip3 install pytest
+
+    - name: Run index generation tests
+      run: |
+        cd scripts
+        pytest test_generate_index.py -v
+
     - name: Generate repository index pages
       run: |
         set -e
         # Use Python script to generate multi-distribution index pages
         # Generates main index.html + individual pages for each distribution
-        python3 scripts/generate-index.py \
+        python3 scripts/generate_index.py \
           apt-repo \
           --gpg-fingerprint "$GPG_FINGERPRINT"
 
