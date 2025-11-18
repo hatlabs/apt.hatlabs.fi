@@ -193,7 +193,7 @@ The `stable/main` distribution must remain indefinitely to support existing HALP
 
 ### Architecture Support
 
-Current focus is on ARM architectures (arm64 only) and architecture-independent packages (all). x86_64 is not in scope.
+Current focus is on ARM architectures (arm64 and armhf) and architecture-independent packages (all). x86_64 is not in scope.
 
 ### Repository Signing
 

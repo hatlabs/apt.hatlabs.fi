@@ -147,6 +147,7 @@ jobs:
             echo "Creating distribution: $dist"
             mkdir -p "apt-repo/pool/$dist/main"
             mkdir -p "apt-repo/dists/$dist/main/binary-arm64"
+            mkdir -p "apt-repo/dists/$dist/main/binary-armhf"
             mkdir -p "apt-repo/dists/$dist/main/binary-all"
           done
         else
@@ -159,6 +160,7 @@ jobs:
           # Ensure target distribution directories exist (won't overwrite existing)
           mkdir -p "apt-repo/pool/$TARGET_DIST/$COMPONENT"
           mkdir -p "apt-repo/dists/$TARGET_DIST/$COMPONENT/binary-arm64"
+          mkdir -p "apt-repo/dists/$TARGET_DIST/$COMPONENT/binary-armhf"
           mkdir -p "apt-repo/dists/$TARGET_DIST/$COMPONENT/binary-all"
 
           echo "✓ Ensured $TARGET_DIST/$COMPONENT directories exist"
@@ -472,6 +474,7 @@ jobs:
 
           # Ensure directories exist
           mkdir -p "$comp_path/binary-arm64"
+          mkdir -p "$comp_path/binary-armhf"
           mkdir -p "$comp_path/binary-all"
 
           # Generate Packages files for each architecture
@@ -480,6 +483,10 @@ jobs:
           # ARM64 packages - scan only this component's pool
           dpkg-scanpackages -a arm64 "$pool_path" /dev/null > "$comp_path/binary-arm64/Packages" 2>/dev/null || touch "$comp_path/binary-arm64/Packages"
           gzip -kf "$comp_path/binary-arm64/Packages"
+
+          # ARMHF packages - scan only this component's pool
+          dpkg-scanpackages -a armhf "$pool_path" /dev/null > "$comp_path/binary-armhf/Packages" 2>/dev/null || touch "$comp_path/binary-armhf/Packages"
+          gzip -kf "$comp_path/binary-armhf/Packages"
 
           # Architecture-independent packages - scan only this component's pool
           dpkg-scanpackages -a all "$pool_path" /dev/null > "$comp_path/binary-all/Packages" 2>/dev/null || touch "$comp_path/binary-all/Packages"
@@ -500,7 +507,7 @@ jobs:
           # Only include known components (main, hatlabs) to prevent including temporary directories
           local components=""
           for comp in main hatlabs; do
-            if [ -f "$dist_path/$comp/binary-arm64/Packages" ] || [ -f "$dist_path/$comp/binary-all/Packages" ]; then
+            if [ -f "$dist_path/$comp/binary-arm64/Packages" ] || [ -f "$dist_path/$comp/binary-armhf/Packages" ] || [ -f "$dist_path/$comp/binary-all/Packages" ]; then
               components="$components $comp"
             fi
           done
@@ -547,7 +554,7 @@ jobs:
         Suite: $SUITE
         Codename: $CODENAME
         Version: 1.0
-        Architectures: arm64 all
+        Architectures: arm64 armhf all
         Components: $components
         Description: $DESC
         Date: $(date -Ru)

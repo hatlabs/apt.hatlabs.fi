@@ -67,12 +67,18 @@ apt-repo/dists/trixie-stable/
 │   ├── binary-arm64/
 │   │   ├── Packages          # Packages in main component (arm64)
 │   │   └── Packages.gz
+│   ├── binary-armhf/
+│   │   ├── Packages          # Packages in main component (armhf)
+│   │   └── Packages.gz
 │   └── binary-all/
 │       ├── Packages          # Packages in main component (all architectures)
 │       └── Packages.gz
 └── hatlabs/
     ├── binary-arm64/
     │   ├── Packages          # Packages in hatlabs component (arm64)
+    │   └── Packages.gz
+    ├── binary-armhf/
+    │   ├── Packages          # Packages in hatlabs component (armhf)
     │   └── Packages.gz
     └── binary-all/
         ├── Packages          # Packages in hatlabs component (all architectures)
@@ -88,13 +94,17 @@ apt-repo/dists/trixie-stable/
 Example Release file excerpt:
 ```
 Components: main hatlabs
-Architectures: arm64 all
+Architectures: arm64 armhf all
 
 MD5Sum:
  <hash> 1234 main/binary-arm64/Packages
  <hash> 2345 main/binary-arm64/Packages.gz
- <hash> 3456 hatlabs/binary-arm64/Packages
- <hash> 4567 hatlabs/binary-arm64/Packages.gz
+ <hash> 3456 main/binary-armhf/Packages
+ <hash> 4567 main/binary-armhf/Packages.gz
+ <hash> 5678 hatlabs/binary-arm64/Packages
+ <hash> 6789 hatlabs/binary-arm64/Packages.gz
+ <hash> 7890 hatlabs/binary-armhf/Packages
+ <hash> 8901 hatlabs/binary-armhf/Packages.gz
 ```
 
 ## Using Components in APT

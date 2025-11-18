@@ -18,7 +18,7 @@ import html
 # Constants
 REPO_URL = 'https://apt.hatlabs.fi'
 KEYRING_PATH = '/usr/share/keyrings/hatlabs.gpg'
-SUPPORTED_ARCHITECTURES = ['arm64', 'all']
+SUPPORTED_ARCHITECTURES = ['arm64', 'armhf', 'all']
 
 UNSTABLE_WARNING = '''
                 <div class="warning-box">
@@ -332,9 +332,10 @@ def get_preferred_architecture(arch1: str, arch2: str) -> str:
     """Return the preferred architecture for display purposes.
 
     Prefers more specific architectures (arm64, armhf) over generic ones (all).
+    arm64 is preferred over armhf for display purposes.
     """
     # Define preference order (higher index = higher priority)
-    preference = {'all': 0, 'arm64': 1}
+    preference = {'all': 0, 'armhf': 1, 'arm64': 2}
 
     pref1 = preference.get(arch1, 1)  # Default to middle priority
     pref2 = preference.get(arch2, 1)
