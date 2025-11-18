@@ -607,14 +607,14 @@ jobs:
         echo "GPG_FINGERPRINT=$FINGERPRINT" >> $GITHUB_ENV
         echo "Key fingerprint: $FINGERPRINT"
 
-    - name: Generate repository index page
+    - name: Generate repository index pages
       run: |
         set -e
-        # Use Python script to generate multi-distribution index page
+        # Use Python script to generate multi-distribution index pages
+        # Generates main index.html + individual pages for each distribution
         python3 scripts/generate-index.py \
           apt-repo \
-          --gpg-fingerprint "$GPG_FINGERPRINT" \
-          --output apt-repo/index.html
+          --gpg-fingerprint "$GPG_FINGERPRINT"
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
