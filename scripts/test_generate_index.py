@@ -269,11 +269,12 @@ class TestMainIndex:
         assert 'TEST12345' in html
 
     def test_main_index_responsive_design(self, all_distributions):
-        """Main index should have responsive design styles."""
+        """Main index should have responsive design via external stylesheet."""
         html = render_main_index(all_distributions, 'ABC123')
-        # Should have CSS styles and responsive elements
-        assert '<style>' in html
-        assert 'media' in html or 'responsive' in html.lower()
+        # Should link to external stylesheet (CSS extracted to styles.css)
+        assert '<link rel="stylesheet" href="styles.css">' in html
+        # Should have viewport meta tag for responsive design
+        assert 'viewport' in html
 
 
 class TestMultiPageGeneration:
