@@ -25,33 +25,3 @@ Description: Modern APT package manager interface for Cockpit
  APT packages through Cockpit's web interface, designed for Debian
  and Ubuntu systems.
 
-Package: container-packaging-tools
-Version: 0.2.0-1
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 111
-Depends: python3-jinja2, python3-pydantic (>= 2.0), python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-1_all.deb
-Size: 21484
-MD5sum: b36e8e12acb52d93b117e828e5253eb2
-SHA1: a478166dac82998c9827069f98f8f3a7361a2074
-SHA256: 4359c4842ccc319563d16f4f99a9cdacf87e45712da8cdd853be64024532d460
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
