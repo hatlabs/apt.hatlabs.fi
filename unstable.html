@@ -16,11 +16,15 @@
 
         <div class="dist-section">
             <div class="dist-card">
-                <h3>Bookworm Stable</h3>
+                <h3>Unstable</h3>
                 <p class="dist-meta">0 packages</p>
-                <p class="dist-desc">Halos packages for Debian Bookworm (stable releases)</p>
+                <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
                 <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
                 <p style="color: #718096; font-style: italic;">No packages available yet.</p>
             </div>
         </div>
