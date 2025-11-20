@@ -26,16 +26,16 @@ Description: Modern APT package manager interface for Cockpit
  and Ubuntu systems.
 
 Package: container-packaging-tools
-Version: 0.2.0-1
+Version: 0.2.0-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 111
 Depends: python3-jinja2, python3-pydantic (>= 2.0), python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-1_all.deb
-Size: 21340
-MD5sum: 10c5b68601f0c9fbc46b6097c70bfee5
-SHA1: e77a3b2d66f3a7f4d5a5b43bd484f593388462a4
-SHA256: ea4d86114238ca6f2e0bc92afd5514ab1360f98b8f4e9d8361eb1c6c67e2ec6c
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-2_all.deb
+Size: 21372
+MD5sum: 588801796df1e406c9971440521612d8
+SHA1: 7d8ee0a6b20d2ad4b2b097089d94232deda836fe
+SHA256: 5ef612cd8df4469b27b7949f2cdeca625716e12e1153ba6934b28c71e7646735
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
