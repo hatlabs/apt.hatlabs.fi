@@ -55,17 +55,17 @@ Description: Modern APT package manager interface for Cockpit
  and Ubuntu systems.
 
 Package: cockpit-dockermanager
-Version: 1.0.7-2
+Version: 1.0.7-3
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 66
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-unstable/main/cockpit-dockermanager_1.0.7-2_all.deb
-Size: 15680
-MD5sum: 31bfdd457ffa180a1eb23ff04f7b99d8
-SHA1: 2adb569599f49d2704146e758dae877c11000e80
-SHA256: 2d9faf54434f68d1921a169c645d1f21caf2b4aeb4b988dae66e6ae4e4c7206a
+Filename: pool/trixie-unstable/main/cockpit-dockermanager_1.0.7-3_all.deb
+Size: 15720
+MD5sum: 36ff8e3b1387e3833b30ab7c6a68731a
+SHA1: 825bf2f29861830b048e89ec4b7223b3bd4e4924
+SHA256: c2a31916bd5188525b814761684cb6cf3510f756519efa0478e7fa00400c97e7
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
