@@ -108,16 +108,16 @@ Description: Data visualization and monitoring platform
 Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
 
 Package: halos
-Version: 0.1.0-1
+Version: 0.1.0-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
 Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-branding-halos
-Filename: pool/trixie-unstable/main/halos_0.1.0-1_all.deb
-Size: 2188
-MD5sum: 653ed23017874900ea18859eb6f5aba7
-SHA1: e27f58b7bec078464f6194e9b5f18b1213d4d05b
-SHA256: b30104b18357c3205ed27f5a3957d07bed4c3c8f4135561cd8a9b04a26972245
+Filename: pool/trixie-unstable/main/halos_0.1.0-2_all.deb
+Size: 2152
+MD5sum: 008d71c32b16297cc17b3e3c8e058158
+SHA1: b7e5d2459ff08ac10f1f5de963001a8e9c2c5a00
+SHA256: 8aac3ee35bcb6a3a128643b505b05d0fb562b6f8b683041ee9fbf251de6a254d
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -136,16 +136,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-marine
-Version: 0.1.0-1
+Version: 0.1.0-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-1), marine-container-store, signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-1_all.deb
-Size: 2208
-MD5sum: 9a00c6aaada179df0d22898978b82c8d
-SHA1: cb06aabbc24680fe092fe00faeef7a8621247e88
-SHA256: b5f53644062bee8434ad8690784b49dae58de3fbf6040cf125adde021dd13b72
+Depends: halos (>= 0.1.0-2), marine-container-store, signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-2_all.deb
+Size: 2168
+MD5sum: cecf4a47818fa1226cf51c1792b87c87
+SHA1: bdc5464d47c10a946bd2b8137317c82c716122c3
+SHA256: 1faa16228e528f41df98f5eab31a2702f7e8b66834e24be6018f81a5eace9482
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
