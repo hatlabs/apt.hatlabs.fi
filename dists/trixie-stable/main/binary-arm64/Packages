@@ -26,16 +26,16 @@ Description: Modern APT package manager interface for Cockpit
  and Ubuntu systems.
 
 Package: halos
-Version: 0.1.0-2
+Version: 0.1.0-3
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
 Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-branding-halos
-Filename: pool/trixie-stable/main/halos_0.1.0-2_all.deb
-Size: 2152
-MD5sum: 008d71c32b16297cc17b3e3c8e058158
-SHA1: b7e5d2459ff08ac10f1f5de963001a8e9c2c5a00
-SHA256: 8aac3ee35bcb6a3a128643b505b05d0fb562b6f8b683041ee9fbf251de6a254d
+Filename: pool/trixie-stable/main/halos_0.1.0-3_all.deb
+Size: 2160
+MD5sum: 8308ecffcc9b56d70567e73617b30a82
+SHA1: 5836905ba41498502705b7a0c5fdf22ab304cf77
+SHA256: af8b61472dff7c44ca357b7727e0c72e5da602542d7465333ae33ea5611e41de
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -54,16 +54,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-marine
-Version: 0.1.0-2
+Version: 0.1.0-3
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-2), marine-container-store, signalk-server-container
-Filename: pool/trixie-stable/main/halos-marine_0.1.0-2_all.deb
-Size: 2168
-MD5sum: cecf4a47818fa1226cf51c1792b87c87
-SHA1: bdc5464d47c10a946bd2b8137317c82c716122c3
-SHA256: 1faa16228e528f41df98f5eab31a2702f7e8b66834e24be6018f81a5eace9482
+Depends: halos (>= 0.1.0-3), marine-container-store, signalk-server-container
+Filename: pool/trixie-stable/main/halos-marine_0.1.0-3_all.deb
+Size: 2180
+MD5sum: 1f862aa20813278b5f3f3aea45c0e846
+SHA1: e287838865e98b2698fa2ee6e341524e3f337d36
+SHA256: 4823c48a0aa3df21473c4b1a19f8fa032a9d8c4b68855930a671b09570f4aadc
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
