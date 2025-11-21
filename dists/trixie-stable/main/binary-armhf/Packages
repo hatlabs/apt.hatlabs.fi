@@ -1,3 +1,30 @@
+Package: cockpit-apt
+Version: 0.2.0-6
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 13780
+Depends: cockpit (>= 276), python3-apt
+Filename: pool/trixie-stable/main/cockpit-apt_0.2.0-6_all.deb
+Size: 1378492
+MD5sum: 44a076f1b1705adc2fb75300a9b48f2c
+SHA1: e5cf7588f84a6f94ab4048908beaa6dd1d85d3eb
+SHA256: 08999e8aa65a5030bb39e7c9ee72c56e2521a7fa39d263aee4955fadccf1e312
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-apt
+Description: Modern APT package manager interface for Cockpit
+ A web-based package manager interface for Cockpit that provides:
+  - Browse packages by Debian section (games, web, development, etc.)
+  - Search and filter packages by name or description
+  - View detailed package information, dependencies, and file lists
+  - Install and remove packages with progress tracking
+  - View available package updates
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a modern, user-friendly interface for managing
+ APT packages through Cockpit's web interface, designed for Debian
+ and Ubuntu systems.
+
 Package: halos
 Version: 0.1.0-2
 Architecture: all
