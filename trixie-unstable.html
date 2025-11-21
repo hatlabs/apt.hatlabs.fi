@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">9 packages</p>
+                <p class="dist-meta">2 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -28,11 +28,6 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <div class="package-item">
-                        <h4>avnav-container <span class="version">v20240520-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Touch-optimized chart plotter for sailing and motor yachts AvNav is a navigation software specifically designed for touch operation on tablets and smartphones. It combines a chart plotter with routing capabilities and integration with marine electronics. . Features: - Touch-optimized web interface - Multiple chart format support (mbtiles, gemf, xml) - Route planning and navigation - AIS integration - Anchor watch functionality - NMEA data display and logging - Plugin system for extensions</p>
-                        <div class="install-cmd">sudo apt install avnav-container</div>
-                    </div>
-                    <div class="package-item">
                         <h4>cockpit-apt <span class="version">v0.2.0-4</span> <span class="arch-badge">all</span></h4>
                         <p class="description">Modern APT package manager interface for Cockpit A web-based package manager interface for Cockpit that provides: - Browse packages by Debian section (games, web, development, etc.) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - View available package updates - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing APT packages through Cockpit&#x27;s web interface, designed for Debian and Ubuntu systems.</p>
                         <div class="install-cmd">sudo apt install cockpit-apt</div>
@@ -41,36 +36,6 @@
                         <h4>cockpit-dockermanager <span class="version">v1.0.7-2</span> <span class="arch-badge">all</span></h4>
                         <p class="description">Cockpit plugin for Docker container management Docker Manager is a lightweight and intuitive utility designed to help you manage your Docker containers via a simplified web interface through Cockpit. . Features: * List, start, stop, search and restart containers * View container status, uptime, details and exposed ports * In-window terminal with individual container terminal functionality * Image management</p>
                         <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>container-packaging-tools <span class="version">v0.2.0-3</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Generate Debian packages from container application definitions container-packaging-tools is a command-line tool that converts simple container app definitions into full-fledged Debian packages. It eliminates the need for package maintainers to understand Debian packaging internals. . Features: - Template-based generation using Jinja2 - Input validation with JSON schemas - Consistent package structure across all apps - Support for Docker Compose orchestration - Systemd service integration . The tool reads docker-compose.yml, config.yml, and metadata.json from application directories and generates complete Debian package structures ready for building with dpkg-buildpackage.</p>
-                        <div class="install-cmd">sudo apt install container-packaging-tools</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>grafana-container <span class="version">v11.3.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Data visualization and monitoring platform Grafana is an open-source platform for monitoring and observability. Create beautiful dashboards to visualize marine data from InfluxDB, Signal K, and other data sources. . Features: - Rich visualization options (graphs, gauges, maps) - Multiple data source support - Alert notifications - Dashboard sharing and templating - Plugin ecosystem</p>
-                        <div class="install-cmd">sudo apt install grafana-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>influxdb-container <span class="version">v2.7.10-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Time-series database for marine data logging InfluxDB is a high-performance time-series database designed for handling large volumes of timestamped data. Perfect for marine applications to store and analyze historical data from Signal K, sensors, and other sources. . Features: - High-performance time-series data storage - Built-in web UI for data exploration - Powerful query language (Flux) - Retention policies for automatic data management - Integration with Grafana for visualization</p>
-                        <div class="install-cmd">sudo apt install influxdb-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>marine-container-store <span class="version">v0.1.0-3</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Marine container application store definition for Cockpit APT This package provides the store definition and branding for the Marine container application store, designed to work with cockpit-apt. . When installed alongside cockpit-apt, it enables a curated view of marine and sailing applications including navigation software, chart plotters, weather routing, data logging, and monitoring dashboards. . The store filters packages from apt.hatlabs.fi and other repositories based on Debian tags (debtags), sections, and package metadata.</p>
-                        <div class="install-cmd">sudo apt install marine-container-store</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>opencpn-container <span class="version">v5.10.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Open source chart plotter and navigation software OpenCPN is a free software project to create a concise chart plotter and navigation software for use as an underway or planning tool. Designed to be used at the helm station of your boat while underway. . Features: - Raster and vector chart support - AIS target tracking - GPS and autopilot integration - Weather routing and GRIB file support - Extensive plugin system - Route and waypoint management</p>
-                        <div class="install-cmd">sudo apt install opencpn-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>signalk-server-container <span class="version">v2.17.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Signal K server for marine data processing and routing Signal K is a modern and open data format for marine use. A Signal K server provides a central hub for collecting, processing, and distributing marine data from multiple sources including NMEA 0183, NMEA 2000, and other sensors. . Features: - WebSocket API for real-time data streaming - Data logging and historical playback - Web app server for marine applications - Plugin system for extending functionality - Instrument integration and display</p>
-                        <div class="install-cmd">sudo apt install signalk-server-container</div>
                     </div>
                 </div>
             </div>
@@ -85,7 +50,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-20 21:59:30 UTC</p>
+            <p>Last updated: 2025-11-21 06:07:34 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
