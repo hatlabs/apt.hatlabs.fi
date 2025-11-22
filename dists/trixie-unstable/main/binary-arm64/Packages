@@ -5,10 +5,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20240520-1_all.deb
-Size: 4968
-MD5sum: e6d538db1fbb52a40d05831abd8c4efb
-SHA1: 43de2a840294cb9c592734947bd186bfe94b5bff
-SHA256: 87186cafb9e4d81781257afe5939b97ddf5e49828b86cee4530c74f33288eb4d
+Size: 4980
+MD5sum: 2a3090c6b371177dc74acc88ac48119a
+SHA1: 10ee09f806e6ecc034b6a1e2c2f46c1cfb61ab8d
+SHA256: 1bc01ab7fd0815444371ddbb7eb26bf2cfdec51c1b107df5bc786dab4f123aa4
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -136,9 +136,9 @@ Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.i
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/grafana-container_11.3.2-1_all.deb
 Size: 4860
-MD5sum: 5379c0d300dcf7e3115d7d4140ec9b49
-SHA1: 2d3f597a1d2e735a3462493fef05d710edd60d91
-SHA256: 945da1fb3b3a74f1b8668b9fe3265e726a34a64dd05868e922d7891710e66c67
+MD5sum: e2e1a9f8dd8747ca0429eeb9f66db71e
+SHA1: c30ee77d592b1057452cf2248dcf4f773b4f97cb
+SHA256: 6615c9104f57fbfea34df817b6baf0014eff02c35acb5f1923300897ab1008e3
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -216,10 +216,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 38
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/influxdb-container_2.7.10-1_all.deb
-Size: 5216
-MD5sum: e5a15e2fe61fc66e7c1a03a10c661e90
-SHA1: 7679781d4be96e6740756ad8712bc2df1e0948f8
-SHA256: 36f19de7fddde5d3ef314a813c3688e90245e6b904d02511e3e8cf0d24c5af1a
+Size: 5236
+MD5sum: 5a5e68833610c77853b11605c2fbd67f
+SHA1: 0a6ed76f8c0183ad61e8dcc02ebe42dc1482d53c
+SHA256: 95b080c4530748d35ee74d1bb07dfc529d0c0b63654300d01c584a1e3e633d98
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -237,15 +237,15 @@ Description: Time-series database for marine data logging
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-container-store
-Version: 0.1.0-8
+Version: 0.1.0-7
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 17
-Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-8_all.deb
-Size: 3000
-MD5sum: b7f4a4334ea5fb56c4af0e0620ced3e0
-SHA1: 3c633a8bfbb312cc2716bed23e2d2d42463a29aa
-SHA256: 02f16cb0c5bac431bc8ba50b15723520084a85935624f20ce1b7ed4928be4c63
+Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-7_all.deb
+Size: 2904
+MD5sum: dbdf4adf74117f8b8b799800f7661e67
+SHA1: c41a296bed82156c9f3d27b93d2493eac828661e
+SHA256: 564aa767f5a33673f7b1429bab4ba8d76a2c25684a742c5d45ab4467860df525
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-marine-containers
@@ -267,10 +267,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/opencpn-container_5.10.2-1_all.deb
-Size: 4956
-MD5sum: 3f0f3819e363a840d8e7d02e6057b307
-SHA1: a09f4e0c8c8e3321a4abdfcb0018466d839bbddd
-SHA256: 5efa2b8c8b20d8543eed22acaf918f705a0543c956bd77cd0b6580388cf9f8b0
+Size: 4972
+MD5sum: 42cd84b2c372b0dda7545018d685835b
+SHA1: 306a3685e17252653f9ec9ad267095037880c892
+SHA256: 69b24a3847b1321803ffe4dbc310f17e5f2fe4bbbc3670e2db6456bb53023285
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -295,10 +295,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/signalk-server-container_2.17.2-1_all.deb
-Size: 4980
-MD5sum: d9b26adc5dfcfa39a921b550c433343c
-SHA1: f5cb387d024f96d893048838452ad33d5616ca62
-SHA256: a6f01d589762d8fce7ce7a6eee0b6cec52182fe2ac04cf8d82d9bc0124f5eb68
+Size: 5076
+MD5sum: 59d06fdcc3616480fad2419ba3594f86
+SHA1: 6df0f04818e0b0968fb8f3cc08f27cd636799b2c
+SHA256: 57f136d366388a3304840397b39c3e48e00121c34ad49adf2b70bb0cdff06c09
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
