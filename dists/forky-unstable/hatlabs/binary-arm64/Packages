@@ -5,7 +5,7 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 248
 Recommends: halpid (>= 4.0.0)
 Breaks: halpid (<< 4.0.0)
-Filename: pool/trixie-unstable/hatlabs/halpi2-firmware_3.2.1-a1-1_all.deb
+Filename: pool/forky-unstable/hatlabs/halpi2-firmware_3.2.1-a1-1_all.deb
 Size: 82040
 MD5sum: 29c652b6a5ebb79c91f36736c74dac78
 SHA1: d4cb2899f145b229db98a68c0945a9d49a0b9ff5
@@ -25,7 +25,7 @@ Installed-Size: 8082
 Conflicts: halpid
 Replaces: halpid
 Provides: halpid
-Filename: pool/trixie-unstable/hatlabs/halpi2-rust-daemon_5.0.0-5_arm64.deb
+Filename: pool/forky-unstable/hatlabs/halpi2-rust-daemon_5.0.0-5_arm64.deb
 Size: 1770016
 MD5sum: 2787b3db97e3b4c1aba96481e72ed7ba
 SHA1: d41baf7d6b4c00ee770d9455dea655e90e73256e
@@ -45,7 +45,7 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 58527
 Pre-Depends: dpkg (>= 1.16.1)
 Recommends: halpi-firmware
-Filename: pool/trixie-unstable/hatlabs/halpid_4.0.7-2_arm64.deb
+Filename: pool/forky-unstable/hatlabs/halpid_4.0.7-2_arm64.deb
 Size: 14654876
 MD5sum: 978c4d73187a0717b29c83b6b13b4561
 SHA1: e6fc9a4f2725bd03c824fee7d8892aac3322ca4c
@@ -68,7 +68,7 @@ Architecture: arm64
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 3186
 Depends: halpid (= 4.0.7-2)
-Filename: pool/trixie-unstable/hatlabs/halpid-dbgsym_4.0.7-2_arm64.deb
+Filename: pool/forky-unstable/hatlabs/halpid-dbgsym_4.0.7-2_arm64.deb
 Size: 2960956
 MD5sum: d93337da0e12998c95ab97c23e6f45ec
 SHA1: e95238877ffcf92ee4c3257022ee309230aebf26
