@@ -213,6 +213,42 @@ footer {
     font-style: italic;
 }
 
+/* Collapsible install command section */
+.install-section {
+    margin-top: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #f7fafc;
+}
+.install-section summary {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #4a5568;
+    font-size: 0.9em;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.install-section summary::-webkit-details-marker { display: none; }
+.install-section summary::before {
+    content: "▶";
+    font-size: 0.65em;
+    transition: transform 0.2s;
+}
+.install-section[open] summary::before {
+    transform: rotate(90deg);
+}
+.install-section[open] summary {
+    border-bottom: 1px solid #e2e8f0;
+}
+.install-section .install-content {
+    padding: 15px;
+}
+.install-section .command-block {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .container { padding: 20px; }
     h1 { font-size: 2em; }
@@ -477,12 +513,17 @@ def render_distribution_summary_card(dist: Distribution) -> str:
     if 'unstable' in dist.name:
         parts.append(UNSTABLE_WARNING)
 
-    # Add installation command with all available components
-    components_str = ' '.join(dist.components)
-    parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
-
+    # Link to distribution page
     parts.append(f'\n                <p style="margin-top: 15px;"><a href="{html.escape(dist.name)}.html" style="color: #4299e1; text-decoration: none;">View all {dist.package_count} packages →</a></p>')
+
+    # Add collapsible installation command section
+    components_str = ' '.join(dist.components)
+    parts.append('\n                <details class="install-section">')
+    parts.append('\n                    <summary>Add this distribution</summary>')
+    parts.append('\n                    <div class="install-content">')
+    parts.append(f'\n                        <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append('\n                    </div>')
+    parts.append('\n                </details>')
 
     parts.append('\n            </div>')
 
@@ -543,11 +584,6 @@ def render_distribution_card(dist: Distribution) -> str:
     if 'unstable' in dist.name:
         parts.append(UNSTABLE_WARNING)
 
-    # Add installation command with all available components
-    components_str = ' '.join(dist.components)
-    parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
-
     # Render package list grouped by component
     parts.append('\n                <div class="package-list">')
     parts.append('\n                    <strong>Available Packages:</strong>')
@@ -559,6 +595,15 @@ def render_distribution_card(dist: Distribution) -> str:
         parts.append(render_component_group(dist, component, expanded=expanded))
 
     parts.append('\n                </div>')
+
+    # Add collapsible installation command section (after packages)
+    components_str = ' '.join(dist.components)
+    parts.append('\n                <details class="install-section">')
+    parts.append('\n                    <summary>Add this distribution</summary>')
+    parts.append('\n                    <div class="install-content">')
+    parts.append(f'\n                        <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append('\n                    </div>')
+    parts.append('\n                </details>')
 
     parts.append('\n            </div>')
 
