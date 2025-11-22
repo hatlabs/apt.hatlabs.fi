@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Bookworm Unstable</h3>
-                <p class="dist-meta">2 packages</p>
+                <p class="dist-meta">3 packages</p>
                 <p class="dist-desc">Halos packages for Debian Bookworm (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,15 +26,20 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Hat Labs Products <span class="pkg-count">(2 packages)</span></summary>
+                        <summary>Hat Labs Products <span class="pkg-count">(3 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
-                            <h4>halpi2-rust-daemon <span class="version">v5.0.0-4</span> <span class="arch-badge">arm64</span></h4>
+                            <h4>halpi2-rust-daemon <span class="version">v5.0.0-5</span> <span class="arch-badge">arm64</span></h4>
                             <p class="description">Power monitor and watchdog daemon for HALPI2 HALPI2 power monitoring and watchdog daemon (Rust implementation). Provides power management, blackout detection, and hardware watchdog functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.</p>
                             <div class="install-cmd">sudo apt install halpi2-rust-daemon</div>
                         </div>
                         <div class="package-item">
-                            <h4>halpid-dbgsym <span class="version">v4.0.7-1</span> <span class="arch-badge">arm64</span></h4>
+                            <h4>halpid <span class="version">v4.0.7-2</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">HALPI2 service daemon `halpid` is a power monitor and watchdog service for HALPI2. It communicates with the HALPI2 controller, providing the &quot;smart&quot; aspects of the operation. . The main use case for the service software is to have the Raspberry Pi Operating System shut down once the power is cut. This prevents potential file system corruption without having to shut down the device manually.</p>
+                            <div class="install-cmd">sudo apt install halpid</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpid-dbgsym <span class="version">v4.0.7-2</span> <span class="arch-badge">arm64</span></h4>
                             <p class="description">debug symbols for halpid</p>
                             <div class="install-cmd">sudo apt install halpid-dbgsym</div>
                         </div>
@@ -59,7 +64,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 14:01:14 UTC</p>
+            <p>Last updated: 2025-11-22 14:06:38 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
