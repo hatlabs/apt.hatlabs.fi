@@ -5,10 +5,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20240520-1_all.deb
-Size: 4976
-MD5sum: bae2bcf85d3ea1f91ff17b5efecb968b
-SHA1: cb37993e1113c0ad0dfd7cdb7257ab5ca9a3fbd8
-SHA256: 1977c54881bda23b775df5d54682e8cfa430f6228c59bfd408d5cff14b28e831
+Size: 4968
+MD5sum: 1d28551d78617a26a6cc24e1349b82c3
+SHA1: 4f36bf4d38ac216cafd0ce9ae779432a08ac1d18
+SHA256: b0a859809561cefb0c8936a35d5a2959e67c4fa4912d754508f0d3799ea0fe42
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -136,9 +136,9 @@ Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.i
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/grafana-container_11.3.2-1_all.deb
 Size: 4860
-MD5sum: 64fda6acdb4208c2e6665d5d62fea8a0
-SHA1: c34a21eb7a155ea05a9585febbc120dc3dbb912d
-SHA256: d9225c138a561440da3cdc43a201bd9ab55c6c86db3e46a7bd9ec75c2273e855
+MD5sum: 141803c856032c7a172ad47f9bb5809d
+SHA1: ffcb089c9fa5794934ed65a6aa0d638c403217d4
+SHA256: eeb2a5ac9c37853d1a3447045c2be567e66006e215c8bcd5e77cfed9e569548e
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -217,9 +217,9 @@ Installed-Size: 38
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/influxdb-container_2.7.10-1_all.deb
 Size: 5216
-MD5sum: e9d04fc3d8e2747da57dfbd6732b3d10
-SHA1: 9e2364deea4964cb28b25d5239f2cad5d919cf16
-SHA256: 670f885a16d9bb5f596b777b493d778dc81e4c81501122796dfa4044cf5181c5
+MD5sum: 2d2afaddfbc851b1c0e68aa2d5fd3792
+SHA1: adaf3f25f30154ddc5d1b808758ab3fe5dd9678e
+SHA256: 56e978d9a31d8bca3bc4ea6e4b556660c74546edfb57f9fe76db988ca583700a
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -237,15 +237,15 @@ Description: Time-series database for marine data logging
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-container-store
-Version: 0.1.0-9
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 17
-Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-9_all.deb
-Size: 2896
-MD5sum: ab26ee209fc0f0ac3e606dbd69f3bf1e
-SHA1: e32be822b78211b9579a732157028cf855afe0d2
-SHA256: 3f249db2898a7ef3713ba1b20e04edaa415b4a9860ee48f8e5387fc27cdf392f
+Filename: pool/trixie-unstable/main/marine-container-store_0.1.1-1_all.deb
+Size: 2960
+MD5sum: 876393491256b5003e8ef1cba864b6da
+SHA1: a3dbf74249177f7f37ab00fa1d533209c9130611
+SHA256: b34e0f2b7b8d7175af4279d628c7ea6d615d17f32f6e2820f331f6525b99a3b2
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-marine-containers
@@ -268,9 +268,9 @@ Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/opencpn-container_5.10.2-1_all.deb
 Size: 4960
-MD5sum: d31e7f9abcec6d2d0e8271f21ea5a1af
-SHA1: 03385b21c4d88a82f77b9312ac2e14b1a6cb97d1
-SHA256: d8b05961e7e7575272708f70e0a185f94a9d806f9cef3844a7b66fb79952d5e6
+MD5sum: ce7a1b160aac2aebf66fc0e4290a8003
+SHA1: 7fc756e7ceb420dd4027c39bc142ead9b5fb725e
+SHA256: da802e4ea5ad6e4006c913c53eb3a2e5f1f93dbe21f0a4f6cf309fd7bcb3f7ae
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -296,9 +296,9 @@ Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-1_all.deb
 Size: 4984
-MD5sum: f0ef4f2659b570726dd644fb2c83b848
-SHA1: bb900ac8ac3800bb1ae1f0a91f942492584a2fa4
-SHA256: ca76d49924b2a97b8011167c452be1dfc2600af9ac140537227507176d92f6c0
+MD5sum: 663a506c82b2a6ac8d01048c0a117dc2
+SHA1: 99da9153826ba69f3ca4e2ce754ab8c324e40e9b
+SHA256: 7f39ef07b247d27d81d4287b13f108206760d69003e1559818cd1b1437af5cc3
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
