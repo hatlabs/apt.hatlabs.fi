@@ -54,6 +54,24 @@ Description: Modern APT package manager interface for Cockpit
  APT packages through Cockpit's web interface, designed for Debian
  and Ubuntu systems.
 
+Package: cockpit-branding-halos
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 40
+Depends: cockpit
+Filename: pool/trixie-stable/main/cockpit-branding-halos_0.2.0-1_all.deb
+Size: 19400
+MD5sum: 21eff3b22d2a6fee8bd1ebf02befe25b
+SHA1: 3ba482ce0902fb97e36927e2f92dfdb3df2283c3
+SHA256: 1ea6e2d399d66ad709c4d1c2a2da59ecbf027391a4f1eba62f73ecc2d61d2ede
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-distro
+Description: Custom HaLOS branding for Cockpit
+ This package provides the Hat Labs "HaLOS" branding for the Cockpit
+ web interface, including custom logo, CSS, and favicon.
+
 Package: cockpit-dockermanager
 Version: 1.0.7-4
 Architecture: all
