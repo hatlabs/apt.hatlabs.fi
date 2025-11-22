@@ -584,9 +584,34 @@ jobs:
 
         # Determine which distributions to build
         if [ "$MODE" = "targeted" ]; then
-          echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
-          build_component "$TARGET_DIST" "$COMPONENT"
-          build_release "$TARGET_DIST"
+          DISTRO="${{ steps.payload.outputs.distro }}"
+
+          if [ "$DISTRO" = "any" ]; then
+            # For distro=any, packages are routed to all distro-specific pools
+            # We need to build all {distro}-{channel} distributions
+            echo "=== Targeted Mode: Updating all distributions for distro=any ==="
+
+            # Use same SUPPORTED_DISTROS as routing-functions.sh
+            SUPPORTED_DISTROS="bookworm trixie forky"
+
+            for distro in $SUPPORTED_DISTROS; do
+              dist="${distro}-${CHANNEL}"
+              build_component "$dist" "$COMPONENT"
+              build_release "$dist"
+            done
+
+            # Also build legacy {channel}/main for backward compatibility
+            # (route_package copies distro=any+component=hatlabs to {channel}/main)
+            if [ "$COMPONENT" = "hatlabs" ]; then
+              build_component "$CHANNEL" "main"
+              build_release "$CHANNEL"
+            fi
+          else
+            # Specific distro - build only that distribution
+            echo "=== Targeted Mode: Updating $TARGET_DIST only ==="
+            build_component "$TARGET_DIST" "$COMPONENT"
+            build_release "$TARGET_DIST"
+          fi
         else
           echo "=== Full Rebuild Mode ==="
           echo "Building metadata for all distributions"
