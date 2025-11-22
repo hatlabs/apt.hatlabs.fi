@@ -513,10 +513,20 @@ jobs:
           done
           components=$(echo "$components" | xargs)
 
-          # Validate we have at least one component
+          # Default to main component if no packages found (ensures distribution appears in index)
           if [ -z "$components" ]; then
-            echo "⚠️  Warning: No components found for $dist (skipping Release file)"
-            return 0
+            echo "ℹ️  No packages in $dist, creating empty main component"
+            components="main"
+            # Ensure empty Packages files exist so the distribution is valid
+            mkdir -p "$dist_path/main/binary-arm64"
+            mkdir -p "$dist_path/main/binary-armhf"
+            mkdir -p "$dist_path/main/binary-all"
+            touch "$dist_path/main/binary-arm64/Packages"
+            touch "$dist_path/main/binary-armhf/Packages"
+            touch "$dist_path/main/binary-all/Packages"
+            gzip -kf "$dist_path/main/binary-arm64/Packages"
+            gzip -kf "$dist_path/main/binary-armhf/Packages"
+            gzip -kf "$dist_path/main/binary-all/Packages"
           fi
 
           # Determine suite and description based on distribution pattern
