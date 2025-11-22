@@ -126,16 +126,16 @@ Description: Data visualization and monitoring platform
 Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
 
 Package: halos
-Version: 0.1.0-5
+Version: 0.1.0-6
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-branding-halos
-Filename: pool/trixie-unstable/main/halos_0.1.0-5_all.deb
-Size: 2156
-MD5sum: 957efbd48b8a13207043aba82b73ac28
-SHA1: 4fc8e2aca960a4570123101335d8aa8064c4422b
-SHA256: 24037d7203dc37e9abfe07404db9c87e7bdc06e9c1ae7cec02ee13309c959269
+Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli
+Filename: pool/trixie-unstable/main/halos_0.1.0-6_all.deb
+Size: 2196
+MD5sum: 16bfb5692e825355068680f3ff75505c
+SHA1: 278470151622177ff12aca52275931d64d0fd7e7
+SHA256: 4c0bae86b93131bfcf2767e0bd54f4aa3fa82920e1c3fa9cc22ad334d75752e6
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -154,16 +154,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-marine
-Version: 0.1.0-5
+Version: 0.1.0-6
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-5), marine-container-store, signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-5_all.deb
-Size: 2168
-MD5sum: 2253956f2afd43c47ec06744ea81b02a
-SHA1: d06a205bf3b10b4bd6901b9e2e7ab4edd6e2ab4f
-SHA256: b556019466c96f50588ad97fee1111e43b79ed3c4ceff16e881c82d0e12b0bfb
+Depends: halos (>= 0.1.0-6), marine-container-store, signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-6_all.deb
+Size: 2180
+MD5sum: 8ef633aad5a742f54000367df1de3d99
+SHA1: be12ae995bf7658b805c636fc37365d88b21ea07
+SHA256: c67b8d06584e9735ca299f3bbedf493a9db55201fa3082b51071686657f303f7
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
