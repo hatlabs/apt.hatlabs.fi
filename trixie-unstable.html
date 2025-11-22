@@ -23,8 +23,6 @@
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
                 </div>
 
-                <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
@@ -103,6 +101,12 @@
                         </div>
                     </details>
                 </div>
+                <details class="install-section">
+                    <summary>Add this distribution</summary>
+                    <div class="install-content">
+                        <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                    </div>
+                </details>
             </div>
         </div>
         <div class="info-box">
@@ -115,7 +119,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 12:42:06 UTC</p>
+            <p>Last updated: 2025-11-22 12:52:50 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

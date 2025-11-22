@@ -185,6 +185,42 @@ footer {
     font-style: italic;
 }
 
+/* Collapsible install command section */
+.install-section {
+    margin-top: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #f7fafc;
+}
+.install-section summary {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #4a5568;
+    font-size: 0.9em;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.install-section summary::-webkit-details-marker { display: none; }
+.install-section summary::before {
+    content: "▶";
+    font-size: 0.65em;
+    transition: transform 0.2s;
+}
+.install-section[open] summary::before {
+    transform: rotate(90deg);
+}
+.install-section[open] summary {
+    border-bottom: 1px solid #e2e8f0;
+}
+.install-section .install-content {
+    padding: 15px;
+}
+.install-section .command-block {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .container { padding: 20px; }
     h1 { font-size: 2em; }
