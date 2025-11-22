@@ -24,31 +24,6 @@ Description: CasaOS containerized service for Halos
  .
  The web interface is accessible on port 80 after installation.
 
-Package: cockpit-dockermanager
-Version: 1.0.7-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 66
-Depends: cockpit (>= 200)
-Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/hatlabs/cockpit-dockermanager_1.0.7-1_all.deb
-Size: 15608
-MD5sum: d2b4c22012a7cb1fb1d8174f1a3bb2c7
-SHA1: 3fbba28bd8d8c4778d0725f0bba0431e374b1767
-SHA256: fc5f2c47685bc88d3567b246f6437658d08ef1c77a457c3a44c2e3630b21c590
-Section: admin
-Priority: optional
-Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
-Description: Cockpit plugin for Docker container management
- Docker Manager is a lightweight and intuitive utility designed to help you
- manage your Docker containers via a simplified web interface through Cockpit.
- .
- Features:
-  * List, start, stop, search and restart containers
-  * View container status, uptime, details and exposed ports
-  * In-window terminal with individual container terminal functionality
-  * Image management
-
 Package: cockpit-package-manager
 Version: 0.1.1-1
 Architecture: all
