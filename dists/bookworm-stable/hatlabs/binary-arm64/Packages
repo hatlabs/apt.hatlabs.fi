@@ -68,6 +68,27 @@ Description: Firmware for the HALPI2 Computer
  This package contains the firmware for the HALPI2 Computer onboard controller.
  The firmware is automatically flashed to the device upon installation.
 
+Package: halpi2-rust-daemon
+Version: 5.0.0-5
+Architecture: arm64
+Maintainer: Hat Labs Ltd. <info@hatlabs.fi>
+Installed-Size: 8082
+Conflicts: halpid
+Replaces: halpid
+Provides: halpid
+Filename: pool/bookworm-stable/hatlabs/halpi2-rust-daemon_5.0.0-5_arm64.deb
+Size: 1770016
+MD5sum: 2787b3db97e3b4c1aba96481e72ed7ba
+SHA1: d41baf7d6b4c00ee770d9455dea655e90e73256e
+SHA256: ff91be791c7a3c84c1d61916edc99bb3c62361960007078dd8afcacf1e7118ac
+Section: admin
+Priority: optional
+Homepage: https://docs.hatlabs.fi/halpi2
+Description: Power monitor and watchdog daemon for HALPI2
+ HALPI2 power monitoring and watchdog daemon (Rust implementation).
+ Provides power management, blackout detection, and hardware watchdog
+ functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.
+
 Package: halpid
 Version: 4.0.7
 Architecture: arm64
