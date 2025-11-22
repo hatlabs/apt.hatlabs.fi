@@ -5,10 +5,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20240520-1_all.deb
-Size: 4980
-MD5sum: 2a3090c6b371177dc74acc88ac48119a
-SHA1: 10ee09f806e6ecc034b6a1e2c2f46c1cfb61ab8d
-SHA256: 1bc01ab7fd0815444371ddbb7eb26bf2cfdec51c1b107df5bc786dab4f123aa4
+Size: 4976
+MD5sum: bae2bcf85d3ea1f91ff17b5efecb968b
+SHA1: cb37993e1113c0ad0dfd7cdb7257ab5ca9a3fbd8
+SHA256: 1977c54881bda23b775df5d54682e8cfa430f6228c59bfd408d5cff14b28e831
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -136,9 +136,9 @@ Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.i
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/grafana-container_11.3.2-1_all.deb
 Size: 4860
-MD5sum: e2e1a9f8dd8747ca0429eeb9f66db71e
-SHA1: c30ee77d592b1057452cf2248dcf4f773b4f97cb
-SHA256: 6615c9104f57fbfea34df817b6baf0014eff02c35acb5f1923300897ab1008e3
+MD5sum: 64fda6acdb4208c2e6665d5d62fea8a0
+SHA1: c34a21eb7a155ea05a9585febbc120dc3dbb912d
+SHA256: d9225c138a561440da3cdc43a201bd9ab55c6c86db3e46a7bd9ec75c2273e855
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -216,10 +216,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 38
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/influxdb-container_2.7.10-1_all.deb
-Size: 5236
-MD5sum: 5a5e68833610c77853b11605c2fbd67f
-SHA1: 0a6ed76f8c0183ad61e8dcc02ebe42dc1482d53c
-SHA256: 95b080c4530748d35ee74d1bb07dfc529d0c0b63654300d01c584a1e3e633d98
+Size: 5216
+MD5sum: e9d04fc3d8e2747da57dfbd6732b3d10
+SHA1: 9e2364deea4964cb28b25d5239f2cad5d919cf16
+SHA256: 670f885a16d9bb5f596b777b493d778dc81e4c81501122796dfa4044cf5181c5
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -237,15 +237,15 @@ Description: Time-series database for marine data logging
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-container-store
-Version: 0.1.0-7
+Version: 0.1.0-9
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 17
-Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-7_all.deb
-Size: 2904
-MD5sum: dbdf4adf74117f8b8b799800f7661e67
-SHA1: c41a296bed82156c9f3d27b93d2493eac828661e
-SHA256: 564aa767f5a33673f7b1429bab4ba8d76a2c25684a742c5d45ab4467860df525
+Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-9_all.deb
+Size: 2896
+MD5sum: ab26ee209fc0f0ac3e606dbd69f3bf1e
+SHA1: e32be822b78211b9579a732157028cf855afe0d2
+SHA256: 3f249db2898a7ef3713ba1b20e04edaa415b4a9860ee48f8e5387fc27cdf392f
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-marine-containers
@@ -267,10 +267,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/opencpn-container_5.10.2-1_all.deb
-Size: 4972
-MD5sum: 42cd84b2c372b0dda7545018d685835b
-SHA1: 306a3685e17252653f9ec9ad267095037880c892
-SHA256: 69b24a3847b1321803ffe4dbc310f17e5f2fe4bbbc3670e2db6456bb53023285
+Size: 4960
+MD5sum: d31e7f9abcec6d2d0e8271f21ea5a1af
+SHA1: 03385b21c4d88a82f77b9312ac2e14b1a6cb97d1
+SHA256: d8b05961e7e7575272708f70e0a185f94a9d806f9cef3844a7b66fb79952d5e6
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -289,16 +289,16 @@ Description: Open source chart plotter and navigation software
 Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
 
 Package: signalk-server-container
-Version: 2.17.2-1
+Version: 2.18.0-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/signalk-server-container_2.17.2-1_all.deb
-Size: 5076
-MD5sum: 59d06fdcc3616480fad2419ba3594f86
-SHA1: 6df0f04818e0b0968fb8f3cc08f27cd636799b2c
-SHA256: 57f136d366388a3304840397b39c3e48e00121c34ad49adf2b70bb0cdff06c09
+Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-1_all.deb
+Size: 4984
+MD5sum: f0ef4f2659b570726dd644fb2c83b848
+SHA1: bb900ac8ac3800bb1ae1f0a91f942492584a2fa4
+SHA256: ca76d49924b2a97b8011167c452be1dfc2600af9ac140537227507176d92f6c0
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
