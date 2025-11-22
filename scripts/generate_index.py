@@ -168,6 +168,51 @@ footer {
     font-size: 0.9em;
 }
 
+/* Collapsible component sections */
+.component-group {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background: white;
+}
+.component-group summary {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c5282;
+    background: #f7fafc;
+    border-radius: 6px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.component-group summary::-webkit-details-marker { display: none; }
+.component-group summary::before {
+    content: "▶";
+    font-size: 0.7em;
+    transition: transform 0.2s;
+}
+.component-group[open] summary::before {
+    transform: rotate(90deg);
+}
+.component-group[open] summary {
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 6px 6px 0 0;
+}
+.component-group .component-content {
+    padding: 15px;
+}
+.component-group .pkg-count {
+    font-weight: normal;
+    color: #718096;
+    font-size: 0.9em;
+}
+.component-group .empty-msg {
+    color: #718096;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .container { padding: 20px; }
     h1 { font-size: 2em; }
@@ -184,6 +229,7 @@ class Package:
     description: str
     architecture: str
     filename: str
+    component: str = 'main'
     all_architectures: List[str] = field(default_factory=list)
 
     def __post_init__(self):
@@ -205,9 +251,35 @@ class Distribution:
         """Return number of unique packages."""
         return len(set(p.name for p in self.packages))
 
+    @property
+    def components(self) -> List[str]:
+        """Return list of components that have packages, in preferred order."""
+        found = set(p.component for p in self.packages)
+        # Return in preferred order: main first, then hatlabs, then others
+        ordered = []
+        for comp in ['main', 'hatlabs']:
+            if comp in found:
+                ordered.append(comp)
+                found.remove(comp)
+        ordered.extend(sorted(found))
+        return ordered if ordered else ['main']  # Always show at least main
 
-def parse_packages_file(packages_file: Path) -> List[Package]:
-    """Parse a Debian Packages file and extract package information."""
+    def packages_by_component(self, component: str) -> List[Package]:
+        """Return packages for a specific component."""
+        return [p for p in self.packages if p.component == component]
+
+    def component_package_count(self, component: str) -> int:
+        """Return number of unique packages in a component."""
+        return len(set(p.name for p in self.packages if p.component == component))
+
+
+def parse_packages_file(packages_file: Path, component: str = 'main') -> List[Package]:
+    """Parse a Debian Packages file and extract package information.
+
+    Args:
+        packages_file: Path to the Packages file
+        component: Component name (main, hatlabs, etc.) for tracking
+    """
     packages = []
     current_package = {}
     last_key = None
@@ -227,7 +299,8 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
                                 version=current_package['Version'],
                                 description=current_package['Description'],
                                 architecture=current_package.get('Architecture', 'unknown'),
-                                filename=current_package['Filename']
+                                filename=current_package['Filename'],
+                                component=component
                             ))
                         current_package = {}
                         last_key = None
@@ -247,7 +320,8 @@ def parse_packages_file(packages_file: Path) -> List[Package]:
                     version=current_package['Version'],
                     description=current_package['Description'],
                     architecture=current_package.get('Architecture', 'unknown'),
-                    filename=current_package['Filename']
+                    filename=current_package['Filename'],
+                    component=component
                 ))
     except FileNotFoundError:
         # Distribution directory exists but no packages yet
@@ -277,12 +351,18 @@ def get_distribution_info(dist_name: str) -> Tuple[str, str]:
 
 
 def scan_distributions(repo_dir: Path) -> List[Distribution]:
-    """Scan repository for all distributions and their packages."""
+    """Scan repository for all distributions and their packages.
+
+    Scans all components (main, hatlabs, etc.) found in each distribution.
+    """
     distributions = []
     dists_dir = repo_dir / 'dists'
 
     if not dists_dir.exists():
         return distributions
+
+    # Known components in preferred order
+    known_components = ['main', 'hatlabs']
 
     for dist_path in sorted(dists_dir.iterdir()):
         if not dist_path.is_dir():
@@ -291,23 +371,42 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
         dist_name = dist_path.name
         display_name, description = get_distribution_info(dist_name)
 
-        # Collect packages from all architectures
+        # Discover all components in this distribution
+        components = []
+        for item in dist_path.iterdir():
+            if item.is_dir() and not item.name.startswith('.'):
+                # Check if it looks like a component (has binary-* subdirs)
+                if any((item / f'binary-{arch}').exists() for arch in SUPPORTED_ARCHITECTURES):
+                    components.append(item.name)
+
+        # Sort components: known ones first in order, then others alphabetically
+        def component_sort_key(c):
+            try:
+                return (0, known_components.index(c))
+            except ValueError:
+                return (1, c)
+        components.sort(key=component_sort_key)
+
+        # Collect packages from all components and architectures
         all_packages = []
-        for arch in SUPPORTED_ARCHITECTURES:
-            packages_file = dist_path / 'main' / f'binary-{arch}' / 'Packages'
-            if packages_file.exists():
-                all_packages.extend(parse_packages_file(packages_file))
+        for component in components:
+            for arch in SUPPORTED_ARCHITECTURES:
+                packages_file = dist_path / component / f'binary-{arch}' / 'Packages'
+                if packages_file.exists():
+                    all_packages.extend(parse_packages_file(packages_file, component))
 
         # Deduplicate packages while tracking all architectures.
+        # Use (name, component) as key since same package name could be in different components.
         # Packages can legitimately appear in multiple architecture directories
         # (e.g., both binary-arm64 and binary-all).
         unique_packages = {}
         for pkg in all_packages:
-            if pkg.name not in unique_packages:
-                unique_packages[pkg.name] = pkg
+            key = (pkg.name, pkg.component)
+            if key not in unique_packages:
+                unique_packages[key] = pkg
             else:
                 # Package already exists - check version and merge architectures
-                existing = unique_packages[pkg.name]
+                existing = unique_packages[key]
                 if pkg.version != existing.version:
                     print(f"Warning: Package {pkg.name} has different versions across architectures: "
                           f"{existing.architecture}={existing.version}, {pkg.architecture}={pkg.version}",
@@ -322,7 +421,7 @@ def scan_distributions(repo_dir: Path) -> List[Distribution]:
             name=dist_name,
             display_name=display_name,
             description=description,
-            packages=sorted(unique_packages.values(), key=lambda p: p.name)
+            packages=sorted(unique_packages.values(), key=lambda p: (p.component, p.name))
         ))
 
     return distributions
@@ -352,6 +451,15 @@ def is_product_distribution(dist_name: str) -> bool:
     return '-' not in dist_name
 
 
+def get_component_display_name(component: str) -> str:
+    """Get a human-readable display name for a component."""
+    names = {
+        'main': 'Main Packages',
+        'hatlabs': 'Hat Labs Products',
+    }
+    return names.get(component, component.title())
+
+
 def render_distribution_summary_card(dist: Distribution) -> str:
     """Render HTML for a distribution summary card (for main index).
 
@@ -369,9 +477,10 @@ def render_distribution_summary_card(dist: Distribution) -> str:
     if 'unstable' in dist.name:
         parts.append(UNSTABLE_WARNING)
 
-    # Add installation command
+    # Add installation command with all available components
+    components_str = ' '.join(dist.components)
     parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
 
     parts.append(f'\n                <p style="margin-top: 15px;"><a href="{html.escape(dist.name)}.html" style="color: #4299e1; text-decoration: none;">View all {dist.package_count} packages →</a></p>')
 
@@ -380,10 +489,48 @@ def render_distribution_summary_card(dist: Distribution) -> str:
     return ''.join(parts)
 
 
+def render_package_item(pkg: Package) -> str:
+    """Render HTML for a single package item."""
+    parts = []
+    parts.append(f'\n                        <div class="package-item">')
+    # Display all architectures if multiple, otherwise just the primary
+    arch_badges = ' '.join(f'<span class="arch-badge">{html.escape(arch)}</span>'
+                           for arch in pkg.all_architectures)
+    parts.append(f'\n                            <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span> {arch_badges}</h4>')
+    parts.append(f'\n                            <p class="description">{html.escape(pkg.description)}</p>')
+    parts.append(f'\n                            <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
+    parts.append('\n                        </div>')
+    return ''.join(parts)
+
+
+def render_component_group(dist: Distribution, component: str, expanded: bool = True) -> str:
+    """Render HTML for a collapsible component group with its packages."""
+    parts = []
+    packages = dist.packages_by_component(component)
+    pkg_count = len(packages)
+    display_name = get_component_display_name(component)
+
+    open_attr = ' open' if expanded else ''
+    parts.append(f'\n                    <details class="component-group"{open_attr}>')
+    parts.append(f'\n                        <summary>{html.escape(display_name)} <span class="pkg-count">({pkg_count} packages)</span></summary>')
+    parts.append('\n                        <div class="component-content">')
+
+    if packages:
+        for pkg in packages:
+            parts.append(render_package_item(pkg))
+    else:
+        parts.append('\n                            <p class="empty-msg">No packages in this component yet.</p>')
+
+    parts.append('\n                        </div>')
+    parts.append('\n                    </details>')
+
+    return ''.join(parts)
+
+
 def render_distribution_card(dist: Distribution) -> str:
     """Render HTML for a single distribution card (full version with all packages).
 
-    This is used for the legacy single-page view if needed.
+    Packages are organized into collapsible groups by component.
     """
     parts = []
 
@@ -396,26 +543,22 @@ def render_distribution_card(dist: Distribution) -> str:
     if 'unstable' in dist.name:
         parts.append(UNSTABLE_WARNING)
 
-    # Add installation command
+    # Add installation command with all available components
+    components_str = ' '.join(dist.components)
     parts.append(f'\n                <strong>Add this distribution:</strong>')
-    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
+    parts.append(f'\n                <div class="command-block">echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} {html.escape(dist.name)} {html.escape(components_str)}" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>')
 
-    # Render package list
-    if dist.packages:
-        parts.append('\n                <div class="package-list">')
-        parts.append('\n                    <strong>Available Packages:</strong>')
-        for pkg in dist.packages:
-            parts.append(f'\n                    <div class="package-item">')
-            # Display all architectures if multiple, otherwise just the primary
-            arch_badges = ' '.join(f'<span class="arch-badge">{html.escape(arch)}</span>'
-                                   for arch in pkg.all_architectures)
-            parts.append(f'\n                        <h4>{html.escape(pkg.name)} <span class="version">v{html.escape(pkg.version)}</span> {arch_badges}</h4>')
-            parts.append(f'\n                        <p class="description">{html.escape(pkg.description)}</p>')
-            parts.append(f'\n                        <div class="install-cmd">sudo apt install {html.escape(pkg.name)}</div>')
-            parts.append('\n                    </div>')
-        parts.append('\n                </div>')
-    else:
-        parts.append('\n                <p style="color: #718096; font-style: italic;">No packages available yet.</p>')
+    # Render package list grouped by component
+    parts.append('\n                <div class="package-list">')
+    parts.append('\n                    <strong>Available Packages:</strong>')
+
+    for i, component in enumerate(dist.components):
+        # Expand the first component that has packages, or the first one if all empty
+        has_packages = dist.component_package_count(component) > 0
+        expanded = has_packages or i == 0
+        parts.append(render_component_group(dist, component, expanded=expanded))
+
+    parts.append('\n                </div>')
 
     parts.append('\n            </div>')
 
@@ -475,9 +618,9 @@ def render_main_index(distributions: List[Distribution], gpg_fingerprint: str) -
             <h3>🔐 Repository Setup</h3>
             <p>Add the Hat Labs repository to your system:</p>
             <div class="command-block">curl -fsSL {html.escape(REPO_URL)}/hat-labs-apt-key.asc | sudo gpg --dearmor -o {html.escape(KEYRING_PATH)}
-echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} <distribution> main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
+echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} <distribution> <components>" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
 sudo apt update</div>
-            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
+            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution and <code>&lt;components&gt;</code> with available components (e.g., <code>main hatlabs</code>)</small></p>
         </div>
 ''')
 
@@ -743,9 +886,9 @@ def generate_html(distributions: List[Distribution], gpg_fingerprint: str) -> st
             <h3>🔐 Repository Setup</h3>
             <p>Add the Hat Labs repository to your system:</p>
             <div class="command-block">curl -fsSL {html.escape(REPO_URL)}/hat-labs-apt-key.asc | sudo gpg --dearmor -o {html.escape(KEYRING_PATH)}
-echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} <distribution> main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
+echo "deb [signed-by={html.escape(KEYRING_PATH)}] {html.escape(REPO_URL)} <distribution> <components>" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
 sudo apt update</div>
-            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
+            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution and <code>&lt;components&gt;</code> with available components (e.g., <code>main hatlabs</code>)</small></p>
         </div>
 ''')
 
