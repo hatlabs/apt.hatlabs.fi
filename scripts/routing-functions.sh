@@ -5,7 +5,7 @@
 # List of supported distributions (easily extensible for future distros)
 # Note: This list includes only actual distributions, not "any" (which is an alias)
 # See suffix-parsing-functions.sh for VALID_DISTROS which includes "any" for validation
-SUPPORTED_DISTROS=("bookworm" "trixie" "forky")
+SUPPORTED_DISTROS=("bookworm" "trixie")
 
 # route_package - Route a package to appropriate pools based on metadata
 #

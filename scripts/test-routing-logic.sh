@@ -131,7 +131,7 @@ EOF
 # ============================================================================
 # Test 1: Route distro=any, component=hatlabs (legacy routing)
 # ============================================================================
-test_case "Route distro=any, component=hatlabs to 4 locations"
+test_case "Route distro=any, component=hatlabs to 3 locations"
 
 mkdir -p "$TEST_DIR/packages"
 mkdir -p "$TEST_DIR/apt-repo"
@@ -149,12 +149,10 @@ assert_file_exists "$TEST_DIR/apt-repo/pool/bookworm-stable/hatlabs/halpi2-daemo
   "Package routed to bookworm-stable/hatlabs"
 assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/hatlabs/halpi2-daemon_1.0.0-1_all.deb" \
   "Package routed to trixie-stable/hatlabs"
-assert_file_exists "$TEST_DIR/apt-repo/pool/forky-stable/hatlabs/halpi2-daemon_1.0.0-1_all.deb" \
-  "Package routed to forky-stable/hatlabs"
 
 # Count total copies
 count=$(count_files "**/halpi2-daemon_1.0.0-1_all.deb")
-assert_equals "4" "$count" "Package copied to exactly 4 locations"
+assert_equals "3" "$count" "Package copied to exactly 3 locations"
 
 # ============================================================================
 # Test 2: Route distro=trixie, component=main (single location)
@@ -177,9 +175,9 @@ count=$(count_files "**/signalk_2.17.2-1_all.deb")
 assert_equals "1" "$count" "Package copied to exactly 1 location"
 
 # ============================================================================
-# Test 3: Route distro=any, component=main (3 locations, no legacy)
+# Test 3: Route distro=any, component=main (2 locations, no legacy)
 # ============================================================================
-test_case "Route distro=any, component=main to 3 locations (no legacy)"
+test_case "Route distro=any, component=main to 2 locations (no legacy)"
 
 rm -rf "$TEST_DIR/apt-repo"
 mkdir -p "$TEST_DIR/apt-repo"
@@ -192,13 +190,11 @@ assert_file_exists "$TEST_DIR/apt-repo/pool/bookworm-stable/main/runtipi_1.0-1_a
   "Package routed to bookworm-stable/main"
 assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/main/runtipi_1.0-1_all.deb" \
   "Package routed to trixie-stable/main"
-assert_file_exists "$TEST_DIR/apt-repo/pool/forky-stable/main/runtipi_1.0-1_all.deb" \
-  "Package routed to forky-stable/main"
 assert_file_not_exists "$TEST_DIR/apt-repo/pool/stable/main/runtipi_1.0-1_all.deb" \
   "Package NOT routed to legacy stable/main"
 
 count=$(count_files "**/runtipi_1.0-1_all.deb")
-assert_equals "3" "$count" "Package copied to exactly 3 locations"
+assert_equals "2" "$count" "Package copied to exactly 2 locations"
 
 # ============================================================================
 # Test 4: Route unstable channel (pre-release)
@@ -235,7 +231,7 @@ assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-unstable/hatlabs/halpi2-firmw
   "Package routed to trixie-unstable/hatlabs"
 
 count=$(count_files "**/halpi2-firmware_2.0-1_all.deb")
-assert_equals "4" "$count" "Package copied to 4 locations (1 legacy + 3 distro-specific)"
+assert_equals "3" "$count" "Package copied to 3 locations (1 legacy + 2 distro-specific)"
 
 # ============================================================================
 # Test 6: Missing metadata file should fail
@@ -309,17 +305,17 @@ route_package "packages/pkg1_1.0-1_all.deb" "stable" "$TEST_DIR"
 route_package "packages/pkg2_2.0-1_all.deb" "stable" "$TEST_DIR"
 route_package "packages/pkg3_3.0-1_all.deb" "stable" "$TEST_DIR"
 
-# pkg1: 4 locations (legacy + 3 distro-specific)
+# pkg1: 3 locations (legacy + 2 distro-specific)
 pkg1_count=$(count_files "**/pkg1_1.0-1_all.deb")
-assert_equals "4" "$pkg1_count" "pkg1 (any/hatlabs) copied to 4 locations"
+assert_equals "3" "$pkg1_count" "pkg1 (any/hatlabs) copied to 3 locations"
 
 # pkg2: 1 location (trixie-specific)
 pkg2_count=$(count_files "**/pkg2_2.0-1_all.deb")
 assert_equals "1" "$pkg2_count" "pkg2 (trixie/main) copied to 1 location"
 
-# pkg3: 3 locations (no legacy for non-hatlabs)
+# pkg3: 2 locations (no legacy for non-hatlabs)
 pkg3_count=$(count_files "**/pkg3_3.0-1_all.deb")
-assert_equals "3" "$pkg3_count" "pkg3 (any/main) copied to 3 locations"
+assert_equals "2" "$pkg3_count" "pkg3 (any/main) copied to 2 locations"
 
 # ============================================================================
 # Test 10: Invalid channel validation
@@ -363,7 +359,6 @@ expected_dirs=(
   "apt-repo/pool/stable/main"
   "apt-repo/pool/bookworm-stable/hatlabs"
   "apt-repo/pool/trixie-stable/hatlabs"
-  "apt-repo/pool/forky-stable/hatlabs"
 )
 
 all_dirs_exist=true

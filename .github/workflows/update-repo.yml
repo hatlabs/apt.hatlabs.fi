@@ -592,7 +592,7 @@ jobs:
             echo "=== Targeted Mode: Updating all distributions for distro=any ==="
 
             # Use same SUPPORTED_DISTROS as routing-functions.sh
-            SUPPORTED_DISTROS="bookworm trixie forky"
+            SUPPORTED_DISTROS="bookworm trixie"
 
             for distro in $SUPPORTED_DISTROS; do
               dist="${distro}-${CHANNEL}"
