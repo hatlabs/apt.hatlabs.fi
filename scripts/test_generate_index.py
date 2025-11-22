@@ -15,8 +15,10 @@ from generate_index import (
     render_distribution_summary_card,
     render_main_index,
     render_distribution_page,
+    render_component_group,
     scan_distributions,
     get_distribution_info,
+    get_component_display_name,
 )
 
 
@@ -30,6 +32,7 @@ def sample_distribution():
             description='First test package',
             architecture='arm64',
             filename='pool/test-pkg-1_1.0.0_arm64.deb',
+            component='main',
             all_architectures=['arm64']
         ),
         Package(
@@ -38,6 +41,7 @@ def sample_distribution():
             description='Second test package',
             architecture='all',
             filename='pool/test-pkg-2_2.1.0_all.deb',
+            component='main',
             all_architectures=['all']
         ),
     ]
@@ -70,7 +74,15 @@ def all_distributions():
             display_name='Stable',
             description='Hat Labs product packages (stable releases)',
             packages=[
-                Package('pkg-a', '1.0', 'Package A', 'all', 'pool/pkg-a_1.0_all.deb', ['all'])
+                Package(
+                    name='pkg-a',
+                    version='1.0',
+                    description='Package A',
+                    architecture='all',
+                    filename='pool/pkg-a_1.0_all.deb',
+                    component='main',
+                    all_architectures=['all']
+                )
             ]
         ),
         Distribution(
@@ -78,7 +90,15 @@ def all_distributions():
             display_name='Unstable',
             description='Hat Labs product packages (rolling, latest from main)',
             packages=[
-                Package('pkg-b', '2.0', 'Package B', 'all', 'pool/pkg-b_2.0_all.deb', ['all'])
+                Package(
+                    name='pkg-b',
+                    version='2.0',
+                    description='Package B',
+                    architecture='all',
+                    filename='pool/pkg-b_2.0_all.deb',
+                    component='main',
+                    all_architectures=['all']
+                )
             ]
         ),
         Distribution(
