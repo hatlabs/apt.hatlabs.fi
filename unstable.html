@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Unstable</h3>
-                <p class="dist-meta">0 packages</p>
+                <p class="dist-meta">2 packages</p>
                 <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -25,7 +25,24 @@
 
                 <strong>Add this distribution:</strong>
                 <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="color: #718096; font-style: italic;">No packages available yet.</p>
+                <div class="package-list">
+                    <strong>Available Packages:</strong>
+                    <details class="component-group" open>
+                        <summary>Main Packages <span class="pkg-count">(2 packages)</span></summary>
+                        <div class="component-content">
+                        <div class="package-item">
+                            <h4>halpi2-rust-daemon <span class="version">v5.0.0-4</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">Power monitor and watchdog daemon for HALPI2 HALPI2 power monitoring and watchdog daemon (Rust implementation). Provides power management, blackout detection, and hardware watchdog functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.</p>
+                            <div class="install-cmd">sudo apt install halpi2-rust-daemon</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpid-dbgsym <span class="version">v4.0.7-1</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">debug symbols for halpid</p>
+                            <div class="install-cmd">sudo apt install halpid-dbgsym</div>
+                        </div>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
         <div class="info-box">
@@ -38,7 +55,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 12:17:09 UTC</p>
+            <p>Last updated: 2025-11-22 12:42:06 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

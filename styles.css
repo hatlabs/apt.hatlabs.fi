@@ -140,6 +140,51 @@ footer {
     font-size: 0.9em;
 }
 
+/* Collapsible component sections */
+.component-group {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background: white;
+}
+.component-group summary {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c5282;
+    background: #f7fafc;
+    border-radius: 6px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.component-group summary::-webkit-details-marker { display: none; }
+.component-group summary::before {
+    content: "▶";
+    font-size: 0.7em;
+    transition: transform 0.2s;
+}
+.component-group[open] summary::before {
+    transform: rotate(90deg);
+}
+.component-group[open] summary {
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 6px 6px 0 0;
+}
+.component-group .component-content {
+    padding: 15px;
+}
+.component-group .pkg-count {
+    font-weight: normal;
+    color: #718096;
+    font-size: 0.9em;
+}
+.component-group .empty-msg {
+    color: #718096;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .container { padding: 20px; }
     h1 { font-size: 2em; }

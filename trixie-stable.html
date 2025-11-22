@@ -17,62 +17,102 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Stable</h3>
-                <p class="dist-meta">10 packages</p>
+                <p class="dist-meta">16 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (stable releases)</p>
                 <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-stable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
                 <div class="package-list">
                     <strong>Available Packages:</strong>
-                    <div class="package-item">
-                        <h4>avnav-container <span class="version">v20240520-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Touch-optimized chart plotter for sailing and motor yachts AvNav is a navigation software specifically designed for touch operation on tablets and smartphones. It combines a chart plotter with routing capabilities and integration with marine electronics. . Features: - Touch-optimized web interface - Multiple chart format support (mbtiles, gemf, xml) - Route planning and navigation - AIS integration - Anchor watch functionality - NMEA data display and logging - Plugin system for extensions</p>
-                        <div class="install-cmd">sudo apt install avnav-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>cockpit-apt <span class="version">v0.2.0-7</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Modern APT package manager interface for Cockpit A web-based package manager interface for Cockpit that provides: - Browse packages by Debian section (games, web, development, etc.) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - View available package updates - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing APT packages through Cockpit&#x27;s web interface, designed for Debian and Ubuntu systems.</p>
-                        <div class="install-cmd">sudo apt install cockpit-apt</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>cockpit-dockermanager <span class="version">v1.0.7-3</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Cockpit plugin for Docker container management Docker Manager is a lightweight and intuitive utility designed to help you manage your Docker containers via a simplified web interface through Cockpit. . Features: * List, start, stop, search and restart containers * View container status, uptime, details and exposed ports * In-window terminal with individual container terminal functionality * Image management</p>
-                        <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>grafana-container <span class="version">v11.3.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Data visualization and monitoring platform Grafana is an open-source platform for monitoring and observability. Create beautiful dashboards to visualize marine data from InfluxDB, Signal K, and other data sources. . Features: - Rich visualization options (graphs, gauges, maps) - Multiple data source support - Alert notifications - Dashboard sharing and templating - Plugin ecosystem</p>
-                        <div class="install-cmd">sudo apt install grafana-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>halos <span class="version">v0.1.0-4</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Base system metapackage for HaLOS This metapackage installs the base HaLOS system, providing web-based Raspberry Pi management through Cockpit. . The HaLOS base system includes: * Cockpit web interface for system management * Network configuration through cockpit-networkmanager * Storage management through cockpit-storaged * Package management through cockpit-apt * Custom HaLOS branding . HaLOS is a Debian-based operating system designed for easy management of Raspberry Pi systems through a web interface.</p>
-                        <div class="install-cmd">sudo apt install halos</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>halos-marine <span class="version">v0.1.0-4</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
-                        <div class="install-cmd">sudo apt install halos-marine</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>influxdb-container <span class="version">v2.7.10-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Time-series database for marine data logging InfluxDB is a high-performance time-series database designed for handling large volumes of timestamped data. Perfect for marine applications to store and analyze historical data from Signal K, sensors, and other sources. . Features: - High-performance time-series data storage - Built-in web UI for data exploration - Powerful query language (Flux) - Retention policies for automatic data management - Integration with Grafana for visualization</p>
-                        <div class="install-cmd">sudo apt install influxdb-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>marine-container-store <span class="version">v0.1.0-6</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Marine container application store definition for Cockpit APT This package provides the store definition and branding for the Marine container application store, designed to work with cockpit-apt. . When installed alongside cockpit-apt, it enables a curated view of marine and sailing applications including navigation software, chart plotters, weather routing, data logging, and monitoring dashboards. . The store filters packages from apt.hatlabs.fi and other repositories based on Debian tags (debtags), sections, and package metadata.</p>
-                        <div class="install-cmd">sudo apt install marine-container-store</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>opencpn-container <span class="version">v5.10.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Open source chart plotter and navigation software OpenCPN is a free software project to create a concise chart plotter and navigation software for use as an underway or planning tool. Designed to be used at the helm station of your boat while underway. . Features: - Raster and vector chart support - AIS target tracking - GPS and autopilot integration - Weather routing and GRIB file support - Extensive plugin system - Route and waypoint management</p>
-                        <div class="install-cmd">sudo apt install opencpn-container</div>
-                    </div>
-                    <div class="package-item">
-                        <h4>signalk-server-container <span class="version">v2.17.2-1</span> <span class="arch-badge">all</span></h4>
-                        <p class="description">Signal K server for marine data processing and routing Signal K is a modern and open data format for marine use. A Signal K server provides a central hub for collecting, processing, and distributing marine data from multiple sources including NMEA 0183, NMEA 2000, and other sensors. . Features: - WebSocket API for real-time data streaming - Data logging and historical playback - Web app server for marine applications - Plugin system for extending functionality - Instrument integration and display</p>
-                        <div class="install-cmd">sudo apt install signalk-server-container</div>
-                    </div>
+                    <details class="component-group" open>
+                        <summary>Main Packages <span class="pkg-count">(10 packages)</span></summary>
+                        <div class="component-content">
+                        <div class="package-item">
+                            <h4>avnav-container <span class="version">v20240520-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Touch-optimized chart plotter for sailing and motor yachts AvNav is a navigation software specifically designed for touch operation on tablets and smartphones. It combines a chart plotter with routing capabilities and integration with marine electronics. . Features: - Touch-optimized web interface - Multiple chart format support (mbtiles, gemf, xml) - Route planning and navigation - AIS integration - Anchor watch functionality - NMEA data display and logging - Plugin system for extensions</p>
+                            <div class="install-cmd">sudo apt install avnav-container</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>cockpit-apt <span class="version">v0.2.0-7</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Modern APT package manager interface for Cockpit A web-based package manager interface for Cockpit that provides: - Browse packages by Debian section (games, web, development, etc.) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - View available package updates - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing APT packages through Cockpit&#x27;s web interface, designed for Debian and Ubuntu systems.</p>
+                            <div class="install-cmd">sudo apt install cockpit-apt</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>cockpit-dockermanager <span class="version">v1.0.7-3</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Cockpit plugin for Docker container management Docker Manager is a lightweight and intuitive utility designed to help you manage your Docker containers via a simplified web interface through Cockpit. . Features: * List, start, stop, search and restart containers * View container status, uptime, details and exposed ports * In-window terminal with individual container terminal functionality * Image management</p>
+                            <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>grafana-container <span class="version">v11.3.2-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Data visualization and monitoring platform Grafana is an open-source platform for monitoring and observability. Create beautiful dashboards to visualize marine data from InfluxDB, Signal K, and other data sources. . Features: - Rich visualization options (graphs, gauges, maps) - Multiple data source support - Alert notifications - Dashboard sharing and templating - Plugin ecosystem</p>
+                            <div class="install-cmd">sudo apt install grafana-container</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halos <span class="version">v0.1.0-4</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Base system metapackage for HaLOS This metapackage installs the base HaLOS system, providing web-based Raspberry Pi management through Cockpit. . The HaLOS base system includes: * Cockpit web interface for system management * Network configuration through cockpit-networkmanager * Storage management through cockpit-storaged * Package management through cockpit-apt * Custom HaLOS branding . HaLOS is a Debian-based operating system designed for easy management of Raspberry Pi systems through a web interface.</p>
+                            <div class="install-cmd">sudo apt install halos</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halos-marine <span class="version">v0.1.0-4</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
+                            <div class="install-cmd">sudo apt install halos-marine</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>influxdb-container <span class="version">v2.7.10-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Time-series database for marine data logging InfluxDB is a high-performance time-series database designed for handling large volumes of timestamped data. Perfect for marine applications to store and analyze historical data from Signal K, sensors, and other sources. . Features: - High-performance time-series data storage - Built-in web UI for data exploration - Powerful query language (Flux) - Retention policies for automatic data management - Integration with Grafana for visualization</p>
+                            <div class="install-cmd">sudo apt install influxdb-container</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>marine-container-store <span class="version">v0.1.0-6</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Marine container application store definition for Cockpit APT This package provides the store definition and branding for the Marine container application store, designed to work with cockpit-apt. . When installed alongside cockpit-apt, it enables a curated view of marine and sailing applications including navigation software, chart plotters, weather routing, data logging, and monitoring dashboards. . The store filters packages from apt.hatlabs.fi and other repositories based on Debian tags (debtags), sections, and package metadata.</p>
+                            <div class="install-cmd">sudo apt install marine-container-store</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>opencpn-container <span class="version">v5.10.2-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Open source chart plotter and navigation software OpenCPN is a free software project to create a concise chart plotter and navigation software for use as an underway or planning tool. Designed to be used at the helm station of your boat while underway. . Features: - Raster and vector chart support - AIS target tracking - GPS and autopilot integration - Weather routing and GRIB file support - Extensive plugin system - Route and waypoint management</p>
+                            <div class="install-cmd">sudo apt install opencpn-container</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>signalk-server-container <span class="version">v2.17.2-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Signal K server for marine data processing and routing Signal K is a modern and open data format for marine use. A Signal K server provides a central hub for collecting, processing, and distributing marine data from multiple sources including NMEA 0183, NMEA 2000, and other sensors. . Features: - WebSocket API for real-time data streaming - Data logging and historical playback - Web app server for marine applications - Plugin system for extending functionality - Instrument integration and display</p>
+                            <div class="install-cmd">sudo apt install signalk-server-container</div>
+                        </div>
+                        </div>
+                    </details>
+                    <details class="component-group" open>
+                        <summary>Hat Labs Products <span class="pkg-count">(6 packages)</span></summary>
+                        <div class="component-content">
+                        <div class="package-item">
+                            <h4>casaos-docker-service <span class="version">v0.4.15-2</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">CasaOS containerized service for Halos CasaOS provides a user-friendly web interface for managing Docker containers. This package installs CasaOS as a containerized service using Docker Compose. . CasaOS runs in a Docker container and provides: - Container management through web UI - App store functionality - Simple Docker management for non-technical users . The web interface is accessible on port 80 after installation.</p>
+                            <div class="install-cmd">sudo apt install casaos-docker-service</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>cockpit-package-manager <span class="version">v0.1.1-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Cockpit-based package manager using PackageKit A web-based package manager interface for Cockpit that provides: - Browse packages by PackageKit group (cross-distribution compatible) - Search and filter packages by name or description - View detailed package information, dependencies, and file lists - Install and remove packages with progress tracking - Modern React-based UI with PatternFly components . This package provides a modern, user-friendly interface for managing system packages through Cockpit&#x27;s web interface using the PackageKit D-Bus API for cross-distribution compatibility.</p>
+                            <div class="install-cmd">sudo apt install cockpit-package-manager</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpi2-firmware <span class="version">v3.2.0</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Firmware for the HALPI2 Computer This package contains the firmware for the HALPI2 Computer onboard controller. The firmware is automatically flashed to the device upon installation.</p>
+                            <div class="install-cmd">sudo apt install halpi2-firmware</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpi2-rust-daemon <span class="version">v5.0.0-1</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">Power monitor and watchdog daemon for HALPI2 HALPI2 power monitoring and watchdog daemon (Rust implementation). Provides power management, blackout detection, and hardware watchdog functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.</p>
+                            <div class="install-cmd">sudo apt install halpi2-rust-daemon</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpid <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">HALPI2 service daemon `halpid` is a power monitor and watchdog service for HALPI2. It communicates with the HALPI2 controller, providing the &quot;smart&quot; aspects of the operation. . The main use case for the service software is to have the Raspberry Pi Operating System shut down once the power is cut. This prevents potential file system corruption without having to shut down the device manually.</p>
+                            <div class="install-cmd">sudo apt install halpid</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halpid-dbgsym <span class="version">v4.0.7</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">debug symbols for halpid</p>
+                            <div class="install-cmd">sudo apt install halpid-dbgsym</div>
+                        </div>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>
@@ -86,7 +126,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 12:17:09 UTC</p>
+            <p>Last updated: 2025-11-22 12:42:06 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

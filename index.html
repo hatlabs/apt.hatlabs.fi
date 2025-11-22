@@ -17,9 +17,9 @@
             <h3>🔐 Repository Setup</h3>
             <p>Add the Hat Labs repository to your system:</p>
             <div class="command-block">curl -fsSL https://apt.hatlabs.fi/hat-labs-apt-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/hatlabs.gpg
-echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi <distribution> main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
+echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi <distribution> <components>" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list
 sudo apt update</div>
-            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution (see below)</small></p>
+            <p style="margin-top: 10px;"><small>Replace <code>&lt;distribution&gt;</code> with your desired distribution and <code>&lt;components&gt;</code> with available components (e.g., <code>main hatlabs</code>)</small></p>
         </div>
 
         <div class="dist-section">
@@ -35,7 +35,7 @@ sudo apt update</div>
             </div>
             <div class="dist-card">
                 <h3><a href="unstable.html">Unstable</a></h3>
-                <p class="dist-meta">0 packages</p>
+                <p class="dist-meta">2 packages</p>
                 <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -43,7 +43,7 @@ sudo apt update</div>
 
                 <strong>Add this distribution:</strong>
                 <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="margin-top: 15px;"><a href="unstable.html" style="color: #4299e1; text-decoration: none;">View all 0 packages →</a></p>
+                <p style="margin-top: 15px;"><a href="unstable.html" style="color: #4299e1; text-decoration: none;">View all 2 packages →</a></p>
             </div>
         </div>
         <div class="dist-section">
@@ -51,31 +51,43 @@ sudo apt update</div>
             <p style="margin-bottom: 20px; color: #4a5568;">Halos-specific packages for different Debian/Raspberry Pi OS releases</p>
             <div class="dist-card">
                 <h3><a href="bookworm-stable.html">Bookworm Stable</a></h3>
-                <p class="dist-meta">0 packages</p>
+                <p class="dist-meta">5 packages</p>
                 <p class="dist-desc">Halos packages for Debian Bookworm (stable releases)</p>
                 <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="margin-top: 15px;"><a href="bookworm-stable.html" style="color: #4299e1; text-decoration: none;">View all 0 packages →</a></p>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-stable hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="margin-top: 15px;"><a href="bookworm-stable.html" style="color: #4299e1; text-decoration: none;">View all 5 packages →</a></p>
+            </div>
+            <div class="dist-card">
+                <h3><a href="bookworm-unstable.html">Bookworm Unstable</a></h3>
+                <p class="dist-meta">2 packages</p>
+                <p class="dist-desc">Halos packages for Debian Bookworm (rolling)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-unstable hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="margin-top: 15px;"><a href="bookworm-unstable.html" style="color: #4299e1; text-decoration: none;">View all 2 packages →</a></p>
             </div>
             <div class="dist-card">
                 <h3><a href="trixie-stable.html">Trixie Stable</a></h3>
-                <p class="dist-meta">10 packages</p>
+                <p class="dist-meta">16 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (stable releases)</p>
                 <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="margin-top: 15px;"><a href="trixie-stable.html" style="color: #4299e1; text-decoration: none;">View all 10 packages →</a></p>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-stable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="margin-top: 15px;"><a href="trixie-stable.html" style="color: #4299e1; text-decoration: none;">View all 16 packages →</a></p>
             </div>
             <div class="dist-card">
                 <h3><a href="trixie-unstable.html">Trixie Unstable</a></h3>
-                <p class="dist-meta">10 packages</p>
+                <p class="dist-meta">13 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
                 </div>
 
                 <strong>Add this distribution:</strong>
-                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
-                <p style="margin-top: 15px;"><a href="trixie-unstable.html" style="color: #4299e1; text-decoration: none;">View all 10 packages →</a></p>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi trixie-unstable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="margin-top: 15px;"><a href="trixie-unstable.html" style="color: #4299e1; text-decoration: none;">View all 13 packages →</a></p>
             </div>
         </div>
         <div class="info-box">
@@ -88,7 +100,7 @@ sudo apt update</div>
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 12:17:09 UTC</p>
+            <p>Last updated: 2025-11-22 12:42:06 UTC</p>
             <p>Repository URL: <code>https://apt.hatlabs.fi</code></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
