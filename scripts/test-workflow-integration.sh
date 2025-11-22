@@ -163,7 +163,6 @@ echo "Scenario: halpi2-daemon with distro=any should be in:"
 echo "  - pool/stable/main (legacy)"
 echo "  - pool/bookworm-stable/hatlabs"
 echo "  - pool/trixie-stable/hatlabs"
-echo "  - pool/forky-stable/hatlabs"
 echo ""
 
 route_package "$TEST_DIR/packages/halpi2-daemon_1.0.0-1_all.deb" "stable" "$TEST_DIR"
@@ -176,9 +175,6 @@ assert_file_exists "$TEST_DIR/apt-repo/pool/bookworm-stable/hatlabs/halpi2-daemo
 
 assert_file_exists "$TEST_DIR/apt-repo/pool/trixie-stable/hatlabs/halpi2-daemon_1.0.0-1_all.deb" \
   "halpi2-daemon in trixie-stable/hatlabs"
-
-assert_file_exists "$TEST_DIR/apt-repo/pool/forky-stable/hatlabs/halpi2-daemon_1.0.0-1_all.deb" \
-  "halpi2-daemon in forky-stable/hatlabs"
 
 # ============================================================================
 # Test 3: Component preservation
