@@ -33,6 +33,18 @@ sudo apt update</div>
                 <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi stable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
                 <p style="margin-top: 15px;"><a href="stable.html" style="color: #4299e1; text-decoration: none;">View all 5 packages →</a></p>
             </div>
+            <div class="dist-card">
+                <h3><a href="unstable.html">Unstable</a></h3>
+                <p class="dist-meta">0 packages</p>
+                <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
+                <div class="warning-box">
+                    <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
+                </div>
+
+                <strong>Add this distribution:</strong>
+                <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi unstable main" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                <p style="margin-top: 15px;"><a href="unstable.html" style="color: #4299e1; text-decoration: none;">View all 0 packages →</a></p>
+            </div>
         </div>
         <div class="dist-section">
             <h2>🌊 Halos Operating System Packages</h2>
@@ -76,7 +88,7 @@ sudo apt update</div>
         </div>
 
         <footer>
-            <p>Last updated: 2025-11-22 12:02:29 UTC</p>
+            <p>Last updated: 2025-11-22 12:17:09 UTC</p>
             <p>Repository URL: <code>https://apt.hatlabs.fi</code></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
