@@ -5,10 +5,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20240520-1_all.deb
-Size: 4964
-MD5sum: fbd80ab3b4fbdb21afbec65ad3d41c85
-SHA1: 4bbf338a07d64d47bdde4b88839e8291623f7c17
-SHA256: 7079a7491c2ac1bdd464abc527ee16cedea3612128d75d19c450bc452e468a67
+Size: 4956
+MD5sum: fd4f1a51617bc8d5d7b6ddfd0f879738
+SHA1: 93d02e586e2182bd63b14b13707a0306ebe8e6bc
+SHA256: c2725c2a7d1551c022a988553ff61d6887e7e2924c45529b646705920680b052
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -110,17 +110,17 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: grafana-container
-Version: 11.3.2-1
+Version: 12.1.4-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: influxdb-container
-Filename: pool/trixie-unstable/main/grafana-container_11.3.2-1_all.deb
-Size: 4856
-MD5sum: 149e0b3cdfe03ac36343efb19073f36b
-SHA1: 9b8722f1853baf7ded12072efc9864e16f3444f2
-SHA256: 2966f49dea896dab1d70a99331ae2b8240289dff0692dc6960a777116e4a3859
+Filename: pool/trixie-unstable/main/grafana-container_12.1.4-1_all.deb
+Size: 4848
+MD5sum: d67b8a286d02f17112871fc2ac43172a
+SHA1: 666fb5f2385860a9ace5204f94af733311e23a26
+SHA256: 251ca55839ca35da096adec689201929f65e9cfb8588196903980c0e97326d0a
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -192,16 +192,16 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: influxdb-container
-Version: 2.7.10-1
+Version: 2.7.12-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 38
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/influxdb-container_2.7.10-1_all.deb
-Size: 5224
-MD5sum: 799984129d36ace78abffaf8bc2f9077
-SHA1: 90b89e31c38b4cc13df43f0067c906840164cbf9
-SHA256: 4d7898f8260090de2c96d55427284cb23232da7b030dba4645b0fc79f05c6d81
+Filename: pool/trixie-unstable/main/influxdb-container_2.7.12-1_all.deb
+Size: 5216
+MD5sum: a2b6841b7acbff5c603e5c1c0b4406b5
+SHA1: d20f881cee5ed9e57a237160c26aa7868a62e836
+SHA256: cd594e0e7b9bcb3a5af86ad38be8f52ec61c9974d4abfdda5ccd489ffe19fc47
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -243,16 +243,16 @@ Description: Marine container application store definition for Cockpit APT
  based on Debian tags (debtags), sections, and package metadata.
 
 Package: opencpn-container
-Version: 5.10.2-1
+Version: 5.10.2-2
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/opencpn-container_5.10.2-1_all.deb
+Filename: pool/trixie-unstable/main/opencpn-container_5.10.2-2_all.deb
 Size: 4956
-MD5sum: 52c74fbf587442261a23a7c72233a882
-SHA1: abd89641710a23a02e3ae93f79b100cc430c4cda
-SHA256: 949b8359edb81326d5413159d696d3456eb9b60ff18688213069ad94bfe6b279
+MD5sum: 0e330e2a5d2161e7cb9486f916b4797d
+SHA1: 9c707cc728f334268664f2d978bd6930e9c2e9f9
+SHA256: 44fb4351540dc0b901c61f9d144513dc4aa4634f25be5a516a824a693b9f2104
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -271,16 +271,16 @@ Description: Open source chart plotter and navigation software
 Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
 
 Package: signalk-server-container
-Version: 2.18.0-1
+Version: 2.18.0-2
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-1_all.deb
+Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-2_all.deb
 Size: 4960
-MD5sum: 274f3ed3be1bd115b7062e053c560145
-SHA1: 1b9e8a6f4f4c23db5702506df495e2b4a85819d3
-SHA256: aedd9348d509934319f6076d42719601f97d8f3f64722c84b120e7364687d934
+MD5sum: 2a3e85d8353802ec1350c7a86b4687ad
+SHA1: 30ee6678c2a55d002d95f651392a3b7b1066c2c9
+SHA256: ee4b51354b62daeda1664cf82711b5cb919c089e716d26b1cc6e5a1443210753
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
