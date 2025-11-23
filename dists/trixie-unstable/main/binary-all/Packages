@@ -6,9 +6,9 @@ Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20251028-2_all.deb
 Size: 5080
-MD5sum: 046bc0b42f31a758d438f417029ee9be
-SHA1: ea1b2e174b77b2207694c2823f961aa9d7f7f828
-SHA256: a7423d2dba6a9ece46d1e9afe1e3e06471897f05e87700dadc149698612ffa21
+MD5sum: 297343a49992ebe6fad593f7bf53ecd5
+SHA1: 97a14018ba7cedbeb9d20e13f26127da0b8f53f1
+SHA256: 817e2980a456e672680e4be3a52de9f93d607000c4fe4f1f29c02d2ec0f845a2
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -88,9 +88,9 @@ Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.i
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/grafana-container_12.1.4-6_all.deb
 Size: 4984
-MD5sum: 9d78cb95077c0879d61ce71405052610
-SHA1: 121f6fb02e6b5b641cd01e6f39bd992e20def43c
-SHA256: 89729ade4f3b8a9ace63f57f02056e2748e888a22d3c5837ea1bfaa193573dd8
+MD5sum: 837cf686a8ab30942c110769db1296fc
+SHA1: d944f861cee7bbb4d0c6e42b0753c5ad31e0a45f
+SHA256: 65b1902503a5145ed9a1714199832a0d7fdc6f02f42f076d0189a8a100b452bf
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -169,9 +169,9 @@ Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/influxdb-container_2.7.12-5_all.deb
 Size: 5340
-MD5sum: 83e6e5ec2272ce0b9c365ad25c20077f
-SHA1: b9f15f211dc105ab7f25f2f6c7c73c279f5dda3a
-SHA256: 49a586f2700adfa2f0cc81c73f966fe131f38a97cd97587ae617f1fd30a32ead
+MD5sum: 83977ffad05e03bdfe908402726d93ed
+SHA1: 369330d5345ab71b3db9add559cf7cd05082c0ba
+SHA256: 9a5add5b3be4eacc296b810be080b022488608d75023e8c67d7b2da2da87795e
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -213,16 +213,16 @@ Description: Marine container application store definition for Cockpit APT
  based on Debian tags (debtags), sections, and package metadata.
 
 Package: opencpn-container
-Version: 5.12.4-2
+Version: 5.12.4-3
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/opencpn-container_5.12.4-2_all.deb
-Size: 5068
-MD5sum: 924dd32300ff8a93226723a40f7c4c74
-SHA1: 2f20b69f91d224a5324525563493798160dc353c
-SHA256: 154b3797442bb3cef921a275e899a3389b079cebbe4d37b6bd5756cd5ee77fe0
+Filename: pool/trixie-unstable/main/opencpn-container_5.12.4-3_all.deb
+Size: 5072
+MD5sum: ff37500819c304ed42b27cd234b5174e
+SHA1: 81beacaf198028b45be1df1066b02e652047c6a7
+SHA256: 466d1e6209334f7564d151db52ac8766d06dc6aaf0cbd1d07e23558032bd2ef4
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -247,10 +247,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-6_all.deb
-Size: 5084
-MD5sum: 50a8727e2a33fcdbd398af87106d84d5
-SHA1: f7c9040fbe8c586bb3b1378ee85a8e994a4a6327
-SHA256: be1fa570ca0af55e577f45d2e1d471f6972dc5644d846b905dcbb2c3f6201426
+Size: 5088
+MD5sum: e35c8e0fcd31dc5368d103753312c007
+SHA1: 3185916bbbdca76a1515b16e30cb4a21b785eed9
+SHA256: de9063fd551aadda4697e8297bda51756b7d0885f443e0b6eafa7889f9b31061
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
