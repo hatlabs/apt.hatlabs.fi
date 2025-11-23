@@ -54,24 +54,6 @@ Description: Modern APT package manager interface for Cockpit
  APT packages through Cockpit's web interface, designed for Debian
  and Ubuntu systems.
 
-Package: cockpit-branding-halos
-Version: 0.2.0-2
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 40
-Depends: cockpit
-Filename: pool/trixie-unstable/main/cockpit-branding-halos_0.2.0-2_all.deb
-Size: 19978
-MD5sum: 0f994121fbc23f146aab712aeb3c6f00
-SHA1: 7ca42577e16756017895f31fd3f842ab7933b5d1
-SHA256: eb516017db5e44b8d6cf873715be7eb5ca66af6735be96fa9f7921faf48104b6
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-distro
-Description: Custom HaLOS branding for Cockpit
- This package provides the Hat Labs "HaLOS" branding for the Cockpit
- web interface, including custom logo, CSS, and favicon.
-
 Package: cockpit-dockermanager
 Version: 1.0.7-4
 Architecture: all
@@ -96,36 +78,6 @@ Description: Cockpit plugin for Docker container management
   * View container status, uptime, details and exposed ports
   * In-window terminal with individual container terminal functionality
   * Image management
-
-Package: container-packaging-tools
-Version: 0.2.0-5
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 112
-Depends: python3-jinja2, python3-pydantic (>= 2.0), python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-5_all.deb
-Size: 21752
-MD5sum: ae4ce243080f1b9ce0195d8e9f3a2b3e
-SHA1: 6d6af97e8a7bfb676dfbdb8ef0ac8a481ca81b5f
-SHA256: 638072efc815fc96c04ccab9ad4e5ba448728319e949c1d79b57f4a3a2f29db3
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
 
 Package: grafana-container
 Version: 11.3.2-1
