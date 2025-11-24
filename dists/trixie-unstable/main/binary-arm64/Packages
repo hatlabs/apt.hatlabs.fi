@@ -72,6 +72,33 @@ Description: Custom HaLOS branding for Cockpit
  This package provides the Hat Labs "HaLOS" branding for the Cockpit
  web interface, including custom logo, CSS, and favicon.
 
+Package: cockpit-container-apps
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 11913
+Depends: python3-yaml, python3:any, cockpit (>= 276), python3-apt
+Filename: pool/trixie-unstable/main/cockpit-container-apps_0.1.0-1_all.deb
+Size: 1217004
+MD5sum: 0531d48752b0653bd2f3874854cd012c
+SHA1: c8b6db664ba066d214146c66782a1e33e2973e1e
+SHA256: cb47fcb7befd8de1686fec152c34c2845758af616fb0b533e5dc2a37d83a2ff4
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-container-apps
+Description: Container app management interface for Cockpit
+ A web-based container app manager interface for Cockpit that provides:
+  - Browse container apps by store and category
+  - Search and filter apps by name or description
+  - View detailed app information and configuration
+  - Install and remove container app packages
+  - Configure container apps through dynamic forms
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a user-friendly interface for managing container
+ applications through Cockpit's web interface, designed for the HaLOS
+ distribution.
+
 Package: cockpit-dockermanager
 Version: 1.0.7-4
 Architecture: all
