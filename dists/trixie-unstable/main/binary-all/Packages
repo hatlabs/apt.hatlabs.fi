@@ -5,10 +5,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/avnav-container_20251028-2_all.deb
-Size: 4964
-MD5sum: 1a569098a98dffb4d4e667890efb9663
-SHA1: a9b41caf12e23cfe1c226a8170a5a93c04a11d13
-SHA256: 6597d53c8fcbf022269bb2c7874db076beff51d21deda14ca14ea4fb30d27a82
+Size: 4970
+MD5sum: a39e9a5df0211ec3f977a2be823be519
+SHA1: 2e44243a1c8daee6237ee6ef68cf9a997367401d
+SHA256: efbfb3639475b000e35049ec1bfc22bb5130e1f76d013a33b06d31fe0eba0878
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -132,10 +132,10 @@ Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/grafana-container_12.1.4-6_all.deb
-Size: 4858
-MD5sum: 1002d92d931a2e0f71b527002a4754f9
-SHA1: 29c94bb452e628165cadf526cab95304bd67da14
-SHA256: 8677fca03bb4ba8a0285567f7704894150186fc400be90286d853819b93b472a
+Size: 4854
+MD5sum: 4fa17f6f54fc3c58f8c8fe62d9e9439e
+SHA1: 70beab3e6d469c749799f1bc27c655820c47295a
+SHA256: ef96c635eb2d4a30b7f9ea04cd9a13fff9598719e97e25698942ba6a8518f53f
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -213,10 +213,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/influxdb-container_2.7.12-5_all.deb
-Size: 5242
-MD5sum: 10ef27b8738ccf0cda210bc39c80660e
-SHA1: 6fb8af0a115335789e09585ba2b2fe8978c0c236
-SHA256: 4ec4b70ad35f1f7d318dca84a0c0db5866ef29b04ef6253117bad2a8c9d6ff47
+Size: 5244
+MD5sum: 5927c1aa0500d705b8df5c50cbe3920d
+SHA1: c589fc9584cf3b6ff8d5b3213cdce3589310dbff
+SHA256: 318b8d87fff910cc10cba8e06619eda43750b65253cf1b3fe3f1904481de027b
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -234,15 +234,15 @@ Description: Time-series database for marine data logging
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-container-store
-Version: 0.1.0-1
+Version: 0.2.0-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 17
-Filename: pool/trixie-unstable/main/marine-container-store_0.1.0-1_all.deb
-Size: 2810
-MD5sum: 73f30c211be429749fd19d8fb0518330
-SHA1: 263f20cc19c135d33f9f2a46a9828f929dd64d00
-SHA256: 9d0946c1f7a74be25341825b163dad96378ce8901d3497123b2c961c7392ee5f
+Filename: pool/trixie-unstable/main/marine-container-store_0.2.0-1_all.deb
+Size: 2946
+MD5sum: cc2a55eaba9ef47a9a9c0eda8a0c0d46
+SHA1: 1251557d5a60c993bf5583740ce5a901d4a826f2
+SHA256: 05f5c972a8b4fa48d49ed1e69fe451b76946b8b063d5537e757588889b8bdaaa
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-marine-containers
@@ -264,10 +264,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/opencpn-container_5.12.4-3_all.deb
-Size: 4946
-MD5sum: 9ebc83a4b1a47917ce81f2fd2e7a0647
-SHA1: d019fc561b85d3ceb5459aa496d25a91d26b1786
-SHA256: 1ee5d4b0d3a1a90bafa5aefc067e14622d4661358cb11c2789ecfd0fcc3c352f
+Size: 4948
+MD5sum: 434fb4c8ba296b26f0b33aca671fa2a1
+SHA1: f9f6eaaae5433169ed9351104e6582c1d553291f
+SHA256: 8da5263fe3754bdec376557ba3dcff2c77b7e3a42130e011d9957d0c171a7e97
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -292,10 +292,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 36
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-6_all.deb
-Size: 4970
-MD5sum: 25e8528c88fc745e16c7512f8f2f08e5
-SHA1: 2b1893d90b1eb53f0f2bdabce3e30d3359164034
-SHA256: db3ee4dba78bc0d34f08a420162abac07f14a263d50773c1cadb50450a0d5c3e
+Size: 4978
+MD5sum: 48567446eb5c78ebb0a77baa9c783e46
+SHA1: 32679e032dd0c51b4180dfafc4dd6a9c5731fd67
+SHA256: fb41c487485cde1e215344538927beb7b08715341839e3283dadb81373ecfbf1
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
