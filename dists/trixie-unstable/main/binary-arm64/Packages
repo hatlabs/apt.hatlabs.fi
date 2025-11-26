@@ -73,16 +73,16 @@ Description: Custom HaLOS branding for Cockpit
  web interface, including custom logo, CSS, and favicon.
 
 Package: cockpit-container-apps
-Version: 0.1.0-3
+Version: 0.1.0-4
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 12100
+Installed-Size: 12125
 Depends: python3-yaml, python3:any, cockpit (>= 276), python3-apt
-Filename: pool/trixie-unstable/main/cockpit-container-apps_0.1.0-3_all.deb
-Size: 1198600
-MD5sum: 2ba7c94b5297a358dbf85f8661772bc5
-SHA1: dfd44329eaf9119197b57af1c483c2b15f07c805
-SHA256: edea2f0c1788801f520787286cbd30fd40f7b60abbfb848fa15c8608c5a74a0e
+Filename: pool/trixie-unstable/main/cockpit-container-apps_0.1.0-4_all.deb
+Size: 1202524
+MD5sum: be8ed6a375f64f056baaf7d20305f7fd
+SHA1: 171c91e22daf5a174cbed6f4fc63abbdd4f3f39f
+SHA256: c488e6638e7c09f91a13c2f3d5e09066bafed290a524568fe9545fe944f0eec5
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-container-apps
