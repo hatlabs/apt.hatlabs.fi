@@ -73,16 +73,16 @@ Description: Custom HaLOS branding for Cockpit
  web interface, including custom logo, CSS, and favicon.
 
 Package: cockpit-container-apps
-Version: 0.1.0-6
+Version: 0.1.0-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 12141
+Installed-Size: 12127
 Depends: python3-yaml, python3:any, cockpit (>= 276), python3-apt
-Filename: pool/trixie-unstable/main/cockpit-container-apps_0.1.0-6_all.deb
-Size: 1204944
-MD5sum: decda90c4c3441ebb0970c65703d39ea
-SHA1: d4f906376f9e0299f775d90fa60b8b0a1efcd492
-SHA256: 3d0357f586506de5451a97ee40e413d08f14997f6befe2b4f0a3853d20ed973f
+Filename: pool/trixie-unstable/main/cockpit-container-apps_0.1.0-5_all.deb
+Size: 1202968
+MD5sum: 36d10ba8a9e21df26fbac6505d4a7aba
+SHA1: 21a62b3d1b8a71040964bae5b10d65c0bf7dc565
+SHA256: e6cdae6ea4cf6e1f7ee3e68c0bda879221aebce8dfd329ecdd11a858104cee21
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-container-apps
@@ -125,16 +125,16 @@ Description: Cockpit plugin for Docker container management
   * Image management
 
 Package: container-packaging-tools
-Version: 0.2.0-14
+Version: 0.2.0-15
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 147
+Installed-Size: 165
 Depends: python3-jinja2, python3-pydantic (>= 2.0), python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-14_all.deb
-Size: 25540
-MD5sum: 0f342a9440a574f550a9ab22a09f346f
-SHA1: 9cea74d2fa22c253aa99a743c1b86fc02107ab77
-SHA256: f3839a402fce218490708f70912d1920a200dfc2b5beeea2b4a36988559857c0
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-15_all.deb
+Size: 28640
+MD5sum: 4c2385907f3ddfa3db74ef70254f49a4
+SHA1: 14f72d310d9fe4dea3eed6a99de9620a2fd1e5a0
+SHA256: d6e5dbdf40a686f2deca0f20b78ad4807f5efc6be7a58bac386df59e4b53a124
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
