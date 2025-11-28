@@ -28,16 +28,16 @@ Description: Touch-optimized chart plotter for sailing and motor yachts
 Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
 
 Package: cockpit-apt
-Version: 0.2.0-14
+Version: 0.2.0-15
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 13661
+Installed-Size: 13644
 Depends: cockpit (>= 276), python3-apt
-Filename: pool/trixie-unstable/main/cockpit-apt_0.2.0-14_all.deb
-Size: 1357156
-MD5sum: b8130a410188c48880e2d4217e094d8b
-SHA1: 1f3f247d8cc572ccd39df0438c644df980530c58
-SHA256: 13360157ad5a80adc8e8d069263856fb5e412ec5731347d5334b517af8a0d610
+Filename: pool/trixie-unstable/main/cockpit-apt_0.2.0-15_all.deb
+Size: 1354888
+MD5sum: 2753aba3a342163bc315b58a2f7f82b4
+SHA1: 2d1d59440c2a8fffc8a6e063c6f408f4d0b65bc9
+SHA256: ef28e15d83a72d27f9487aa0b45a26179388def5741bf463060db6c1b2282f7f
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-apt
