@@ -237,16 +237,16 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: homarr-container
-Version: 1.45.3-2
+Version: 1.45.3-3
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 68
+Installed-Size: 69
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/homarr-container_1.45.3-2_all.deb
-Size: 34694
-MD5sum: f6c74d3bbac72bf16f8253d658f4f7a4
-SHA1: f3a54ad6e2e8698227885d41c20d141ddf5e5b6b
-SHA256: d5435ea986c822268f7ed7ba1965bdb751ae8e5f1ce546c05708f85a111bf5b0
+Filename: pool/trixie-unstable/main/homarr-container_1.45.3-3_all.deb
+Size: 34896
+MD5sum: bb9968f1b64ca369cfdc048233505103
+SHA1: a3f36b69009965fec593e2d914bb984055b6fa99
+SHA256: 56f03ddf2b83da87c2f0421fa4586ebb79113981b9ae8f6ffaff8c0ab1f46657
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
