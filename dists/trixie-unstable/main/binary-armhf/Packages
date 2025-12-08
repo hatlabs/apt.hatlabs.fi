@@ -236,6 +236,34 @@ Description: HaLOS marine system metapackage
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
 
+Package: homarr-container
+Version: 1.45.3-1
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 68
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/homarr-container_1.45.3-1_all.deb
+Size: 34682
+MD5sum: 17aef8ad3ae1c58b66224bf3f4578bb5
+SHA1: 08a94e2b7e11385ab247aa3f2a3e17686615febd
+SHA256: 1572f3888c244c2e40912ed95648b970e33d2133cee3fe01e984871b2a932c47
+Section: web
+Priority: optional
+Homepage: https://homarr.dev/
+Description: Dashboard landing page for HaLOS
+ Homarr provides a unified dashboard landing page for accessing all installed
+ container applications. It serves as the primary entry point for users
+ accessing their HaLOS system.
+ .
+ Features:
+ - Visual dashboard showing all installed container apps
+ - Auto-discovery of newly installed applications
+ - Drag and drop configuration without YAML
+ - User-customizable layout and organization
+ - Quick access to Cockpit and system information
+ - 30+ integrations for various services
+Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
+
 Package: influxdb-container
 Version: 2.7.12-5
 Architecture: all
