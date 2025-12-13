@@ -206,6 +206,26 @@ Description: HaLOS marine system metapackage
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
 
+Package: homarr-container-adapter
+Version: 0.1.0-1
+Architecture: arm64
+Maintainer: Hat Labs Ltd <info@hatlabs.fi>
+Depends: homarr-branding-halos
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-1_arm64.deb
+Size: 1924004
+MD5sum: ebb279f5cf9336fff037544366b42411
+SHA1: ef6a923111571326ab3886602789ba89fdbff5f9
+SHA256: abb5bc28607cc504e096a284e4216bcd6ec7eb3b96bce22629bacc0a25b3807f
+Description: Homarr dashboard adapter for HaLOS
+ Adapter service that handles first-boot setup and container
+ auto-discovery for the Homarr dashboard.
+ .
+ Features:
+  - Completes Homarr onboarding with HaLOS branding
+  - Creates admin user and default dashboard
+  - Watches Docker events for real-time container discovery
+  - Auto-adds containers with homarr.* labels to dashboard
+
 Package: influxdb-container
 Version: 2.7.12-5
 Architecture: all
