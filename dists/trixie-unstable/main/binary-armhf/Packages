@@ -124,6 +124,36 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
+Package: container-packaging-tools
+Version: 0.2.0-32
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 302
+Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-32_all.deb
+Size: 56860
+MD5sum: 1830ad652aa341a10decb23653f8ab4a
+SHA1: 722e4236c972c579a5ccd993a007d4acf1e10302
+SHA256: 51339e9c76ae224d0750c4f5064c902a04b3c271782835960e80d83819cbf2d5
+Section: devel
+Priority: optional
+Homepage: https://github.com/hatlabs/container-packaging-tools
+Description: Generate Debian packages from container application definitions
+ container-packaging-tools is a command-line tool that converts simple
+ container app definitions into full-fledged Debian packages. It eliminates
+ the need for package maintainers to understand Debian packaging internals.
+ .
+ Features:
+  - Template-based generation using Jinja2
+  - Input validation with JSON schemas
+  - Consistent package structure across all apps
+  - Support for Docker Compose orchestration
+  - Systemd service integration
+ .
+ The tool reads docker-compose.yml, config.yml, and metadata.json from
+ application directories and generates complete Debian package structures
+ ready for building with dpkg-buildpackage.
+
 Package: grafana-container
 Version: 12.1.4-6
 Architecture: all
