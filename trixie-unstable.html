@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">161 packages</p>
+                <p class="dist-meta">162 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(12 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(13 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>avnav-container <span class="version">v20251028-2</span> <span class="arch-badge">all</span></h4>
@@ -67,6 +67,11 @@
                             <h4>halos-marine <span class="version">v0.1.0-7</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
                             <div class="install-cmd">sudo apt install halos-marine</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>homarr-container-adapter <span class="version">v0.1.0-2</span> <span class="arch-badge">arm64</span></h4>
+                            <p class="description">Homarr dashboard adapter for HaLOS Adapter service that handles first-boot setup and container auto-discovery for the Homarr dashboard. . Features: - Completes Homarr onboarding with HaLOS branding - Creates admin user and default dashboard - Watches Docker events for real-time container discovery - Auto-adds containers with homarr.* labels to dashboard</p>
+                            <div class="install-cmd">sudo apt install homarr-container-adapter</div>
                         </div>
                         <div class="package-item">
                             <h4>influxdb-container <span class="version">v2.7.12-5</span> <span class="arch-badge">all</span></h4>
@@ -859,7 +864,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-12-14 09:45:08 UTC</p>
+            <p>Last updated: 2025-12-14 10:36:57 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
