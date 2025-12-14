@@ -311,6 +311,35 @@ Description: Time-series database for marine data logging
  - Integration with Grafana for visualization
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
+Package: marine-avnav-container
+Version: 20251028-2
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 97
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-2_all.deb
+Size: 65174
+MD5sum: cd805de061406d3466378e0073707629
+SHA1: 3f5096bd77f2178a3160901ce98d3e12083782bc
+SHA256: 58fdb74ec623e978bf7c7746eb06bdbfcfb8be869bed3be507a2e9db647f4614
+Section: graphics
+Priority: optional
+Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
+Description: Touch-optimized chart plotter for sailing and motor yachts
+ AvNav is a navigation software specifically designed for touch operation on
+ tablets and smartphones. It combines a chart plotter with routing
+ capabilities and integration with marine electronics.
+ .
+ Features:
+ - Touch-optimized web interface
+ - Multiple chart format support (mbtiles, gemf, xml)
+ - Route planning and navigation
+ - AIS integration
+ - Anchor watch functionality
+ - NMEA data display and logging
+ - Plugin system for extensions
+Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
+
 Package: marine-container-store
 Version: 0.2.0-1
 Architecture: all
@@ -334,6 +363,116 @@ Description: Marine container application store definition for Cockpit APT
  .
  The store filters packages from apt.hatlabs.fi and other repositories
  based on Debian tags (debtags), sections, and package metadata.
+
+Package: marine-grafana-container
+Version: 12.1.4-6
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 43
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Recommends: influxdb-container
+Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-6_all.deb
+Size: 7348
+MD5sum: cb115d422b52419d33f3cdaefbd57229
+SHA1: f0d5f53fc090198e8b5153a19ec5c78d6d1d3b7f
+SHA256: c1addae5ee40ceda47855274e35ac53cfbc8e276e05c88e6432acc37b956b0f1
+Section: web
+Priority: optional
+Homepage: https://grafana.com/
+Description: Data visualization and monitoring platform
+ Grafana is an open-source platform for monitoring and observability. Create
+ beautiful dashboards to visualize marine data from InfluxDB, Signal K, and
+ other data sources.
+ .
+ Features:
+ - Rich visualization options (graphs, gauges, maps)
+ - Multiple data source support
+ - Alert notifications
+ - Dashboard sharing and templating
+ - Plugin ecosystem
+Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
+
+Package: marine-influxdb-container
+Version: 2.7.12-5
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 42
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-5_all.deb
+Size: 6546
+MD5sum: 824b97737fce296d5a423f790eaf76f9
+SHA1: f2612d0bc3df07e5fe44c6f9cf56d1ebf629c53d
+SHA256: a7c12a38de9dc950c39cd8916773a6c03da8db39774ce5b044eabe41149934ef
+Section: net
+Priority: optional
+Homepage: https://www.influxdata.com/
+Description: Time-series database for marine data logging
+ InfluxDB is a high-performance time-series database designed for handling
+ large volumes of timestamped data. Perfect for marine applications to store
+ and analyze historical data from Signal K, sensors, and other sources.
+ .
+ Features:
+ - High-performance time-series data storage
+ - Built-in web UI for data exploration
+ - Powerful query language (Flux)
+ - Retention policies for automatic data management
+ - Integration with Grafana for visualization
+Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
+
+Package: marine-opencpn-container
+Version: 5.12.4-3
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 44
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-3_all.deb
+Size: 11592
+MD5sum: 0aa8aacde906b5217a853939a8398fb3
+SHA1: f543cdaf997b5e2ff3189407c57c6ce244cc59fb
+SHA256: 060a2e6b44d984607f400bd0914c31572c34efd819964506ad3b2108c84a77e4
+Section: graphics
+Priority: optional
+Homepage: https://opencpn.org/
+Description: Open source chart plotter and navigation software
+ OpenCPN is a free software project to create a concise chart plotter and
+ navigation software for use as an underway or planning tool. Designed to
+ be used at the helm station of your boat while underway.
+ .
+ Features:
+ - Raster and vector chart support
+ - AIS target tracking
+ - GPS and autopilot integration
+ - Weather routing and GRIB file support
+ - Extensive plugin system
+ - Route and waypoint management
+Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
+
+Package: marine-signalk-server-container
+Version: 2.18.0-6
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 41
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-6_all.deb
+Size: 6842
+MD5sum: aa5042eebeab2fe2d1130da3c68d2ed9
+SHA1: 2441bcb7c9146de6771dc6c4458dd6195cfd2286
+SHA256: 9c26cf3febfe5de68be3d5e801c0fb7a6ad400ecbecac411333e4ec54d16f854
+Section: net
+Priority: optional
+Homepage: https://signalk.org/
+Description: Signal K server for marine data processing and routing
+ Signal K is a modern and open data format for marine use. A Signal K server
+ provides a central hub for collecting, processing, and distributing marine
+ data from multiple sources including NMEA 0183, NMEA 2000, and other sensors.
+ .
+ Features:
+ - WebSocket API for real-time data streaming
+ - Data logging and historical playback
+ - Web app server for marine applications
+ - Plugin system for extending functionality
+ - Instrument integration and display
+Tag: role::container-app, field::marine, category::communication, category::monitoring, interface::web, use::routing, network::server
 
 Package: opencpn-container
 Version: 5.12.4-3
