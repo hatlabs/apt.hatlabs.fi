@@ -155,6 +155,27 @@ Description: Base system metapackage for HaLOS
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
 
+Package: halos-homarr-branding
+Version: 0.1.0-3
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 31
+Depends: homarr-container
+Filename: pool/trixie-unstable/main/halos-homarr-branding_0.1.0-3_all.deb
+Size: 11390
+MD5sum: 2b896ff2c0a27ebc2278a38c354b9e47
+SHA1: ebf2f6214635364d6e57c2c8c9a8b427117a1213
+SHA256: 9af65802b7e4f19665c05f300b688525be741af999efee3ac9030cb2b07cb716
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-distro
+Description: HaLOS branding and default configuration for Homarr dashboard
+ This package provides the Hat Labs "HaLOS" branding configuration for
+ the Homarr dashboard, including default theme colors, admin credentials,
+ and pre-configured board layout. The homarr-container-adapter reads this
+ configuration during first-boot setup to initialize Homarr with HaLOS
+ branding.
+
 Package: halos-homarr-container
 Version: 1.45.3-5
 Architecture: all
