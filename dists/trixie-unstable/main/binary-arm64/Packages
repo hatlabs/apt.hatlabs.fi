@@ -252,15 +252,15 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: homarr-container-adapter
-Version: 0.1.0-6
+Version: 0.1.0-7
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: halos-homarr-branding
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-6_arm64.deb
-Size: 1921044
-MD5sum: 4dde88173bf7f80b89d476ddd1ba8f93
-SHA1: 1d19659c9643217268a72f4966116cf90af3553f
-SHA256: 18b473094ec582e102bbd3e62bdd291694fff3c922c8cd74c30f42f607429895
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-7_arm64.deb
+Size: 1926024
+MD5sum: 44b475ce3cad11c1e61eea9e81ca4857
+SHA1: 9c3ed67e5b2b7ad3df52cf081082768173e2ecb9
+SHA256: 1f756789642f441595c014d11a529b6efc8e56257650d5ca45283761c68c17c1
 Description: Homarr dashboard adapter for HaLOS
  Adapter service that handles first-boot setup and container
  auto-discovery for the Homarr dashboard.
