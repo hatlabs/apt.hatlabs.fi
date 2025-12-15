@@ -156,16 +156,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-homarr-branding
-Version: 0.1.0-6
+Version: 0.1.0-7
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 31
-Depends: homarr-container
-Filename: pool/trixie-unstable/main/halos-homarr-branding_0.1.0-6_all.deb
-Size: 11420
-MD5sum: ad3c81b1c854bf33b94d0bf4ed644f00
-SHA1: 676e05a45234946d9531a3c26acbfb36d5a98635
-SHA256: 56f005076ab0936d0487eb6c8c97756a56d035261b59f6500d0d19553f1c2f9b
+Depends: halos-homarr-container
+Filename: pool/trixie-unstable/main/halos-homarr-branding_0.1.0-7_all.deb
+Size: 11444
+MD5sum: 1f4e87e7b30a4bc76506a230418ac35c
+SHA1: 67e484afdcd6ca156723ae14d01fc1d8e03dd88b
+SHA256: 321be56b34a1e7a89867bdf654200c6f77a02616c0444563dddd927c944f7abd
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
