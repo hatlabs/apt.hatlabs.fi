@@ -177,16 +177,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-homarr-container
-Version: 1.45.3-6
+Version: 1.45.3-7
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 74
+Installed-Size: 75
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-6_all.deb
-Size: 35984
-MD5sum: bcaa2ebd25c008f2b3eb2bbff4f7d571
-SHA1: 3be77d94efda9539621866297fc4856a507064be
-SHA256: ab51699198efd123da812b0a27e8affb40d1a8493708459a746420f4c1e5f77d
+Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-7_all.deb
+Size: 36022
+MD5sum: 2a02d785ea0ceeb648f8f79c8c772034
+SHA1: 35111925ca169ba0e408151cde7f0731980ceb7d
+SHA256: 10829b43683acaaa4bb7cc3648a888f515920c982b04ee48169e20b3e39a4d43
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
