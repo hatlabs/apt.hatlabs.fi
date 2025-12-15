@@ -209,6 +209,27 @@ Description: HaLOS marine system metapackage
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
 
+Package: homarr-branding-halos
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 31
+Depends: homarr-container
+Filename: pool/trixie-unstable/main/homarr-branding-halos_0.1.0-1_all.deb
+Size: 11356
+MD5sum: 4799da09099392e521ae29bde6792edd
+SHA1: a4ce6dd1777285280be90b47920a964f1fe68fef
+SHA256: a9af6a6f61d0574a0da6d0459cc144ea54cd56da787b93e9886dad0e21bb34bc
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-distro
+Description: HaLOS branding and default configuration for Homarr dashboard
+ This package provides the Hat Labs "HaLOS" branding configuration for
+ the Homarr dashboard, including default theme colors, admin credentials,
+ and pre-configured board layout. The homarr-container-adapter reads this
+ configuration during first-boot setup to initialize Homarr with HaLOS
+ branding.
+
 Package: homarr-container-adapter
 Version: 0.1.0-2
 Architecture: arm64
