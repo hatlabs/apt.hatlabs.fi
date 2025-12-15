@@ -154,6 +154,34 @@ Description: Base system metapackage for HaLOS
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
 
+Package: halos-homarr-container
+Version: 1.45.3-5
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 74
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-5_all.deb
+Size: 35668
+MD5sum: 3a5997e396115c671c7a7aaf09282601
+SHA1: 6ee9a345ec539e904abfb3fbc1479ce414ef4c20
+SHA256: 1379ffdd1a124c95f8adc0fd8ef933f669559969c788b381d6cf4f41d00077c6
+Section: web
+Priority: optional
+Homepage: https://homarr.dev/
+Description: Dashboard landing page for HaLOS
+ Homarr provides a unified dashboard landing page for accessing all installed
+ container applications. It serves as the primary entry point for users
+ accessing their HaLOS system.
+ .
+ Features:
+ - Visual dashboard showing all installed container apps
+ - Auto-discovery of newly installed applications
+ - Drag and drop configuration without YAML
+ - User-customizable layout and organization
+ - Quick access to Cockpit and system information
+ - 30+ integrations for various services
+Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
+
 Package: halos-marine
 Version: 0.1.0-8
 Architecture: all
