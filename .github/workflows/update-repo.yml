@@ -7,6 +7,12 @@ on:
   schedule:
     - cron: '0 6 * * *'        # Daily rebuild
 
+# Serialize all APT repo updates to prevent race conditions.
+# Without this, concurrent workflows can overwrite each other's changes.
+concurrency:
+  group: apt-repo-update
+  cancel-in-progress: false
+
 jobs:
   update-apt-repo:
     runs-on: ubuntu-latest
