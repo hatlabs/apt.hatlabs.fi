@@ -1,32 +1,3 @@
-Package: avnav-container
-Version: 20251028-2
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 97
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/avnav-container_20251028-2_all.deb
-Size: 65168
-MD5sum: b7874654cd792152be6678e228583b3b
-SHA1: 76bfe4c073dd0d0609b4714a36f06b2f2b12a606
-SHA256: b20310806c186d172f84a7ef2d40c88d4eb144db05262d7ad56af54f0cc0665d
-Section: graphics
-Priority: optional
-Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
-Description: Touch-optimized chart plotter for sailing and motor yachts
- AvNav is a navigation software specifically designed for touch operation on
- tablets and smartphones. It combines a chart plotter with routing
- capabilities and integration with marine electronics.
- .
- Features:
- - Touch-optimized web interface
- - Multiple chart format support (mbtiles, gemf, xml)
- - Route planning and navigation
- - AIS integration
- - Anchor watch functionality
- - NMEA data display and logging
- - Plugin system for extensions
-Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
-
 Package: cockpit-apt
 Version: 0.2.0-17
 Architecture: all
@@ -124,64 +95,6 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
-Package: container-packaging-tools
-Version: 0.2.0-33
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 300
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-33_all.deb
-Size: 56720
-MD5sum: d493c731be5c49976cb0260f7de23bfa
-SHA1: 5e5a5d7a1269c0474a07838878449882bdac3720
-SHA256: 5ac4a1f28bea637ba73e55864b8d2f6cdaecb907c124a731fb49eefa1328f019
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
-Package: grafana-container
-Version: 12.1.4-6
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 43
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Recommends: influxdb-container
-Filename: pool/trixie-unstable/main/grafana-container_12.1.4-6_all.deb
-Size: 7342
-MD5sum: a0c4845cc3f58d92249011b4e214910d
-SHA1: 8a5a7e8431ae11010d70d4614934c2210ab5bef4
-SHA256: 2b3f61cb02d18d67bf968b99c384a02a6cb2e896d48b2919db247b51b36d88a5
-Section: web
-Priority: optional
-Homepage: https://grafana.com/
-Description: Data visualization and monitoring platform
- Grafana is an open-source platform for monitoring and observability. Create
- beautiful dashboards to visualize marine data from InfluxDB, Signal K, and
- other data sources.
- .
- Features:
- - Rich visualization options (graphs, gauges, maps)
- - Multiple data source support
- - Alert notifications
- - Dashboard sharing and templating
- - Plugin ecosystem
-Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
-
 Package: halos
 Version: 0.1.0-8
 Architecture: all
@@ -211,34 +124,6 @@ Description: Base system metapackage for HaLOS
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
 
-Package: halos-homarr-container
-Version: 1.45.3-4
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 71
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-4_all.deb
-Size: 35402
-MD5sum: a4e076c1b5fbbb6c849a24e8907b8ee9
-SHA1: 7cad2409c43d307c59881a99222556f63539ccbf
-SHA256: 2f666509f8930ef6688a4ca5ab6bae9587c6c4602e7d0a3b841e822c49237639
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-8
 Architecture: all
@@ -264,81 +149,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: homarr-container
-Version: 1.45.3-4
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 71
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/homarr-container_1.45.3-4_all.deb
-Size: 35394
-MD5sum: 3edc0b96ca4f3f611a6da01cd8a775e3
-SHA1: f49fe28e52a6f6f4adb190cab1ac04e954026119
-SHA256: 30597be5b8fec131acdfe23bbc4a75353cc99188436d9516cc44c7c338c7441d
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
-Package: homarr-container-adapter
-Version: 0.1.0-2
-Architecture: arm64
-Maintainer: Hat Labs Ltd <info@hatlabs.fi>
-Depends: homarr-branding-halos
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-2_arm64.deb
-Size: 1921648
-MD5sum: f3e5d623a830911730d913bd9e99b64f
-SHA1: 888ed419d349c72cc725e18e4e772f95b7113e76
-SHA256: aae9584afb07da010cd8ea0704147a9816003945073f39b7ce76ad8e22cce533
-Description: Homarr dashboard adapter for HaLOS
- Adapter service that handles first-boot setup and container
- auto-discovery for the Homarr dashboard.
- .
- Features:
-  - Completes Homarr onboarding with HaLOS branding
-  - Creates admin user and default dashboard
-  - Watches Docker events for real-time container discovery
-  - Auto-adds containers with homarr.* labels to dashboard
-
-Package: influxdb-container
-Version: 2.7.12-5
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 42
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/influxdb-container_2.7.12-5_all.deb
-Size: 6532
-MD5sum: c9842c98f06bf8d6a99c4b85a8761f90
-SHA1: 75cc9ef0b0a4c7f581075f8626076e659e985d21
-SHA256: d977152da4bd9ac3b742fda17246029f4eb0ec62e39c05597f23c8041ebab040
-Section: net
-Priority: optional
-Homepage: https://www.influxdata.com/
-Description: Time-series database for marine data logging
- InfluxDB is a high-performance time-series database designed for handling
- large volumes of timestamped data. Perfect for marine applications to store
- and analyze historical data from Signal K, sensors, and other sources.
- .
- Features:
- - High-performance time-series data storage
- - Built-in web UI for data exploration
- - Powerful query language (Flux)
- - Retention policies for automatic data management
- - Integration with Grafana for visualization
-Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-avnav-container
 Version: 20251028-2
@@ -487,61 +297,6 @@ Size: 6844
 MD5sum: f71158d3f7cfd5516cabfe71d316fb5e
 SHA1: 4f8002f12f50a988eb34a27f260ebc8485b703d2
 SHA256: fb4b70dfae1a0103beb3f2bc4a18ae9e2f89b7dfd0256152863ba4643df308e5
-Section: net
-Priority: optional
-Homepage: https://signalk.org/
-Description: Signal K server for marine data processing and routing
- Signal K is a modern and open data format for marine use. A Signal K server
- provides a central hub for collecting, processing, and distributing marine
- data from multiple sources including NMEA 0183, NMEA 2000, and other sensors.
- .
- Features:
- - WebSocket API for real-time data streaming
- - Data logging and historical playback
- - Web app server for marine applications
- - Plugin system for extending functionality
- - Instrument integration and display
-Tag: role::container-app, field::marine, category::communication, category::monitoring, interface::web, use::routing, network::server
-
-Package: opencpn-container
-Version: 5.12.4-3
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 44
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/opencpn-container_5.12.4-3_all.deb
-Size: 11566
-MD5sum: e293395b7a63a64a752544e6f7a15979
-SHA1: 1f7c5e0b397726fd319debb97bc39123f6f9c15f
-SHA256: 655c3b0c33c43621a4f268cb2c73ab2fed7fdbad23bf3e9332837b1fa47d6305
-Section: graphics
-Priority: optional
-Homepage: https://opencpn.org/
-Description: Open source chart plotter and navigation software
- OpenCPN is a free software project to create a concise chart plotter and
- navigation software for use as an underway or planning tool. Designed to
- be used at the helm station of your boat while underway.
- .
- Features:
- - Raster and vector chart support
- - AIS target tracking
- - GPS and autopilot integration
- - Weather routing and GRIB file support
- - Extensive plugin system
- - Route and waypoint management
-Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
-
-Package: signalk-server-container
-Version: 2.18.0-6
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 41
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/signalk-server-container_2.18.0-6_all.deb
-Size: 6840
-MD5sum: 949d78ba205d5515ec44d03a5cb1b5ec
-SHA1: 19a5338aea193195f3bfdf4b13e952ebb2b1740c
-SHA256: 5135f13ea0de0d3dd16e3f6a9f2301d4c4549f6d91014522bc319e1685596be8
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
