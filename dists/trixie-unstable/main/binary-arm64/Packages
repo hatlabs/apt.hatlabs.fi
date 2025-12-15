@@ -126,16 +126,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.1.0-9
+Version: 0.1.0-10
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, homarr-branding-halos
-Filename: pool/trixie-unstable/main/halos_0.1.0-9_all.deb
-Size: 2172
-MD5sum: 691e6b5743395bba50d85f7aaf008d74
-SHA1: 8e942edb88814860d64dde5367895eadf91a6fd8
-SHA256: cd38aee75192438e3a10217b62a7eaafd871db971a65d83bf164d71282c4b77d
+Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding
+Filename: pool/trixie-unstable/main/halos_0.1.0-10_all.deb
+Size: 2196
+MD5sum: 35ef97a53304815cfc8b4709efab26c7
+SHA1: dc4d5d294a7b6d5eafcd2816eef15b05ec290036
+SHA256: 652d5a0091883bc99d29cf6161c7371932e6346058113c47b7f5d640470bed01
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -154,27 +154,6 @@ Description: Base system metapackage for HaLOS
  .
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
-
-Package: halos-homarr-branding
-Version: 0.1.0-3
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 31
-Depends: homarr-container
-Filename: pool/trixie-unstable/main/halos-homarr-branding_0.1.0-3_all.deb
-Size: 11390
-MD5sum: 2b896ff2c0a27ebc2278a38c354b9e47
-SHA1: ebf2f6214635364d6e57c2c8c9a8b427117a1213
-SHA256: 9af65802b7e4f19665c05f300b688525be741af999efee3ac9030cb2b07cb716
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-distro
-Description: HaLOS branding and default configuration for Homarr dashboard
- This package provides the Hat Labs "HaLOS" branding configuration for
- the Homarr dashboard, including default theme colors, admin credentials,
- and pre-configured board layout. The homarr-container-adapter reads this
- configuration during first-boot setup to initialize Homarr with HaLOS
- branding.
 
 Package: halos-homarr-container
 Version: 1.45.3-5
@@ -205,16 +184,16 @@ Description: Dashboard landing page for HaLOS
 Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
 
 Package: halos-marine
-Version: 0.1.0-9
+Version: 0.1.0-10
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-9), marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-9_all.deb
-Size: 2090
-MD5sum: a9589616d66a394e2390e6fe8c1a958f
-SHA1: 0cb793e8c8c80f6404c86a8cb5febbad70eb1bd7
-SHA256: 5e84ac799806cf8e181d69f48519281a75433d409a65e5c6c8e877cafd64e761
+Depends: halos (>= 0.1.0-10), marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-10_all.deb
+Size: 2122
+MD5sum: 93a2924381aa7f4c1ce2dcc6c9b9a9fe
+SHA1: 1c8e474185c6eed4f2cb059b09504c2da78dbe26
+SHA256: 2bac636cd9b251614cca77c0ab543bd23fe15a78c7b9a101f0e865fbc6754641
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
