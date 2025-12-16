@@ -95,36 +95,6 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
-Package: container-packaging-tools
-Version: 0.2.0-36
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 311
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.0-36_all.deb
-Size: 59044
-MD5sum: 3b1fba386297948353ac04265f573c8f
-SHA1: 0a82580bee507aff1add50fa8b2c0235797e8ba6
-SHA256: 3f4200e7e69c507508fe7b3892ad10dbf6decde34e84b1dfabd92edb78c4f61a
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
 Package: halos
 Version: 0.1.0-10
 Architecture: all
@@ -176,34 +146,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-7
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 75
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-7_all.deb
-Size: 36022
-MD5sum: 2a02d785ea0ceeb648f8f79c8c772034
-SHA1: 35111925ca169ba0e408151cde7f0731980ceb7d
-SHA256: 10829b43683acaaa4bb7cc3648a888f515920c982b04ee48169e20b3e39a4d43
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-10
 Architecture: all
@@ -229,27 +171,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: homarr-branding-halos
-Version: 0.1.0-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 31
-Depends: homarr-container
-Filename: pool/trixie-unstable/main/homarr-branding-halos_0.1.0-1_all.deb
-Size: 11356
-MD5sum: 4799da09099392e521ae29bde6792edd
-SHA1: a4ce6dd1777285280be90b47920a964f1fe68fef
-SHA256: a9af6a6f61d0574a0da6d0459cc144ea54cd56da787b93e9886dad0e21bb34bc
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-distro
-Description: HaLOS branding and default configuration for Homarr dashboard
- This package provides the Hat Labs "HaLOS" branding configuration for
- the Homarr dashboard, including default theme colors, admin credentials,
- and pre-configured board layout. The homarr-container-adapter reads this
- configuration during first-boot setup to initialize Homarr with HaLOS
- branding.
 
 Package: marine-avnav-container
 Version: 20251028-3
