@@ -173,15 +173,15 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: homarr-container-adapter
-Version: 0.1.0-9
+Version: 0.1.0-10
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: halos-homarr-branding
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-9_arm64.deb
-Size: 1929788
-MD5sum: cdc44b1e3783f69ec214b014d67e16ea
-SHA1: 40365835be148614286d71e75e2a80dc24704591
-SHA256: 74fce33cdc47ee5a8d0413e0c6d94715cc813e34403bdbd8b56edfd2d287834f
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-10_arm64.deb
+Size: 1940724
+MD5sum: 64ee2e9f8a7b864b3f2f1291958960fc
+SHA1: 12da3cdad1d11072266787e6ca3ae05432aa7c76
+SHA256: 9bd9baebb874131f5c233ef2b30fd9c26c94ecc70c7777c756c17b97e5bdb027
 Description: Homarr dashboard adapter for HaLOS
  Adapter service that handles first-boot setup and container
  auto-discovery for the Homarr dashboard.
