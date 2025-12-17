@@ -26,16 +26,16 @@ Description: Modern APT package manager interface for Cockpit
  and Ubuntu systems.
 
 Package: cockpit-branding-halos
-Version: 0.2.0-2
+Version: 0.2.0-3
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 40
 Depends: cockpit
-Filename: pool/trixie-unstable/main/cockpit-branding-halos_0.2.0-2_all.deb
-Size: 19978
-MD5sum: 0f994121fbc23f146aab712aeb3c6f00
-SHA1: 7ca42577e16756017895f31fd3f842ab7933b5d1
-SHA256: eb516017db5e44b8d6cf873715be7eb5ca66af6735be96fa9f7921faf48104b6
+Filename: pool/trixie-unstable/main/cockpit-branding-halos_0.2.0-3_all.deb
+Size: 19948
+MD5sum: 55c34a4da848fcbf032d0b0cc8723a5b
+SHA1: aa1f131f8d3a06f2ad5155fcb411340060ef7c44
+SHA256: e6ce0e04c0482185504a0c4993660d3d07405e9a6c8302f53139cc67530994cb
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
@@ -96,16 +96,16 @@ Description: Cockpit plugin for Docker container management
   * Image management
 
 Package: halos
-Version: 0.1.0-10
+Version: 0.1.0-11
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
 Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding
-Filename: pool/trixie-unstable/main/halos_0.1.0-10_all.deb
-Size: 2196
-MD5sum: 35ef97a53304815cfc8b4709efab26c7
-SHA1: dc4d5d294a7b6d5eafcd2816eef15b05ec290036
-SHA256: 652d5a0091883bc99d29cf6161c7371932e6346058113c47b7f5d640470bed01
+Filename: pool/trixie-unstable/main/halos_0.1.0-11_all.deb
+Size: 2202
+MD5sum: 4a100c81272721b8f4c5ffa30defd497
+SHA1: ef8e6f8a52e2801288ea9cfaf0eb536e5c8ee1da
+SHA256: f48261d345832e0ae112b70eb782245b2d34243e672155ffdde81b124f6c298b
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -147,16 +147,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.1.0-10
+Version: 0.1.0-11
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-10), marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-10_all.deb
+Depends: halos (>= 0.1.0-11), marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-11_all.deb
 Size: 2122
-MD5sum: 93a2924381aa7f4c1ce2dcc6c9b9a9fe
-SHA1: 1c8e474185c6eed4f2cb059b09504c2da78dbe26
-SHA256: 2bac636cd9b251614cca77c0ab543bd23fe15a78c7b9a101f0e865fbc6754641
+MD5sum: 629092cb462270e9f490166b9993670a
+SHA1: 4852fee38d2d4e24fc5288d030a8f82cef4ef8a5
+SHA256: 70c39ece0f7210001d058948bc5764f1dc20e151410cfebe96cbf2d8f4b0de79
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -199,10 +199,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 98
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-3_all.deb
-Size: 65364
-MD5sum: c5259477414fb3099bddab159f5eb9c2
-SHA1: bbb5cf6a4002a20914d7a9c7d2a46fd4c385d8a5
-SHA256: dd23f43e7be7e815236a3a5b8e6d6211708e192c16fa99e2ffbb0e4573361da4
+Size: 65314
+MD5sum: 5bee0eb439491e8714ad307269060adb
+SHA1: facb6b1a3beeaa55a143da742337c3682d9dd7ff
+SHA256: 872adfc1469e19459d86ad460a88425b1b49b69777a29c889319334f40af66e2
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -253,10 +253,10 @@ Installed-Size: 44
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-7_all.deb
-Size: 7518
-MD5sum: 14df8c13356ebe476b132ad5c12e9d6d
-SHA1: e68f18bc0fc238dafe2baefd419d173833407004
-SHA256: 24beb173184942e8e1cfb38345a147f4df6c58005e4d4f5a6b08395b298bbb56
+Size: 7482
+MD5sum: 04ad78eb24d8cd25680e40b42a05cbaa
+SHA1: e76da0b0b3c75244826687d3631b9a7021eb3da5
+SHA256: d3026490fa829890df2016adad278f8cee7fe9d156bd97e2903c8c508112810f
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -280,10 +280,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 43
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-6_all.deb
-Size: 6734
-MD5sum: 582bdf01100f2357ec962ac1baafd9d1
-SHA1: 1389ae6c5d9a4c5330721dc4b83916ecab1160fc
-SHA256: f9b5ef35d5ff022e83bfc71ccdc458ceca584f17ef52d8acb31e963eca870b05
+Size: 6690
+MD5sum: 791d0b2818c7b99351f57791b9d03e3a
+SHA1: 997f442824399a673d9866ffbfda36c4d643c339
+SHA256: fba63436723195e21dc0089c85bc3a2c35f4cbb415ff1deef29911e89744bc28
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -307,10 +307,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 45
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-4_all.deb
-Size: 11766
-MD5sum: fc1c53abb9be46454a467483e3f646bf
-SHA1: 1f33674e7a197f64f4158f065353f4e0a1a611d0
-SHA256: 2c096a55dda062489f1ac5f467699adcb9f7e9b07579f2fa0706a06798629ad7
+Size: 11712
+MD5sum: 43f07840a52e9db78d02981c308216ee
+SHA1: 3438f5a61b034db6d5aa6d3a6abe006c72fb3f41
+SHA256: e1d29c327e1d7c030272d51770080d2cc7603bb93441eb8545fb6339dde35d2d
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -335,10 +335,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 42
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-7_all.deb
-Size: 7014
-MD5sum: 44ce60aa729b8f3b39454bf717cc84d5
-SHA1: a04ae020b463eec922c7568f1067b27910531435
-SHA256: 46cea8fab694b45d4669239fa251ed7d8d2aa58720a9234d49e464495e4c334e
+Size: 6978
+MD5sum: 191c1454b0b8c2b3db5a7ba5e88619d6
+SHA1: f62a3a99d19926e94a08407835675e2c57df3b0f
+SHA256: 1622d4a04ca513b77b5c435f8e0895fa814c44555226c2977c61e07ea9bc1373
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
