@@ -146,34 +146,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-8
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 75
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-8_all.deb
-Size: 36034
-MD5sum: 4de45bf3a995e51f13a3ec0a8485698c
-SHA1: b79b52bc185533be55767199c7114e4efb8ff709
-SHA256: f1c9910a76a8636c07b4384be99b984bb4411f987191fbb55963fc20f727b181
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-10
 Architecture: all
