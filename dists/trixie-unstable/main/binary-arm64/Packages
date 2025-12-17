@@ -95,36 +95,6 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
-Package: container-packaging-tools
-Version: 0.2.1-3
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 312
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-3_all.deb
-Size: 57420
-MD5sum: 2e3e403633010a6bfe6f1be712426782
-SHA1: 0120f94d3a4b9ec8207d37fcc81adcfe4b7132ce
-SHA256: 43631ce4f041d0e7b889e82edbe6956cd3237d8eed41904353bc7219554d4f9e
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
 Package: halos
 Version: 0.1.0-10
 Architecture: all
@@ -176,34 +146,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-8
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 75
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-8_all.deb
-Size: 36034
-MD5sum: 4de45bf3a995e51f13a3ec0a8485698c
-SHA1: b79b52bc185533be55767199c7114e4efb8ff709
-SHA256: f1c9910a76a8636c07b4384be99b984bb4411f987191fbb55963fc20f727b181
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-10
 Architecture: all
@@ -231,15 +173,15 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: homarr-container-adapter
-Version: 0.1.0-17
+Version: 0.1.0-18
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: halos-homarr-branding
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-17_arm64.deb
-Size: 1943988
-MD5sum: d0e001ce9268f70757140e5e88095c21
-SHA1: 9cf285aee60ba0e706710722493d3ac391cbf2f2
-SHA256: c8fd81927542b54abc7e3712a79c88ee8ac3a8ed751a0150b50816b065f2c878
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.1.0-18_arm64.deb
+Size: 1944580
+MD5sum: 29dc11a2eeaaece4d3aa61e7e268183e
+SHA1: 0a5eefac94eaa721c3630138895b3321eb44056c
+SHA256: d0d28ef53c473e31d344c91eb863485bdcf013c1a55d05ea44e61c3dd368cf65
 Description: Homarr dashboard adapter for HaLOS
  Adapter service that handles first-boot setup and container
  auto-discovery for the Homarr dashboard.
