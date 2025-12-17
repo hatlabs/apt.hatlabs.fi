@@ -126,16 +126,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.1.0-11
+Version: 0.1.0-12
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
 Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding
-Filename: pool/trixie-unstable/main/halos_0.1.0-11_all.deb
-Size: 2202
-MD5sum: 4a100c81272721b8f4c5ffa30defd497
-SHA1: ef8e6f8a52e2801288ea9cfaf0eb536e5c8ee1da
-SHA256: f48261d345832e0ae112b70eb782245b2d34243e672155ffdde81b124f6c298b
+Filename: pool/trixie-unstable/main/halos_0.1.0-12_all.deb
+Size: 2242
+MD5sum: 46b0c6c072582e0b6afbc931fddb290b
+SHA1: 5797bd2f22abe57242f292abb1d41f29393d5043
+SHA256: 494cb53a67a39a44915876b2659ce9609d2190eacb229f34b5e721af838798a8
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -177,16 +177,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.1.0-11
+Version: 0.1.0-12
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-11), marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-11_all.deb
-Size: 2122
-MD5sum: 629092cb462270e9f490166b9993670a
-SHA1: 4852fee38d2d4e24fc5288d030a8f82cef4ef8a5
-SHA256: 70c39ece0f7210001d058948bc5764f1dc20e151410cfebe96cbf2d8f4b0de79
+Depends: halos (>= 0.1.0-12), marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-12_all.deb
+Size: 2148
+MD5sum: a08ffee00c6538861ae19df8e591c2ae
+SHA1: 68d6748df3dbbd7935ddf8fe54c19f9c03616f01
+SHA256: 26a14ab623c97544da4377074d70fc032db26c95b4fbcadb28472d33d7cacf76
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
