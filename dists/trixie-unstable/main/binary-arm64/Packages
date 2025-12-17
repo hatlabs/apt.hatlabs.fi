@@ -126,16 +126,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.1.0-12
+Version: 0.1.0-13
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-branding-halos, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding
-Filename: pool/trixie-unstable/main/halos_0.1.0-12_all.deb
-Size: 2242
-MD5sum: 46b0c6c072582e0b6afbc931fddb290b
-SHA1: 5797bd2f22abe57242f292abb1d41f29393d5043
-SHA256: 494cb53a67a39a44915876b2659ce9609d2190eacb229f34b5e721af838798a8
+Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, halos-cockpit-branding, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding
+Filename: pool/trixie-unstable/main/halos_0.1.0-13_all.deb
+Size: 2252
+MD5sum: a350806d754b147c5486943bdfda4576
+SHA1: 0e3aa32afa813c6cf66b8812f9d165809bb8bf9c
+SHA256: 46ddc6f89d60d032d9ac1e4a6ec489c4eee789796ef6c8b4020e8254a638a6e2
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -177,16 +177,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.1.0-12
+Version: 0.1.0-13
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: halos (>= 0.1.0-12), marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.1.0-12_all.deb
-Size: 2148
-MD5sum: a08ffee00c6538861ae19df8e591c2ae
-SHA1: 68d6748df3dbbd7935ddf8fe54c19f9c03616f01
-SHA256: 26a14ab623c97544da4377074d70fc032db26c95b4fbcadb28472d33d7cacf76
+Depends: halos (>= 0.1.0-13), marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.1.0-13_all.deb
+Size: 2172
+MD5sum: 6f95690e000de115330b5e2d4244b226
+SHA1: 1492c300831ad5346eab0ff3ad3714569b0404e5
+SHA256: 5b9a91c612a0edb01b4bc3b0b14370e3837d08954694a77c65e1d6d2695f41c5
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
