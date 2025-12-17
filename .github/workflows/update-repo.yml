@@ -209,7 +209,7 @@ jobs:
             echo "Fetching latest pre-release from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/$repo/releases" | \
-              jq '[.[] | select(.prerelease == true)] | sort_by(.created_at) | reverse | .[0]')
+              jq '[.[] | select(.prerelease == true)] | sort_by(.published_at) | reverse | .[0]')
           else
             echo "Fetching release $release_tag from $repo..."
             release_info=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
