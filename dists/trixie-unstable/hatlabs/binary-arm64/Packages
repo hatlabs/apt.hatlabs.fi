@@ -3432,18 +3432,18 @@ Description: Firmware for the HALPI2 Computer
  The firmware is automatically flashed to the device upon installation.
 
 Package: halpi2-rust-daemon
-Version: 5.0.0-6
+Version: 5.0.0-7
 Architecture: arm64
 Maintainer: Hat Labs Ltd. <info@hatlabs.fi>
 Installed-Size: 7923
 Conflicts: halpid
 Replaces: halpid
 Provides: halpid
-Filename: pool/trixie-unstable/hatlabs/halpi2-rust-daemon_5.0.0-6_arm64.deb
+Filename: pool/trixie-unstable/hatlabs/halpi2-rust-daemon_5.0.0-7_arm64.deb
 Size: 1743148
-MD5sum: 9e65dc51d6b9b0eed34b9c2a4ed15e35
-SHA1: 324377b4bf794aa248be486e3e2a8ac0720d7070
-SHA256: ee98831ba78c89e1f99fc4a2d903a26444a2306355485e6ffac3da640f0a1e54
+MD5sum: 0954d82e977fbaa8800c8a9e646e37fa
+SHA1: 0162f00880d4f06fc58b05ad82064ea43785d6af
+SHA256: e7083535b9cd442312018fb535603050e106c8911450b6884d69f2e5411390da
 Section: admin
 Priority: optional
 Homepage: https://docs.hatlabs.fi/halpi2

@@ -25,24 +25,6 @@ Description: Modern APT package manager interface for Cockpit
  APT packages through Cockpit's web interface, designed for Debian
  and Ubuntu systems.
 
-Package: cockpit-branding-halos
-Version: 0.2.0-5
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 49
-Depends: cockpit
-Filename: pool/trixie-unstable/main/cockpit-branding-halos_0.2.0-5_all.deb
-Size: 21806
-MD5sum: e2a19337667b438d6b3e036538643966
-SHA1: b8356342771d08d6ce83fc5f242b70cbd6f11209
-SHA256: 828c365eeb34e951e1202c5312e866ea551318210ecb150b611c1f9fcf1b49ff
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-distro
-Description: Custom HaLOS branding for Cockpit
- This package provides the Hat Labs "HaLOS" branding for the Cockpit
- web interface, including custom logo, CSS, and favicon.
-
 Package: cockpit-container-apps
 Version: 0.1.0-16
 Architecture: all
@@ -71,17 +53,17 @@ Description: Container app management interface for Cockpit
  distribution.
 
 Package: cockpit-dockermanager
-Version: 1.0.7-4
+Version: 1.0.7-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 66
+Installed-Size: 69
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-unstable/main/cockpit-dockermanager_1.0.7-4_all.deb
-Size: 15760
-MD5sum: 08c3afcfcada5facbd7cf898c75b9345
-SHA1: 415c9b94e14eb20748e3188ad0ccd2fe2a19a3f5
-SHA256: 2ef7b79abc88a00edd1deb0595284714d26bb5259265de6d683482d81e04abe4
+Filename: pool/trixie-unstable/main/cockpit-dockermanager_1.0.7-5_all.deb
+Size: 16856
+MD5sum: 3a826ea3dddcfad8227242f9408c06f8
+SHA1: 214704f43ba57abe778050ae0b1b4174350846a0
+SHA256: 0d508d6763e0c2843be9329391aab58f2d87d5a36a2aae8e052cec2e4972effd
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
@@ -94,36 +76,6 @@ Description: Cockpit plugin for Docker container management
   * View container status, uptime, details and exposed ports
   * In-window terminal with individual container terminal functionality
   * Image management
-
-Package: container-packaging-tools
-Version: 0.2.1-7
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 318
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-7_all.deb
-Size: 58536
-MD5sum: c7f83ac3543cb8373d4a819753786acd
-SHA1: c6a273b703e8a0ff8983c9d03cde982d06a16daa
-SHA256: 622729d4a6b0c402bb8b3960fa53ff200e222a9b7ee0bc500e74c7ec0549b560
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
 
 Package: halos
 Version: 0.1.0-13
