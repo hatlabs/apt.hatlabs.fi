@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">165 packages</p>
+                <p class="dist-meta">167 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(16 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(18 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>cockpit-apt <span class="version">v0.2.0-19</span> <span class="arch-badge">all</span></h4>
@@ -49,6 +49,11 @@
                             <div class="install-cmd">sudo apt install halos</div>
                         </div>
                         <div class="package-item">
+                            <h4>halos-authelia-container <span class="version">v4.39.15-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Identity provider for HaLOS Single Sign-On Authelia is a lightweight authentication and authorization server that provides Single Sign-On (SSO) for HaLOS web applications. . Features: - OpenID Connect (OIDC) provider for native application integration - Forward Auth for applications without native OIDC support - File-based user database (no external database required) - Session management with secure cookies - Low memory footprint (~30-50 MB RAM) . Authelia integrates with Traefik reverse proxy to provide unified authentication across all HaLOS web interfaces.</p>
+                            <div class="install-cmd">sudo apt install halos-authelia-container</div>
+                        </div>
+                        <div class="package-item">
                             <h4>halos-cockpit-branding <span class="version">v0.3.1-1</span> <span class="arch-badge">all</span></h4>
                             <p class="description">Custom HaLOS branding for Cockpit This package provides the Hat Labs &quot;HaLOS&quot; branding for the Cockpit web interface, including custom logo, CSS, and favicon.</p>
                             <div class="install-cmd">sudo apt install halos-cockpit-branding</div>
@@ -59,7 +64,7 @@
                             <div class="install-cmd">sudo apt install halos-homarr-branding</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-homarr-container <span class="version">v1.45.3-8</span> <span class="arch-badge">all</span></h4>
+                            <h4>halos-homarr-container <span class="version">v1.45.3-9</span> <span class="arch-badge">all</span></h4>
                             <p class="description">Dashboard landing page for HaLOS Homarr provides a unified dashboard landing page for accessing all installed container applications. It serves as the primary entry point for users accessing their HaLOS system. . Features: - Visual dashboard showing all installed container apps - Auto-discovery of newly installed applications - Drag and drop configuration without YAML - User-customizable layout and organization - Quick access to Cockpit and system information - 30+ integrations for various services</p>
                             <div class="install-cmd">sudo apt install halos-homarr-container</div>
                         </div>
@@ -67,6 +72,11 @@
                             <h4>halos-marine <span class="version">v0.1.0-13</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
                             <div class="install-cmd">sudo apt install halos-marine</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halos-mdns-publisher-container <span class="version">v0.1.0-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Advertises HaLOS subdomains via mDNS/Avahi The mDNS Publisher automatically advertises HaLOS application subdomains on the local network via Avahi/mDNS. This enables browsers to resolve addresses like auth.halos.local without requiring DNS infrastructure. . The publisher monitors Docker containers for the `halos.subdomain` label and dynamically registers/unregisters mDNS records as containers start and stop. . Features: - Automatic subdomain discovery from Docker labels - Dynamic registration/unregistration - Works on standard home networks with mDNS support - Zero configuration required</p>
+                            <div class="install-cmd">sudo apt install halos-mdns-publisher-container</div>
                         </div>
                         <div class="package-item">
                             <h4>halos-traefik-container <span class="version">v3.6.5-1</span> <span class="arch-badge">all</span></h4>
@@ -879,7 +889,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-12-20 18:33:44 UTC</p>
+            <p>Last updated: 2025-12-20 18:48:57 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
