@@ -149,6 +149,34 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
+Package: halos-homarr-container
+Version: 1.45.3-8
+Architecture: all
+Maintainer: Hat Labs <support@hatlabs.fi>
+Installed-Size: 76
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-8_all.deb
+Size: 36440
+MD5sum: c4240c5792850fac557feaee8966bb42
+SHA1: 7f7e0a4677608af7c7b5b08b614454901a23dcaf
+SHA256: a3884f5120ede7e8da7759383a3d0112b52144dadded8ca1625a69bee3b9949c
+Section: web
+Priority: optional
+Homepage: https://homarr.dev/
+Description: Dashboard landing page for HaLOS
+ Homarr provides a unified dashboard landing page for accessing all installed
+ container applications. It serves as the primary entry point for users
+ accessing their HaLOS system.
+ .
+ Features:
+ - Visual dashboard showing all installed container apps
+ - Auto-discovery of newly installed applications
+ - Drag and drop configuration without YAML
+ - User-customizable layout and organization
+ - Quick access to Cockpit and system information
+ - 30+ integrations for various services
+Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
+
 Package: halos-marine
 Version: 0.1.0-13
 Architecture: all
@@ -174,6 +202,33 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
+
+Package: halos-traefik-container
+Version: 3.6.5-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 39
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
+Size: 5690
+MD5sum: 48e2d3547b1c7205a81486131ebc85d9
+SHA1: 5856ac53e77aaca188b7e332b0b47e8a7307272c
+SHA256: 3aaaa6ceba86c4547db36f59467b72ab893f1f09ee6959bba73271b6fba83dfb
+Section: web
+Priority: optional
+Homepage: https://traefik.io/
+Description: Reverse proxy and load balancer for HaLOS
+ Traefik is a modern HTTP reverse proxy and load balancer that serves as the
+ central entry point for all HaLOS web traffic. It provides automatic service
+ discovery via Docker labels and enables host-based routing for web applications.
+ .
+ Features:
+ - Automatic service discovery from Docker containers
+ - Host-based routing (halos.local, auth.halos.local, etc.)
+ - ForwardAuth integration for SSO with Authelia
+ - Dynamic configuration updates without restart
+ - Built-in dashboard for monitoring (internal only)
+Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: marine-avnav-container
 Version: 20251028-3
