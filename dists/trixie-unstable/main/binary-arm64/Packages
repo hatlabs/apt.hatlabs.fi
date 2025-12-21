@@ -107,35 +107,6 @@ Description: Base system metapackage for HaLOS
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
 
-Package: halos-authelia-container
-Version: 4.39.15-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 46
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 7478
-MD5sum: c466ffbe4a3e00e543b6b006de8f4c15
-SHA1: 890631bd21529f3a79e36d4c61eedc6278216fa5
-SHA256: a0e6b260e760043a57d868197c733d174bb9507b8b7419d811ffa028069bff56
-Section: admin
-Priority: optional
-Homepage: https://www.authelia.com/
-Description: Identity provider for HaLOS Single Sign-On
- Authelia is a lightweight authentication and authorization server that
- provides Single Sign-On (SSO) for HaLOS web applications.
- .
- Features:
- - OpenID Connect (OIDC) provider for native application integration
- - Forward Auth for applications without native OIDC support
- - File-based user database (no external database required)
- - Session management with secure cookies
- - Low memory footprint (~30-50 MB RAM)
- .
- Authelia integrates with Traefik reverse proxy to provide unified
- authentication across all HaLOS web interfaces.
-Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
-
 Package: halos-cockpit-branding
 Version: 0.3.1-1
 Architecture: all
@@ -178,35 +149,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-9
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 79
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Recommends: halos-authelia-container
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 36746
-MD5sum: 50e55572d534fb8e3fbdadc1a721bc58
-SHA1: 272f3c6cf74755542ed2712c1addca24bf999a36
-SHA256: 41f50a098d4c80ea19f670aaf674ca7955b9b38f8c1241d5b8fd48c336e4517a
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-13
 Architecture: all
@@ -232,63 +174,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: halos-mdns-publisher-container
-Version: 0.1.0-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 37
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
-Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5098
-MD5sum: 165682f2c2178a4c56efc3f0c7e818a5
-SHA1: adbf9d6e62da076ef26a8b89b7aad522fdc2875f
-SHA256: 6a873700e43c4640aa896ec075e598bd53f453debf5bee04c1f044f0179267b1
-Section: net
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-core-containers
-Description: Advertises HaLOS subdomains via mDNS/Avahi
- The mDNS Publisher automatically advertises HaLOS application subdomains
- on the local network via Avahi/mDNS. This enables browsers to resolve
- addresses like auth.halos.local without requiring DNS infrastructure.
- .
- The publisher monitors Docker containers for the `halos.subdomain` label
- and dynamically registers/unregisters mDNS records as containers start
- and stop.
- .
- Features:
- - Automatic subdomain discovery from Docker labels
- - Dynamic registration/unregistration
- - Works on standard home networks with mDNS support
- - Zero configuration required
-Tag: role::container-app, field::core, category::infrastructure, network::mdns
-
-Package: halos-traefik-container
-Version: 3.6.5-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 39
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 5694
-MD5sum: f2693bccd7a6c3e6d5fef173ab218d8e
-SHA1: e80d9198639234b354fd05431d6eec1630d6204b
-SHA256: 99416d3a64c5ed9ce06b61536c88bab70f5b60f760fdc9927ac53df0699dc7cd
-Section: web
-Priority: optional
-Homepage: https://traefik.io/
-Description: Reverse proxy and load balancer for HaLOS
- Traefik is a modern HTTP reverse proxy and load balancer that serves as the
- central entry point for all HaLOS web traffic. It provides automatic service
- discovery via Docker labels and enables host-based routing for web applications.
- .
- Features:
- - Automatic service discovery from Docker containers
- - Host-based routing (halos.local, auth.halos.local, etc.)
- - ForwardAuth integration for SSO with Authelia
- - Dynamic configuration updates without restart
- - Built-in dashboard for monitoring (internal only)
-Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: homarr-container-adapter
 Version: 0.1.0-23
