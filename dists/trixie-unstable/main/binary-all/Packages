@@ -321,16 +321,16 @@ Description: Reverse proxy and load balancer for HaLOS
 Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: marine-avnav-container
-Version: 20251028-3
+Version: 20251028-4
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 101
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-3_all.deb
-Size: 65676
-MD5sum: 5eb9143b23130674b11dd9bb782a99dc
-SHA1: 61d673a8bfeb7dd7581e6b6ee2c090210d8dff65
-SHA256: 5d7d685dae2b18dfa8f54070f8b4e9c37d2afbeabfb75baa3e3c865f782f38eb
+Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-4_all.deb
+Size: 65674
+MD5sum: 3c1d3f6d1ac36b2ad97a9886ed07f582
+SHA1: 93dabd311511f8c6c9f69aeeb217d6e88b196a9c
+SHA256: cd8b4ffa0088d5e053bff82ee8bd49c329c502d16eec47dd3fa222246ee10a45
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -381,10 +381,10 @@ Installed-Size: 47
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: influxdb-container
 Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-8_all.deb
-Size: 7770
-MD5sum: 8fad8424f60feaa84a0e16bc2b5091e9
-SHA1: a0d092f1e8d3f3d51cfb9e1156e0c0fa7087e331
-SHA256: 18462eeebf721125e36f4d0dbf691f0c5fe1328dbd0218920d03b5235d370f15
+Size: 7766
+MD5sum: 86ffd08ed9cefc1c0081ebae110b84e3
+SHA1: da5230f67967df3b09a5696411d963d0d898be8c
+SHA256: 3108fb13e876e02464e810e0e3039ed43351b765f8310e271e879153cc663327
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -408,10 +408,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 46
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-6_all.deb
-Size: 6964
-MD5sum: ff7bae3587206885a35ade3ccb9afc83
-SHA1: 4c5bee3c04cfecc7ff1fcd6472aff60cfa50e88e
-SHA256: 67c239d052af02d5d5492d9b84f6b37aa90de9796d605f2cef15cf858f94c34b
+Size: 6966
+MD5sum: 233b58127947739a2d4aef730faee861
+SHA1: 561097d3cb2e008da52be64d986128b7cea7cd4d
+SHA256: 45c59e576209635c1d9ba513452c784fe3cea3736e599607cfc278d1aea205ec
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -435,10 +435,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 48
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-4_all.deb
-Size: 12002
-MD5sum: 344fc13f72486fa25af64d0c847476e0
-SHA1: 3569ad196ae2576cd3fc480c7201cb9437d48024
-SHA256: fc8798b87ab808e1ff85b4cfd4464ef02deeade7cb387414738e5b1b9c0bf681
+Size: 11996
+MD5sum: 7a632077d323313c9fbc546ff7b3b0be
+SHA1: 1c6eb57d551679941076b00063299022ca9f2ba5
+SHA256: f1acc1162b3921280c2e4305796e54a0f93d4727006a52561e05f3a578b01d28
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -457,16 +457,16 @@ Description: Open source chart plotter and navigation software
 Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
 
 Package: marine-signalk-server-container
-Version: 2.18.0-7
+Version: 2.18.0-8
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 45
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-7_all.deb
-Size: 7282
-MD5sum: 35630744ed6d7eda0f86e84c58c25c9d
-SHA1: dcac636b5fe4fd53bd0e6cd156eb8d0a08cdfeb5
-SHA256: 2409849f025c32a08a8f24d9e72c740f6caede8ac35d580dc204385a50ed35d5
+Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-8_all.deb
+Size: 7290
+MD5sum: fac8902cd609afbafccb4239cfbed51f
+SHA1: 2bc9055fe8812ee0c75e05331b089e87ea2187be
+SHA256: aa4b5f91852bd3f11013d3f6c7d7cd01000be251024a30aef42fb824b8627acb
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
