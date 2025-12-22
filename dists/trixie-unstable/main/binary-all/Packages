@@ -167,7 +167,7 @@ Description: Identity provider for HaLOS Single Sign-On
 Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
 
 Package: halos-cockpit-branding
-Version: 0.3.1-1
+Version: 0.3.1-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 49
@@ -175,11 +175,11 @@ Depends: cockpit
 Breaks: cockpit-branding-halos (<< 0.3.0)
 Replaces: cockpit-branding-halos (<< 0.3.0)
 Provides: cockpit-branding-halos
-Filename: pool/trixie-unstable/main/halos-cockpit-branding_0.3.1-1_all.deb
-Size: 22098
-MD5sum: 4e4f3d2a332fd3ed566a7b6dd044d4b6
-SHA1: bc01e0b1861513a406ff1237be6c269c3190e705
-SHA256: ae0ee4d1e0cd310a6f61793e07c7280b98ba6fb2afdfd784e46a2002e7ef570f
+Filename: pool/trixie-unstable/main/halos-cockpit-branding_0.3.1-2_all.deb
+Size: 22008
+MD5sum: 72804b07c795b36063e167e4a0a2bcd6
+SHA1: 5366a8024aec5261dbad9f959a9d096be597653e
+SHA256: a06e2b787125cc058791f7294421cb0b2789ddc995d8f0f40ad460dbde7243b4
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
