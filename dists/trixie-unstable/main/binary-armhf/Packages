@@ -321,16 +321,16 @@ Description: Reverse proxy and load balancer for HaLOS
 Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: marine-avnav-container
-Version: 20251028-4
+Version: 20251028-5
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 101
+Installed-Size: 105
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-4_all.deb
-Size: 65680
-MD5sum: eaf686b48df7fefa40bf2050f4be8998
-SHA1: af90d6dfdee282fa0ec52d801da7048ec387e152
-SHA256: 6b70fe6d5aa30f9ce2975027372f51316b6ba19c15e3e2a04ebbd0d6752db789
+Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-5_all.deb
+Size: 66128
+MD5sum: 4a88cc2ac755f3ed9c79c83b6fccdd45
+SHA1: b2a6abca38e8ceab549b3c2b66764d8f3e53dd08
+SHA256: c64a57e0936c76771c1ba6aa0104afa1df5e577fb17e09d22898e614ca9609be
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -375,17 +375,17 @@ Description: Marine container application store for Cockpit Container Apps
 Tag: role::container-store
 
 Package: marine-grafana-container
-Version: 12.1.4-8
+Version: 12.1.4-9
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 47
+Installed-Size: 53
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: influxdb-container
-Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-8_all.deb
-Size: 7772
-MD5sum: ee8ec344587a2b7efef42aa0a37e4314
-SHA1: aa1cebf4955b070446cd719fb8cf73849523e724
-SHA256: b67a235b28d174acbfe51cbead33230cb97162fbbc335f820b4246ab67fcdfa0
+Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-9_all.deb
+Size: 8474
+MD5sum: 8a32dce96a4f565e329735bd1c32f79f
+SHA1: a2541e9304d1c805eb1d73796634f8d4308480f6
+SHA256: 1425ea309ee8fbd68ac7e001c1a042eb9ca86c5f14b259ab4c9577bd26811ea3
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -403,16 +403,16 @@ Description: Data visualization and monitoring platform
 Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
 
 Package: marine-influxdb-container
-Version: 2.7.12-6
+Version: 2.7.12-7
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 46
+Installed-Size: 50
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-6_all.deb
-Size: 6974
-MD5sum: d8f485686ea42c288a1c29dd2bb3682a
-SHA1: 8afed49f77c649c5e118e559ab4b65c753475aca
-SHA256: f59f2cfbfedeefa8f67632ff902506d10786cb3a99b4e464640da4be72ac5da3
+Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-7_all.deb
+Size: 7394
+MD5sum: 103b48477822f1018c765640b260daf8
+SHA1: af7fd6d190fd21e025405c57a99f814aac3ec31d
+SHA256: f207321f957c7e5ff0c07cd89230f36c011679d4d7a4156710ad919dd431029b
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -430,16 +430,16 @@ Description: Time-series database for marine data logging
 Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
 
 Package: marine-opencpn-container
-Version: 5.12.4-4
+Version: 5.12.4-5
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 48
+Installed-Size: 52
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-4_all.deb
-Size: 12008
-MD5sum: ac1e69e0fb22042616f6a2765daca462
-SHA1: af18e35e58a3adcfbae758f8d7187fe7881512f6
-SHA256: 93c40b9a973a71836404cf543c0574d1fd74fae9e49304c906292759772aa902
+Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-5_all.deb
+Size: 12446
+MD5sum: de3a9d1f8c7f7b82a37546d427542523
+SHA1: 007d98dba8d8205382f14c7f12295191f78facc9
+SHA256: 01dab90a814d63d0011d501f6b2effc99e52a7f6171867c2485addb61b898e60
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -458,16 +458,16 @@ Description: Open source chart plotter and navigation software
 Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
 
 Package: marine-signalk-server-container
-Version: 2.18.0-8
+Version: 2.18.0-9
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 45
+Installed-Size: 49
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-8_all.deb
-Size: 7282
-MD5sum: b695edca2b202c9fb8e4394532568ba5
-SHA1: 643c6c3ef7046b35cc80af456d326c064aea828c
-SHA256: 64026d6a0a2071d064d9edcb77dfbfdd12e31dbdf7a2cd332ad3edb579ec8af5
+Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.18.0-9_all.deb
+Size: 7708
+MD5sum: 783c127295105576c1c7f553aee6f58e
+SHA1: 8b56bd48a611ff77d023d66fa6311ca71e7feec1
+SHA256: 0b5466dad6284fbcb9c65cf16800056f6bcdb95ff71f66b8f0d211cb9ff6d334
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
