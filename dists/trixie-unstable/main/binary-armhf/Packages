@@ -78,16 +78,16 @@ Description: Cockpit plugin for Docker container management
   * Image management
 
 Package: container-packaging-tools
-Version: 0.2.1-11
+Version: 0.2.1-12
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 335
+Installed-Size: 334
 Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-11_all.deb
-Size: 63832
-MD5sum: b7c03435b6667e4b603727a310c32033
-SHA1: e534182343c92ffe9d6aeb25c058fdefa0f341db
-SHA256: f435a1648e6d8b3960a1baa10bd9e79356bfc56e8ddde582583519b80a3fa306
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-12_all.deb
+Size: 63796
+MD5sum: b98879e233d5a8d710eaed8a48341269
+SHA1: 71513e414b5693ea7fcf4ed5717950d182a22a8c
+SHA256: b68ca223960c3d06fa2023dac3dedddfc78b418b5a38c0cd471a6e85e1c04f0d
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
