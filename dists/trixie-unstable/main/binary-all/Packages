@@ -144,10 +144,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 57
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9596
-MD5sum: 2b3ed2f8aff6a8c0f9ac25df65e26301
-SHA1: 060be7c1e7db8a9df9d79e4d61a6a8c7a66f2527
-SHA256: 478f115bb89af742b23f34ea837478ab601d239d8c69504a947f7c0fab0d77e8
+Size: 9590
+MD5sum: eb61a488dd63ac5d0b7015ea9600f997
+SHA1: 85ee32b62eed031aa554db530171ae23bfe5117a
+SHA256: cea16c3aa1cbdf2237186f4159c999e828f22957129d3cb8c8fa553fc90f7fab
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -217,9 +217,9 @@ Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.i
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
 Size: 37580
-MD5sum: 4ebb7e9b4012f3e4f4673047ed98d821
-SHA1: bd3891a69bf5100cdcb377fcdb8d8dd239acf6ce
-SHA256: 6221e3e1d43264bd23931ce95c5911c0dde67798d27d7fd4365a31564cf60cc3
+MD5sum: 4500617bc52bfb9e1c4a4511037ae884
+SHA1: d6dc1a10094eb667894c279d2b0d0855b10a3170
+SHA256: e88f089a360bb6f88a6b34061f182e0c5a2ed0b3bf82d0ad3e3158e823a61951
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -270,10 +270,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
 Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5096
-MD5sum: 493e55a259f3eac3065eb25c074bf4b0
-SHA1: 7da667bcdbbb4cbb8e509855af8b0386717f1f0f
-SHA256: 12a4d51ab27974615502e2ccd88ec9301f7d3ba15e0d5875c5ab52cdac9dc768
+Size: 5108
+MD5sum: 261f2f69cf478089d09ac5c4d9ee0eba
+SHA1: 6ce4a3d02feb8371b9786f92d5ec1335070a1ee8
+SHA256: 169219ea9b3d1778262881b3b6b6adc1e9066730b60c7a1adff802607309b257
 Section: net
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-core-containers
@@ -300,10 +300,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 52
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 8572
-MD5sum: 2a8c52c99dcf68d5fb579accb5719a19
-SHA1: a0604f4678fa3aa8fbd475bd251324927280866b
-SHA256: d5217423e81ddd26596bfd1966c39f608a5ca7c8678e590dd288568435101a72
+Size: 8568
+MD5sum: 04b71516386b8c1e9d446c6b19bc2e30
+SHA1: 645f03ee1665cac3039187b2d7b4373791ebd46b
+SHA256: ac73dd4bef63a53962f514e4f8722e0ed9098029f5a57ae4697c31a1e70c867e
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
