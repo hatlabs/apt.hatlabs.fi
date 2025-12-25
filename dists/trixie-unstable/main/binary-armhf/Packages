@@ -77,6 +77,36 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
+Package: container-packaging-tools
+Version: 0.2.1-17
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 339
+Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-17_all.deb
+Size: 64208
+MD5sum: a0857c178a39a21b8b616a811fe4f0cd
+SHA1: 7041202d7701ba48bd02afdf2d0d19cacc27917b
+SHA256: 0df5500b8c8ecc3d820e8d9cf0179c0dcbef8f79429ad220cda7ef78db5795ff
+Section: devel
+Priority: optional
+Homepage: https://github.com/hatlabs/container-packaging-tools
+Description: Generate Debian packages from container application definitions
+ container-packaging-tools is a command-line tool that converts simple
+ container app definitions into full-fledged Debian packages. It eliminates
+ the need for package maintainers to understand Debian packaging internals.
+ .
+ Features:
+  - Template-based generation using Jinja2
+  - Input validation with JSON schemas
+  - Consistent package structure across all apps
+  - Support for Docker Compose orchestration
+  - Systemd service integration
+ .
+ The tool reads docker-compose.yml, config.yml, and metadata.json from
+ application directories and generates complete Debian package structures
+ ready for building with dpkg-buildpackage.
+
 Package: halos
 Version: 0.1.0-13
 Architecture: all
