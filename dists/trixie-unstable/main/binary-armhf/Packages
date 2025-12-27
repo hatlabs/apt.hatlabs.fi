@@ -144,10 +144,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 58
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9718
-MD5sum: 929a73507187442cac3cf996ec376f47
-SHA1: b16ee00c3bf7ccd99b9b45f633f1e485cda957dd
-SHA256: 286000d5774ed1e393d481cdc375f7f993f59aaf9a06168ae6b2665bea43176d
+Size: 9698
+MD5sum: 8ae6a7aa5dff6f3e35163d991ac59c27
+SHA1: da6e470166fdfec760f832029d04aa48e0c3a397
+SHA256: 0bc42435f9e08db9ae0221b1b0c15fb9b56a37c4674a4b76bc7a726584888b34
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -216,10 +216,10 @@ Installed-Size: 88
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38200
-MD5sum: e0a205254415d2271bdd8807ccfda279
-SHA1: a38241ad2719f642466a312caba89c1da7c1e18a
-SHA256: ef366dc5625d71f0a15c0ebd8e91749c0024e77391d6198fbd6a35a3a8a91d1f
+Size: 38174
+MD5sum: 86f6783981907534bdabe208aeec9da5
+SHA1: 9c3cd58521b79c6955e08ea3815f62c3772f4f66
+SHA256: 767a38d8975d9874e80631d524d6a1beb0b8862ed351588cd04c9be7bda169e0
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -270,17 +270,17 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 37
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
 Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5100
-MD5sum: b7c1d35addcaf1821a5f0e5e76ef5968
-SHA1: 241150d7e07c44cf5be367b1d3bbd63907eb8dd1
-SHA256: 60cc139717f22b974daf8306fdfbd5e4081f45ba8d2a1dd01d4310025eabb4d5
+Size: 5134
+MD5sum: b08020dcbb8be3de90e56f22b8afc2b8
+SHA1: f46d23749a36685f08effb8cd16da61e02f1aa93
+SHA256: 24438212153c69045e1b07570c8b36226c5c0cc4172dace58daf4319aa1689d5
 Section: net
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-core-containers
 Description: Advertises HaLOS subdomains via mDNS/Avahi
  The mDNS Publisher automatically advertises HaLOS application subdomains
  on the local network via Avahi/mDNS. This enables browsers to resolve
- addresses like auth.halos.local without requiring DNS infrastructure.
+ addresses like auth.<hostname>.local without requiring DNS infrastructure.
  .
  The publisher monitors Docker containers for the `halos.subdomain` label
  and dynamically registers/unregisters mDNS records as containers start
@@ -300,10 +300,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 52
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 8562
-MD5sum: cea2db8aff9da766ec863899fec1d9d1
-SHA1: 88fe0ebd6c6e0f3e000e8a546a458b16902c973d
-SHA256: 0543ba0ecd1b5a76f49c0a647b463da2625bad6212ab0dddc57afb234d2bf8d6
+Size: 8594
+MD5sum: 3181ab3c639168183ac840271a20539b
+SHA1: cac47f6ea9a0a1dc3588abab8799d387120fa91f
+SHA256: d2625e9d4d07c91cfaa95c5eca6582fdfec8051998bc279bc6744f0a8452b9d6
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
@@ -314,7 +314,7 @@ Description: Reverse proxy and load balancer for HaLOS
  .
  Features:
  - Automatic service discovery from Docker containers
- - Host-based routing (halos.local, auth.halos.local, etc.)
+ - Host-based routing (subdomains like auth.<hostname>.local)
  - ForwardAuth integration for SSO with Authelia
  - Dynamic configuration updates without restart
  - Built-in dashboard for monitoring (internal only)

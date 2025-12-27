@@ -80,12 +80,12 @@
                         </div>
                         <div class="package-item">
                             <h4>halos-mdns-publisher-container <span class="version">v0.1.0-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Advertises HaLOS subdomains via mDNS/Avahi The mDNS Publisher automatically advertises HaLOS application subdomains on the local network via Avahi/mDNS. This enables browsers to resolve addresses like auth.halos.local without requiring DNS infrastructure. . The publisher monitors Docker containers for the `halos.subdomain` label and dynamically registers/unregisters mDNS records as containers start and stop. . Features: - Automatic subdomain discovery from Docker labels - Dynamic registration/unregistration - Works on standard home networks with mDNS support - Zero configuration required</p>
+                            <p class="description">Advertises HaLOS subdomains via mDNS/Avahi The mDNS Publisher automatically advertises HaLOS application subdomains on the local network via Avahi/mDNS. This enables browsers to resolve addresses like auth.&lt;hostname&gt;.local without requiring DNS infrastructure. . The publisher monitors Docker containers for the `halos.subdomain` label and dynamically registers/unregisters mDNS records as containers start and stop. . Features: - Automatic subdomain discovery from Docker labels - Dynamic registration/unregistration - Works on standard home networks with mDNS support - Zero configuration required</p>
                             <div class="install-cmd">sudo apt install halos-mdns-publisher-container</div>
                         </div>
                         <div class="package-item">
                             <h4>halos-traefik-container <span class="version">v3.6.5-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Reverse proxy and load balancer for HaLOS Traefik is a modern HTTP reverse proxy and load balancer that serves as the central entry point for all HaLOS web traffic. It provides automatic service discovery via Docker labels and enables host-based routing for web applications. . Features: - Automatic service discovery from Docker containers - Host-based routing (halos.local, auth.halos.local, etc.) - ForwardAuth integration for SSO with Authelia - Dynamic configuration updates without restart - Built-in dashboard for monitoring (internal only)</p>
+                            <p class="description">Reverse proxy and load balancer for HaLOS Traefik is a modern HTTP reverse proxy and load balancer that serves as the central entry point for all HaLOS web traffic. It provides automatic service discovery via Docker labels and enables host-based routing for web applications. . Features: - Automatic service discovery from Docker containers - Host-based routing (subdomains like auth.&lt;hostname&gt;.local) - ForwardAuth integration for SSO with Authelia - Dynamic configuration updates without restart - Built-in dashboard for monitoring (internal only)</p>
                             <div class="install-cmd">sudo apt install halos-traefik-container</div>
                         </div>
                         <div class="package-item">
@@ -894,7 +894,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-12-27 19:55:54 UTC</p>
+            <p>Last updated: 2025-12-27 19:56:56 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
