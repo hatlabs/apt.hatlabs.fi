@@ -25,6 +25,30 @@ Description: Modern APT package manager interface for Cockpit
  APT packages through Cockpit's web interface, designed for Debian
  and Ubuntu systems.
 
+Package: cockpit-authelia-users
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 12212
+Depends: python3, cockpit (>= 276), python3-yaml, python3-argon2
+Filename: pool/trixie-unstable/main/cockpit-authelia-users_0.1.0-1_all.deb
+Size: 1255224
+MD5sum: 2029d9bb4a84141c796fea8360471f3f
+SHA1: 0322d1ee88262fd6cf29e440d3020a0bd830fa5d
+SHA256: dac6ff09cf7068f2fd4e34ef7dffc629d97e3bdbf3d87ef2cada896a2f6a92a3
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit-authelia-users
+Description: Cockpit plugin for Authelia user management
+ A web-based user management interface for Authelia that provides:
+  - List, create, edit, and delete Authelia users
+  - Manage user groups and permissions
+  - Password management with Argon2id hashing
+  - Modern React-based UI with PatternFly components
+ .
+ This package provides a user-friendly interface for managing
+ Authelia users through Cockpit's web interface.
+
 Package: cockpit-container-apps
 Version: 0.1.0-18
 Architecture: all
