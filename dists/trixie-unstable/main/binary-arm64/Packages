@@ -77,36 +77,6 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
-Package: container-packaging-tools
-Version: 0.2.1-20
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 343
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-20_all.deb
-Size: 64964
-MD5sum: f289db92daf8984576913fc92cfa0724
-SHA1: f784fe4c2d40fc56d759fbe70d7a64a232741875
-SHA256: fe0b62851ed72bcd06276d81742373f12022c6b09bb9180bae8535d4c013d771
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
 Package: halos
 Version: 0.1.0-13
 Architecture: all
@@ -136,35 +106,6 @@ Description: Base system metapackage for HaLOS
  .
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
-
-Package: halos-authelia-container
-Version: 4.39.15-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9708
-MD5sum: 783235e49f0e78ad1289678b4fd1dfbc
-SHA1: 45f2525178c37ec5abd747a29b5b4c2a4f6508b9
-SHA256: ba2c6c82f5ddedfab3f95cdde25fb7e6e8c3a7368b199d10680dfd3ab08f357d
-Section: admin
-Priority: optional
-Homepage: https://www.authelia.com/
-Description: Identity provider for HaLOS Single Sign-On
- Authelia is a lightweight authentication and authorization server that
- provides Single Sign-On (SSO) for HaLOS web applications.
- .
- Features:
- - OpenID Connect (OIDC) provider for native application integration
- - Forward Auth for applications without native OIDC support
- - File-based user database (no external database required)
- - Session management with secure cookies
- - Low memory footprint (~30-50 MB RAM)
- .
- Authelia integrates with Traefik reverse proxy to provide unified
- authentication across all HaLOS web interfaces.
-Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
 
 Package: halos-cockpit-branding
 Version: 0.3.1-3
@@ -208,35 +149,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-9
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 88
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Recommends: halos-authelia-container
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38176
-MD5sum: 5229039ea6a66b696acb8e2a920401e9
-SHA1: 8a905d140e6e8fab18a94a25f31ed9ce8ce6a3e0
-SHA256: 1cff6ac3a5b434de989e2e2bded14614d731f7a69e180fcef22adef547214df4
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-13
 Architecture: all
@@ -262,90 +174,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: halos-mdns-publisher
-Version: 0.1.1-1
-Architecture: arm64
-Maintainer: Hat Labs Ltd <info@hatlabs.fi>
-Depends: avahi-daemon, avahi-utils, libnss-mdns
-Recommends: docker.io | docker-ce
-Conflicts: halos-mdns-publisher-container
-Replaces: halos-mdns-publisher-container
-Filename: pool/trixie-unstable/main/halos-mdns-publisher_0.1.1-1_arm64.deb
-Size: 1086724
-MD5sum: e19cf8cd3c0a22fc0dd11c1bbc41b7dc
-SHA1: ea083c4f022798b4de65f6ae8a4221db2d51244e
-SHA256: f959f0f15c140c5242799e44f6166c4844c360ac2d5de7654893db1f6d14d0e9
-Description: HaLOS mDNS subdomain publisher and resolver
- Native systemd service that advertises container subdomains via mDNS.
- Monitors Docker containers for the halos.subdomain label and uses
- avahi-publish to advertise the corresponding subdomains.
- .
- Also configures the system to resolve multi-label mDNS hostnames
- (e.g., auth.hostname.local) which are used by HaLOS services.
- .
- Features:
-  - Monitors Docker for containers with halos.subdomain label
-  - Publishes subdomains as <subdomain>.<hostname>.local
-  - Configures system mDNS resolution for multi-label hostnames
-  - Automatic cleanup when containers stop
-
-Package: halos-mdns-publisher-container
-Version: 0.1.0-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 37
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
-Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5120
-MD5sum: 6db9ac90196e9e6849d2119e6358502a
-SHA1: 9fe171f2785cbe145a236afd880f31c5dfecf910
-SHA256: da83d2c8eb00cb5bdd906fe6f71f915d60cb82f205c0d75283134065e51869cc
-Section: net
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-core-containers
-Description: Advertises HaLOS subdomains via mDNS/Avahi
- The mDNS Publisher automatically advertises HaLOS application subdomains
- on the local network via Avahi/mDNS. This enables browsers to resolve
- addresses like auth.<hostname>.local without requiring DNS infrastructure.
- .
- The publisher monitors Docker containers for the `halos.subdomain` label
- and dynamically registers/unregisters mDNS records as containers start
- and stop.
- .
- Features:
- - Automatic subdomain discovery from Docker labels
- - Dynamic registration/unregistration
- - Works on standard home networks with mDNS support
- - Zero configuration required
-Tag: role::container-app, field::core, category::infrastructure, network::mdns
-
-Package: halos-traefik-container
-Version: 3.6.5-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 52
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 8582
-MD5sum: c546b30b7e8497b387c2a616e1d25ed1
-SHA1: 3a6f3d96733d1aefab6a3439aafc452d5e29f581
-SHA256: cb44ed3a9334cb9ea09e1cdd308669d0e450a2d881af827e4381b8457359c205
-Section: web
-Priority: optional
-Homepage: https://traefik.io/
-Description: Reverse proxy and load balancer for HaLOS
- Traefik is a modern HTTP reverse proxy and load balancer that serves as the
- central entry point for all HaLOS web traffic. It provides automatic service
- discovery via Docker labels and enables host-based routing for web applications.
- .
- Features:
- - Automatic service discovery from Docker containers
- - Host-based routing (subdomains like auth.<hostname>.local)
- - ForwardAuth integration for SSO with Authelia
- - Dynamic configuration updates without restart
- - Built-in dashboard for monitoring (internal only)
-Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: homarr-container-adapter
 Version: 0.1.0-27
