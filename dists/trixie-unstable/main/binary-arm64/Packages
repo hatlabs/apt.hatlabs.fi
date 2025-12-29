@@ -211,6 +211,28 @@ Description: Custom HaLOS branding for Cockpit
  This package provides the Hat Labs "HaLOS" branding for the Cockpit
  web interface, including custom logo, CSS, and favicon.
 
+Package: halos-cockpit-config
+Version: 0.4.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 59
+Depends: cockpit, avahi-utils
+Breaks: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
+Replaces: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
+Provides: cockpit-branding-halos, halos-cockpit-branding
+Filename: pool/trixie-unstable/main/halos-cockpit-config_0.4.0-1_all.deb
+Size: 23508
+MD5sum: 560dff19149297494d6fb60e952accec
+SHA1: 1147e41e2550d724d15b4ad4801a1b84e0e917c0
+SHA256: 4e1b940063bae14524dba2307babd4bd9201e761f1ce17ee0ae475c51b15ed04
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-distro
+Description: HaLOS Cockpit configuration and branding
+ This package provides HaLOS-specific configuration for the Cockpit
+ web interface, including branding (logo, CSS, favicon), Homarr dashboard
+ integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
+
 Package: halos-homarr-branding
 Version: 0.1.0-16
 Architecture: all
