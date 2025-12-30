@@ -191,16 +191,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-authelia-container
-Version: 4.39.15-1
+Version: 4.39.15-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 58
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9716
-MD5sum: 1e457eb405f3cf22fc39f10001b66b79
-SHA1: 087126b2c9d228f2b9748925e2687ddd247d5460
-SHA256: 179f5f5a30fa1045dfff4690dcd6d91181413372b966f5ca1de8a2318c18fb6c
+Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-2_all.deb
+Size: 9786
+MD5sum: 37c1b06d214bccb70f9fe91e2bbecd94
+SHA1: efd4607ed56c4320ab3cc016f58767875bc69105
+SHA256: 9b1a08953ea76cf41a3d74ed165a76aca80b78a4f018f258480201a4b9269e23
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -270,10 +270,10 @@ Installed-Size: 88
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38202
-MD5sum: 5e4fc5ae58e0f3457897a40868cd7602
-SHA1: d2047c9096827794e6c9a06e0e37a5ae07f65e17
-SHA256: d4451c194f4d265cbfa2e7d4e0498cf6e107319cb18f5a5019ee01f32a650c07
+Size: 38196
+MD5sum: 7c868b2296a654914f637f98bb8ff173
+SHA1: a7a0264ef21d22437b49079af0442a5ec8169e95
+SHA256: c9554a9c75b1ee5588d43712234221759787f243cc2a33f3c63db1426fe08556
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -355,10 +355,10 @@ Installed-Size: 60
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
 Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 10298
-MD5sum: ad207a71de3d196bf4aae99ead98cdd9
-SHA1: aba5547bf2ee4149dd334fcc5518b5a5d5452c61
-SHA256: 0506d43f9fad06d86d05fdfebc955327db9987f00674dafde1b20def55dfafe3
+Size: 10304
+MD5sum: 689dfb205976fc88d595928515c9a528
+SHA1: 932ffd44d07efd4c80125bc84f747dcdbcd61f43
+SHA256: b735e744663f268c9e6934ab5f3d6d6f1377098d539778e607f498dbff99ca4d
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
