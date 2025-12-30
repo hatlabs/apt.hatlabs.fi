@@ -73,17 +73,17 @@ Description: Custom HaLOS branding for Cockpit
  web interface, including custom logo, CSS, and favicon.
 
 Package: cockpit-dockermanager
-Version: 1.0.7-4
+Version: 1.0.7-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 66
+Installed-Size: 69
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7-4_all.deb
-Size: 15760
-MD5sum: 08c3afcfcada5facbd7cf898c75b9345
-SHA1: 415c9b94e14eb20748e3188ad0ccd2fe2a19a3f5
-SHA256: 2ef7b79abc88a00edd1deb0595284714d26bb5259265de6d683482d81e04abe4
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7-5_all.deb
+Size: 16856
+MD5sum: 3a826ea3dddcfad8227242f9408c06f8
+SHA1: 214704f43ba57abe778050ae0b1b4174350846a0
+SHA256: 0d508d6763e0c2843be9329391aab58f2d87d5a36a2aae8e052cec2e4972effd
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
