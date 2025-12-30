@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">171 packages</p>
+                <p class="dist-meta">164 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(22 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(15 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>cockpit-apt <span class="version">v0.2.0-22</span> <span class="arch-badge">all</span></h4>
@@ -49,24 +49,9 @@
                             <div class="install-cmd">sudo apt install cockpit-dockermanager</div>
                         </div>
                         <div class="package-item">
-                            <h4>container-packaging-tools <span class="version">v0.2.1-23</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Generate Debian packages from container application definitions container-packaging-tools is a command-line tool that converts simple container app definitions into full-fledged Debian packages. It eliminates the need for package maintainers to understand Debian packaging internals. . Features: - Template-based generation using Jinja2 - Input validation with JSON schemas - Consistent package structure across all apps - Support for Docker Compose orchestration - Systemd service integration . The tool reads docker-compose.yml, config.yml, and metadata.json from application directories and generates complete Debian package structures ready for building with dpkg-buildpackage.</p>
-                            <div class="install-cmd">sudo apt install container-packaging-tools</div>
-                        </div>
-                        <div class="package-item">
                             <h4>halos <span class="version">v0.1.0-14</span> <span class="arch-badge">all</span></h4>
                             <p class="description">Base system metapackage for HaLOS This metapackage installs the base HaLOS system, providing web-based Raspberry Pi management through Cockpit. . The HaLOS base system includes: * Cockpit web interface for system management * Network configuration through cockpit-networkmanager * Storage management through cockpit-storaged * Package management through cockpit-apt * Homarr dashboard for container app access * Automatic container discovery and dashboard integration * Custom HaLOS branding . HaLOS is a Debian-based operating system designed for easy management of Raspberry Pi systems through a web interface.</p>
                             <div class="install-cmd">sudo apt install halos</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-authelia-container <span class="version">v4.39.15-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Identity provider for HaLOS Single Sign-On Authelia is a lightweight authentication and authorization server that provides Single Sign-On (SSO) for HaLOS web applications. . Features: - OpenID Connect (OIDC) provider for native application integration - Forward Auth for applications without native OIDC support - File-based user database (no external database required) - Session management with secure cookies - Low memory footprint (~30-50 MB RAM) . Authelia integrates with Traefik reverse proxy to provide unified authentication across all HaLOS web interfaces.</p>
-                            <div class="install-cmd">sudo apt install halos-authelia-container</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-cockpit-branding <span class="version">v0.3.1-3</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Custom HaLOS branding for Cockpit This package provides the Hat Labs &quot;HaLOS&quot; branding for the Cockpit web interface, including custom logo, CSS, and favicon.</p>
-                            <div class="install-cmd">sudo apt install halos-cockpit-branding</div>
                         </div>
                         <div class="package-item">
                             <h4>halos-cockpit-config <span class="version">v0.4.0-1</span> <span class="arch-badge">all</span></h4>
@@ -79,29 +64,9 @@
                             <div class="install-cmd">sudo apt install halos-homarr-branding</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-homarr-container <span class="version">v1.45.3-9</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Dashboard landing page for HaLOS Homarr provides a unified dashboard landing page for accessing all installed container applications. It serves as the primary entry point for users accessing their HaLOS system. . Features: - Visual dashboard showing all installed container apps - Auto-discovery of newly installed applications - Drag and drop configuration without YAML - User-customizable layout and organization - Quick access to Cockpit and system information - 30+ integrations for various services</p>
-                            <div class="install-cmd">sudo apt install halos-homarr-container</div>
-                        </div>
-                        <div class="package-item">
                             <h4>halos-marine <span class="version">v0.1.0-14</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
                             <div class="install-cmd">sudo apt install halos-marine</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-mdns-publisher <span class="version">v0.1.2-1</span> <span class="arch-badge">arm64</span></h4>
-                            <p class="description">HaLOS mDNS subdomain publisher and resolver Native systemd service that advertises container subdomains via mDNS. Monitors Docker containers for the halos.subdomain label and uses avahi-publish to advertise the corresponding subdomains. . Also configures the system to resolve multi-label mDNS hostnames (e.g., auth.hostname.local) which are used by HaLOS services. . Features: - Monitors Docker for containers with halos.subdomain label - Publishes subdomains as &lt;subdomain&gt;.&lt;hostname&gt;.local - Configures system mDNS resolution for multi-label hostnames - Automatic cleanup when containers stop</p>
-                            <div class="install-cmd">sudo apt install halos-mdns-publisher</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-mdns-publisher-container <span class="version">v0.1.0-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Advertises HaLOS subdomains via mDNS/Avahi The mDNS Publisher automatically advertises HaLOS application subdomains on the local network via Avahi/mDNS. This enables browsers to resolve addresses like auth.&lt;hostname&gt;.local without requiring DNS infrastructure. . The publisher monitors Docker containers for the `halos.subdomain` label and dynamically registers/unregisters mDNS records as containers start and stop. . Features: - Automatic subdomain discovery from Docker labels - Dynamic registration/unregistration - Works on standard home networks with mDNS support - Zero configuration required</p>
-                            <div class="install-cmd">sudo apt install halos-mdns-publisher-container</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-traefik-container <span class="version">v3.6.5-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Reverse proxy and load balancer for HaLOS Traefik is a modern HTTP reverse proxy and load balancer that serves as the central entry point for all HaLOS web traffic. It provides automatic service discovery via Docker labels and enables host-based routing for web applications. . Features: - Automatic service discovery from Docker containers - Host-based routing (subdomains like auth.&lt;hostname&gt;.local) - ForwardAuth integration for SSO with Authelia - Dynamic configuration updates without restart - Built-in dashboard for monitoring (internal only)</p>
-                            <div class="install-cmd">sudo apt install halos-traefik-container</div>
                         </div>
                         <div class="package-item">
                             <h4>homarr-container-adapter <span class="version">v0.2.0-2</span> <span class="arch-badge">arm64</span></h4>
@@ -909,7 +874,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-12-29 23:04:15 UTC</p>
+            <p>Last updated: 2025-12-30 06:08:24 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

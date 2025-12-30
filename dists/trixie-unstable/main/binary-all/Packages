@@ -101,36 +101,6 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
-Package: container-packaging-tools
-Version: 0.2.1-23
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 347
-Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.2.1-23_all.deb
-Size: 65652
-MD5sum: 8df20796d97c4c6eee792556d6186b89
-SHA1: 2b3ab0d6026d29e89bc0841c4f3e00ff9174072e
-SHA256: 884f0f50b68a7030ff91b29979d35dfa799c30a0af4cac7856f1447aa87084a6
-Section: devel
-Priority: optional
-Homepage: https://github.com/hatlabs/container-packaging-tools
-Description: Generate Debian packages from container application definitions
- container-packaging-tools is a command-line tool that converts simple
- container app definitions into full-fledged Debian packages. It eliminates
- the need for package maintainers to understand Debian packaging internals.
- .
- Features:
-  - Template-based generation using Jinja2
-  - Input validation with JSON schemas
-  - Consistent package structure across all apps
-  - Support for Docker Compose orchestration
-  - Systemd service integration
- .
- The tool reads docker-compose.yml, config.yml, and metadata.json from
- application directories and generates complete Debian package structures
- ready for building with dpkg-buildpackage.
-
 Package: halos
 Version: 0.1.0-14
 Architecture: all
@@ -160,56 +130,6 @@ Description: Base system metapackage for HaLOS
  .
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
-
-Package: halos-authelia-container
-Version: 4.39.15-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9700
-MD5sum: 5f60933f762248a8a17730fca9851c46
-SHA1: 000a1f208af31c817ca7342244fbdd196682c243
-SHA256: 7847f89139e36750edd75e016c6bd2d2864e0b006faa68ef4365752af146e414
-Section: admin
-Priority: optional
-Homepage: https://www.authelia.com/
-Description: Identity provider for HaLOS Single Sign-On
- Authelia is a lightweight authentication and authorization server that
- provides Single Sign-On (SSO) for HaLOS web applications.
- .
- Features:
- - OpenID Connect (OIDC) provider for native application integration
- - Forward Auth for applications without native OIDC support
- - File-based user database (no external database required)
- - Session management with secure cookies
- - Low memory footprint (~30-50 MB RAM)
- .
- Authelia integrates with Traefik reverse proxy to provide unified
- authentication across all HaLOS web interfaces.
-Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
-
-Package: halos-cockpit-branding
-Version: 0.3.1-3
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 49
-Depends: cockpit
-Breaks: cockpit-branding-halos (<< 0.3.0)
-Replaces: cockpit-branding-halos (<< 0.3.0)
-Provides: cockpit-branding-halos
-Filename: pool/trixie-unstable/main/halos-cockpit-branding_0.3.1-3_all.deb
-Size: 22034
-MD5sum: f430c064c04215ae5775ebb2a859ba3c
-SHA1: 976e1eba35527d97dbaa2310d26edb7e1d0798a1
-SHA256: 974aff426cafe2321db05b9714db2a7a49c2883ce723e5134870898c24b381f4
-Section: admin
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-distro
-Description: Custom HaLOS branding for Cockpit
- This package provides the Hat Labs "HaLOS" branding for the Cockpit
- web interface, including custom logo, CSS, and favicon.
 
 Package: halos-cockpit-config
 Version: 0.4.0-1
@@ -254,35 +174,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-9
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 88
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Recommends: halos-authelia-container
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38198
-MD5sum: 6076eecfa8b37920fa8a06eaace97536
-SHA1: fee06cd265ce7fdbfd89183dafdf62576f20cd05
-SHA256: 20ee532fa01e2078544e50e5e79b007948e259da45344b842e9d8bdf17e098bd
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.1.0-14
 Architecture: all
@@ -308,64 +199,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: halos-mdns-publisher-container
-Version: 0.1.0-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 37
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
-Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5120
-MD5sum: dbca51b3d6d8050d6b650a3804605538
-SHA1: c4361e9364762091ebeb3a6e21fae048b9962374
-SHA256: 9e122d91b271d1e75c20eb5e21f0dc305041e176096bddf2c4c408c1e0cab450
-Section: net
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-core-containers
-Description: Advertises HaLOS subdomains via mDNS/Avahi
- The mDNS Publisher automatically advertises HaLOS application subdomains
- on the local network via Avahi/mDNS. This enables browsers to resolve
- addresses like auth.<hostname>.local without requiring DNS infrastructure.
- .
- The publisher monitors Docker containers for the `halos.subdomain` label
- and dynamically registers/unregisters mDNS records as containers start
- and stop.
- .
- Features:
- - Automatic subdomain discovery from Docker labels
- - Dynamic registration/unregistration
- - Works on standard home networks with mDNS support
- - Zero configuration required
-Tag: role::container-app, field::core, category::infrastructure, network::mdns
-
-Package: halos-traefik-container
-Version: 3.6.5-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Recommends: halos-cockpit-config
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 10048
-MD5sum: f98ab985a712170b0efa9b0654d3f02d
-SHA1: 35a40c390aba9feffc36ef235460cfd7e3d4b678
-SHA256: 188804f9eac5afb49f0f368b17f9f45160b65383e9b4ec70f069bd06cc6ffd3d
-Section: web
-Priority: optional
-Homepage: https://traefik.io/
-Description: Reverse proxy and load balancer for HaLOS
- Traefik is a modern HTTP reverse proxy and load balancer that serves as the
- central entry point for all HaLOS web traffic. It provides automatic service
- discovery via Docker labels and enables host-based routing for web applications.
- .
- Features:
- - Automatic service discovery from Docker containers
- - Host-based routing (subdomains like auth.<hostname>.local)
- - ForwardAuth integration for SSO with Authelia
- - Dynamic configuration updates without restart
- - Built-in dashboard for monitoring (internal only)
-Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: marine-avnav-container
 Version: 20251028-6
