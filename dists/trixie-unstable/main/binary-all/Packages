@@ -197,10 +197,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 58
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-1_all.deb
-Size: 9706
-MD5sum: d01215ff4cc2ea716872f27b6fd1fbc9
-SHA1: d2dff87aa37b8e4f67af7be6f7ab10025a89ee9a
-SHA256: 40429e90e26aed345e76b198face43d6bff8ec400c7363bf5b4f3709d8699069
+Size: 9716
+MD5sum: 1e457eb405f3cf22fc39f10001b66b79
+SHA1: 087126b2c9d228f2b9748925e2687ddd247d5460
+SHA256: 179f5f5a30fa1045dfff4690dcd6d91181413372b966f5ca1de8a2318c18fb6c
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -270,10 +270,10 @@ Installed-Size: 88
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38116
-MD5sum: c0ae9d55bc5aaf47784b85c60871dee2
-SHA1: 196c6a8cf366f4a38cea8583fe742ce65b2970cb
-SHA256: 60080919492dcf7729be6c5f80ebf38571e84123e1d0471e1a3f0c6525a084f2
+Size: 38202
+MD5sum: 5e4fc5ae58e0f3457897a40868cd7602
+SHA1: d2047c9096827794e6c9a06e0e37a5ae07f65e17
+SHA256: d4451c194f4d265cbfa2e7d4e0498cf6e107319cb18f5a5019ee01f32a650c07
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -355,10 +355,10 @@ Installed-Size: 60
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
 Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 10300
-MD5sum: 0ee395ae400b0060fb053a281855d66b
-SHA1: 56596b263dea0b9c5a8ce5ce426bb1f801c79224
-SHA256: 9f2bf89c0b7a402fe68afbc14ea22d7b06febd745d97f94ac0e818aedd1fc233
+Size: 10298
+MD5sum: ad207a71de3d196bf4aae99ead98cdd9
+SHA1: aba5547bf2ee4149dd334fcc5518b5a5d5452c61
+SHA256: 0506d43f9fad06d86d05fdfebc955327db9987f00674dafde1b20def55dfafe3
 Section: web
 Priority: optional
 Homepage: https://traefik.io/

@@ -6,61 +6,61 @@ Version: 1.0
 Architectures: arm64 armhf all
 Components: main hatlabs
 Description: Halos packages for Debian Trixie (unstable - rolling)
-Date: Tue, 30 Dec 2025 14:50:36 +0000
-Date: Tue, 30 Dec 2025 14:50:36 +0000
+Date: Tue, 30 Dec 2025 14:59:17 +0000
+Date: Tue, 30 Dec 2025 14:59:17 +0000
 MD5Sum:
- 94c440678f0066dd29052c67ef7f20ab              300 Release
+ f584e1d5f690aaf54e7b8bb3689fe671              300 Release
  25cd3b8bcfbcc06532f98b99deaae7bc           200797 hatlabs/binary-all/Packages
  5eb691206b7050e18e021d938789c7ba            61838 hatlabs/binary-all/Packages.gz
  d979d479f7d3b21dec9b1d1aa6134816           203382 hatlabs/binary-arm64/Packages
  29e30823c0142b6b3701972f311e2fae            62893 hatlabs/binary-arm64/Packages.gz
  25cd3b8bcfbcc06532f98b99deaae7bc           200797 hatlabs/binary-armhf/Packages
  654513ee511a3c496cafe102f8bf5939            61838 hatlabs/binary-armhf/Packages.gz
- 18d37aa866bc8fa8f871a1b9a88ad0e5            23006 main/binary-all/Packages
- 5062dfaed566d08546053cf1612c2e85             7404 main/binary-all/Packages.gz
- 760f8f4203e3c67f7a52d05b2052064b            24978 main/binary-arm64/Packages
- 58557fcc39969769f3119c340bf320c3             7995 main/binary-arm64/Packages.gz
- 18d37aa866bc8fa8f871a1b9a88ad0e5            23006 main/binary-armhf/Packages
- 5062dfaed566d08546053cf1612c2e85             7404 main/binary-armhf/Packages.gz
+ 46009ed190f48d23eeecd759037935fb            23006 main/binary-all/Packages
+ ab812faf97894297da94419256fae674             7407 main/binary-all/Packages.gz
+ 6bfdbe944215491092ae193a1e04456a            24978 main/binary-arm64/Packages
+ bd445da6dad832a2dc9f3b0514ee0029             7996 main/binary-arm64/Packages.gz
+ 46009ed190f48d23eeecd759037935fb            23006 main/binary-armhf/Packages
+ ab812faf97894297da94419256fae674             7407 main/binary-armhf/Packages.gz
 SHA1:
- 712617f188af39e4f991a212818451453abb9ae8              300 Release
+ c7e94650f836be682a94933b75376b2b668e28cc              300 Release
  5df6878495dd60590bf967075413e7a14fed3d40           200797 hatlabs/binary-all/Packages
  a8d865ce88caad7d4c91413d11768b2bd471d1c0            61838 hatlabs/binary-all/Packages.gz
  5cd9e97d92afe72a0731a593505807fe4142a2d7           203382 hatlabs/binary-arm64/Packages
  b76fddcc4aa51f314653d5f04840b7970c5963c7            62893 hatlabs/binary-arm64/Packages.gz
  5df6878495dd60590bf967075413e7a14fed3d40           200797 hatlabs/binary-armhf/Packages
  9db4def151d1dc0fbcb768a31a70190f87a0cedc            61838 hatlabs/binary-armhf/Packages.gz
- ef58fa54e47db941fe74f6f0f55dc2ab7575cc83            23006 main/binary-all/Packages
- 7df2d7a264e52169092783b652a2e0bff49e1e40             7404 main/binary-all/Packages.gz
- ae827f5cbbb3629a5e6e821f537da32a6ea92ec5            24978 main/binary-arm64/Packages
- cdc7dfdfc9ae9f5fe8c0c6090660b4a9bebc499b             7995 main/binary-arm64/Packages.gz
- ef58fa54e47db941fe74f6f0f55dc2ab7575cc83            23006 main/binary-armhf/Packages
- 7df2d7a264e52169092783b652a2e0bff49e1e40             7404 main/binary-armhf/Packages.gz
+ 69f335422ee040f8f13cf1f5c5f2da744cd35790            23006 main/binary-all/Packages
+ 900d8ae247194e0651b7a408fce97d27b0d02cd0             7407 main/binary-all/Packages.gz
+ 685067d591b11338935d622dab07850af91fb2fa            24978 main/binary-arm64/Packages
+ 64df4b91ac5c6a9a1f43f39336f0311ba798c2d5             7996 main/binary-arm64/Packages.gz
+ 69f335422ee040f8f13cf1f5c5f2da744cd35790            23006 main/binary-armhf/Packages
+ 900d8ae247194e0651b7a408fce97d27b0d02cd0             7407 main/binary-armhf/Packages.gz
 SHA256:
- a65d7992c12d4763868e0841cfd4f260fd7308e74b489de31994504d449211ba              300 Release
+ beb9138a0a6c1c7b6670a0d79999f6094ff410c42a2f07ff930aefda258af666              300 Release
  f306051375bf8628adf1ef054f78294afa4e5f03e93522bbc2cb46561a4bea00           200797 hatlabs/binary-all/Packages
  02ba08d89ff63115182067ae877259eee1cd6ec45fcd69c688e200c4d6a90d5c            61838 hatlabs/binary-all/Packages.gz
  a3795bc98e3a46f601a0490455422247f032ba4e9498ad623c2d065c6149a52c           203382 hatlabs/binary-arm64/Packages
  cac6da49d91b71dc4f558283cc28cc39bf9f13e37f16c14fe22428b880b4346c            62893 hatlabs/binary-arm64/Packages.gz
  f306051375bf8628adf1ef054f78294afa4e5f03e93522bbc2cb46561a4bea00           200797 hatlabs/binary-armhf/Packages
  1a1951a0955145512168a0c416140a8f75a92c01f2c2c52e3b5f2f103b0964df            61838 hatlabs/binary-armhf/Packages.gz
- df49f24ffb460e296791c7cb745e9da2df7ecc09755e6aa62b66c76b7f1035f4            23006 main/binary-all/Packages
- d472f63942ada089704f3d721d79ee411958a42f301be76bfced776255795056             7404 main/binary-all/Packages.gz
- 1da8f72fa40b208c64c51a2da17c3e724bc6f73a7b21d58471367c27d5827af1            24978 main/binary-arm64/Packages
- f1b3726ad3c1450426cc0fc85251418674f060be981dbdf0715d7f9cbbe0c9ae             7995 main/binary-arm64/Packages.gz
- df49f24ffb460e296791c7cb745e9da2df7ecc09755e6aa62b66c76b7f1035f4            23006 main/binary-armhf/Packages
- d472f63942ada089704f3d721d79ee411958a42f301be76bfced776255795056             7404 main/binary-armhf/Packages.gz
+ 8bbc027520d64b99593e9cb86e566c5f7d424c0bc6f062e3a5d0cb983fc907a6            23006 main/binary-all/Packages
+ 95db75dbd939999600359c3dbba90c5d6558fc890c3565229984b6c672b40dcb             7407 main/binary-all/Packages.gz
+ a5405cd4ded90a3ab0721fa1a1ec691fc77ff7a6a97986f0b2861f1093329a41            24978 main/binary-arm64/Packages
+ bfaa8eb11a980ab61dd2b6cc1359912eed39545f82a72be9ed21e4907b51840d             7996 main/binary-arm64/Packages.gz
+ 8bbc027520d64b99593e9cb86e566c5f7d424c0bc6f062e3a5d0cb983fc907a6            23006 main/binary-armhf/Packages
+ 95db75dbd939999600359c3dbba90c5d6558fc890c3565229984b6c672b40dcb             7407 main/binary-armhf/Packages.gz
 SHA512:
- b77b7dddc6fbc19a9bfc61bdc5d667883f995a2f8b149ec2ad4440a5b9260a3c59e189c7bc2e3b9586b8ec9c75472ad46c057d4c14df28bc781bf479fa9df676              300 Release
+ 3eb78020b621f7a7e84149bb9b0fb2292cbf77484b8721a6bcfd6dd4b11698a31c21f27aa42fc7792cf23a53413f6c17219375706c343e31403d8a81cdadc316              300 Release
  ffdc4a88891ccdf581e57731cb2c8b8f73af9ef05f2b86bc1336595f44fef95f52a2808ff48e9bcbcdbd405f8b26c82d0e8abe8a0d0e103e7c3d8d801ffcf5fa           200797 hatlabs/binary-all/Packages
  99363509aa6ef3b82db319d725e070692153453e319a6d3c0424f6b712c773e5501be7756a8b5772768bdc6b06cec6d2ed7be4fabf8de6aab4d88b1f55dbfbf7            61838 hatlabs/binary-all/Packages.gz
  2ebaf63dc7416a2d508b8730b619f2d0808e4adb43482373d114b36cb00e4f7f5532b16d80b8a03d389c946b7f53b3ea631b84d901765c491eb81a8e9c358e06           203382 hatlabs/binary-arm64/Packages
  cb8a22c46c42df6200a897f1c01c4b072479c0588113171b49d4d00a619b8aa81a0072290c162137218cec3ab2985bdb9132a9e948c7160fdd170df472f6021e            62893 hatlabs/binary-arm64/Packages.gz
  ffdc4a88891ccdf581e57731cb2c8b8f73af9ef05f2b86bc1336595f44fef95f52a2808ff48e9bcbcdbd405f8b26c82d0e8abe8a0d0e103e7c3d8d801ffcf5fa           200797 hatlabs/binary-armhf/Packages
  af68327f50a86c71fc5924edf556fcbb23f74354f3a9210fdde7312ffa9c812554ae28c72ff65e18fc1daedd2daf0311f8590353ba8c79fb41b8d8817479c3d5            61838 hatlabs/binary-armhf/Packages.gz
- 3bac359f93b849069450ef64fdbfa9b92ec78ba44240a94751359e639019573790e4c7fe154a164452a54901f99bc9a162e9209040fa9f05657d15ada658e6ad            23006 main/binary-all/Packages
- 13eebab7b6278a9390197751a61a42b94784039e98e69ce5652c45f2e34605acdc762962ffde96bbd1fdcd64ee4bd086d572cd416683da824c95762f1bbff3c3             7404 main/binary-all/Packages.gz
- ea798bbcb2cb10b332ac4f0cdac463d86190c8814187d77c808b7da49014e6da9e3140f78bbf9b8a4e2b7ebdc09d5db8bb001c20348081e64f460e3d021b6d16            24978 main/binary-arm64/Packages
- b671c095b476258b7996280fdcd27eb4419a500409582630d77b9793b30be4c871219b186e83bf75f4d7e71d12a53f2a129589a67e67cb3b2c09eea3558b79d9             7995 main/binary-arm64/Packages.gz
- 3bac359f93b849069450ef64fdbfa9b92ec78ba44240a94751359e639019573790e4c7fe154a164452a54901f99bc9a162e9209040fa9f05657d15ada658e6ad            23006 main/binary-armhf/Packages
- 13eebab7b6278a9390197751a61a42b94784039e98e69ce5652c45f2e34605acdc762962ffde96bbd1fdcd64ee4bd086d572cd416683da824c95762f1bbff3c3             7404 main/binary-armhf/Packages.gz
+ 56321258dc5d56b7cbde81a2acb6804112875a4704e777ef134b21b5efc33e63959638aba16863ea787b2491c23493236b31966f4b13ba21c4778f03270d3b1c            23006 main/binary-all/Packages
+ 8437e479ac070ad22757b0edc5759e51b2e876dde7ca0998882bc73a885b99fb059b87801a4dadbcd307abb0879ff8effbfeedc0bec96e9209267a750a1a75e6             7407 main/binary-all/Packages.gz
+ c829cee3951ade7643c13c23fa606ad449f3042b290e8f6497cb7e322bc6e3745b9358c3bb162cb05abfacdb668e0d069a772ea13015db42ccc411181507f8f9            24978 main/binary-arm64/Packages
+ b828648ef2654a76e2664da094453df5c8cf57613a52b8b8a6c004bbbb3ee3eda0e10b59cb7cac83c2b0d06b991003abb50df008f5b7a2142743209b48fccabb             7996 main/binary-arm64/Packages.gz
+ 56321258dc5d56b7cbde81a2acb6804112875a4704e777ef134b21b5efc33e63959638aba16863ea787b2491c23493236b31966f4b13ba21c4778f03270d3b1c            23006 main/binary-armhf/Packages
+ 8437e479ac070ad22757b0edc5759e51b2e876dde7ca0998882bc73a885b99fb059b87801a4dadbcd307abb0879ff8effbfeedc0bec96e9209267a750a1a75e6             7407 main/binary-armhf/Packages.gz
