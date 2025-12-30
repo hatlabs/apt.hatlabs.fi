@@ -26,16 +26,16 @@ Description: Modern APT package manager interface for Cockpit
  and Ubuntu systems.
 
 Package: cockpit-authelia-users
-Version: 0.1.0-2
+Version: 0.2.0-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 13071
 Depends: python3, cockpit (>= 276), python3-yaml, python3-argon2
-Filename: pool/trixie-unstable/main/cockpit-authelia-users_0.1.0-2_all.deb
+Filename: pool/trixie-unstable/main/cockpit-authelia-users_0.2.0-1_all.deb
 Size: 1272080
-MD5sum: e0315d504b456e8812a9cebd8d240704
-SHA1: e8d35f890854d648dd50149dbc29d32cbb4a9838
-SHA256: 8f4a9f43dc5c01651ee5a27c5dc945b661fceac19ed6cd47b0f566522e0efa4f
+MD5sum: 15efa24719b3f3f63ecb65e981532fab
+SHA1: c5a5417318a56cfa75a1602060b619c49843588b
+SHA256: 33bed0378818a8205881fd99560bec971240de43c7428d9c3a7e18657a15b7e5
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-authelia-users
