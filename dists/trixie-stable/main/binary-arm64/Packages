@@ -308,18 +308,18 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: halos-mdns-publisher
-Version: 0.2.0-3
+Version: 0.2.1-1
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: avahi-daemon, avahi-utils, libnss-mdns, libc6
 Recommends: docker.io | docker-ce
 Conflicts: halos-mdns-publisher-container
 Replaces: halos-mdns-publisher-container
-Filename: pool/trixie-stable/main/halos-mdns-publisher_0.2.0-3_arm64.deb
-Size: 910824
-MD5sum: 3440c1149571db8f1d3c82e6999bdce9
-SHA1: 1a0d8e7c0434bef5a0956b837d8d6099384c5bd6
-SHA256: bb48f7fa03c3f45b9b3a6083c2f38dd8798c177b7f3325abdbde8c672f481342
+Filename: pool/trixie-stable/main/halos-mdns-publisher_0.2.1-1_arm64.deb
+Size: 911752
+MD5sum: b3ad768915f2dbbab2ddc0d5a494820a
+SHA1: b21373db259ef06849eebc2d23d397429f93f5ba
+SHA256: 4a89ad69b48a08a18f8022d91cf6f0da3c6769dec60bb2c536216099102c8835
 Section: admin
 Priority: optional
 Description: HaLOS mDNS subdomain publisher and resolver
