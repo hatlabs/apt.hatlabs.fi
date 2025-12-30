@@ -183,6 +183,28 @@ Description: Base system metapackage for HaLOS
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
 
+Package: halos-cockpit-config
+Version: 0.5.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 61
+Depends: cockpit, avahi-utils, xdg-utils
+Breaks: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
+Replaces: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
+Provides: cockpit-branding-halos, halos-cockpit-branding
+Filename: pool/trixie-stable/main/halos-cockpit-config_0.5.0-1_all.deb
+Size: 23880
+MD5sum: b39c4105db84503af45b6ab893e409c2
+SHA1: d74321e609fbc1b50d6b82314b37885d71adfab5
+SHA256: 7ac9f7711521f1823b9eea18da1b7274a0dd4480ae69b7a87528075cedcd5320
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-distro
+Description: HaLOS Cockpit configuration and branding
+ This package provides HaLOS-specific configuration for the Cockpit
+ web interface, including branding (logo, CSS, favicon), Homarr dashboard
+ integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
+
 Package: halos-homarr-branding
 Version: 0.2.0-1
 Architecture: all
