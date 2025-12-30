@@ -197,10 +197,10 @@ Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 58
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-2_all.deb
-Size: 9786
-MD5sum: 37c1b06d214bccb70f9fe91e2bbecd94
-SHA1: efd4607ed56c4320ab3cc016f58767875bc69105
-SHA256: 9b1a08953ea76cf41a3d74ed165a76aca80b78a4f018f258480201a4b9269e23
+Size: 9862
+MD5sum: a1ef97600ccca6f6d0f12c4f88faa184
+SHA1: bef7a8ecabfa4244c6c6cf212337221ada675382
+SHA256: d9833c46d1d38d7366e310d7ff3f9cb71b1e45441251fded5ac8b782e8a4c9fe
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -270,10 +270,10 @@ Installed-Size: 88
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-9_all.deb
-Size: 38196
-MD5sum: 7c868b2296a654914f637f98bb8ff173
-SHA1: a7a0264ef21d22437b49079af0442a5ec8169e95
-SHA256: c9554a9c75b1ee5588d43712234221759787f243cc2a33f3c63db1426fe08556
+Size: 38204
+MD5sum: f73d786cddc56cecc150e9591565983a
+SHA1: f657e40b273eef4c20cf21790e460d9ac9297816
+SHA256: 9e9d7e9f91c66a10b62071ac5c70d67957c305c19716b86eac0b4e1b5ec28417
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -377,17 +377,19 @@ Description: Advertises HaLOS subdomains via mDNS/Avahi
 Tag: role::container-app, field::core, category::infrastructure, network::mdns
 
 Package: halos-traefik-container
-Version: 3.6.5-1
+Version: 3.6.5-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 60
+Installed-Size: 79
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-1_all.deb
-Size: 10304
-MD5sum: 689dfb205976fc88d595928515c9a528
-SHA1: 932ffd44d07efd4c80125bc84f747dcdbcd61f43
-SHA256: b735e744663f268c9e6934ab5f3d6d6f1377098d539778e607f498dbff99ca4d
+Conflicts: halos-reverse-proxy
+Provides: halos-reverse-proxy
+Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-2_all.deb
+Size: 10918
+MD5sum: d39f18c40ae84ac9e5d4ea72f2374c5d
+SHA1: a6c91b67bb8b173a572ebaaa2eabeadbf802353d
+SHA256: 5108edc3f98745a370dec8dd2dc8265957d0b3d5be05bfef03b458206b9dc5f9
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
