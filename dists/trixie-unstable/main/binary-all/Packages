@@ -1,14 +1,14 @@
 Package: cockpit-apt
-Version: 0.2.0-22
+Version: 0.3.0-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 13644
-Depends: cockpit (>= 276), python3-apt
-Filename: pool/trixie-unstable/main/cockpit-apt_0.2.0-22_all.deb
-Size: 1354928
-MD5sum: f4aef864a48a33a5d9b0230a2ed8a56f
-SHA1: feb6d736622574e2f28f4d1ad6fb59516a2d77ae
-SHA256: 4eda1b05b98297bb4c00f9d907ccd25b3476b401bbcb3bb67067c6ceb1ad5c50
+Installed-Size: 13549
+Depends: cockpit (>= 276), python3, python3-apt
+Filename: pool/trixie-unstable/main/cockpit-apt_0.3.0-1_all.deb
+Size: 1334256
+MD5sum: 9cced0636d2f038e4f7373045c983e11
+SHA1: 15befb82516fc4ae5d2b9400b7b6e5d8caee5612
+SHA256: 9fb36dff283c5c42d3608ab23de3d2147683216d757e30a1cddf700055a4b72c
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-apt
