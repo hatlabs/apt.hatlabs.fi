@@ -101,6 +101,35 @@ Description: Cockpit plugin for Docker container management
   * In-window terminal with individual container terminal functionality
   * Image management
 
+Package: cockpit-networkmanager-halos
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 18097
+Depends: cockpit (>= 276), network-manager (>= 1.20)
+Conflicts: cockpit-networkmanager
+Replaces: cockpit-networkmanager
+Provides: cockpit-networkmanager
+Filename: pool/trixie-unstable/main/cockpit-networkmanager-halos_0.1.0-1_all.deb
+Size: 1823788
+MD5sum: 4c9a7085b685a1b94f6eba33858e49ad
+SHA1: 90d3fd1d568f63e8a03d3269410bd89a94b69018
+SHA256: 1cc4d17feb3f14ed229192c395c8fa72a59a0850654b15524ec48bf962fae294
+Section: admin
+Priority: optional
+Homepage: https://github.com/hatlabs/cockpit
+Description: Cockpit NetworkManager module with WiFi support for HaLOS
+ This package provides the NetworkManager integration for Cockpit with
+ comprehensive WiFi configuration support including:
+ .
+  - WiFi network scanning and connection management
+  - WPA2/WPA3 Personal authentication
+  - Access Point (hotspot) mode configuration
+  - Simultaneous AP + Client mode support
+ .
+ This is a HaLOS-specific build from the hatlabs/cockpit fork (wifi branch)
+ with WiFi features under development for potential upstream contribution.
+
 Package: container-packaging-tools
 Version: 0.3.0-1
 Architecture: all
