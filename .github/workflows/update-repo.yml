@@ -131,10 +131,40 @@ jobs:
         fi
 
         echo "✓ Existing repository content preserved"
-        echo "Pool contents:"
-        ls -la apt-repo/pool/ 2>/dev/null || echo "  (empty)"
-        echo "Distributions:"
-        ls -la apt-repo/dists/ 2>/dev/null || echo "  (empty)"
+
+        # Detailed package inventory for debugging (issue #70)
+        echo ""
+        echo "=== PACKAGE INVENTORY AFTER FETCH ==="
+        total_packages=0
+        for dist_dir in apt-repo/pool/*/; do
+          if [ -d "$dist_dir" ]; then
+            dist_name=$(basename "$dist_dir")
+            for comp_dir in "$dist_dir"*/; do
+              if [ -d "$comp_dir" ]; then
+                comp_name=$(basename "$comp_dir")
+                pkg_count=$(find "$comp_dir" -name "*.deb" 2>/dev/null | wc -l | tr -d ' ')
+                if [ "$pkg_count" -gt 0 ]; then
+                  echo "  $dist_name/$comp_name: $pkg_count packages"
+                  # List first 5 packages as sample
+                  find "$comp_dir" -name "*.deb" 2>/dev/null | head -5 | while read pkg; do
+                    echo "    - $(basename "$pkg")"
+                  done
+                  if [ "$pkg_count" -gt 5 ]; then
+                    echo "    ... and $((pkg_count - 5)) more"
+                  fi
+                  total_packages=$((total_packages + pkg_count))
+                fi
+              fi
+            done
+          fi
+        done
+        echo "  TOTAL: $total_packages packages fetched from gh-pages"
+        echo "==========================================="
+
+        # Save package count for later validation
+        echo "$total_packages" > /tmp/initial_package_count.txt
+        # Save full package list for comparison
+        find apt-repo/pool -name "*.deb" 2>/dev/null | sort > /tmp/initial_packages.txt
 
     - name: Setup build environment
       run: |
@@ -446,6 +476,27 @@ jobs:
               echo "❌ Failed to route $routing_failed/$pkg_count packages"
               exit 1
             fi
+
+            # Log package inventory after routing (issue #70 debugging)
+            echo ""
+            echo "=== PACKAGE INVENTORY AFTER ROUTING ==="
+            for dist_dir in apt-repo/pool/*/; do
+              if [ -d "$dist_dir" ]; then
+                dist_name=$(basename "$dist_dir")
+                for comp_dir in "$dist_dir"*/; do
+                  if [ -d "$comp_dir" ]; then
+                    comp_name=$(basename "$comp_dir")
+                    pkg_count=$(find "$comp_dir" -name "*.deb" 2>/dev/null | wc -l | tr -d ' ')
+                    if [ "$pkg_count" -gt 0 ]; then
+                      echo "  $dist_name/$comp_name: $pkg_count packages"
+                    fi
+                  fi
+                done
+              fi
+            done
+            total_after=$(find apt-repo/pool -name "*.deb" 2>/dev/null | wc -l | tr -d ' ')
+            echo "  TOTAL: $total_after packages in pool"
+            echo "==========================================="
           else
             echo "ℹ No packages to route"
           fi
@@ -672,6 +723,83 @@ jobs:
         python3 scripts/generate_index.py \
           apt-repo \
           --gpg-fingerprint "$GPG_FINGERPRINT"
+
+    - name: Validate package inventory (issue #70 debugging)
+      run: |
+        echo "=== PACKAGE INVENTORY BEFORE DEPLOY ==="
+
+        # Count packages in final apt-repo
+        final_packages=0
+        for dist_dir in apt-repo/pool/*/; do
+          if [ -d "$dist_dir" ]; then
+            dist_name=$(basename "$dist_dir")
+            for comp_dir in "$dist_dir"*/; do
+              if [ -d "$comp_dir" ]; then
+                comp_name=$(basename "$comp_dir")
+                pkg_count=$(find "$comp_dir" -name "*.deb" 2>/dev/null | wc -l | tr -d ' ')
+                if [ "$pkg_count" -gt 0 ]; then
+                  echo "  $dist_name/$comp_name: $pkg_count packages"
+                  final_packages=$((final_packages + pkg_count))
+                fi
+              fi
+            done
+          fi
+        done
+        echo "  TOTAL: $final_packages packages ready to deploy"
+        echo "==========================================="
+
+        # Save final package list for comparison
+        find apt-repo/pool -name "*.deb" 2>/dev/null | sort > /tmp/final_packages.txt
+
+        # Compare with initial inventory (only in targeted mode)
+        MODE="${{ steps.payload.outputs.mode }}"
+        if [ "$MODE" = "targeted" ] && [ -f /tmp/initial_packages.txt ]; then
+          echo ""
+          echo "=== PACKAGE DIFF ANALYSIS ==="
+
+          # Find removed packages
+          removed=$(comm -23 /tmp/initial_packages.txt /tmp/final_packages.txt)
+          if [ -n "$removed" ]; then
+            removed_count=$(echo "$removed" | wc -l | tr -d ' ')
+            echo "⚠️  REMOVED PACKAGES ($removed_count):"
+            echo "$removed" | while read pkg; do
+              echo "  - $(basename "$pkg")"
+            done
+          else
+            echo "✓ No packages removed"
+          fi
+
+          # Find added packages
+          added=$(comm -13 /tmp/initial_packages.txt /tmp/final_packages.txt)
+          if [ -n "$added" ]; then
+            added_count=$(echo "$added" | wc -l | tr -d ' ')
+            echo "✓ ADDED PACKAGES ($added_count):"
+            echo "$added" | while read pkg; do
+              echo "  + $(basename "$pkg")"
+            done
+          else
+            echo "ℹ️  No new packages added"
+          fi
+
+          echo "==========================================="
+
+          # FAIL if packages were removed (safety check)
+          if [ -n "$removed" ]; then
+            echo ""
+            echo "❌ ERROR: Packages would be removed by this deployment!"
+            echo "This indicates a potential race condition (issue #70)."
+            echo "Failing the workflow to prevent package loss."
+            echo ""
+            echo "To investigate:"
+            echo "1. Check if another workflow ran concurrently"
+            echo "2. Verify gh-pages content at fetch time"
+            echo "3. Review the routing step output"
+            exit 1
+          fi
+        fi
+
+        echo ""
+        echo "✓ Package inventory validation passed"
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
