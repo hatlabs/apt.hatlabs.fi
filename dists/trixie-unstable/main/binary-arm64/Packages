@@ -220,7 +220,7 @@ Description: Identity provider for HaLOS Single Sign-On
 Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
 
 Package: halos-cockpit-config
-Version: 0.4.0-2
+Version: 0.5.0-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 61
@@ -228,11 +228,11 @@ Depends: cockpit, avahi-utils, xdg-utils
 Breaks: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
 Replaces: cockpit-branding-halos (<< 0.3.0), halos-cockpit-branding (<< 0.4.0)
 Provides: cockpit-branding-halos, halos-cockpit-branding
-Filename: pool/trixie-unstable/main/halos-cockpit-config_0.4.0-2_all.deb
-Size: 23858
-MD5sum: d13ffd02d916d6dc6ba21c47b5c0a0fb
-SHA1: 4706589c2544a4b16025e80075cad5fd2dedf936
-SHA256: 6381a9c23cae21b0180a573e748ce25d69e5ba9551e42a86fe28727b792977da
+Filename: pool/trixie-unstable/main/halos-cockpit-config_0.5.0-1_all.deb
+Size: 23880
+MD5sum: b39c4105db84503af45b6ab893e409c2
+SHA1: d74321e609fbc1b50d6b82314b37885d71adfab5
+SHA256: 7ac9f7711521f1823b9eea18da1b7274a0dd4480ae69b7a87528075cedcd5320
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
@@ -345,36 +345,6 @@ Description: HaLOS mDNS subdomain publisher and resolver
   - Publishes subdomains as <subdomain>.<hostname>.local
   - Configures system mDNS resolution for multi-label hostnames
   - Automatic cleanup when containers stop
-
-Package: halos-mdns-publisher-container
-Version: 0.1.0-1
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 37
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), traefik-container
-Filename: pool/trixie-unstable/main/halos-mdns-publisher-container_0.1.0-1_all.deb
-Size: 5118
-MD5sum: e71a331f4b67b0b029b0f12913df0416
-SHA1: 370c50666def21d8ca7567559126f1a0fd748752
-SHA256: 8bc6ff4e9c2843e97a13f62ef9df1cfdee825a00c9bc2b9fc9926853758aecd3
-Section: net
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-core-containers
-Description: Advertises HaLOS subdomains via mDNS/Avahi
- The mDNS Publisher automatically advertises HaLOS application subdomains
- on the local network via Avahi/mDNS. This enables browsers to resolve
- addresses like auth.<hostname>.local without requiring DNS infrastructure.
- .
- The publisher monitors Docker containers for the `halos.subdomain` label
- and dynamically registers/unregisters mDNS records as containers start
- and stop.
- .
- Features:
- - Automatic subdomain discovery from Docker labels
- - Dynamic registration/unregistration
- - Works on standard home networks with mDNS support
- - Zero configuration required
-Tag: role::container-app, field::core, category::infrastructure, network::mdns
 
 Package: halos-traefik-container
 Version: 3.6.5-2

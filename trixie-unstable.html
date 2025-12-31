@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">171 packages</p>
+                <p class="dist-meta">170 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(22 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(21 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>cockpit-apt <span class="version">v0.3.0-1</span> <span class="arch-badge">all</span></h4>
@@ -69,7 +69,7 @@
                             <div class="install-cmd">sudo apt install halos-authelia-container</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-cockpit-config <span class="version">v0.4.0-2</span> <span class="arch-badge">all</span></h4>
+                            <h4>halos-cockpit-config <span class="version">v0.5.0-1</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS Cockpit configuration and branding This package provides HaLOS-specific configuration for the Cockpit web interface, including branding (logo, CSS, favicon), Homarr dashboard integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.</p>
                             <div class="install-cmd">sudo apt install halos-cockpit-config</div>
                         </div>
@@ -92,11 +92,6 @@
                             <h4>halos-mdns-publisher <span class="version">v0.2.1-1</span> <span class="arch-badge">arm64</span></h4>
                             <p class="description">HaLOS mDNS subdomain publisher and resolver Native systemd service that advertises container subdomains via mDNS. Monitors Docker containers for the halos.subdomain label and uses avahi-publish to advertise the corresponding subdomains. . Also configures the system to resolve multi-label mDNS hostnames (e.g., auth.hostname.local) which are used by HaLOS services. . Features: - Monitors Docker for containers with halos.subdomain label - Publishes subdomains as &lt;subdomain&gt;.&lt;hostname&gt;.local - Configures system mDNS resolution for multi-label hostnames - Automatic cleanup when containers stop</p>
                             <div class="install-cmd">sudo apt install halos-mdns-publisher</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-mdns-publisher-container <span class="version">v0.1.0-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Advertises HaLOS subdomains via mDNS/Avahi The mDNS Publisher automatically advertises HaLOS application subdomains on the local network via Avahi/mDNS. This enables browsers to resolve addresses like auth.&lt;hostname&gt;.local without requiring DNS infrastructure. . The publisher monitors Docker containers for the `halos.subdomain` label and dynamically registers/unregisters mDNS records as containers start and stop. . Features: - Automatic subdomain discovery from Docker labels - Dynamic registration/unregistration - Works on standard home networks with mDNS support - Zero configuration required</p>
-                            <div class="install-cmd">sudo apt install halos-mdns-publisher-container</div>
                         </div>
                         <div class="package-item">
                             <h4>halos-traefik-container <span class="version">v3.6.5-2</span> <span class="arch-badge">all</span></h4>
@@ -909,7 +904,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2025-12-30 21:01:43 UTC</p>
+            <p>Last updated: 2025-12-31 06:09:50 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
