@@ -377,15 +377,15 @@ Description: Reverse proxy and load balancer for HaLOS
 Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: homarr-container-adapter
-Version: 0.3.0-2
+Version: 0.3.0-3
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: halos-homarr-branding
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.3.0-2_arm64.deb
-Size: 1943772
-MD5sum: bc7f33f9451412de06c9a408f8f2d3e3
-SHA1: c014cee395e3db32efb49dcd0f46c134993ae58d
-SHA256: 9b5d1dc00397f52d4fde1289ac19685d0296b554d78d9906f9b36545122f8048
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.3.0-3_arm64.deb
+Size: 1943136
+MD5sum: 627a2429af88d2acf8679cd2b5d750c1
+SHA1: 9dbf5cbda5089a22f54f514df4ebc9e165505047
+SHA256: 0a257b0ca65dcba1caa165ceafaba9a78558cbdf25f68c511a62a2732e64f804
 Description: Homarr dashboard adapter for HaLOS
  Adapter service that handles first-boot setup and container
  auto-discovery for the Homarr dashboard.
