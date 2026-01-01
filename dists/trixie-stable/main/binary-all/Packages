@@ -164,16 +164,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-authelia-container
-Version: 4.39.15-4
+Version: 4.39.15-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58
+Installed-Size: 59
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-stable/main/halos-authelia-container_4.39.15-4_all.deb
-Size: 10094
-MD5sum: 58a220afaa677cf26eb6bd8b75a7edd2
-SHA1: d6f48611cd40881741891ccd96a404b4c3ba633f
-SHA256: 8e74472f599d512f2e3f679771a18887947c0cd6c5566b1be01fa3792b416d8e
+Filename: pool/trixie-stable/main/halos-authelia-container_4.39.15-5_all.deb
+Size: 10208
+MD5sum: a06e82aaa1ae855257a2f2c06f775ac3
+SHA1: 5b1b48eb644293081c76b7856c353164f6797dc7
+SHA256: 037aece0bba6d7eee874fd3de7c6e37300e57bda1919eb8c8716526b528d35c8
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -236,17 +236,17 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-homarr-container
-Version: 1.45.3-10
+Version: 1.45.3-12
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 88
+Installed-Size: 89
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
-Filename: pool/trixie-stable/main/halos-homarr-container_1.45.3-10_all.deb
-Size: 38354
-MD5sum: c3aa043a114b392378fb94d431872965
-SHA1: b4b41377e9c21c83b2edafd289739465d3600c8a
-SHA256: 7911ec55c0d13e2af2b10985054abf08208dd49c5e54ded5718b9a31351c4e42
+Filename: pool/trixie-stable/main/halos-homarr-container_1.45.3-12_all.deb
+Size: 38490
+MD5sum: dfde46fd89666b9ebcbee9c60a0ae954
+SHA1: 407be2e6592dd0f7f65a0d80b2f44239f245dfd9
+SHA256: 566c7fae84f8352f0abf810a073943d60ffa11616021531d64044be1b0663e2d
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -291,19 +291,19 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: halos-traefik-container
-Version: 3.6.5-4
+Version: 3.6.5-7
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 81
+Installed-Size: 83
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-stable/main/halos-traefik-container_3.6.5-4_all.deb
-Size: 11494
-MD5sum: 10145127d8c87faac040b8aafabbe0ef
-SHA1: 8e080e0d8900b9107a81b671c99de130acc83d39
-SHA256: b787f5a1666f4b5a0cc38328185d02ffd0f6a52b47c572da167b19eb51e3376b
+Filename: pool/trixie-stable/main/halos-traefik-container_3.6.5-7_all.deb
+Size: 11620
+MD5sum: c73d973013bb59bdf90c5d899e50f911
+SHA1: 0edadebce6325c8919505f5dbe9fc4290f6938db
+SHA256: 49e8e832a1688c848f2bb9f9e789e0da086876cb56b95f994eb75597ada3f8a4
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
