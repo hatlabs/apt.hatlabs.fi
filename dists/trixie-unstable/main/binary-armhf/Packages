@@ -161,16 +161,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.2.2-1
+Version: 0.2.3-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 9
-Depends: cockpit, cockpit-networkmanager, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding, halos-mdns-publisher
-Filename: pool/trixie-unstable/main/halos_0.2.2-1_all.deb
-Size: 2180
-MD5sum: 72293c66d3b108106d710162e7e542cf
-SHA1: 3e53b0750d6b33d37a0f235c54dbb77c6f699c62
-SHA256: 08f40fb8564124a706c09ae02c5ae2813b159596e6bb16c426b541453f5d851c
+Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io, docker-compose, docker-cli, halos-homarr-container, homarr-container-adapter, halos-homarr-branding, halos-mdns-publisher
+Filename: pool/trixie-unstable/main/halos_0.2.3-1_all.deb
+Size: 2168
+MD5sum: 6c4c414677d4207ccb3f52364375a9b9
+SHA1: 379a4a12f1a94c800ee758f212ff2f8cf792985a
+SHA256: 75b094536fbc5b8c87e7d0b12a54d5608f28e4dc3541da5acd4158bfb52f4ff2
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
@@ -180,7 +180,7 @@ Description: Base system metapackage for HaLOS
  .
  The HaLOS base system includes:
   * Cockpit web interface for system management
-  * Network configuration through cockpit-networkmanager
+  * Network configuration with WiFi hotspot support
   * Storage management through cockpit-storaged
   * Package management through cockpit-apt
   * Container app management through cockpit-container-apps
@@ -293,16 +293,16 @@ Description: Dashboard landing page for HaLOS
 Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
 
 Package: halos-marine
-Version: 0.2.2-1
+Version: 0.2.3-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 12
-Depends: halos (>= 0.2.2-1), marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.2.2-1_all.deb
-Size: 2252
-MD5sum: 2b45e177f5e8d178d869c21b784496a6
-SHA1: f275987ad518580c6bc9981bdf04f05e1137ac9a
-SHA256: b667089b7bd85a13b61099dfec84ea4266acea1f9f7632615a2dcb974a8e880e
+Depends: halos (>= 0.2.3-1), marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.2.3-1_all.deb
+Size: 2208
+MD5sum: d1eb79c60f0c2f0954fe5a4b5ecf43bd
+SHA1: b558f6a7c903305a43598af53f91f4ba258473d6
+SHA256: be7950d6d3cfdb2ff91356c2ed1e0d82db6b40152f9b08989b0a43ad961ceabb
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-metapackages
