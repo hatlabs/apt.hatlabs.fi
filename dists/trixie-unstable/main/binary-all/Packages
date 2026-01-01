@@ -194,13 +194,13 @@ Package: halos-authelia-container
 Version: 4.39.15-4
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 57
+Installed-Size: 58
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-4_all.deb
-Size: 9900
-MD5sum: cb90d2bea19bb88adf701b9771573631
-SHA1: 146bab1ce21cfac11d177d99905264d0f93f7a9c
-SHA256: c1126675bcf1c04d23d3680969365f8c940913dc04cb7fcea3c2c56977894f08
+Size: 10096
+MD5sum: 3ba5d3c6c8c51ecec08eeaf307e079c3
+SHA1: 03aa0345a3af07b90c75376b230ae582cb62d6f2
+SHA256: 5064dc4403d18c0df6e8e6642db372492a6ee0c96f5b84c84095a5eec5d843d3
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -270,10 +270,10 @@ Installed-Size: 88
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-10_all.deb
-Size: 38360
-MD5sum: 4c6d7596666c44d538868e8e6b6a1f65
-SHA1: d1ac683057a08e01d1d64e5fd2293bfcea79db6a
-SHA256: 80c312845df6d87c9796f196aff45e9ec5dd92b6157493a62e311d05b61bc88c
+Size: 38350
+MD5sum: 8550a737e94711aea3d6f5116e1f459a
+SHA1: 81a2f12f2da8d4c6a89dd70bb319533edf85f85f
+SHA256: 10da9be48d265b8a5c4a29e37ed13f64316b0fa900a5fe21ab7fbe8977cf1686
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -327,10 +327,10 @@ Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
 Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-3_all.deb
-Size: 10976
-MD5sum: f398ca2d386cc3eb4e629519e17c56a3
-SHA1: 2340b272e4046a7d7437b384117d71208de20abe
-SHA256: 63d1c559abf0b376b19c145a2fa9abc8a889513661cc11f3c83d0386c628aafb
+Size: 10984
+MD5sum: c96e117ade0570dae55f219e31ffd390
+SHA1: 21a489d1770027a32c89918911633ec7f41e34fe
+SHA256: 387e6fde2d44989dfc5bd38da65d4460d7dd27feabadccb5a114dab184840db2
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
