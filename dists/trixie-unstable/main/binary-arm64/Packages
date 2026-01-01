@@ -191,16 +191,16 @@ Description: Base system metapackage for HaLOS
  of Raspberry Pi systems through a web interface.
 
 Package: halos-authelia-container
-Version: 4.39.15-4
+Version: 4.39.15-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 59
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-4_all.deb
-Size: 10118
-MD5sum: bc0c7c8515c074f5756175e278b78d80
-SHA1: a5499424b61ff99b2bc7b840fbf4b758597b1e5c
-SHA256: 5bef78e10fb7e1ff4bfc50b2ba68277fb006f267a781de07117ca78bbac7a150
+Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-5_all.deb
+Size: 10208
+MD5sum: a06e82aaa1ae855257a2f2c06f775ac3
+SHA1: 5b1b48eb644293081c76b7856c353164f6797dc7
+SHA256: 037aece0bba6d7eee874fd3de7c6e37300e57bda1919eb8c8716526b528d35c8
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -263,17 +263,17 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-homarr-container
-Version: 1.45.3-10
+Version: 1.45.3-12
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 89
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
-Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-10_all.deb
-Size: 38370
-MD5sum: e2c06dfa73a5fdb84ef5490494cd4675
-SHA1: 2b6672bc5893497096946b352a97576abe41a4fa
-SHA256: 8114af1b05f0adff05a152f1a6fd26bdafeb987cde9146c2b1e8fe473f18b6ea
+Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-12_all.deb
+Size: 38490
+MD5sum: dfde46fd89666b9ebcbee9c60a0ae954
+SHA1: 407be2e6592dd0f7f65a0d80b2f44239f245dfd9
+SHA256: 566c7fae84f8352f0abf810a073943d60ffa11616021531d64044be1b0663e2d
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -347,19 +347,19 @@ Description: HaLOS mDNS subdomain publisher and resolver
   - Automatic cleanup when containers stop
 
 Package: halos-traefik-container
-Version: 3.6.5-5
+Version: 3.6.5-7
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 82
+Installed-Size: 83
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-5_all.deb
-Size: 11514
-MD5sum: 7c8da59590b8f3836be8dec9c7a6e88c
-SHA1: 6a7164a47b401a498013e2e5ae3a13d070f88730
-SHA256: dc27bbe1b54e5b5182794b0ccab3014b25a499fdd329038d1be2891e697bc53f
+Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-7_all.deb
+Size: 11620
+MD5sum: c73d973013bb59bdf90c5d899e50f911
+SHA1: 0edadebce6325c8919505f5dbe9fc4290f6938db
+SHA256: 49e8e832a1688c848f2bb9f9e789e0da086876cb56b95f994eb75597ada3f8a4
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
