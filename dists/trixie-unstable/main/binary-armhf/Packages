@@ -194,13 +194,13 @@ Package: halos-authelia-container
 Version: 4.39.15-4
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58
+Installed-Size: 59
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Filename: pool/trixie-unstable/main/halos-authelia-container_4.39.15-4_all.deb
-Size: 10094
-MD5sum: 58a220afaa677cf26eb6bd8b75a7edd2
-SHA1: d6f48611cd40881741891ccd96a404b4c3ba633f
-SHA256: 8e74472f599d512f2e3f679771a18887947c0cd6c5566b1be01fa3792b416d8e
+Size: 10118
+MD5sum: bc0c7c8515c074f5756175e278b78d80
+SHA1: a5499424b61ff99b2bc7b840fbf4b758597b1e5c
+SHA256: 5bef78e10fb7e1ff4bfc50b2ba68277fb006f267a781de07117ca78bbac7a150
 Section: admin
 Priority: optional
 Homepage: https://www.authelia.com/
@@ -266,14 +266,14 @@ Package: halos-homarr-container
 Version: 1.45.3-10
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 88
+Installed-Size: 89
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
 Recommends: halos-authelia-container
 Filename: pool/trixie-unstable/main/halos-homarr-container_1.45.3-10_all.deb
-Size: 38354
-MD5sum: c3aa043a114b392378fb94d431872965
-SHA1: b4b41377e9c21c83b2edafd289739465d3600c8a
-SHA256: 7911ec55c0d13e2af2b10985054abf08208dd49c5e54ded5718b9a31351c4e42
+Size: 38370
+MD5sum: e2c06dfa73a5fdb84ef5490494cd4675
+SHA1: 2b6672bc5893497096946b352a97576abe41a4fa
+SHA256: 8114af1b05f0adff05a152f1a6fd26bdafeb987cde9146c2b1e8fe473f18b6ea
 Section: web
 Priority: optional
 Homepage: https://homarr.dev/
@@ -318,19 +318,19 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: halos-traefik-container
-Version: 3.6.5-4
+Version: 3.6.5-5
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 81
+Installed-Size: 82
 Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-4_all.deb
-Size: 11494
-MD5sum: 10145127d8c87faac040b8aafabbe0ef
-SHA1: 8e080e0d8900b9107a81b671c99de130acc83d39
-SHA256: b787f5a1666f4b5a0cc38328185d02ffd0f6a52b47c572da167b19eb51e3376b
+Filename: pool/trixie-unstable/main/halos-traefik-container_3.6.5-5_all.deb
+Size: 11514
+MD5sum: 7c8da59590b8f3836be8dec9c7a6e88c
+SHA1: 6a7164a47b401a498013e2e5ae3a13d070f88730
+SHA256: dc27bbe1b54e5b5182794b0ccab3014b25a499fdd329038d1be2891e697bc53f
 Section: web
 Priority: optional
 Homepage: https://traefik.io/
