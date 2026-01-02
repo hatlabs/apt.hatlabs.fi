@@ -243,16 +243,17 @@ Description: HaLOS Cockpit configuration and branding
  integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
 
 Package: halos-homarr-branding
-Version: 0.2.0-2
+Version: 0.2.0-4
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 757
-Depends: halos-homarr-container, xdg-utils
-Filename: pool/trixie-stable/main/halos-homarr-branding_0.2.0-2_all.deb
-Size: 398028
-MD5sum: 514b8fc9f78d5a97d52ce0ca34da692b
-SHA1: fca33c449f72f5898010ec66f9c1a258a5cc3397
-SHA256: 0a30ac03f9a860dcb5f086607f5b096445f3bbd5c334498f5e73eef5a3787bba
+Depends: xdg-utils
+Recommends: halos-core-containers | halos-homarr-container
+Filename: pool/trixie-stable/main/halos-homarr-branding_0.2.0-4_all.deb
+Size: 398088
+MD5sum: 7389e8592d686c5f3dab0262522d245a
+SHA1: 2a5b20c23aeddeff4f2a1b6b2541da900ed7e4ff
+SHA256: f131cc41dc654c40bb94b8dea68a18a4930fc774ecb4cb3fbeb7cfe6353e3e4a
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
