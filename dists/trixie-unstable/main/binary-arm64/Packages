@@ -242,6 +242,35 @@ Description: HaLOS Cockpit configuration and branding
  web interface, including branding (logo, CSS, favicon), Homarr dashboard
  integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
 
+Package: halos-core-containers
+Version: 0.2.1-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 124
+Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-homarr-branding
+Recommends: halos-cockpit-config
+Conflicts: halos-reverse-proxy
+Provides: halos-reverse-proxy
+Filename: pool/trixie-unstable/main/halos-core-containers_0.2.1-1_all.deb
+Size: 45790
+MD5sum: 18599dd342f7637f343031868967a252
+SHA1: cfcc8f40e867f68f9a0d16e7da7b54a5a12c328d
+SHA256: 69d6d299d612f2d674ec2081578e1edb68380475e9423c3f5327db30cb8ef975
+Section: web
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-core-containers
+Description: Core infrastructure stack (Traefik, Authelia, Homarr)
+ HaLOS core infrastructure providing the foundational web services:
+ .
+  - Traefik: Reverse proxy and load balancer for all HaLOS web traffic
+  - Authelia: Single Sign-On (SSO) identity provider with OIDC support
+  - Homarr: Dashboard landing page for accessing all installed applications
+ .
+ These services are tightly integrated and managed as a single unit.
+ Traefik handles HTTPS termination and routing, Authelia provides
+ authentication, and Homarr serves as the main user interface.
+Tag: role::container-app, field::core, category::infrastructure, interface::web
+
 Package: halos-homarr-branding
 Version: 0.2.0-3
 Architecture: all
