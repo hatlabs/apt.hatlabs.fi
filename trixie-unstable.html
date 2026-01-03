@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Trixie Unstable</h3>
-                <p class="dist-meta">171 packages</p>
+                <p class="dist-meta">168 packages</p>
                 <p class="dist-desc">Halos packages for Debian Trixie (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(22 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(19 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>cockpit-apt <span class="version">v0.3.0-4</span> <span class="arch-badge">all</span></h4>
@@ -39,7 +39,7 @@
                             <div class="install-cmd">sudo apt install cockpit-authelia-users</div>
                         </div>
                         <div class="package-item">
-                            <h4>cockpit-container-apps <span class="version">v0.1.1-1</span> <span class="arch-badge">all</span></h4>
+                            <h4>cockpit-container-apps <span class="version">v0.1.1-2</span> <span class="arch-badge">all</span></h4>
                             <p class="description">Container app management interface for Cockpit A web-based container app manager interface for Cockpit that provides: - Browse container apps by store and category - Search and filter apps by name or description - View detailed app information and configuration - Install and remove container app packages - Configure container apps through dynamic forms - Modern React-based UI with PatternFly components . This package provides a user-friendly interface for managing container applications through Cockpit&#x27;s web interface, designed for the HaLOS distribution.</p>
                             <div class="install-cmd">sudo apt install cockpit-container-apps</div>
                         </div>
@@ -64,11 +64,6 @@
                             <div class="install-cmd">sudo apt install halos</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-authelia-container <span class="version">v4.39.15-5</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Identity provider for HaLOS Single Sign-On Authelia is a lightweight authentication and authorization server that provides Single Sign-On (SSO) for HaLOS web applications. . Features: - OpenID Connect (OIDC) provider for native application integration - Forward Auth for applications without native OIDC support - File-based user database (no external database required) - Session management with secure cookies - Low memory footprint (~30-50 MB RAM) . Authelia integrates with Traefik reverse proxy to provide unified authentication across all HaLOS web interfaces.</p>
-                            <div class="install-cmd">sudo apt install halos-authelia-container</div>
-                        </div>
-                        <div class="package-item">
                             <h4>halos-cockpit-config <span class="version">v0.5.0-3</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS Cockpit configuration and branding This package provides HaLOS-specific configuration for the Cockpit web interface, including branding (logo, CSS, favicon), Homarr dashboard integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.</p>
                             <div class="install-cmd">sudo apt install halos-cockpit-config</div>
@@ -79,14 +74,9 @@
                             <div class="install-cmd">sudo apt install halos-core-containers</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-homarr-branding <span class="version">v0.2.0-3</span> <span class="arch-badge">all</span></h4>
+                            <h4>halos-homarr-branding <span class="version">v0.2.0-4</span> <span class="arch-badge">all</span></h4>
                             <p class="description">HaLOS branding and default configuration for Homarr dashboard This package provides the Hat Labs &quot;HaLOS&quot; branding configuration for the Homarr dashboard, including default theme colors, admin credentials, and pre-configured board layout. The homarr-container-adapter reads this configuration during first-boot setup to initialize Homarr with HaLOS branding.</p>
                             <div class="install-cmd">sudo apt install halos-homarr-branding</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-homarr-container <span class="version">v1.45.3-12</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Dashboard landing page for HaLOS Homarr provides a unified dashboard landing page for accessing all installed container applications. It serves as the primary entry point for users accessing their HaLOS system. . Features: - Visual dashboard showing all installed container apps - Auto-discovery of newly installed applications - Drag and drop configuration without YAML - User-customizable layout and organization - Quick access to Cockpit and system information - 30+ integrations for various services</p>
-                            <div class="install-cmd">sudo apt install halos-homarr-container</div>
                         </div>
                         <div class="package-item">
                             <h4>halos-marine <span class="version">v0.2.4-4</span> <span class="arch-badge">all</span></h4>
@@ -94,14 +84,9 @@
                             <div class="install-cmd">sudo apt install halos-marine</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-mdns-publisher <span class="version">v0.2.3-2</span> <span class="arch-badge">arm64</span></h4>
+                            <h4>halos-mdns-publisher <span class="version">v0.2.3-3</span> <span class="arch-badge">arm64</span></h4>
                             <p class="description">HaLOS mDNS subdomain publisher and resolver Native systemd service that advertises container subdomains via mDNS. Monitors Docker containers for the halos.subdomain label and uses avahi-publish to advertise the corresponding subdomains. . Also configures the system to resolve multi-label mDNS hostnames (e.g., auth.hostname.local) which are used by HaLOS services. . Features: - Monitors Docker for containers with halos.subdomain label - Publishes subdomains as &lt;subdomain&gt;.&lt;hostname&gt;.local - Configures system mDNS resolution for multi-label hostnames - Automatic cleanup when containers stop</p>
                             <div class="install-cmd">sudo apt install halos-mdns-publisher</div>
-                        </div>
-                        <div class="package-item">
-                            <h4>halos-traefik-container <span class="version">v3.6.5-7</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Reverse proxy and load balancer for HaLOS Traefik is a modern HTTP reverse proxy and load balancer that serves as the central entry point for all HaLOS web traffic. It provides automatic service discovery via Docker labels and enables host-based routing for web applications. . Features: - Automatic service discovery from Docker containers - Host-based routing (subdomains like auth.&lt;hostname&gt;.local) - ForwardAuth integration for SSO with Authelia - Dynamic configuration updates without restart - Built-in dashboard for monitoring (internal only)</p>
-                            <div class="install-cmd">sudo apt install halos-traefik-container</div>
                         </div>
                         <div class="package-item">
                             <h4>homarr-container-adapter <span class="version">v0.4.0-3</span> <span class="arch-badge">arm64</span></h4>
@@ -909,7 +894,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2026-01-02 22:05:04 UTC</p>
+            <p>Last updated: 2026-01-03 06:08:12 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

@@ -50,16 +50,16 @@ Description: Cockpit plugin for Authelia user management
  Authelia users through Cockpit's web interface.
 
 Package: cockpit-container-apps
-Version: 0.1.1-1
+Version: 0.1.1-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 12942
 Depends: python3-yaml, python3:any, cockpit (>= 276), python3-apt
-Filename: pool/trixie-stable/main/cockpit-container-apps_0.1.1-1_all.deb
-Size: 1269744
-MD5sum: cce4b714fdbe11d9e5c1bf548912ba05
-SHA1: 9dbfd8b067af371db347e5ec5111e2494ff4fe7e
-SHA256: 9f52da8df5e1e314af2ea79ca2e54168e221082d08871ad42db02001af69b6f3
+Filename: pool/trixie-stable/main/cockpit-container-apps_0.1.1-2_all.deb
+Size: 1270032
+MD5sum: e8898914d5b2b4e0e4f0894f9788a9c5
+SHA1: 03d7744a6bf92ae9a334b146e9e8c2c72bc5d55b
+SHA256: 48ec6c76ea0ef365cf7a7b1b2d616c792ecf43f3a1788dde742d41b82759eb7c
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit-container-apps
@@ -77,17 +77,17 @@ Description: Container app management interface for Cockpit
  distribution.
 
 Package: cockpit-dockermanager
-Version: 1.0.7-6
+Version: 1.0.7.2-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 69
+Installed-Size: 72
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7-6_all.deb
-Size: 16876
-MD5sum: 250add6b9adcef2cd686c6bab0cb4fd9
-SHA1: 9e8711fdb2bb392fd8924ad862683dd4c93f1d51
-SHA256: c22d98d9cba52c419842904560cecba905a767a520f5f5ec31aaf322a6d7aec1
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-1_all.deb
+Size: 17152
+MD5sum: 4b5aa442b4dbb1edfaf1d2a777dea169
+SHA1: 1b2fd359dd964c8d62f2e85d506a2077f010ad7a
+SHA256: e964f95a3c3314f755f3eee76015dfd515d0a5eea9a19be2670f3cd94fb824d3
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
@@ -131,16 +131,16 @@ Description: Cockpit NetworkManager module with WiFi support for HaLOS
  with WiFi features under development for potential upstream contribution.
 
 Package: container-packaging-tools
-Version: 0.5.0-1
+Version: 0.5.0-2
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 354
 Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-1_all.deb
-Size: 66860
-MD5sum: 852cc05858bec5f6e1b2d3242e4fc9a3
-SHA1: 3ad2739b91a8c03ce1865da697e5036340cd61f3
-SHA256: 3e6d49301492c9e391e1fe6c83a6b0e8b9fa12af74e197821970a4f3cc13ccb3
+Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-2_all.deb
+Size: 66824
+MD5sum: 2bc361e3730e39e055ef6015995e858c
+SHA1: 68477c0a909bd8ea954760a89a695824151513b2
+SHA256: 9c5671d3fd7dcaf72d426ddde468a1651613dbdbbc48ab36191d70a8dbee5db5
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
@@ -190,35 +190,6 @@ Description: Base system metapackage for HaLOS
  .
  HaLOS is a Debian-based operating system designed for easy management
  of Raspberry Pi systems through a web interface.
-
-Package: halos-authelia-container
-Version: 4.39.15-5
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 59
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Filename: pool/trixie-stable/main/halos-authelia-container_4.39.15-5_all.deb
-Size: 10208
-MD5sum: a06e82aaa1ae855257a2f2c06f775ac3
-SHA1: 5b1b48eb644293081c76b7856c353164f6797dc7
-SHA256: 037aece0bba6d7eee874fd3de7c6e37300e57bda1919eb8c8716526b528d35c8
-Section: admin
-Priority: optional
-Homepage: https://www.authelia.com/
-Description: Identity provider for HaLOS Single Sign-On
- Authelia is a lightweight authentication and authorization server that
- provides Single Sign-On (SSO) for HaLOS web applications.
- .
- Features:
- - OpenID Connect (OIDC) provider for native application integration
- - Forward Auth for applications without native OIDC support
- - File-based user database (no external database required)
- - Session management with secure cookies
- - Low memory footprint (~30-50 MB RAM)
- .
- Authelia integrates with Traefik reverse proxy to provide unified
- authentication across all HaLOS web interfaces.
-Tag: role::container-app, field::core, category::security, interface::web, auth::oidc
 
 Package: halos-cockpit-config
 Version: 0.5.0-3
@@ -293,35 +264,6 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-homarr-container
-Version: 1.45.3-12
-Architecture: all
-Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 89
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-traefik-container
-Recommends: halos-authelia-container
-Filename: pool/trixie-stable/main/halos-homarr-container_1.45.3-12_all.deb
-Size: 38490
-MD5sum: dfde46fd89666b9ebcbee9c60a0ae954
-SHA1: 407be2e6592dd0f7f65a0d80b2f44239f245dfd9
-SHA256: 566c7fae84f8352f0abf810a073943d60ffa11616021531d64044be1b0663e2d
-Section: web
-Priority: optional
-Homepage: https://homarr.dev/
-Description: Dashboard landing page for HaLOS
- Homarr provides a unified dashboard landing page for accessing all installed
- container applications. It serves as the primary entry point for users
- accessing their HaLOS system.
- .
- Features:
- - Visual dashboard showing all installed container apps
- - Auto-discovery of newly installed applications
- - Drag and drop configuration without YAML
- - User-customizable layout and organization
- - Quick access to Cockpit and system information
- - 30+ integrations for various services
-Tag: role::container-app, field::core, category::dashboard, interface::web, network::server
-
 Package: halos-marine
 Version: 0.2.4-4
 Architecture: all
@@ -347,36 +289,6 @@ Description: HaLOS marine system metapackage
  .
  This package depends on the halos base metapackage and adds marine-specific
  components for boat and vessel management.
-
-Package: halos-traefik-container
-Version: 3.6.5-7
-Architecture: all
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 83
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Recommends: halos-cockpit-config
-Conflicts: halos-reverse-proxy
-Provides: halos-reverse-proxy
-Filename: pool/trixie-stable/main/halos-traefik-container_3.6.5-7_all.deb
-Size: 11620
-MD5sum: c73d973013bb59bdf90c5d899e50f911
-SHA1: 0edadebce6325c8919505f5dbe9fc4290f6938db
-SHA256: 49e8e832a1688c848f2bb9f9e789e0da086876cb56b95f994eb75597ada3f8a4
-Section: web
-Priority: optional
-Homepage: https://traefik.io/
-Description: Reverse proxy and load balancer for HaLOS
- Traefik is a modern HTTP reverse proxy and load balancer that serves as the
- central entry point for all HaLOS web traffic. It provides automatic service
- discovery via Docker labels and enables host-based routing for web applications.
- .
- Features:
- - Automatic service discovery from Docker containers
- - Host-based routing (subdomains like auth.<hostname>.local)
- - ForwardAuth integration for SSO with Authelia
- - Dynamic configuration updates without restart
- - Built-in dashboard for monitoring (internal only)
-Tag: role::container-app, field::core, category::infrastructure, interface::web, network::proxy
 
 Package: marine-avnav-container
 Version: 20251028-8
