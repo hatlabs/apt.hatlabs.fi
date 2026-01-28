@@ -102,19 +102,19 @@ Description: Cockpit plugin for Docker container management
   * Image management
 
 Package: cockpit-networkmanager-halos
-Version: 0.1.0-2
+Version: 0.1.0-3
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 18105
+Installed-Size: 18125
 Depends: cockpit (>= 276), network-manager (>= 1.20)
 Conflicts: cockpit-networkmanager
 Replaces: cockpit-networkmanager
 Provides: cockpit-networkmanager
-Filename: pool/trixie-unstable/main/cockpit-networkmanager-halos_0.1.0-2_all.deb
-Size: 1825216
-MD5sum: b15041820386722c5b20b12eb3a5ecae
-SHA1: 2a1096147fc570c4e53f32ee489f1c0480562219
-SHA256: bacb117de5e7e2f83e76d76477e4dd43c2bca015fcc5f1f70114cb2ad49d7c95
+Filename: pool/trixie-unstable/main/cockpit-networkmanager-halos_0.1.0-3_all.deb
+Size: 1828032
+MD5sum: 38c847b0a2d9d58e6821d9bd77adc80b
+SHA1: 8db9a78bcd1a7a7977df3a2a09482b4edb64d225
+SHA256: d8b9a5d12f1dd531de775aa5f0002592a8375c46f8fe092a4e13e2747b6cdf00
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit
