@@ -295,12 +295,12 @@ Version: 20251028-9
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 105
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-9_all.deb
-Size: 66366
-MD5sum: 7e8de19dd6be96d197be2cd2977f4a89
-SHA1: 709fbb6d8548ed122d2f42f191cf27429b03606e
-SHA256: 764ef4334f917b75a2aa1097d36875600f4d4946d119859d30b91fca8d23f7b6
+Size: 66348
+MD5sum: 3a6588efc747608bc5e4a6ea8a293d0d
+SHA1: 2520bf8a72de7e5466cd8f2bdfa345ee02ed11b7
+SHA256: 9e1f3da44f3f36aa12074cc0738a65c6d231e16efb80874e9f3ef6f4eb6a3407
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -349,13 +349,13 @@ Version: 12.1.4-17
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 54
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Recommends: marine-influxdb-container
 Filename: pool/trixie-unstable/main/marine-grafana-container_12.1.4-17_all.deb
-Size: 9098
-MD5sum: c641d10051b6e7c45770e5d1645fcd59
-SHA1: f6c690e6247d409ec5e82ca0916429d95c8086e5
-SHA256: a52404994465b412731ad8742aeae2ed303a0382f808e6b2cd8abfbbb3a265fd
+Size: 9094
+MD5sum: ca735e7858f2adc672d95408f0fef716
+SHA1: 44c73d042fd7008febdc1ebe6a1127ef4ad85114
+SHA256: b568463b0125050fa2fd70b37769fbc3649c4d48d3fdbba21746b3d8be807aff
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -377,12 +377,12 @@ Version: 2.7.12-8
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 50
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-influxdb-container_2.7.12-8_all.deb
-Size: 7540
-MD5sum: 65f79976c79fc484d7d9c8e8ea0ea336
-SHA1: 8fa61885ed43dc5cfb586a70c86d8fa35fe15ef2
-SHA256: 4795b59030c1b95c5432022b0790142d0e0b590ab0b13284f2d054a6c945a823
+Size: 7534
+MD5sum: afd2e4e93ff1a1893ad7326b013ed559
+SHA1: c166116fca96616ad5d5d19c80d42d0001d39c7e
+SHA256: 8ecd85d5f254c76bc1380462fced61264c57e8c13380c80c46e066832985dd7d
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -404,12 +404,12 @@ Version: 5.12.4-7
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 52
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-7_all.deb
 Size: 12614
-MD5sum: 7104093a38137b82ca47230b655be762
-SHA1: 736fc74b7c11fcf068dd0a120e076ef17e51dd85
-SHA256: 92d230515f9aa7d2e3d98b0ee30d60eff385d9d5d954d20c09b8a00c000a34e4
+MD5sum: bf35c6334da59883b633673159e9111f
+SHA1: 9cc633d4a4ec5f4a13b2d04b6575ed720fcf0115
+SHA256: ba5f8cd0f5521ddb72182a7e5a7acca936ce53938c4a6cd266310ea544f94ec1
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -432,12 +432,12 @@ Version: 2.20.0-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 54
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), python3-bcrypt
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), python3-bcrypt
 Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.20.0-1_all.deb
-Size: 9482
-MD5sum: a8e8e7e7183364345ddd356ac1b18c5b
-SHA1: e42729f4a303a690c4eed6d4a89a541c1fdf922d
-SHA256: ba6721136b3eece0a41bf608aa6b6b1bb57365074575fdc8fa215206ae3ca798
+Size: 9486
+MD5sum: e516a4b94a857086c94a174c48b7e582
+SHA1: 57b1ae8a50b29dbc50d030b7f39066e941c8e36b
+SHA256: 7f4afec5f368ceb41bb4c02e2b2d0be6844f8d6db8e0b6750382e52359ec8d88
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
