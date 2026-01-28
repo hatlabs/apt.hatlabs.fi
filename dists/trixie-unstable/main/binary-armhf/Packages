@@ -214,19 +214,19 @@ Description: HaLOS Cockpit configuration and branding
  integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
 
 Package: halos-core-containers
-Version: 0.2.1-16
+Version: 0.2.1-18
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 125
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-homarr-branding
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), halos-homarr-branding
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-unstable/main/halos-core-containers_0.2.1-16_all.deb
-Size: 45896
-MD5sum: 2e349f41ea4f1ac612fc5f7f232b6122
-SHA1: df6d1c850995c5fbb81403edc6c1cb17957ee994
-SHA256: 0dbee1cb03246c6be3c8785c676d9952fc5bfa88fcb41c01f7c2344a5d635bcc
+Filename: pool/trixie-unstable/main/halos-core-containers_0.2.1-18_all.deb
+Size: 45886
+MD5sum: 67eaea6ebda58839c4e9a0cb90382033
+SHA1: e551e6611b522949700eba8488c19e5da468a914
+SHA256: aafa88711c6ae78325f4944a28992812b4eebc2b26b9c8f739a3171a7d191736
 Section: web
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-core-containers
