@@ -3415,17 +3415,17 @@ Description: Self-hosted ZeroTier network controller with web UI for centralized
 Tag: role::container-app
 
 Package: halpi2-firmware
-Version: 3.2.1-a1-3
+Version: 3.2.1-a1-4
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 3120
+Installed-Size: 3122
 Recommends: halpid (>= 4.0.0)
 Breaks: halpid (<< 4.0.0)
-Filename: pool/bookworm-unstable/hatlabs/halpi2-firmware_3.2.1-a1-3_all.deb
-Size: 652888
-MD5sum: 78dc91e9bae56c41b5d717fc7e8dbac7
-SHA1: 17ed35e63d0112d8e74a46d39553e989dc008488
-SHA256: 84ae90d1166796bd8cff805a3971c3c32ab43359663691d7efd7e57595626fb3
+Filename: pool/bookworm-unstable/hatlabs/halpi2-firmware_3.2.1-a1-4_all.deb
+Size: 653040
+MD5sum: 55e2ec7360c4478e8ac09d49097897b1
+SHA1: ae95a72cecd1459c3d522d25a7c63ac1884d880c
+SHA256: 739ffe0e0c7aee7dfdb652b091ff79de7c5aaa166a62024cac05fdb4636c9e09
 Section: embedded
 Priority: optional
 Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
