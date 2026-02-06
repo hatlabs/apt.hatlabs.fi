@@ -77,17 +77,17 @@ Description: Container app management interface for Cockpit
  distribution.
 
 Package: cockpit-dockermanager
-Version: 1.0.7.2-1
+Version: 1.0.7.2-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 72
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-1_all.deb
-Size: 17152
-MD5sum: 4b5aa442b4dbb1edfaf1d2a777dea169
-SHA1: 1b2fd359dd964c8d62f2e85d506a2077f010ad7a
-SHA256: e964f95a3c3314f755f3eee76015dfd515d0a5eea9a19be2670f3cd94fb824d3
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-2_all.deb
+Size: 16828
+MD5sum: 2b8d4fd16fd2cc90914eda4e689ae4a0
+SHA1: 2fe71a8fdbac704ce3a6be07bcd1fa0c9dd4d164
+SHA256: ceaab1ccdb074a028f60ffd6b7485e9fd257fce07e63372a31306c48ebd4f106
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
@@ -102,19 +102,19 @@ Description: Cockpit plugin for Docker container management
   * Image management
 
 Package: cockpit-networkmanager-halos
-Version: 0.1.0-2
+Version: 0.1.0-3
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 18105
+Installed-Size: 18125
 Depends: cockpit (>= 276), network-manager (>= 1.20)
 Conflicts: cockpit-networkmanager
 Replaces: cockpit-networkmanager
 Provides: cockpit-networkmanager
-Filename: pool/trixie-stable/main/cockpit-networkmanager-halos_0.1.0-2_all.deb
-Size: 1825216
-MD5sum: b15041820386722c5b20b12eb3a5ecae
-SHA1: 2a1096147fc570c4e53f32ee489f1c0480562219
-SHA256: bacb117de5e7e2f83e76d76477e4dd43c2bca015fcc5f1f70114cb2ad49d7c95
+Filename: pool/trixie-stable/main/cockpit-networkmanager-halos_0.1.0-3_all.deb
+Size: 1828032
+MD5sum: 38c847b0a2d9d58e6821d9bd77adc80b
+SHA1: 8db9a78bcd1a7a7977df3a2a09482b4edb64d225
+SHA256: d8b9a5d12f1dd531de775aa5f0002592a8375c46f8fe092a4e13e2747b6cdf00
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/cockpit
@@ -131,16 +131,16 @@ Description: Cockpit NetworkManager module with WiFi support for HaLOS
  with WiFi features under development for potential upstream contribution.
 
 Package: container-packaging-tools
-Version: 0.5.0-2
+Version: 0.5.0-6
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 354
+Installed-Size: 363
 Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-2_all.deb
-Size: 66824
-MD5sum: 2bc361e3730e39e055ef6015995e858c
-SHA1: 68477c0a909bd8ea954760a89a695824151513b2
-SHA256: 9c5671d3fd7dcaf72d426ddde468a1651613dbdbbc48ab36191d70a8dbee5db5
+Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-6_all.deb
+Size: 68628
+MD5sum: 3a9441806ff253e88fc693b0bfeae173
+SHA1: ba4546d7abc23cd8d2ebe2a20c76a2e357bf552b
+SHA256: 55248c1e9c1c3e2d16e417cb6b08b05aa9df8af617b365e18a3ee5fe999c2cb4
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
@@ -214,19 +214,19 @@ Description: HaLOS Cockpit configuration and branding
  integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
 
 Package: halos-core-containers
-Version: 0.2.1-14
+Version: 0.2.1-20
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 124
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), halos-homarr-branding
+Installed-Size: 125
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), halos-homarr-branding
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-stable/main/halos-core-containers_0.2.1-14_all.deb
-Size: 45786
-MD5sum: 9334cd36572d2f3d43c279e7acb7e28e
-SHA1: 4c11668a821e1ecb27e6f5cbff7eedab285dcb62
-SHA256: cfbb7619706ce3da1f7644ecb1f8a22f0485f57316a280500e18a6c9ad0722e5
+Filename: pool/trixie-stable/main/halos-core-containers_0.2.1-20_all.deb
+Size: 46336
+MD5sum: 71f95429b2c237c09c11eb05aa6662ec
+SHA1: 3545e1dd0ff7da8f454320a8748bd5c39a5cd519
+SHA256: 9ff8ab0962807eae4e86c796dad7f110bde20004912eec321f8b3faf5105cdcd
 Section: web
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-core-containers
@@ -291,16 +291,16 @@ Description: HaLOS marine system metapackage
  components for boat and vessel management.
 
 Package: marine-avnav-container
-Version: 20251028-8
+Version: 20251028-11
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 105
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-stable/main/marine-avnav-container_20251028-8_all.deb
-Size: 66332
-MD5sum: 90b580e78f26f5331a845f221e53732d
-SHA1: 12686a7a9cad9ada9dda22357dad1f73491e3bc9
-SHA256: efff6eb2c0347e1285c943b1a58e6e44ad29e60994b0a93593b02ec0268efe0b
+Installed-Size: 108
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
+Filename: pool/trixie-stable/main/marine-avnav-container_20251028-11_all.deb
+Size: 66924
+MD5sum: 8c2ef24b9ef106dcfa3c34c5cd786a19
+SHA1: eaa80bf9953a1a17d643e37f943b73362b73a917
+SHA256: 92b137aa858becd1430064bc710bfa6d738f1b23fb609ad771d87d498860efe1
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -317,7 +317,7 @@ Description: Touch-optimized chart plotter for sailing and motor yachts
  - Anchor watch functionality
  - NMEA data display and logging
  - Plugin system for extensions
-Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
+Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps, x-display-name::AvNav
 
 Package: marine-container-store
 Version: 0.3.0-1
@@ -345,17 +345,17 @@ Description: Marine container application store for Cockpit Container Apps
 Tag: role::container-store
 
 Package: marine-grafana-container
-Version: 12.1.4-17
+Version: 12.3.2-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 54
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Recommends: marine-influxdb-container
-Filename: pool/trixie-stable/main/marine-grafana-container_12.1.4-17_all.deb
-Size: 9094
-MD5sum: 5d2df7aed6755df55016e4ba8d98fe7c
-SHA1: 9e10b2d99a6712fa6d5eafa682be9cae4db8e032
-SHA256: dee3c3259f1ab66c2fccddcd90c9962fe36a7ed3b4d9d10a1ce94da5770e9e07
+Filename: pool/trixie-stable/main/marine-grafana-container_12.3.2-1_all.deb
+Size: 9104
+MD5sum: c277a407bf7427cab9a0b6127f30cc3b
+SHA1: d25dec43d9d2312e0981ee96edf89806dc15e830
+SHA256: dd0842e08a1e464c9f8bbcde1fd9c4ef6067ff3a01f2433b3cd973268f902611
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -370,19 +370,19 @@ Description: Data visualization and monitoring platform
  - Alert notifications
  - Dashboard sharing and templating
  - Plugin ecosystem
-Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile
+Tag: role::container-app, field::marine, category::visualization, category::monitoring, interface::web, use::monitoring, works-with::logfile, x-display-name::Grafana
 
 Package: marine-influxdb-container
-Version: 2.7.12-8
+Version: 2.8.0-1
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 50
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-stable/main/marine-influxdb-container_2.7.12-8_all.deb
-Size: 7534
-MD5sum: 2269113f43c747cc2c636ec719ff8c51
-SHA1: c1562357eb6fc74017aba2925cc3c9b90b5c9e41
-SHA256: acf56d8986face65bd4f708d719b898117681b97394da7aaca7dc9536b6f2012
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
+Filename: pool/trixie-stable/main/marine-influxdb-container_2.8.0-1_all.deb
+Size: 7558
+MD5sum: 1c623601d19467a02fe7c7c5038305e9
+SHA1: 64210ea48ec3a1da9a615d7cfab093a35f194d27
+SHA256: 59bb8308ee32eb6ef01d633c0f965c041a5e9741b778ee1a0455365a3af8fec0
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -397,19 +397,19 @@ Description: Time-series database for marine data logging
  - Powerful query language (Flux)
  - Retention policies for automatic data management
  - Integration with Grafana for visualization
-Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile
+Tag: role::container-app, field::marine, category::monitoring, interface::web, use::organizing, works-with::logfile, x-display-name::InfluxDB
 
 Package: marine-opencpn-container
-Version: 5.12.4-7
+Version: 5.12.4-8
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 52
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10)
-Filename: pool/trixie-stable/main/marine-opencpn-container_5.12.4-7_all.deb
-Size: 12602
-MD5sum: 4be708ffa2fbb15069d4d5334c1553a6
-SHA1: cced3a33a5b7e41ff3f50362c037134ae0740ba5
-SHA256: 5b7863faa9a9ec9ea05073a9397ba3d29cb374940a4f0968a6a16485300c0c10
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
+Filename: pool/trixie-stable/main/marine-opencpn-container_5.12.4-8_all.deb
+Size: 12632
+MD5sum: 1284f37771e63661b1396f5d7ed04187
+SHA1: 9d2e2ae88303e090ad7a4f510486246a59dc9b80
+SHA256: 61a5cba4a294fcf6c35e760e284651f3e469b4252d3821b2a973274337fe803a
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -425,19 +425,19 @@ Description: Open source chart plotter and navigation software
  - Weather routing and GRIB file support
  - Extensive plugin system
  - Route and waypoint management
-Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps
+Tag: role::container-app, field::marine, field::navigation, field::geography, category::navigation, category::chartplotters, scope::application, interface::web, use::routing, works-with::maps, x-display-name::OpenCPN
 
 Package: marine-signalk-server-container
-Version: 2.19.0-beta.4-2
+Version: 2.20.2-2
 Architecture: all
 Maintainer: Hat Labs <support@hatlabs.fi>
-Installed-Size: 53
-Depends: docker-compose | docker-compose-plugin, docker-ce (>= 20.10) | docker.io (>= 20.10), python3-bcrypt
-Filename: pool/trixie-stable/main/marine-signalk-server-container_2.19.0-beta.4-2_all.deb
-Size: 9406
-MD5sum: 937df236c9cf87f166bfedd3965bb1ac
-SHA1: a0dc602b0e160ef84afbd46a948f23665072fc07
-SHA256: 340555693fc76d96c6bafd3078107b6c5a11b43e1473a4b5bc5fe706bc662096
+Installed-Size: 54
+Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), python3-bcrypt
+Filename: pool/trixie-stable/main/marine-signalk-server-container_2.20.2-2_all.deb
+Size: 9484
+MD5sum: 17a9c067db073f21207a9fdb461d4c9e
+SHA1: bad1fac5f2f7347392f93f1caa33939e33140ced
+SHA256: 8625a65c0890e131f5b06adc224cde75df784e748f73ea395dd60625276b9844
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
@@ -452,5 +452,5 @@ Description: Signal K server for marine data processing and routing
  - Web app server for marine applications
  - Plugin system for extending functionality
  - Instrument integration and display
-Tag: role::container-app, field::marine, category::communication, category::monitoring, interface::web, use::routing, network::server
+Tag: role::container-app, field::marine, category::communication, category::monitoring, interface::web, use::routing, network::server, x-display-name::Signal K Server
 
