@@ -297,10 +297,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 108
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-avnav-container_20251028-11_all.deb
-Size: 66924
-MD5sum: 8c2ef24b9ef106dcfa3c34c5cd786a19
-SHA1: eaa80bf9953a1a17d643e37f943b73362b73a917
-SHA256: 92b137aa858becd1430064bc710bfa6d738f1b23fb609ad771d87d498860efe1
+Size: 66920
+MD5sum: f299dcc3be3fd634733f633e58f94ca0
+SHA1: 4d6a939c706a0a54a8cc296fa770076765dfa958
+SHA256: 89f99f9731c11521af7f85659c0d6544adf6fdd11384476d4ec427becc7cb7c8
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -352,10 +352,10 @@ Installed-Size: 54
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Recommends: marine-influxdb-container
 Filename: pool/trixie-unstable/main/marine-grafana-container_12.3.2-1_all.deb
-Size: 9104
-MD5sum: c277a407bf7427cab9a0b6127f30cc3b
-SHA1: d25dec43d9d2312e0981ee96edf89806dc15e830
-SHA256: dd0842e08a1e464c9f8bbcde1fd9c4ef6067ff3a01f2433b3cd973268f902611
+Size: 9112
+MD5sum: f271382c7ead94669a621f30881e4464
+SHA1: bdc89768b6af724becd4e232407f4eef92738646
+SHA256: 99171fc7910a8f28f63e54a444599b64bc89d7b36fc61fd17827b5bfa5187656
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -379,10 +379,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 50
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-influxdb-container_2.8.0-1_all.deb
-Size: 7558
-MD5sum: 1c623601d19467a02fe7c7c5038305e9
-SHA1: 64210ea48ec3a1da9a615d7cfab093a35f194d27
-SHA256: 59bb8308ee32eb6ef01d633c0f965c041a5e9741b778ee1a0455365a3af8fec0
+Size: 7570
+MD5sum: 94115349d73b83d38b07a118e54df1db
+SHA1: d0120a58beb5d25e1a3fedfd680a112e129a2352
+SHA256: ff6fd761b5caf3f21eb35cec37ab09857658caae4aa4baf7c4bbd849ba596098
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -406,10 +406,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 52
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-unstable/main/marine-opencpn-container_5.12.4-8_all.deb
-Size: 12632
-MD5sum: 1284f37771e63661b1396f5d7ed04187
-SHA1: 9d2e2ae88303e090ad7a4f510486246a59dc9b80
-SHA256: 61a5cba4a294fcf6c35e760e284651f3e469b4252d3821b2a973274337fe803a
+Size: 12630
+MD5sum: 21003bcb9227b60aa1c09e65dd74e93c
+SHA1: e1fccbacc56fe56f0df0475dc4b6de1adaf59b55
+SHA256: dbc485f852dbd575651e5cb83e7bb8f8c9f9b045b607009b98a7dbc83476a870
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -434,10 +434,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 54
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), python3-bcrypt
 Filename: pool/trixie-unstable/main/marine-signalk-server-container_2.20.2-2_all.deb
-Size: 9484
-MD5sum: 17a9c067db073f21207a9fdb461d4c9e
-SHA1: bad1fac5f2f7347392f93f1caa33939e33140ced
-SHA256: 8625a65c0890e131f5b06adc224cde75df784e748f73ea395dd60625276b9844
+Size: 9648
+MD5sum: 3e8ec8673102619f77b55665e81d552b
+SHA1: acf12f4c3b2a740c887f6233014f462a2eb2a95f
+SHA256: ea9bd86958df78703792e9f963bb6ef70ff61ea003e27b3317fb8f070646bc3e
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
