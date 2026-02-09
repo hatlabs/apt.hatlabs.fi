@@ -320,15 +320,15 @@ Description: HaLOS mDNS subdomain publisher and resolver
   - Automatic cleanup when containers stop
 
 Package: homarr-container-adapter
-Version: 0.4.0-4
+Version: 0.4.1-1
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: halos-homarr-branding
-Filename: pool/trixie-unstable/main/homarr-container-adapter_0.4.0-4_arm64.deb
-Size: 1831228
-MD5sum: e22ef354a64a91093fbf632f38ca14de
-SHA1: 73b7211509cc4e93c90c687e1f2bb1812e84a3f6
-SHA256: a2a037a0e3c898e63597c3bc3d054f27088dcd2954c4474a06b72a320f0e3abe
+Filename: pool/trixie-unstable/main/homarr-container-adapter_0.4.1-1_arm64.deb
+Size: 1835444
+MD5sum: 577d9ddec905f1a3dc09830d1f716d3c
+SHA1: 433e9e259d6eccd6afb7170311aea45548f5cdde
+SHA256: f960e377c27392fa8a93875e098a509a6397a5043b544d2ddb7e9d690c70c5b8
 Description: Homarr dashboard adapter for HaLOS
  Adapter service that handles first-boot setup and container
  auto-discovery for the Homarr dashboard.
