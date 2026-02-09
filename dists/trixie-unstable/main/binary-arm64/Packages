@@ -131,16 +131,16 @@ Description: Cockpit NetworkManager module with WiFi support for HaLOS
  with WiFi features under development for potential upstream contribution.
 
 Package: container-packaging-tools
-Version: 0.5.0-6
+Version: 0.5.0-7
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 363
 Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-unstable/main/container-packaging-tools_0.5.0-6_all.deb
-Size: 68628
-MD5sum: 3a9441806ff253e88fc693b0bfeae173
-SHA1: ba4546d7abc23cd8d2ebe2a20c76a2e357bf552b
-SHA256: 55248c1e9c1c3e2d16e417cb6b08b05aa9df8af617b365e18a3ee5fe999c2cb4
+Filename: pool/trixie-unstable/main/container-packaging-tools_0.5.0-7_all.deb
+Size: 68648
+MD5sum: 73137c089c5777978ffb28d2373e752b
+SHA1: a6efc5bef4667a5a224066609b2c2bb8b17ea4c8
+SHA256: ece696b50577006138da2c6ff6153cd4d92cc2a24af56960d85f05784c0b92aa
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
