@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Unstable</h3>
-                <p class="dist-meta">149 packages</p>
+                <p class="dist-meta">151 packages</p>
                 <p class="dist-desc">Hat Labs product packages (rolling, latest from main)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -26,7 +26,7 @@
                 <div class="package-list">
                     <strong>Available Packages:</strong>
                     <details class="component-group" open>
-                        <summary>Main Packages <span class="pkg-count">(149 packages)</span></summary>
+                        <summary>Main Packages <span class="pkg-count">(151 packages)</span></summary>
                         <div class="component-content">
                         <div class="package-item">
                             <h4>casaos-2fauth-container <span class="version">v1.0.0</span> <span class="arch-badge">all</span></h4>
@@ -754,6 +754,16 @@
                             <div class="install-cmd">sudo apt install casaos-ztnet-container</div>
                         </div>
                         <div class="package-item">
+                            <h4>halos <span class="version">v0.2.7-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Base system metapackage for HaLOS This metapackage installs the base HaLOS system, providing web-based Raspberry Pi management through Cockpit. . The HaLOS base system includes: * Cockpit web interface for system management * Network configuration with WiFi hotspot support * Storage management through cockpit-storaged * Package management through cockpit-apt * Container app management through cockpit-container-apps * Homarr dashboard for container app access * Automatic container discovery and dashboard integration * Custom HaLOS branding . HaLOS is a Debian-based operating system designed for easy management of Raspberry Pi systems through a web interface.</p>
+                            <div class="install-cmd">sudo apt install halos</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halos-marine <span class="version">v0.2.7-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
+                            <div class="install-cmd">sudo apt install halos-marine</div>
+                        </div>
+                        <div class="package-item">
                             <h4>halpi2-firmware <span class="version">v3.2.1-2</span> <span class="arch-badge">all</span></h4>
                             <p class="description">Firmware for the HALPI2 Computer This package contains the firmware for the HALPI2 Computer onboard controller. The firmware is automatically flashed to the device upon installation.</p>
                             <div class="install-cmd">sudo apt install halpi2-firmware</div>
@@ -794,7 +804,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2026-02-09 15:05:47 UTC</p>
+            <p>Last updated: 2026-02-10 06:28:56 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>

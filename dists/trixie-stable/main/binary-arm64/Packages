@@ -77,17 +77,17 @@ Description: Container app management interface for Cockpit
  distribution.
 
 Package: cockpit-dockermanager
-Version: 1.0.7.2-2
+Version: 1.0.7.2-3
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 72
+Installed-Size: 76
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-2_all.deb
-Size: 16828
-MD5sum: 2b8d4fd16fd2cc90914eda4e689ae4a0
-SHA1: 2fe71a8fdbac704ce3a6be07bcd1fa0c9dd4d164
-SHA256: ceaab1ccdb074a028f60ffd6b7485e9fd257fce07e63372a31306c48ebd4f106
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-3_all.deb
+Size: 17320
+MD5sum: a29f36cda13514884bd45f71a0115f6e
+SHA1: 3690f023f4712b8b02536e0f29217621af0622d7
+SHA256: d2f61321ccaa694ea0fe89a51c0437680091ae0c73266942867902a6f51c6ad5
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
@@ -131,16 +131,16 @@ Description: Cockpit NetworkManager module with WiFi support for HaLOS
  with WiFi features under development for potential upstream contribution.
 
 Package: container-packaging-tools
-Version: 0.5.0-6
+Version: 0.5.0-7
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 363
 Depends: python3-jinja2, python3-pil, python3-pydantic (>= 2.0), python3-requests, python3-yaml, python3:any, dpkg-dev
-Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-6_all.deb
-Size: 68628
-MD5sum: 3a9441806ff253e88fc693b0bfeae173
-SHA1: ba4546d7abc23cd8d2ebe2a20c76a2e357bf552b
-SHA256: 55248c1e9c1c3e2d16e417cb6b08b05aa9df8af617b365e18a3ee5fe999c2cb4
+Filename: pool/trixie-stable/main/container-packaging-tools_0.5.0-7_all.deb
+Size: 68648
+MD5sum: 73137c089c5777978ffb28d2373e752b
+SHA1: a6efc5bef4667a5a224066609b2c2bb8b17ea4c8
+SHA256: ece696b50577006138da2c6ff6153cd4d92cc2a24af56960d85f05784c0b92aa
 Section: devel
 Priority: optional
 Homepage: https://github.com/hatlabs/container-packaging-tools
@@ -159,37 +159,6 @@ Description: Generate Debian packages from container application definitions
  The tool reads docker-compose.yml, config.yml, and metadata.json from
  application directories and generates complete Debian package structures
  ready for building with dpkg-buildpackage.
-
-Package: halos
-Version: 0.2.7-1
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 12
-Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-authelia-users, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io (>= 20.10) | docker-ce (>= 20.10), docker-compose | docker-compose-plugin, docker-cli, halos-core-containers, homarr-container-adapter, halos-mdns-publisher
-Filename: pool/trixie-stable/main/halos_0.2.7-1_all.deb
-Size: 2332
-MD5sum: 20ccd283814455fa09d281afa919a4dd
-SHA1: d688906cecdc678a1e7f1e8c53684493e96f3680
-SHA256: 2167e21186643f10b03c548684d3861ac580602b05826c29224adef49359d72f
-Section: metapackages
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-metapackages
-Description: Base system metapackage for HaLOS
- This metapackage installs the base HaLOS system, providing web-based
- Raspberry Pi management through Cockpit.
- .
- The HaLOS base system includes:
-  * Cockpit web interface for system management
-  * Network configuration with WiFi hotspot support
-  * Storage management through cockpit-storaged
-  * Package management through cockpit-apt
-  * Container app management through cockpit-container-apps
-  * Homarr dashboard for container app access
-  * Automatic container discovery and dashboard integration
-  * Custom HaLOS branding
- .
- HaLOS is a Debian-based operating system designed for easy management
- of Raspberry Pi systems through a web interface.
 
 Package: halos-cockpit-config
 Version: 0.5.0-3
@@ -214,19 +183,19 @@ Description: HaLOS Cockpit configuration and branding
  integration, and mDNS subdomain advertisement for cockpit.{hostname}.local.
 
 Package: halos-core-containers
-Version: 0.2.1-20
+Version: 0.2.1-22
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 125
+Installed-Size: 126
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), halos-homarr-branding
 Recommends: halos-cockpit-config
 Conflicts: halos-reverse-proxy
 Provides: halos-reverse-proxy
-Filename: pool/trixie-stable/main/halos-core-containers_0.2.1-20_all.deb
-Size: 46336
-MD5sum: 71f95429b2c237c09c11eb05aa6662ec
-SHA1: 3545e1dd0ff7da8f454320a8748bd5c39a5cd519
-SHA256: 9ff8ab0962807eae4e86c796dad7f110bde20004912eec321f8b3faf5105cdcd
+Filename: pool/trixie-stable/main/halos-core-containers_0.2.1-22_all.deb
+Size: 46464
+MD5sum: 8aff00165a15b41d4645674bb4232b00
+SHA1: f9fa250db4548ae591ddbab2dcb85a4f3715fb9a
+SHA256: f317df3875f6e3d540944788601a403c84520c410eabf7b23c75fb6bb3827d2c
 Section: web
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-core-containers
@@ -243,17 +212,17 @@ Description: Core infrastructure stack (Traefik, Authelia, Homarr)
 Tag: role::container-app, field::core, category::infrastructure, interface::web
 
 Package: halos-homarr-branding
-Version: 0.2.0-4
+Version: 0.2.2-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 757
 Depends: xdg-utils
 Recommends: halos-core-containers | halos-homarr-container
-Filename: pool/trixie-stable/main/halos-homarr-branding_0.2.0-4_all.deb
-Size: 398088
-MD5sum: 7389e8592d686c5f3dab0262522d245a
-SHA1: 2a5b20c23aeddeff4f2a1b6b2541da900ed7e4ff
-SHA256: f131cc41dc654c40bb94b8dea68a18a4930fc774ecb4cb3fbeb7cfe6353e3e4a
+Filename: pool/trixie-stable/main/halos-homarr-branding_0.2.2-1_all.deb
+Size: 398350
+MD5sum: 1a8d3caa07e4f09fc0792e501cd4668d
+SHA1: b2be90f0f00d1f3e178b530813e641fd930d8b4b
+SHA256: 9ffa8744bf7c45fd308db7ce4081e3ccd871000aa8212d3644fb82dc094a8632
 Section: admin
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-distro
@@ -264,45 +233,19 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
 
-Package: halos-marine
-Version: 0.2.7-1
-Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 12
-Depends: halos (>= 0.2.7-1), gpsd, marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-stable/main/halos-marine_0.2.7-1_all.deb
-Size: 2172
-MD5sum: d005254fa2d7b3bd7381ab6906a12ba3
-SHA1: e7833850c15d697228e9855e8d52e40b3c36a1f9
-SHA256: 6ee1246f9d044ec8aa2e4cc0c16bfde4fe69296bd065827a859aef751f8dc0b9
-Section: metapackages
-Priority: optional
-Homepage: https://github.com/hatlabs/halos-metapackages
-Description: HaLOS marine system metapackage
- This metapackage extends the base HaLOS system with marine navigation
- and monitoring software.
- .
- The HaLOS marine system adds:
-  * Marine container store for browsing marine applications
-  * Signal K server for marine data collection and distribution
-  * Pre-configured marine software stack
- .
- This package depends on the halos base metapackage and adds marine-specific
- components for boat and vessel management.
-
 Package: halos-mdns-publisher
-Version: 0.2.3-5
+Version: 0.2.3-6
 Architecture: arm64
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: avahi-daemon, avahi-utils, libnss-mdns, libc6
 Recommends: docker.io | docker-ce
 Conflicts: halos-mdns-publisher-container
 Replaces: halos-mdns-publisher-container
-Filename: pool/trixie-stable/main/halos-mdns-publisher_0.2.3-5_arm64.deb
-Size: 1195412
-MD5sum: 0d9fbb22f01dd0552cb551354af26c8c
-SHA1: 6ebfbad1f8cbf43022aa547ebb7becb30a3ff8e6
-SHA256: dde2f5a13df97513f871e1a05885289308ed2a8b93b04d424fc93f52ade74311
+Filename: pool/trixie-stable/main/halos-mdns-publisher_0.2.3-6_arm64.deb
+Size: 1179036
+MD5sum: c6daed1ca62a9d511f8a91cb63ee2d5b
+SHA1: 7e114a03c681db588b0245244152f36999c26904
+SHA256: 86af9cf97632edbf00f7938b49d8f094751c6147a8795002d3fb957e20e1a5dc
 Section: admin
 Priority: optional
 Description: HaLOS mDNS subdomain publisher and resolver
@@ -346,10 +289,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 108
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-stable/main/marine-avnav-container_20251028-11_all.deb
-Size: 66924
-MD5sum: 7f334bcd10baf01c8e037d4272fe9f87
-SHA1: f98b037bbc47998ca9dfc09a38778be99b0f6bd8
-SHA256: bc0f144015e70f71d449d236895dc0acd961c38424ab8ffbe59816284f23a1a0
+Size: 66914
+MD5sum: 86e67742dd1e066ffc71d1b98ec934f5
+SHA1: 6906b49c3ffd825b6b64371c18a7a72d3dc9aa32
+SHA256: c8d0bf8baedb31a0e031d818dc836e9cb5d213192d2f765873bbc86a37ead619
 Section: graphics
 Priority: optional
 Homepage: https://www.wellenvogel.net/software/avnav/docs/beschreibung.html
@@ -401,10 +344,10 @@ Installed-Size: 54
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Recommends: marine-influxdb-container
 Filename: pool/trixie-stable/main/marine-grafana-container_12.3.2-1_all.deb
-Size: 9106
-MD5sum: ac7be686de58d669a3308b959c22f2f3
-SHA1: d71be5c0c768249367983509da0ba33af90f5231
-SHA256: d59fa2b33beaf72729c0ce62042a90ee50f31ac675043d4d2150841f16bb4c2c
+Size: 9116
+MD5sum: 40497090061715b106a99a3b3492358e
+SHA1: aea864757dcf083599875ebe1a99148854051984
+SHA256: 286c142200958483496549534b83b562d5d2958ff3e12960b719a7bc4ee4cf51
 Section: web
 Priority: optional
 Homepage: https://grafana.com/
@@ -428,10 +371,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 50
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-stable/main/marine-influxdb-container_2.8.0-1_all.deb
-Size: 7558
-MD5sum: 65c7b8203485831a427b671048a7188d
-SHA1: 3d612da0df100e8c3be40fd54e0e98b48dbf46b6
-SHA256: 23ba4b5170d72547fbf6cfae6a0040eb0050ca0972e409ebbe3df3dfe9953b61
+Size: 7554
+MD5sum: d3caa964662cfdb96721d93349ade207
+SHA1: 904d330941697326823e1cb9f7925e5a62cc7b3a
+SHA256: 1aeb0e72af7833fec0e066c2fa563dac903d78d7f8b95d223b1eff458db63f09
 Section: net
 Priority: optional
 Homepage: https://www.influxdata.com/
@@ -455,10 +398,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 52
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10)
 Filename: pool/trixie-stable/main/marine-opencpn-container_5.12.4-8_all.deb
-Size: 12628
-MD5sum: eb7409a13f95b71282e7ebb458b47336
-SHA1: 11912a1e418521ec437e75edd551368e2dd3f07d
-SHA256: 897114d613700599640ccff639112ad19b6f9f1c3d78550f341a42137f0b1d99
+Size: 12632
+MD5sum: 775c38afb387dc48c14982c6100c46a8
+SHA1: f3e681c4ffb48ea4d016bfa7a3163f2ad1117bb9
+SHA256: 0a8bc96db8a240768d855361193dae2b2b151ea7d58a6c6bfdb1ba7c45f0cd79
 Section: graphics
 Priority: optional
 Homepage: https://opencpn.org/
@@ -483,10 +426,10 @@ Maintainer: Hat Labs <support@hatlabs.fi>
 Installed-Size: 54
 Depends: docker-compose | docker-compose-plugin, docker.io (>= 20.10) | docker-ce (>= 20.10), python3-bcrypt
 Filename: pool/trixie-stable/main/marine-signalk-server-container_2.20.2-3_all.deb
-Size: 9660
-MD5sum: 00fbb5367b23b55409b8d68a58a25c89
-SHA1: a1abc6f4171d4bcf0330bdaa880f0845d21e3c43
-SHA256: 9fde4a5b5b19c498faa258efcb76251eb445408b346d4e0ff7d710d81b79d449
+Size: 9656
+MD5sum: ad8347475569f64ed46362ade3d0416a
+SHA1: df492a4eb2814559450390bc12dbdb5551cd504a
+SHA256: 5d4afd5919a270e8ed974417e8adb836975a2772726345eba994bd893a921371
 Section: net
 Priority: optional
 Homepage: https://signalk.org/
