@@ -160,6 +160,37 @@ Description: Generate Debian packages from container application definitions
  application directories and generates complete Debian package structures
  ready for building with dpkg-buildpackage.
 
+Package: halos
+Version: 0.2.8-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 12
+Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-authelia-users, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io (>= 20.10) | docker-ce (>= 20.10), docker-compose | docker-compose-plugin, docker-cli, halos-core-containers, homarr-container-adapter, halos-mdns-publisher
+Filename: pool/trixie-unstable/main/halos_0.2.8-1_all.deb
+Size: 2340
+MD5sum: 4f1f0766e4a7b0c9c31631030e340ba1
+SHA1: eed0c6cf502ad29a7476c8af9518d1a8287c6bf7
+SHA256: babdb804512802e122c1993d3c75fdc2b8af351358179546861b178307d37fe1
+Section: metapackages
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-metapackages
+Description: Base system metapackage for HaLOS
+ This metapackage installs the base HaLOS system, providing web-based
+ Raspberry Pi management through Cockpit.
+ .
+ The HaLOS base system includes:
+  * Cockpit web interface for system management
+  * Network configuration with Wi-Fi hotspot support
+  * Storage management through cockpit-storaged
+  * Package management through cockpit-apt
+  * Container app management through cockpit-container-apps
+  * Homarr dashboard for container app access
+  * Automatic container discovery and dashboard integration
+  * Custom HaLOS branding
+ .
+ HaLOS is a Debian-based operating system designed for easy management
+ of Raspberry Pi systems through a web interface.
+
 Package: halos-cockpit-config
 Version: 0.5.0-3
 Architecture: all
@@ -232,6 +263,32 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  and pre-configured board layout. The homarr-container-adapter reads this
  configuration during first-boot setup to initialize Homarr with HaLOS
  branding.
+
+Package: halos-marine
+Version: 0.2.8-1
+Architecture: all
+Maintainer: Hat Labs <info@hatlabs.fi>
+Installed-Size: 12
+Depends: halos (>= 0.2.8-1), gpsd, marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.2.8-1_all.deb
+Size: 2172
+MD5sum: d1e029be2339e37b5e8bd65a7b77f94d
+SHA1: f85cb0195cc6a925b1a1460efb7b849e82e22560
+SHA256: 6b69e4002685ff2082a4a51b1aab53b7360aef0aaa57aba5760eebbce2bbf5aa
+Section: metapackages
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-metapackages
+Description: HaLOS marine system metapackage
+ This metapackage extends the base HaLOS system with marine navigation
+ and monitoring software.
+ .
+ The HaLOS marine system adds:
+  * Marine container store for browsing marine applications
+  * Signal K server for marine data collection and distribution
+  * Pre-configured marine software stack
+ .
+ This package depends on the halos base metapackage and adds marine-specific
+ components for boat and vessel management.
 
 Package: halos-mdns-publisher
 Version: 0.2.3-6
