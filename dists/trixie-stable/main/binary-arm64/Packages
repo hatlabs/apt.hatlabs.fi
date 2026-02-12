@@ -77,17 +77,17 @@ Description: Container app management interface for Cockpit
  distribution.
 
 Package: cockpit-dockermanager
-Version: 1.0.7.2-3
+Version: 1.0.7.3-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 76
 Depends: cockpit (>= 200)
 Recommends: docker.io | docker-ce
-Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.2-3_all.deb
-Size: 17320
-MD5sum: a29f36cda13514884bd45f71a0115f6e
-SHA1: 3690f023f4712b8b02536e0f29217621af0622d7
-SHA256: d2f61321ccaa694ea0fe89a51c0437680091ae0c73266942867902a6f51c6ad5
+Filename: pool/trixie-stable/main/cockpit-dockermanager_1.0.7.3-2_all.deb
+Size: 17352
+MD5sum: df3a97c06ad9b72631a1754c9a353864
+SHA1: a7bc4bd7bc394880ab7b6e2b91e14ba4fff1901c
+SHA256: 759768e31233510298bd6ba9cfa7cf38dd30a818c12a4b8f02d80e7843717267
 Section: admin
 Priority: optional
 Homepage: https://github.com/chrisjbawden/cockpit-dockermanager
