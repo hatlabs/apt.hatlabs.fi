@@ -3455,26 +3455,25 @@ Description: Power monitor and watchdog daemon for HALPI2
  functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.
 
 Package: halpid
-Version: 4.0.7-2
+Version: 5.0.1-1
 Architecture: arm64
-Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 58527
-Pre-Depends: dpkg (>= 1.16.1)
-Recommends: halpi-firmware
-Filename: pool/bookworm-unstable/hatlabs/halpid_4.0.7-2_arm64.deb
-Size: 14654876
-MD5sum: 978c4d73187a0717b29c83b6b13b4561
-SHA1: e6fc9a4f2725bd03c824fee7d8892aac3322ca4c
-SHA256: e600f2467a474ce2388b4c098b8214226d8c7766b6c8904828d185b38589b4ef
+Maintainer: Hat Labs Ltd. <info@hatlabs.fi>
+Installed-Size: 5364
+Conflicts: halpi2-rust-daemon
+Replaces: halpi2-rust-daemon
+Provides: halpi2-rust-daemon
+Filename: pool/bookworm-unstable/hatlabs/halpid_5.0.1-1_arm64.deb
+Size: 1371084
+MD5sum: b21369f05a032beb6cae41448c5e4e11
+SHA1: 745aabb49cb1b85391a3530f0b64a5c5c9a777ec
+SHA256: 55cdafde1babf76bc11e007528d73686aa1ea45f3203d6a404506bb0b8b02096
 Section: admin
-Priority: important
-Description: HALPI2 service daemon
- `halpid` is a power monitor and watchdog service for HALPI2. It communicates
- with the HALPI2 controller, providing the "smart" aspects of the operation.
- .
- The main use case for the service software is to have the Raspberry Pi
- Operating System shut down once the power is cut. This prevents potential
- file system corruption without having to shut down the device manually.
+Priority: optional
+Homepage: https://docs.hatlabs.fi/halpi2
+Description: Power monitor and watchdog daemon for HALPI2
+ HALPI2 power monitoring and watchdog daemon.
+ Provides power management, blackout detection, and hardware watchdog
+ functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.
 
 Package: halpid-dbgsym
 Source: halpid
