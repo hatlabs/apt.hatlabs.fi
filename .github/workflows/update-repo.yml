@@ -4,8 +4,11 @@ on:
   repository_dispatch:
     types: [package-updated]  # This listens for the event from package repos
   workflow_dispatch:          # Manual trigger
-  schedule:
-    - cron: '0 6 * * *'        # Daily rebuild
+  # Daily rebuild disabled during apt.halos.fi migration.
+  # A full rebuild now would drop HaLOS packages (repos moved to halos-org)
+  # and break existing installations before bridge packages are deployed.
+  # schedule:
+  #   - cron: '0 6 * * *'
 
 # Serialize all APT repo updates to prevent race conditions.
 # Without this, concurrent workflows can overwrite each other's changes.
