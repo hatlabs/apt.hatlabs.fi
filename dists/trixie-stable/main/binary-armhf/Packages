@@ -161,35 +161,29 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.2.10-1
+Version: 0.2.11-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
-Installed-Size: 12
+Installed-Size: 16
 Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-authelia-users, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io (>= 20.10) | docker-ce (>= 20.10), docker-compose | docker-compose-plugin, docker-cli, halos-core-containers, homarr-container-adapter, halos-mdns-publisher
-Filename: pool/trixie-stable/main/halos_0.2.10-1_all.deb
-Size: 2518
-MD5sum: f0eac7bb41e00afa40caa2aa7ef3a25c
-SHA1: 2b9dd14a4ad9a4b0bbb48229b0659f33a1b490cd
-SHA256: bebb6b4442d91327d3f1550ebb359c0f1fbb64473e25ae7ed92bf11bf130a7ec
+Filename: pool/trixie-stable/main/halos_0.2.11-1_all.deb
+Size: 4078
+MD5sum: 23f55db9a5d0034ee0b40263033e6162
+SHA1: 8de95b109b7c23a1bb7c172bf70d37821c38479e
+SHA256: 9fb51599ed4b2c7706608142d80a6231017525186e710364725d3160cd32d3dd
 Section: metapackages
 Priority: optional
-Homepage: https://github.com/hatlabs/halos-metapackages
-Description: Base system metapackage for HaLOS
- This metapackage installs the base HaLOS system, providing web-based
- Raspberry Pi management through Cockpit.
+Homepage: https://github.com/hatlabs/halos-bridge-metapackage
+Description: Bridge metapackage for HaLOS APT repository migration
+ This is a transitional bridge package that migrates the APT source
+ from apt.hatlabs.fi to apt.halos.fi.
  .
- The HaLOS base system includes:
-  * Cockpit web interface for system management
-  * Network configuration with Wi-Fi hotspot support
-  * Storage management through cockpit-storaged
-  * Package management through cockpit-apt
-  * Container app management through cockpit-container-apps
-  * Homarr dashboard for container app access
-  * Automatic container discovery and dashboard integration
-  * Custom HaLOS branding
+ On installation, it adds the apt.halos.fi GPG key and APT source.
+ On the next apt update && apt upgrade, the system will upgrade to
+ the halos package from apt.halos.fi (version 0.3.0+).
  .
- HaLOS is a Debian-based operating system designed for easy management
- of Raspberry Pi systems through a web interface.
+ This package has identical dependencies to halos 0.2.10 to prevent
+ any packages from being auto-removed during the transition.
 
 Package: halos-cockpit-config
 Version: 0.5.0-3
@@ -265,30 +259,26 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.2.10-1
+Version: 0.2.11-1
 Architecture: all
 Maintainer: Hat Labs <info@hatlabs.fi>
 Installed-Size: 12
-Depends: halos (>= 0.2.10-1), gpsd, marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-stable/main/halos-marine_0.2.10-1_all.deb
-Size: 2350
-MD5sum: f4eabb745d3972311051fdaebc2bafab
-SHA1: ec2847ad4a2e706ba07876045bed2f4de8665092
-SHA256: f807be9d02d77231230afdc42db0f270dbe817152fb00ccdb914ea2374216615
+Depends: halos (>= 0.2.11-1), gpsd, marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-stable/main/halos-marine_0.2.11-1_all.deb
+Size: 2198
+MD5sum: e0a4a3cb74b0d5de6295b0ca57f92cab
+SHA1: 07fe8be70820a6b35656db59f8057841d84a1894
+SHA256: 7db62699b2e63f9113aa98fae56bfc51a3e0471a123b8406380abae29f59b38a
 Section: metapackages
 Priority: optional
-Homepage: https://github.com/hatlabs/halos-metapackages
-Description: HaLOS marine system metapackage
- This metapackage extends the base HaLOS system with marine navigation
- and monitoring software.
+Homepage: https://github.com/hatlabs/halos-bridge-metapackage
+Description: Bridge metapackage for HaLOS marine APT repository migration
+ This is a transitional bridge package for halos-marine that maintains
+ identical dependencies to halos-marine 0.2.10 during the migration
+ from apt.hatlabs.fi to apt.halos.fi.
  .
- The HaLOS marine system adds:
-  * Marine container store for browsing marine applications
-  * Signal K server for marine data collection and distribution
-  * Pre-configured marine software stack
- .
- This package depends on the halos base metapackage and adds marine-specific
- components for boat and vessel management.
+ This package has identical dependencies to halos-marine 0.2.10 to prevent
+ any packages from being auto-removed during the transition.
 
 Package: marine-avnav-container
 Version: 20251028-11

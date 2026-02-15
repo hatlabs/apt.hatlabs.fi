@@ -55,8 +55,8 @@
                             <div class="install-cmd">sudo apt install container-packaging-tools</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos <span class="version">v0.2.10-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">Base system metapackage for HaLOS This metapackage installs the base HaLOS system, providing web-based Raspberry Pi management through Cockpit. . The HaLOS base system includes: * Cockpit web interface for system management * Network configuration with Wi-Fi hotspot support * Storage management through cockpit-storaged * Package management through cockpit-apt * Container app management through cockpit-container-apps * Homarr dashboard for container app access * Automatic container discovery and dashboard integration * Custom HaLOS branding . HaLOS is a Debian-based operating system designed for easy management of Raspberry Pi systems through a web interface.</p>
+                            <h4>halos <span class="version">v0.2.11-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Bridge metapackage for HaLOS APT repository migration This is a transitional bridge package that migrates the APT source from apt.hatlabs.fi to apt.halos.fi. . On installation, it adds the apt.halos.fi GPG key and APT source. On the next apt update &amp;&amp; apt upgrade, the system will upgrade to the halos package from apt.halos.fi (version 0.3.0+). . This package has identical dependencies to halos 0.2.10 to prevent any packages from being auto-removed during the transition.</p>
                             <div class="install-cmd">sudo apt install halos</div>
                         </div>
                         <div class="package-item">
@@ -75,8 +75,8 @@
                             <div class="install-cmd">sudo apt install halos-homarr-branding</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-marine <span class="version">v0.2.10-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">HaLOS marine system metapackage This metapackage extends the base HaLOS system with marine navigation and monitoring software. . The HaLOS marine system adds: * Marine container store for browsing marine applications * Signal K server for marine data collection and distribution * Pre-configured marine software stack . This package depends on the halos base metapackage and adds marine-specific components for boat and vessel management.</p>
+                            <h4>halos-marine <span class="version">v0.2.11-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Bridge metapackage for HaLOS marine APT repository migration This is a transitional bridge package for halos-marine that maintains identical dependencies to halos-marine 0.2.10 during the migration from apt.hatlabs.fi to apt.halos.fi. . This package has identical dependencies to halos-marine 0.2.10 to prevent any packages from being auto-removed during the transition.</p>
                             <div class="install-cmd">sudo apt install halos-marine</div>
                         </div>
                         <div class="package-item">
@@ -170,7 +170,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2026-02-15 10:21:37 UTC</p>
+            <p>Last updated: 2026-02-15 10:30:49 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
