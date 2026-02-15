@@ -161,16 +161,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.2.11-3
+Version: 0.2.12-1
 Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 16
 Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-authelia-users, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io (>= 20.10) | docker-ce (>= 20.10), docker-compose | docker-compose-plugin, docker-cli, halos-core-containers, homarr-container-adapter, halos-mdns-publisher
-Filename: pool/trixie-unstable/main/halos_0.2.11-3_all.deb
-Size: 4006
-MD5sum: 81ae69a26f7e8482097ec8a29497c86f
-SHA1: b49d1090d6abe19d4f743ac7872727e8d187e8c4
-SHA256: 552f453c33df321ef043c08bbe4df71e750587347fedb099097ba84d2213f70b
+Filename: pool/trixie-unstable/main/halos_0.2.12-1_all.deb
+Size: 4070
+MD5sum: ef391eefab8ae8fa258458748adb0de8
+SHA1: f0858d1b2d6a3223be7d50637e6a332f2aa79638
+SHA256: c390a53cb245989e88f94bcde3fbca67461a58e55d734d8cbc695c8d5b9ed50f
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-bridge-metapackage
@@ -259,16 +259,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.2.11-3
+Version: 0.2.12-1
 Architecture: all
-Maintainer: Hat Labs <info@hatlabs.fi>
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 12
-Depends: halos (>= 0.2.11-3), gpsd, marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-unstable/main/halos-marine_0.2.11-3_all.deb
-Size: 2144
-MD5sum: 1bb70ca1c3474efc16f6acd83a444f86
-SHA1: ba1e99520ee309c9fe6fdbef9aa4e7b5f6efffb1
-SHA256: d62234dff901030fa09ffab1f789bb561a70b28b2cbada4715fc63dd4c52cbc7
+Depends: halos (>= 0.2.12-1), gpsd, marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-unstable/main/halos-marine_0.2.12-1_all.deb
+Size: 2194
+MD5sum: 78b7fa8e3447b97bb619c18dc4e36749
+SHA1: 0c75fd52a0c9f1c222475940d7aa5b26c97aef8a
+SHA256: 75329ca3e176ba59a1431788a9a4812a64121624ffb69f3016355a599a6755fd
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-bridge-metapackage
