@@ -17,7 +17,7 @@
         <div class="dist-section">
             <div class="dist-card">
                 <h3>Bookworm Unstable</h3>
-                <p class="dist-meta">149 packages</p>
+                <p class="dist-meta">151 packages</p>
                 <p class="dist-desc">Halos packages for Debian Bookworm (rolling)</p>
                 <div class="warning-box">
                     <strong>⚠️ Unstable Channel:</strong> Contains latest packages from main branch. May include untested changes. Use stable for production systems.
@@ -25,6 +25,21 @@
 
                 <div class="package-list">
                     <strong>Available Packages:</strong>
+                    <details class="component-group" open>
+                        <summary>Main Packages <span class="pkg-count">(2 packages)</span></summary>
+                        <div class="component-content">
+                        <div class="package-item">
+                            <h4>halos <span class="version">v0.2.11-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Bridge metapackage for HaLOS APT repository migration This is a transitional bridge package that migrates the APT source from apt.hatlabs.fi to apt.halos.fi. . On installation, it adds the apt.halos.fi GPG key and APT source. On the next apt update &amp;&amp; apt upgrade, the system will upgrade to the halos package from apt.halos.fi (version 0.3.0+). . This package has identical dependencies to halos 0.2.10 to prevent any packages from being auto-removed during the transition.</p>
+                            <div class="install-cmd">sudo apt install halos</div>
+                        </div>
+                        <div class="package-item">
+                            <h4>halos-marine <span class="version">v0.2.11-1</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">Bridge metapackage for HaLOS marine APT repository migration This is a transitional bridge package for halos-marine that maintains identical dependencies to halos-marine 0.2.10 during the migration from apt.hatlabs.fi to apt.halos.fi. . This package has identical dependencies to halos-marine 0.2.10 to prevent any packages from being auto-removed during the transition.</p>
+                            <div class="install-cmd">sudo apt install halos-marine</div>
+                        </div>
+                        </div>
+                    </details>
                     <details class="component-group" open>
                         <summary>Hat Labs Products <span class="pkg-count">(149 packages)</span></summary>
                         <div class="component-content">
@@ -779,7 +794,7 @@
                 <details class="install-section">
                     <summary>Add this distribution</summary>
                     <div class="install-content">
-                        <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-unstable hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
+                        <div class="command-block">echo "deb [signed-by=/usr/share/keyrings/hatlabs.gpg] https://apt.hatlabs.fi bookworm-unstable main hatlabs" | sudo tee -a /etc/apt/sources.list.d/hatlabs.list</div>
                     </div>
                 </details>
             </div>
@@ -794,7 +809,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2026-02-14 15:19:10 UTC</p>
+            <p>Last updated: 2026-02-15 10:21:37 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
