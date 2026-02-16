@@ -444,3 +444,18 @@ Description: Signal K server for marine data processing and routing
  - Instrument integration and display
 Tag: role::container-app, field::marine, category::communication, category::monitoring, interface::web, use::routing, network::server, x-display-name::Signal K Server
 
+Package: signalk-halpi
+Version: 0.1.0-2
+Architecture: all
+Maintainer: Hat Labs Ltd <info@hatlabs.fi>
+Filename: pool/trixie-unstable/main/signalk-halpi_0.1.0-2_all.deb
+Size: 8136
+MD5sum: da31f38bf2a34488c305995bef0154e1
+SHA1: a7d3d0cee8b93f6444c40a97b7365af7bbb4462a
+SHA256: efc2d20c00aea77826ad87edddf22ab8aa44e8bcacf132ec743b69fc165e7a74
+Section: misc
+Priority: optional
+Description: Signal K plugin for HALPI2 device monitoring
+ Publishes HALPI2 power management, temperature, watchdog, and USB
+ status data to Signal K via the halpid daemon Unix socket.
+
