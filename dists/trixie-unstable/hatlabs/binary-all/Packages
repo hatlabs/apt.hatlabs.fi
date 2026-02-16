@@ -3433,3 +3433,20 @@ Description: Firmware for the HALPI2 Computer
  This package contains the firmware for the HALPI2 Computer onboard controller.
  The firmware is automatically flashed to the device upon installation.
 
+Package: signalk-halpi
+Version: 0.1.2-2
+Architecture: all
+Maintainer: Hat Labs Ltd <info@hatlabs.fi>
+Depends: marine-signalk-server-container
+Filename: pool/trixie-unstable/hatlabs/signalk-halpi_0.1.2-2_all.deb
+Size: 7968
+MD5sum: 96bae37a1f86ec0e5b359070bf18cbff
+SHA1: 6320557bcb90532ee1299054765219e9edd62560
+SHA256: b66710120ed0420519dbd0b066660943f9f9c48cd8b0eb837c405db9772ad653
+Section: misc
+Priority: optional
+Description: Signal K plugin for HALPI2 device monitoring
+ Installs the signalk-halpi plugin into the marine-signalk-server-container
+ Signal K instance. Publishes HALPI2 power management, temperature, watchdog,
+ and USB status data to Signal K via the halpid daemon Unix socket.
+
