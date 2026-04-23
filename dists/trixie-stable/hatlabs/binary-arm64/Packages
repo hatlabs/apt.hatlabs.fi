@@ -25,17 +25,17 @@ Description: Cockpit-based package manager using PackageKit
  D-Bus API for cross-distribution compatibility.
 
 Package: halpi2-firmware
-Version: 3.3.0-1
+Version: 3.3.1-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 3148
 Recommends: halpid (>= 4.0.0)
 Breaks: halpid (<< 4.0.0)
-Filename: pool/trixie-stable/hatlabs/halpi2-firmware_3.3.0-1_all.deb
-Size: 655352
-MD5sum: 5ef78975d982f1c2a50386374126c50c
-SHA1: 01dfa8add557ee0bb8f811ada0c4a2f807ed72a6
-SHA256: 4f1ea98d0a979da7b84cedf05c786026ff0b21cc1da2aa833ca53033db547895
+Filename: pool/trixie-stable/hatlabs/halpi2-firmware_3.3.1-1_all.deb
+Size: 655180
+MD5sum: eb6377ec13adb4e1652cad5dc6b6dfbe
+SHA1: 4df09380dda86dee928869c4c6be002113de9478
+SHA256: 6c4946e4d8f25a7dc90a8b758e5d985528e9550d5b498d589e24685b7b1aa763
 Section: embedded
 Priority: optional
 Homepage: https://github.com/hatlabs/HALPI2-firmware-deb
