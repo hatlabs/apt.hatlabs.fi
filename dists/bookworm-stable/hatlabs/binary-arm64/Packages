@@ -1,3 +1,23 @@
+Package: blinkenlights-daemon
+Version: 0.5.0-2
+Architecture: arm64
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 29373
+Filename: pool/bookworm-stable/hatlabs/blinkenlights-daemon_0.5.0-2_arm64.deb
+Size: 5896788
+MD5sum: dfb04ee9f51ebf0b2c0d4f974902bf7d
+SHA1: 2fe1eec805c40ecca3eec6d5ca6db4e7ae4f3acb
+SHA256: 5aa4e67a379c4912f524bfe25188b83edb942cedec47f611eefc2edecc3998b4
+Section: admin
+Priority: optional
+Description: HALPI2 LED status display daemon
+ Asyncio daemon that drives HALPI2's 5 RGB LEDs via halpid's LED
+ override socket. Reads system metrics, network status, marine data
+ sources, and maps values to configurable LED patterns at 10 Hz.
+ .
+ Includes a self-contained Python virtual environment with all
+ dependencies bundled.
+
 Package: cockpit-package-manager
 Version: 0.1.1-1
 Architecture: all
