@@ -3414,6 +3414,36 @@ Description: Self-hosted ZeroTier network controller with web UI for centralized
  - [ZTnet GitHub](https://github.com/sinamics/ztnet)
 Tag: role::container-app
 
+Package: halos-halpi-desktop-branding
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 1348
+Depends: rpd-common
+Conflicts: halos-desktop-wallpaper
+Replaces: halos-desktop-wallpaper
+Provides: halos-desktop-wallpaper
+Filename: pool/trixie-unstable/hatlabs/halos-halpi-desktop-branding_0.1.0-1_all.deb
+Size: 1327994
+MD5sum: 0229048101e05f42cf2f05d11aa4f317
+SHA1: 18d869a621454c70c3fb8720a521d7ba0508d8ab
+SHA256: 3397cf8c2515cfe9ca2aa38cfc6d4256e9012e20313e3cff5aeb3d829e72a4d6
+Section: x11
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-halpi-desktop-branding
+Description: HALPI2 branded default desktop wallpaper
+ This package provides the HALPI2-branded default desktop wallpaper for
+ HaLOS HALPI2 desktop variants, overriding the upstream Raspberry Pi OS
+ default (shipped via the rpd-common package) using dpkg-divert on the
+ pcmanfm system-wide desktop-items conffiles. Per-user wallpaper choices
+ take precedence over this default.
+ .
+ Exclusivity with the generic HaLOS branding (halos-desktop-branding) is
+ enforced via the virtual package halos-desktop-wallpaper: only one
+ provider can be installed at a time. Pi-gen pre-installs this package on
+ HALPI2 desktop builds so the HALPI2-specific artwork wins over the
+ generic default.
+
 Package: halpi2-firmware
 Version: 3.3.1-1
 Architecture: all
