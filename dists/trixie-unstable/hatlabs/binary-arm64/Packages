@@ -3464,6 +3464,25 @@ Description: HALPI2 branded default desktop wallpaper
  HALPI2 desktop builds so the HALPI2-specific artwork wins over the
  generic default.
 
+Package: halos-halpi2-desktop
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Matti Airas <matti.airas@hatlabs.fi>
+Installed-Size: 12
+Depends: halos-halpi2, halos-desktop, halos-halpi-desktop-branding
+Filename: pool/trixie-unstable/hatlabs/halos-halpi2-desktop_0.1.0-1_all.deb
+Size: 2234
+MD5sum: 7456f70baa0e601b554583f46767956c
+SHA1: 81d33e2e4ded92813928f28c8d1f5aaa8c986d14
+SHA256: e65e0e24f00810d26aa7a67756e03bdb466d7e475b61c302ce958e62fd51d63a
+Section: metapackages
+Priority: optional
+Homepage: https://github.com/hatlabs/halos-halpi2-desktop
+Description: HALPI2 desktop variant metapackage
+ Marks a HaLOS installation as a HALPI2 desktop variant and pulls in
+ the HALPI2-branded wallpaper. Future HALPI2-only desktop content will
+ be added as dependencies here.
+
 Package: halpi2-firmware
 Version: 3.3.1-1
 Architecture: all
