@@ -140,8 +140,8 @@
                             <div class="install-cmd">sudo apt install cockpit-package-manager</div>
                         </div>
                         <div class="package-item">
-                            <h4>halos-halpi-desktop-branding <span class="version">v0.1.0-1</span> <span class="arch-badge">all</span></h4>
-                            <p class="description">HALPI2 branded default desktop wallpaper This package provides the HALPI2-branded default desktop wallpaper for HaLOS HALPI2 desktop variants, overriding the upstream Raspberry Pi OS default (shipped via the rpd-common package) using dpkg-divert on the pcmanfm system-wide desktop-items conffiles. Per-user wallpaper choices take precedence over this default. . Exclusivity with the generic HaLOS branding (halos-desktop-branding) is enforced via the virtual package halos-desktop-wallpaper: only one provider can be installed at a time. Pi-gen pre-installs this package on HALPI2 desktop builds so the HALPI2-specific artwork wins over the generic default.</p>
+                            <h4>halos-halpi-desktop-branding <span class="version">v0.1.1-2</span> <span class="arch-badge">all</span></h4>
+                            <p class="description">HALPI2 branded default desktop wallpaper This package provides the HALPI2-branded default desktop wallpaper for HaLOS HALPI2 desktop variants. It ships pcmanfm system-wide desktop-items conffiles that override the upstream Raspberry Pi OS defaults at /etc/xdg/pcmanfm/default/. Per-user wallpaper choices in ~/.config/pcmanfm/ take precedence over this default. . File ownership at the canonical paths is taken from rpd-common via Replaces:; rpd-common stays installed and its other files are unaffected. Exclusivity with the generic HaLOS branding (halos-desktop-branding) is enforced via the virtual package halos-desktop-wallpaper: only one provider can be installed at a time. Pi-gen pre-installs this package on HALPI2 desktop builds so the HALPI2-specific artwork wins over the generic default.</p>
                             <div class="install-cmd">sudo apt install halos-halpi-desktop-branding</div>
                         </div>
                         <div class="package-item">
@@ -195,7 +195,7 @@
         </div>
 
         <footer>
-            <p>Last updated: 2026-05-27 18:01:35 UTC</p>
+            <p>Last updated: 2026-05-27 18:22:40 UTC</p>
             <p><a href="index.html">← Back to all distributions</a></p>
             <p>🔒 This repository is cryptographically signed for security</p>
         </footer>
