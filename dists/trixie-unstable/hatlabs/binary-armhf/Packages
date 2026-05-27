@@ -3415,19 +3415,19 @@ Description: Self-hosted ZeroTier network controller with web UI for centralized
 Tag: role::container-app
 
 Package: halos-halpi-desktop-branding
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
-Installed-Size: 1348
+Installed-Size: 1670
 Depends: rpd-common
 Conflicts: halos-desktop-wallpaper
 Replaces: halos-desktop-wallpaper
 Provides: halos-desktop-wallpaper
-Filename: pool/trixie-unstable/hatlabs/halos-halpi-desktop-branding_0.1.0-1_all.deb
-Size: 1327994
-MD5sum: 0229048101e05f42cf2f05d11aa4f317
-SHA1: 18d869a621454c70c3fb8720a521d7ba0508d8ab
-SHA256: 3397cf8c2515cfe9ca2aa38cfc6d4256e9012e20313e3cff5aeb3d829e72a4d6
+Filename: pool/trixie-unstable/hatlabs/halos-halpi-desktop-branding_0.1.1-1_all.deb
+Size: 1587270
+MD5sum: 484c519ef487fbecf7f898c0b5e216d5
+SHA1: 99492593639b04092932fcb83bdd60c7a5a3b309
+SHA256: 3539d90d1b19b6d96f803928ba7bbf26c838fd1711e8e02620ff2bbcbc6e5372
 Section: x11
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-halpi-desktop-branding
