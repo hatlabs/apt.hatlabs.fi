@@ -3415,34 +3415,36 @@ Description: Self-hosted ZeroTier network controller with web UI for centralized
 Tag: role::container-app
 
 Package: halos-halpi-desktop-branding
-Version: 0.1.1-1
+Version: 0.1.1-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 1670
 Depends: rpd-common
 Conflicts: halos-desktop-wallpaper
-Replaces: halos-desktop-wallpaper
+Replaces: halos-desktop-wallpaper, rpd-common
 Provides: halos-desktop-wallpaper
-Filename: pool/trixie-unstable/hatlabs/halos-halpi-desktop-branding_0.1.1-1_all.deb
-Size: 1587270
-MD5sum: 484c519ef487fbecf7f898c0b5e216d5
-SHA1: 99492593639b04092932fcb83bdd60c7a5a3b309
-SHA256: 3539d90d1b19b6d96f803928ba7bbf26c838fd1711e8e02620ff2bbcbc6e5372
+Filename: pool/trixie-unstable/hatlabs/halos-halpi-desktop-branding_0.1.1-2_all.deb
+Size: 1587406
+MD5sum: d4778aa0ec665b52b324bab3fc150998
+SHA1: b7c6d9438fee3a8c7b4b6393b5a179b7201737b2
+SHA256: c85ec991f4fa4c26bb6e3d4e4593c48a2e18f0971bece5cfa02713adc6874231
 Section: x11
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-halpi-desktop-branding
 Description: HALPI2 branded default desktop wallpaper
  This package provides the HALPI2-branded default desktop wallpaper for
- HaLOS HALPI2 desktop variants, overriding the upstream Raspberry Pi OS
- default (shipped via the rpd-common package) using dpkg-divert on the
- pcmanfm system-wide desktop-items conffiles. Per-user wallpaper choices
- take precedence over this default.
+ HaLOS HALPI2 desktop variants. It ships pcmanfm system-wide
+ desktop-items conffiles that override the upstream Raspberry Pi OS
+ defaults at /etc/xdg/pcmanfm/default/. Per-user wallpaper choices in
+ ~/.config/pcmanfm/ take precedence over this default.
  .
- Exclusivity with the generic HaLOS branding (halos-desktop-branding) is
- enforced via the virtual package halos-desktop-wallpaper: only one
- provider can be installed at a time. Pi-gen pre-installs this package on
- HALPI2 desktop builds so the HALPI2-specific artwork wins over the
- generic default.
+ File ownership at the canonical paths is taken from rpd-common via
+ Replaces:; rpd-common stays installed and its other files are
+ unaffected. Exclusivity with the generic HaLOS branding
+ (halos-desktop-branding) is enforced via the virtual package
+ halos-desktop-wallpaper: only one provider can be installed at a
+ time. Pi-gen pre-installs this package on HALPI2 desktop builds so
+ the HALPI2-specific artwork wins over the generic default.
 
 Package: halos-halpi2-desktop
 Version: 0.1.0-1
