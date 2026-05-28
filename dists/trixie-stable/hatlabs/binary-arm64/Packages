@@ -175,15 +175,15 @@ Description: debug symbols for halpid
 Build-Ids: 0279c3207048ad50c955fbf6c22c0dbfe121f59a 1728fb0bab3aba38f0ef3471243925179e4c18e3 45291742d283499fe0d216b6bd8e3a0f7fd67300 54b221c8668e70325161cf15e93bf69b313dfdf2 69c14f241382bd5c8e46cfb31509aa26cc44a855 7cdf9a5d10e2d0814b1fa5db02828f5e8445c8db 9fbfbce03bf4e40a427bd3a70dae84a069dcb28a c61fed41fc2396952746b4596c943a619660ff16 ce089597aa230f9d66c35d9d192d2a7ed620db33 ee535d14a0ddb5f4b206945991ec58dcd8890184
 
 Package: signalk-halpi
-Version: 0.1.4-4
+Version: 0.1.4-5
 Architecture: all
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: marine-signalk-server-container, halos-halpi2-marine
-Filename: pool/trixie-stable/hatlabs/signalk-halpi_0.1.4-4_all.deb
-Size: 8278
-MD5sum: ad4300a016308a6bc577b429d44fe1be
-SHA1: 1582e6606d2149325bba9cbfe27a52ca2e36cea0
-SHA256: 01f8a506d7eac574411c99896dcd06c114a877549580d768cb190743683976cc
+Filename: pool/trixie-stable/hatlabs/signalk-halpi_0.1.4-5_all.deb
+Size: 8280
+MD5sum: 22c9dd94cf552bf851705ce0bc735567
+SHA1: 1e1f383543e498d1db50f6d1de5991583e005160
+SHA256: 06d5f5c6409f160bcdeb151b4c67a4417a1986ee169b108e383c94a4b6b1e5e1
 Section: misc
 Priority: optional
 Description: Signal K plugin for HALPI2 device monitoring
