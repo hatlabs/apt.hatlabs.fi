@@ -3485,15 +3485,15 @@ Description: Firmware for the HALPI2 Computer
  The firmware is automatically flashed to the device upon installation.
 
 Package: signalk-halpi
-Version: 0.1.4-6
+Version: 0.1.4-7
 Architecture: all
 Maintainer: Hat Labs Ltd <info@hatlabs.fi>
 Depends: marine-signalk-server-container, halos-halpi2-marine
-Filename: pool/trixie-unstable/hatlabs/signalk-halpi_0.1.4-6_all.deb
-Size: 8436
-MD5sum: d314178ea113c2a2c046fd12e4d894e3
-SHA1: 845cefd7e91fc8bf76520ed01984fb660bc42335
-SHA256: 1b9ff74411ffc49358c0b4a3a92a635a92d15e933a83f08597abd729d2e0c793
+Filename: pool/trixie-unstable/hatlabs/signalk-halpi_0.1.4-7_all.deb
+Size: 8300
+MD5sum: fa81aae39cb20c8ec69c298dcf394b7d
+SHA1: f3684f3c97488992af00f866e989ace3a6d1dc38
+SHA256: 91c4634c0e5f3ef44afcfc0e1630324e1525f3f2d1d2c3548d026b7c60bc53c2
 Section: misc
 Priority: optional
 Description: Signal K plugin for HALPI2 device monitoring
