@@ -161,16 +161,16 @@ Description: Generate Debian packages from container application definitions
  ready for building with dpkg-buildpackage.
 
 Package: halos
-Version: 0.2.12-1
+Version: 0.2.12-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 16
 Depends: cockpit, cockpit-networkmanager, cockpit-networkmanager-halos, cockpit-storaged, cockpit-apt, cockpit-authelia-users, cockpit-dockermanager, cockpit-container-apps, halos-cockpit-config, docker.io (>= 20.10) | docker-ce (>= 20.10), docker-compose | docker-compose-plugin, docker-cli, halos-core-containers, homarr-container-adapter, halos-mdns-publisher
-Filename: pool/trixie-stable/main/halos_0.2.12-1_all.deb
-Size: 4070
-MD5sum: ef391eefab8ae8fa258458748adb0de8
-SHA1: f0858d1b2d6a3223be7d50637e6a332f2aa79638
-SHA256: c390a53cb245989e88f94bcde3fbca67461a58e55d734d8cbc695c8d5b9ed50f
+Filename: pool/trixie-stable/main/halos_0.2.12-2_all.deb
+Size: 4006
+MD5sum: 5188f5912f65b20a224051371f059db0
+SHA1: 5c98a9addb9a0e646e677e917f193749a6812f82
+SHA256: ac28cf99bc0b8a19bfa774c191c4c44977eab9e3f029f69764dab9cd58e607fa
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-bridge-metapackage
@@ -259,16 +259,16 @@ Description: HaLOS branding and default configuration for Homarr dashboard
  branding.
 
 Package: halos-marine
-Version: 0.2.12-1
+Version: 0.2.12-2
 Architecture: all
 Maintainer: Matti Airas <matti.airas@hatlabs.fi>
 Installed-Size: 12
-Depends: halos (>= 0.2.12-1), gpsd, marine-container-store, marine-signalk-server-container
-Filename: pool/trixie-stable/main/halos-marine_0.2.12-1_all.deb
-Size: 2194
-MD5sum: 78b7fa8e3447b97bb619c18dc4e36749
-SHA1: 0c75fd52a0c9f1c222475940d7aa5b26c97aef8a
-SHA256: 75329ca3e176ba59a1431788a9a4812a64121624ffb69f3016355a599a6755fd
+Depends: halos (>= 0.2.12-2), gpsd, marine-container-store, marine-signalk-server-container
+Filename: pool/trixie-stable/main/halos-marine_0.2.12-2_all.deb
+Size: 2138
+MD5sum: e4bab219ae7b8c083cbc86cd35fb2027
+SHA1: 032c233abbf6a6bf26e21dad93feecc4b7a5dc7a
+SHA256: e44c220162a3cb8803f8ffa61541cd35b280c1f0e0c25dbc77ab3c757b99222e
 Section: metapackages
 Priority: optional
 Homepage: https://github.com/hatlabs/halos-bridge-metapackage
