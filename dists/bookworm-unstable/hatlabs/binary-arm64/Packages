@@ -3475,18 +3475,18 @@ Description: Power monitor and watchdog daemon for HALPI2
  functionality for HALPI2 Raspberry Pi CM4/CM5 carrier boards.
 
 Package: halpid
-Version: 5.1.2-1
+Version: 5.1.2-2
 Architecture: arm64
 Maintainer: Hat Labs Oy <info@hatlabs.fi>
-Installed-Size: 5496
+Installed-Size: 5500
 Conflicts: halpi2-rust-daemon
 Replaces: halpi2-rust-daemon
 Provides: halpi2-rust-daemon
-Filename: pool/bookworm-unstable/hatlabs/halpid_5.1.2-1_arm64.deb
-Size: 1387260
-MD5sum: 97e282fa5f95158fa2204e1cd437bc74
-SHA1: ebe7ecf71460f706bbb87b73ac18fdea0e8b3bca
-SHA256: 1399102d2c4d95f96acff3001dcb53633fc1cb00ebe6a8ba09595191021e28f5
+Filename: pool/bookworm-unstable/hatlabs/halpid_5.1.2-2_arm64.deb
+Size: 1387632
+MD5sum: 615a8d75569ab14d47c7841dedd37595
+SHA1: fcdee760dde316f5c9d8a9116f686ba1b7d970e6
+SHA256: 8755e0d63c2914e78c23edae2af08c718dc384b8ede9060cbb3e36501f2f999d
 Section: admin
 Priority: optional
 Homepage: https://docs.hatlabs.fi/halpi2
